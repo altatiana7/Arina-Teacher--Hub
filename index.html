@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arina Teacher Hub | EGE 2027</title>
+<style>
+:root{--bg:#faf7ff;--card:#fff;--purple:#8b6bbd;--gold:#d8b45b;--green:#7ab38a;--blue:#6ea8d9;--pink:#d99ab5;--text:#40354d;--line:#eadff3}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(120deg,#7654a7,#c8a9e8);color:white;padding:28px}h1{margin:0 0 8px}.layout{display:grid;grid-template-columns:1fr 330px;gap:20px;padding:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 5px 20px #00000008}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.box{padding:14px;border-radius:14px;background:#f8f0ff;border-left:6px solid var(--purple)}.diag{border-left-color:var(--gold)}.grammar{border-left-color:var(--purple)}.reading{border-left-color:var(--blue)}.writing{border-left-color:var(--pink)}.skills{border-left-color:var(--green)}.bar{height:10px;background:#eee;border-radius:10px;overflow:hidden}.bar span{display:block;height:100%;background:var(--purple)}aside .card{position:sticky;top:15px}button{padding:10px;border:0;border-radius:10px;background:var(--purple);color:white;cursor:pointer}.empty{border:2px dashed var(--line);padding:15px;border-radius:12px;color:#8d789b}@media(max-width:900px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>Arina Teacher Hub</h1><p>ЕГЭ 2027 • Teacher control dashboard</p></header>
+<div class="layout"><main>
+<div class="card"><h2>Dashboard</h2><p><b>Ученик:</b> Арина</p><p><b>Текущий этап:</b> Week 1 • Grammar Foundation</p><p><b>Цель:</b> подготовка к ЕГЭ 2027</p></div>
+<div class="card"><h2>Diagnostics</h2><div class="grid"><div class="box diag"><b>Grammar</b><p>Стартовая диагностика</p><div class="bar"><span style="width:25%"></span></div></div><div class="box reading"><b>Reading</b><p>Not checked</p></div><div class="box skills"><b>Listening</b><p>Not checked</p></div></div></div>
+<div class="card"><h2>8 Week Roadmap</h2><div class="grid"><div class="box grammar">Week 1<br>Present + Irregular verbs</div><div class="box">Week 2<br>Past Tenses</div><div class="box">Week 3<br>Future / Passive</div><div class="box">Week 4<br>Word Formation</div><div class="box">Week 5<br>Reading</div><div class="box">Week 6<br>Listening</div><div class="box writing">Week 7<br>Writing</div><div class="box">Week 8<br>Speaking + Mock</div></div></div>
+<div class="card"><h2>Detailed Lesson Plans</h2><div class="empty">Место для подробного плана урока: цель → этапы → активности → практика → домашнее задание → анализ ошибок.</div></div>
+<div class="card"><h2>Resource Library</h2><div class="empty">Место для правил, PDF, ссылок, тренажёров и материалов.</div></div>
+</main><aside><div class="card"><h3>Teacher Control Panel</h3><p>📌 Current week: 1</p><p>📌 Next lesson:</p><div class="empty">Заполнить</div><p>📊 Progress</p><div class="bar"><span style="width:10%"></span></div></div><div class="card"><h3>Quick Actions</h3><button>Add Result</button><br><br><button>Add Error</button><br><br><button>Add Homework</button></div></aside></div>
+</body></html>
