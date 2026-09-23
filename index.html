@@ -88,6 +88,16 @@
 .taskModal .markerCol{background:#fff!important;padding:7px!important}
 .taskModal .markerCol div{padding:3px 0!important;font-size:10px!important}
 @media(max-width:560px){.taskModal .presentGrid,.taskModal .markerRef{grid-template-columns:1fr!important}}
+
+.stativeCompact{display:grid;grid-template-columns:1fr 1fr;gap:6px!important}
+.stativeCompact .stCard{background:#fff;border:1px solid #c7d6e6;border-left:4px solid #0039A6;border-radius:7px;padding:7px 9px;min-height:0}
+.stativeCompact .stCard>b{display:block;color:#0039A6;font-size:11px;margin-bottom:3px}
+.stativeCompact .stCard small{display:block;color:#64748b;font-size:9px;line-height:1.2;margin-bottom:4px}
+.stativeCompact .stCard p{margin:3px 0!important;font-size:9.5px!important;line-height:1.25!important;color:#111}
+.stativeCompact .stBoth{grid-column:span 2;border-left-color:#D52B1E}
+.stativeCompact .stBoth>b{color:#D52B1E}
+.stativeCompact .stTip{background:#eaf3ff}
+@media(max-width:600px){.stativeCompact{grid-template-columns:1fr}.stativeCompact .stBoth{grid-column:auto}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -186,21 +196,12 @@ const stativeQuiz=[
 ['They ___ a great time at the festival.',['have','are having','have had always','having'],1]
 ];
 function stativeInfo(){
- return '<div class="stativeInfo">'+
- '<div class="rule"><b>STATIVE → обычно Simple</b><span>know, understand, believe, remember, forget, want, need, prefer, like, love, hate, belong, own, possess, contain, consist, include, seem, matter, mean, agree, doubt, suppose, realise, recognise, depend, deserve</span></div>'+
- '<div class="rule"><b>THINK</b><span><i>I think</i> = мнение · <i>I am thinking</i> = обдумываю</span></div>'+
- '<div class="rule"><b>SEE</b><span><i>I see</i> = понимаю/вижу · <i>I am seeing the doctor</i> = встречаюсь</span></div>'+
- '<div class="rule"><b>HAVE</b><span><i>I have a car</i> = владею · <i>I am having lunch</i> = действие/опыт</span></div>'+
- '<div class="rule"><b>TASTE</b><span><i>The soup tastes salty</i> = свойство · <i>She is tasting the soup</i> = пробует</span></div>'+
- '<div class="rule"><b>SMELL</b><span><i>It smells nice</i> = свойство · <i>He is smelling the flowers</i> = нюхает</span></div>'+
- '<div class="rule"><b>FEEL</b><span><i>I feel tired</i> = состояние · <i>I am feeling the fabric</i> = трогаю/проверяю</span></div>'+
- '<div class="rule"><b>LOOK</b><span><i>You look tired</i> = кажешься · <i>She is looking at me</i> = смотрит</span></div>'+
- '<div class="rule"><b>BE</b><span><i>He is rude</i> = качество · <i>He is being rude</i> = ведёт себя так сейчас</span></div>'+
- '<div class="rule"><b>WEIGH</b><span><i>The bag weighs 5 kg</i> = характеристика · <i>She is weighing the bag</i> = взвешивает</span></div>'+
- '<div class="rule"><b>MEASURE</b><span><i>The room measures 20 m²</i> = размер · <i>They are measuring the room</i> = измеряют</span></div>'+
- '<div class="rule"><b>FIT</b><span><i>The jacket fits</i> = подходит по размеру · <i>They are fitting a new door</i> = устанавливают</span></div>'+
- '<div class="rule"><b>APPEAR</b><span><i>She appears calm</i> = кажется · <i>She is appearing on TV</i> = выступает/появляется</span></div>'+
- '<div class="rule"><b>ENJOY / LOVE</b><span>обычно Simple для общего отношения; Continuous возможен для временного переживания/акцента: <i>I am loving this course</i></span></div>'+
+ return '<div class="stativeCompact">'+
+ '<div class="stCard"><b>STATE VERBS</b><small>feelings, thoughts, possession, senses, relationships and states · usually NOT Continuous</small><p><strong>Feelings / opinions:</strong> like, love, hate, prefer</p><p><strong>Thinking / knowledge:</strong> know, believe, understand, remember, forget, mean</p><p><strong>Possession / relationship:</strong> have, own, belong, need, want</p><p><strong>Senses / appearance:</strong> seem, smell, taste, look, sound</p></div>'+
+ '<div class="stCard"><b>DYNAMIC VERBS</b><small>actions and processes · Continuous is common</small><p>run · study · work · play · read · talk · write · travel</p></div>'+
+ '<div class="stCard stBoth"><b>SOME VERBS CAN BE BOTH</b><small>Meaning changes.</small><p><strong>think:</strong> I think it is a good idea. ↔ What are you thinking about?</p><p><strong>have:</strong> I have a car. ↔ We are having lunch.</p><p><strong>see:</strong> I see your point. ↔ I am seeing my doctor tomorrow.</p><p><strong>look:</strong> You look tired. ↔ I am looking at the board.</p></div>'+
+ '<div class="stCard"><b>COMMON MISTAKES</b><p>✕ I am knowing the answer. → ✓ I know the answer.</p><p>✕ She is wanting some water. → ✓ She wants some water.</p><p>✕ He is having a blue bike. → ✓ He has a blue bike.</p></div>'+
+ '<div class="stCard stTip"><b>USEFUL TIP</b><p>Feeling, thought, possession, sense, relationship or state? → usually a <strong>state verb</strong>.</p><p>Action or process? → usually a <strong>dynamic verb</strong>.</p></div>'+
  '</div>';
 }
 function wordwallTestHTML(items,key){
