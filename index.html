@@ -42,6 +42,8 @@
 .stativeInfo .rule span{display:block;font-size:10px;line-height:1.25}
 @media(max-width:900px){.stativeInfo{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.stativeInfo{grid-template-columns:1fr}}
+
+.markerTrain{max-width:760px;margin:0 auto}.markerTrainTop{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:var(--mut);margin-bottom:7px}.markerTrainQ{background:#fff;border:1px solid var(--line);border-radius:11px;padding:18px;text-align:center}.markerTrainQ strong{display:block;font-size:24px;color:#111;margin:5px 0 14px}.markerTrainOpts{display:grid;grid-template-columns:1fr 1fr;gap:7px}.markerTrainOpts button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:10px;font-size:11px;font-weight:900}.markerTrainFb{min-height:22px;margin-top:8px;font-size:11px;font-weight:900}.markerTrainFb.good{color:#15803d}.markerTrainFb.bad{color:#b91c1c}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -257,6 +259,7 @@ function closeTaskWindow(){const m=document.getElementById('taskModal');if(m)m.s
 function openPresentPanel(type,key){
  if(type==='rule')openTaskWindow('Present Tenses · Rule',presentRuleHTML());
  else if(type==='markers')openTaskWindow('Present Tenses · Markers',markerReference());
+ else if(type==='markertrain')openTaskWindow('Markers · Choose the tense',markerTrainingHTML(key),m=>initMarkerTraining(m.querySelector('.markerTrain')));
  else {
    const submitKey='w0l0';
    if(localStorage.getItem('submitted-'+submitKey)){openTaskWindow('Present Tenses · Grammar Test','<div class="wwQ"><p><b>Тест уже отправлен.</b></p><p>Повторная попытка недоступна.</p></div>');return}
@@ -271,13 +274,25 @@ function openStativePanel(type,key){
    openTaskWindow('Stative vs Dynamic · Grammar Test',studentTestHTML(stativeQuiz,key,submitKey,'Stative verbs + Present contrast'),m=>initStudentTest(m.querySelector('.studentTest'),stativeQuiz))
  }
 }
+function markerTrainingHTML(key){return '<div class="markerTrain" data-key="'+key+'"><div class="markerTrainStage"></div></div>'}
+function initMarkerTraining(box){
+ let items=[];markerGroups.forEach(g=>g[1].forEach(x=>items.push({marker:x[0],tense:g[0]})));
+ items.sort(()=>Math.random()-.5);box._items=items;box._pos=0;box._score=0;showMarkerTraining(box)
+}
+function showMarkerTraining(box){
+ const item=box._items[box._pos],stage=box.querySelector('.markerTrainStage');
+ if(!item){stage.innerHTML='<div class="markerTrainQ"><strong>Готово</strong><span>'+box._score+' / '+box._items.length+'</span><br><button class="action" type="button" onclick="initMarkerTraining(this.closest(\'.markerTrain\'))">Ещё раз · перемешать</button></div>';return}
+ const names=markerGroups.map(g=>g[0]);
+ stage.innerHTML='<div class="markerTrainTop"><span>MARKER → TENSE</span><span>'+(box._pos+1)+' / '+box._items.length+'</span></div><div class="markerTrainQ"><strong>'+item.marker+'</strong><div class="markerTrainOpts">'+names.map(n=>'<button type="button" data-tense="'+n+'">'+n+'</button>').join('')+'</div><div class="markerTrainFb"></div></div>';
+ stage.querySelectorAll('.markerTrainOpts button').forEach(btn=>btn.onclick=()=>{const ok=btn.dataset.tense===item.tense;if(ok)box._score++;const fb=stage.querySelector('.markerTrainFb');fb.className='markerTrainFb '+(ok?'good':'bad');fb.textContent=ok?'Correct':'Correct: '+item.tense;stage.querySelectorAll('.markerTrainOpts button').forEach(x=>x.disabled=true);setTimeout(()=>{box._pos++;showMarkerTraining(box)},650)})
+}
 function presentRuleHTML(){
  return '<div class="presentGrid"><div class="rule"><b>Present Simple</b><span>facts, routines, permanent situations · do/does · V / V-s</span></div><div class="rule"><b>Present Continuous</b><span>now, temporary situations, changing situations · am/is/are + V-ing</span></div><div class="rule"><b>Present Perfect</b><span>result/experience connected with now · have/has + V3</span></div><div class="rule"><b>Present Perfect Continuous</b><span>duration/activity continuing to now · have/has been + V-ing</span></div></div>';
 }
 function lessonStarter(w,i){
  const key='w'+w+'l'+i;
  if(w===0&&i===0){
-  return '<div class="lessonMenu"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">GRAMMAR TEST · 25</button></div>';
+  return '<div class="lessonMenu" style="grid-template-columns:repeat(4,1fr)"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markertrain\',\''+key+'m\')">MARKER → TENSE</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">GRAMMAR TEST · 25</button></div>';
  }
  if(w===0&&i===1){
   return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>';
