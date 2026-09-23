@@ -48,11 +48,36 @@
 .egeCore{border:2px solid #0039A6!important;background:#edf3ff!important;font-size:11px!important}.egeCore b{display:block;color:#0039A6}
 
 /* compact Week 1 lesson top bar */
-.lessonPage{padding:6px 14px 24px!important}
+.lessonPage{padding:6px 14px 24px!important;background:#e8f0f8!important}
 .lessonPage>.lessonBack{margin:0 0 4px!important;padding:5px 9px!important;border-radius:6px!important;font-size:10px!important;line-height:1.15!important}
 .lessonPage>.lesson{margin-top:0!important}
 .lessonPage .lessonbody{padding-top:4px!important}
 @media(max-width:800px){.lessonPage{padding:5px 8px 20px!important}.lessonPage>.lessonBack{padding:5px 8px!important}}
+
+/* Week 1 visual hierarchy */
+.weekTitle{background:#dcecff!important;border:1px solid #b8d5f5!important;border-left:5px solid #0039A6!important;border-radius:8px!important;padding:7px 10px!important;color:#334155!important;margin-bottom:8px!important}
+.weekTitle b{color:#0039A6!important}
+#weekView .lesson{background:#f1f6fc!important;border-color:#cbd9ea!important}
+#weekView .lesson:nth-of-type(even){background:#eaf2fb!important}
+
+/* Lesson 1: compact vertical controls */
+.lessonPage .lessonMenu{display:flex!important;flex-direction:column!important;gap:5px!important;width:min(100%,420px)!important;margin:4px 0 8px!important}
+.lessonPage .lessonMenuBtn{width:100%!important;text-align:left!important;padding:8px 10px!important;min-height:34px!important;background:#eaf3ff!important;border:1px solid #bfd2eb!important;border-left:4px solid #0039A6!important;color:#0039A6!important;border-radius:7px!important;font-size:11px!important}
+.lessonPage .lessonMenuBtn:hover{background:#dbeaff!important}
+
+/* compact square popup, not a huge white sheet */
+.taskModal{background:rgba(34,53,78,.28)!important;padding:10px!important}
+.taskModalCard{width:min(92vw,720px)!important;max-width:720px!important;margin:12px auto!important;border-radius:8px!important;padding:10px!important;background:#eef5fc!important;border:1px solid #b9cce3!important}
+.taskModalTop{padding-bottom:6px!important;margin-bottom:7px!important}
+.taskModalBody{background:#e5eef8!important;border-radius:6px!important;padding:7px!important}
+.taskModal .presentGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+.taskModal .presentGrid .rule,.taskModal .stativeInfo .rule{padding:7px!important;margin:0!important;background:#fff!important;border:1px solid #cad8e8!important}
+.taskModal .markerRef{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+.taskModal .markerCol{padding:6px!important;background:#fff!important}
+.taskModal .markerCol div{padding:3px 0!important;font-size:10px!important}
+.taskModal .wwQ,.taskModal .markerTrainQ{background:#fff!important;border-color:#c3d3e5!important;padding:10px!important}
+.taskModal .wwOpts button,.taskModal .markerTrainOpts button{background:#f7fbff!important;min-height:38px!important;padding:6px!important}
+@media(max-width:560px){.taskModal .presentGrid,.taskModal .markerRef{grid-template-columns:1fr!important}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -301,7 +326,7 @@ function presentRuleHTML(){
 function lessonStarter(w,i){
  const key='w'+w+'l'+i;
  if(w===0&&i===0){
-  return '<div class="lessonMenu" style="grid-template-columns:repeat(4,1fr)"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markertrain\',\''+key+'m\')">MARKER → TENSE</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">GRAMMAR TEST · 25</button></div>';
+  return '<div class="lessonMenu"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 PRESENT TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS · REFERENCE</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markertrain\',\''+key+'m\')">MARKER → TENSE · TRAINING</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">GRAMMAR TEST · 25</button></div>';
  }
  if(w===0&&i===1){
   return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>';
