@@ -25,6 +25,16 @@
 @media(max-width:700px){.wwOpts{grid-template-columns:1fr}}
 .markerCol b{color:#111!important}
 .weekTitle{font-size:12px;color:var(--mut);margin:0 0 6px;padding:2px 1px}.weekTitle b{color:#0039A6;font-size:13px}
+
+.lessonMenu{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 10px}
+.lessonMenuBtn{border:1px solid #b7c9e8;border-left:4px solid var(--red);background:#fff;color:#0039A6;border-radius:9px;padding:10px 8px;font-size:12px;font-weight:900;cursor:pointer;text-align:center}
+.lessonMenuBtn:hover{background:var(--soft)}
+.taskModal{position:fixed;inset:38px 0 0 var(--side);z-index:95;background:rgba(247,249,252,.88);backdrop-filter:blur(3px);display:none;padding:18px;overflow:auto}
+.taskModalCard{max-width:980px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 45px rgba(15,23,42,.18);padding:14px}
+.taskModalTop{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px}
+.taskModalTop b{font-size:15px;color:#0039A6}.taskModalClose{border:0;background:#0039A6;color:#fff;border-radius:8px;padding:7px 11px;font-weight:900}
+.taskModal .markerRule>summary{display:none}.taskModal .markerRule{display:block}.taskModal .markerRef{margin-top:0}
+@media(max-width:800px){.lessonMenu{grid-template-columns:1fr 1fr 1fr}.taskModal{left:0;padding:10px}.lessonMenuBtn{font-size:10px;padding:9px 4px}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -208,12 +218,25 @@ function showKahoot(root){
 }
 function initKahoots(){document.querySelectorAll('.kahootBox').forEach(startKahoot)}
 function openMarkerPractice(btn){btn.style.display='none';const wrap=btn.nextElementSibling;wrap.style.display='block';const game=wrap.querySelector('.kahootBox');if(game)startKahoot(game);}
+function openTaskWindow(title,html,after){
+ let m=document.getElementById('taskModal');
+ if(!m){m=document.createElement('div');m.id='taskModal';m.className='taskModal';document.body.appendChild(m)}
+ m.innerHTML='<div class="taskModalCard"><div class="taskModalTop"><b>'+title+'</b><button class="taskModalClose" type="button" onclick="closeTaskWindow()">Закрыть ×</button></div><div class="taskModalBody">'+html+'</div></div>';
+ m.style.display='block';if(after)after(m)
+}
+function closeTaskWindow(){const m=document.getElementById('taskModal');if(m)m.style.display='none'}
+function openPresentPanel(type,key){
+ if(type==='rule')openTaskWindow('Present Tenses · Rule',presentRuleHTML());
+ else if(type==='markers')openTaskWindow('Present Tenses · Markers',markerReference());
+ else openTaskWindow('Present Tenses · Grammar Test',wordwallTestHTML(quiz,key),m=>{const box=m.querySelector('.inlineTest');box.style.display='block';box.dataset.started='1';box._items=quiz.map((q,i)=>({q:q,i:i}));box._pos=0;box._score=0;showWordwall(box,key)})
+}
+function presentRuleHTML(){
+ return '<div class="presentGrid"><div class="rule"><b>Present Simple</b><span>facts, routines, permanent situations · do/does · V / V-s</span></div><div class="rule"><b>Present Continuous</b><span>now, temporary situations, changing situations · am/is/are + V-ing</span></div><div class="rule"><b>Present Perfect</b><span>result/experience connected with now · have/has + V3</span></div><div class="rule"><b>Present Perfect Continuous</b><span>duration/activity continuing to now · have/has been + V-ing</span></div></div>';
+}
 function lessonStarter(w,i){
  const key='w'+w+'l'+i;
  if(w===0&&i===0){
-  return '<details class="starter"><summary>Правило · Present Tenses + Markers</summary><div class="starterBody">'+markerReference()+'</div></details>'+
-  '<button class="inlineTestBtn" type="button" onclick="openWordwall(this,\''+key+'g\',\'present\')">Grammar Test · Present Tenses · 25 →</button>'+wordwallTestHTML(quiz,key+'g')+
-  submitBox(key,'Present Tenses');
+  return '<div class="lessonMenu"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">GRAMMAR TEST · 25</button></div>'+submitBox(key,'Present Tenses');
  }
  if(w===0&&i===1){
   return '<details class="starter"><summary>Правило · Stative verbs / Dynamic meanings</summary><div class="starterBody">'+stativeInfo()+'</div></details>'+
