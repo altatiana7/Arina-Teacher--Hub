@@ -248,11 +248,30 @@ function startVerbGame(root){
 }
 function showVerbRound(root){
  const start=+root.dataset.start,end=+root.dataset.end,pool=irregularVerbs.slice(start,end),game=root.querySelector('.verbGame');
- if(!root._order)startVerbGame(root); if(root._pos>=root._order.length){game.innerHTML='<div class="vpFb">Готово: '+root._score+' / '+root._order.length+'</div><button class="action" onclick="startVerbGame(this.closest(\'.verbPractice\'))">Ещё раз · перемешать</button>';return}
- const idx=root._order[root._pos],a=pool[idx].split('|'),correct=a[1]+' · '+a[2];
- let opts=[correct];while(opts.length<4){const b=pool[Math.floor(Math.random()*pool.length)].split('|'),x=b[1]+' · '+b[2];if(!opts.includes(x))opts.push(x)}opts.sort(()=>Math.random()-.5);
- game.innerHTML='<div class="vpPrompt"><small>'+(root._pos+1)+' / '+root._order.length+'</small><strong>'+a[0]+'</strong><span>'+a[3]+'</span></div><div class="vpChoices">'+opts.map(x=>'<button type="button" data-ok="'+(x===correct)+'">'+x+'</button>').join('')+'</div><div class="vpFb"></div>';
- game.querySelectorAll('.vpChoices button').forEach(b=>b.onclick=()=>{const ok=b.dataset.ok==='true';game.querySelectorAll('.vpChoices button').forEach(x=>x.disabled=true);b.classList.add(ok?'vGood':'vBad');if(ok)root._score++;game.querySelector('.vpFb').textContent=ok?'Correct':'Правильно: '+correct;setTimeout(()=>{root._pos++;showVerbRound(root)},650)});
+ if(!root._order)startVerbGame(root);
+ if(root._pos>=root._order.length){game.innerHTML='<div class="vpFb">Готово: '+root._score+' / '+root._order.length+'</div><button class="action" onclick="startVerbGame(this.closest(\'.verbPractice\'))">Ещё раз · перемешать</button>';return}
+ const idx=root._order[root._pos],a=pool[idx].split('|'),v1=a[0],v2=a[1],v3=a[2],correct=v2+' · '+v3;
+ const regular=v1.endsWith('e')?v1+'d':v1+'ed';
+ const all=irregularVerbs.map(s=>s.split('|'));
+ const sameV2=all.find(x=>x[1]===v2&&x[0]!==v1);
+ const sameV3=all.find(x=>x[2]===v3&&x[0]!==v1);
+ let distractors=[
+   v2+' · '+regular,
+   regular+' · '+v3,
+   regular+' · '+regular,
+   v3+' · '+v2,
+   sameV2 ? sameV2[1]+' · '+sameV2[2] : null,
+   sameV3 ? sameV3[1]+' · '+sameV3[2] : null
+ ].filter(x=>x&&x!==correct);
+ let opts=[correct,...new Set(distractors)].slice(0,4);
+ while(opts.length<4){
+   const x=all[Math.floor(Math.random()*all.length)];
+   const forms=x[1]+' · '+x[2];
+   if(!opts.includes(forms))opts.push(forms);
+ }
+ opts.sort(()=>Math.random()-.5);
+ game.innerHTML='<div class="vpPrompt"><small>'+(root._pos+1)+' / '+root._order.length+'</small><strong>'+v1+'</strong><span>'+a[3]+'</span></div><div class="vpChoices">'+opts.map(x=>'<button type="button" data-ok="'+(x===correct)+'">'+x+'</button>').join('')+'</div><div class="vpFb"></div>';
+ game.querySelectorAll('.vpChoices button').forEach(btn=>btn.onclick=()=>{const ok=btn.dataset.ok==='true';game.querySelectorAll('.vpChoices button').forEach(x=>x.disabled=true);btn.classList.add(ok?'vGood':'vBad');if(ok)root._score++;game.querySelector('.vpFb').textContent=ok?'Correct':'Правильно: '+correct;setTimeout(()=>{root._pos++;showVerbRound(root)},650)});
 }
 function initVerbGames(){document.querySelectorAll('.verbPractice').forEach(startVerbGame)}
 function speakWord(e,w){e.stopPropagation();speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang='en-GB';u.rate=.78;const vs=speechSynthesis.getVoices();u.voice=vs.find(v=>/en-GB/i.test(v.lang)&&/male|daniel|george|arthur/i.test(v.name))||vs.find(v=>/en-GB/i.test(v.lang))||null;speechSynthesis.speak(u)}
