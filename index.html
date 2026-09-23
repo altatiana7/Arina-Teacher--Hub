@@ -78,6 +78,16 @@
 .taskModal .wwQ,.taskModal .markerTrainQ{background:#fff!important;border-color:#c3d3e5!important;padding:10px!important}
 .taskModal .wwOpts button,.taskModal .markerTrainOpts button{background:#f7fbff!important;min-height:38px!important;padding:6px!important}
 @media(max-width:560px){.taskModal .presentGrid,.taskModal .markerRef{grid-template-columns:1fr!important}}
+
+.taskModal .presentGrid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+.taskModal .presentGrid .rule{padding:10px!important;min-height:132px!important;background:#fff!important;border:1px solid #bfd0e4!important;border-left:4px solid #0039A6!important}
+.taskModal .presentGrid .rule b{display:block!important;margin-bottom:7px!important;font-size:13px!important}
+.taskModal .presentGrid .rule span{display:block!important;margin:4px 0!important;font-size:11px!important;line-height:1.3!important;color:#111!important}
+.taskModal .presentGrid .rule span:first-of-type{color:#64748b!important;border-bottom:1px solid #e2e8f0!important;padding-bottom:5px!important;margin-bottom:6px!important}
+.taskModal .markerRef{grid-template-columns:1fr 1fr!important;gap:7px!important}
+.taskModal .markerCol{background:#fff!important;padding:7px!important}
+.taskModal .markerCol div{padding:3px 0!important;font-size:10px!important}
+@media(max-width:560px){.taskModal .presentGrid,.taskModal .markerRef{grid-template-columns:1fr!important}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -292,7 +302,7 @@ function openTaskWindow(title,html,after){
 function closeTaskWindow(){const m=document.getElementById('taskModal');if(m)m.style.display='none'}
 function openPresentPanel(type,key){
  if(type==='rule')openTaskWindow('Present Tenses · Rule',presentRuleHTML());
- else if(type==='markers')openTaskWindow('Present Tenses · Markers',markerReference());
+ else if(type==='markers')openTaskWindow('Present Tenses · Markers','<div class="markerRef">'+markerGroups.map(g=>'<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('')+'</div>').join('')+'</div>');
  else if(type==='markertrain')openTaskWindow('Markers · Choose the tense',markerTrainingHTML(key),m=>initMarkerTraining(m.querySelector('.markerTrain')));
  else {
    const submitKey='w0l0';
@@ -321,7 +331,12 @@ function showMarkerTraining(box){
  stage.querySelectorAll('.markerTrainOpts button').forEach(btn=>btn.onclick=()=>{const ok=btn.dataset.tense===item.tense;if(ok)box._score++;const fb=stage.querySelector('.markerTrainFb');fb.className='markerTrainFb '+(ok?'good':'bad');fb.textContent=ok?'Correct':'Correct: '+item.tense;stage.querySelectorAll('.markerTrainOpts button').forEach(x=>x.disabled=true);setTimeout(()=>{box._pos++;showMarkerTraining(box)},650)})
 }
 function presentRuleHTML(){
- return '<div class="presentGrid"><div class="rule"><b>Present Simple</b><span>facts, routines, permanent situations · do/does · V / V-s</span></div><div class="rule"><b>Present Continuous</b><span>now, temporary situations, changing situations · am/is/are + V-ing</span></div><div class="rule"><b>Present Perfect</b><span>result/experience connected with now · have/has + V3</span></div><div class="rule"><b>Present Perfect Continuous</b><span>duration/activity continuing to now · have/has been + V-ing</span></div></div>';
+ return '<div class="presentGrid">'+
+ '<div class="rule"><b>Present Simple</b><span>facts · routines · permanent situations</span><span><strong>+</strong> V1 / V-s</span><span><strong>−</strong> do/does not + V1</span><span><strong>?</strong> Do/Does + subject + V1?</span></div>'+
+ '<div class="rule"><b>Present Continuous</b><span>now · temporary · changing situations</span><span><strong>+</strong> am/is/are + V-ing</span><span><strong>−</strong> am/is/are not + V-ing</span><span><strong>?</strong> Am/Is/Are + subject + V-ing?</span></div>'+
+ '<div class="rule"><b>Present Perfect</b><span>result · experience · connection with now</span><span><strong>+</strong> have/has + V3</span><span><strong>−</strong> have/has not + V3</span><span><strong>?</strong> Have/Has + subject + V3?</span></div>'+
+ '<div class="rule"><b>Present Perfect Continuous</b><span>duration/activity continuing to now</span><span><strong>+</strong> have/has been + V-ing</span><span><strong>−</strong> have/has not been + V-ing</span><span><strong>?</strong> Have/Has + subject + been + V-ing?</span></div>'+
+ '</div>';
 }
 function lessonStarter(w,i){
  const key='w'+w+'l'+i;
