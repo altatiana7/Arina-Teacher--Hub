@@ -171,10 +171,11 @@ function showKahoot(root){
  q.querySelectorAll('button').forEach(b=>b.onclick=()=>{q.querySelectorAll('button').forEach(x=>x.disabled=true);const ok=b.dataset.ok==='true';if(ok)root._score++;b.classList.add(ok?'vGood':'vBad');q.querySelector('.kFb').textContent=ok?'Correct':item[1];setTimeout(()=>{root._pos++;showKahoot(root)},550)})
 }
 function initKahoots(){document.querySelectorAll('.kahootBox').forEach(startKahoot)}
+function openMarkerPractice(btn){btn.style.display='none';const wrap=btn.nextElementSibling;wrap.style.display='block';const game=wrap.querySelector('.kahootBox');if(game)startKahoot(game);}
 function lessonStarter(w,i){
  const key='w'+w+'l'+i;
  if(w===0&&i===0){
-  return '<details class="starter" open><summary>Present Tenses · 4 forms</summary><div class="starterBody"><div class="presentGrid"><div><h3>MARKERS · RULE</h3>'+markerReference()+'</div><div><h3>KAHOOT · WHICH TENSE?</h3>'+markerKahootHTML(key+'k')+'</div></div></div></details>'+
+  return '<details class="starter" open><summary>Present Tenses · 4 forms</summary><div class="starterBody"><div class="presentGrid"><div><h3>MARKERS · RULE</h3>'+markerReference()+'</div><div><h3>KAHOOT · WHICH TENSE?</h3><button class="action" type="button" onclick="openMarkerPractice(this)">Перейти к тренировке →</button><div class="markerPracticeHidden" style="display:none">'+markerKahootHTML(key+'k')+'</div></div></div></div></details>'+
   '<details class="starter" open><summary>Present Tenses · Test · 25 questions</summary><div class="starterBody">'+qhtml(key+'g')+'</div></details>'+
   submitBox(key,'Present Tenses');
  }
