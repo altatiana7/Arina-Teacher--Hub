@@ -157,12 +157,34 @@ function openWordwall(btn,key,type){
  const box=btn.nextElementSibling;box.style.display=box.style.display==='block'?'none':'block';
  if(box.style.display==='block'&&!box.dataset.started){box.dataset.started='1';box._items=(type==='stative'?stativeQuiz:quiz).map((q,i)=>({q:q,i:i}));box._pos=0;box._score=0;showWordwall(box,key)}
 }
+function studentTestHTML(items,key,submitKey,title){
+ return '<div class="studentTest" data-key="'+key+'" data-submitkey="'+submitKey+'" data-title="'+title+'"><div class="wwStage"></div></div>';
+}
+function initStudentTest(box){box._items=quiz.map((q,i)=>({q:q,i:i}));box._pos=0;box._answers=[];showStudentQuestion(box)}
+function showStudentQuestion(box){
+ const stage=box.querySelector('.wwStage'),item=box._items[box._pos],q=item.q;
+ stage.innerHTML='<div class="wwTop"><span>QUESTION '+(box._pos+1)+' / '+box._items.length+'</span></div><div class="wwQ"><p><b>'+(box._pos+1)+'.</b> '+q[0]+'</p><div class="wwOpts">'+q[1].map((o,j)=>'<button type="button" data-i="'+j+'">'+o+'</button>').join('')+'</div></div>';
+ stage.querySelectorAll('.wwOpts button').forEach(btn=>btn.onclick=()=>{box._answers[box._pos]=+btn.dataset.i;if(box._pos<box._items.length-1){box._pos++;showStudentQuestion(box)}else showFinalSubmit(box)})
+}
+function showFinalSubmit(box){
+ const stage=box.querySelector('.wwStage');
+ stage.innerHTML='<div class="wwQ"><p><b>25 / 25</b></p><p>Все ответы сохранены. После отправки изменить их или пройти тест повторно нельзя.</p><button class="action" type="button" onclick="submitStudentTest(this)">SUBMIT</button><div class="submitStatus"></div></div>';
+}
+function submitStudentTest(btn){
+ const box=btn.closest('.studentTest'),submitKey=box.dataset.submitkey;
+ if(localStorage.getItem('submitted-'+submitKey)){btn.disabled=true;btn.textContent='Уже отправлено';return}
+ let good=0;box._items.forEach((it,i)=>{if(box._answers[i]===+it.q[2])good++});
+ const stamp=new Date().toLocaleString('ru-RU'),code=(submitKey+'-'+good+'-'+box._items.length).toUpperCase();
+ localStorage.setItem('submitted-'+submitKey,JSON.stringify({title:box.dataset.title,score:good,total:box._items.length,date:stamp,code:code,answers:box._answers}));
+ btn.disabled=true;btn.textContent='Отправлено';
+ box.querySelector('.submitStatus').textContent='Результат отправлен учителю. Повторная попытка заблокирована.';
+}
 function showWordwall(box,key){
  const stage=box.querySelector('.wwStage'),item=box._items[box._pos];
- if(!item){stage.innerHTML='<div class="wwQ"><p><b>Готово: '+box._score+' / '+box._items.length+'</b></p></div>';return}
+ if(!item){stage.innerHTML='<div class="wwQ"><p><b>Тест завершён.</b></p></div>';return}
  const q=item.q;
- stage.innerHTML='<div class="wwTop"><span>QUESTION '+(box._pos+1)+' / '+box._items.length+'</span><span>SCORE '+box._score+'</span></div><div class="wwQ"><p><b>'+(box._pos+1)+'.</b> '+q[0]+'</p><div class="wwOpts">'+q[1].map((o,j)=>'<button type="button" data-i="'+j+'">'+o+'</button>').join('')+'</div><div class="wwFb"></div></div>';
- stage.querySelectorAll('.wwOpts button').forEach(b=>b.onclick=()=>{const ok=+b.dataset.i===+q[2];stage.querySelectorAll('.wwOpts button').forEach(x=>{x.disabled=true;if(+x.dataset.i===+q[2])x.classList.add('vGood')});if(!ok)b.classList.add('vBad');if(ok)box._score++;stage.querySelector('.wwFb').innerHTML=(ok?'Correct':'Правильно: <b>'+q[1][q[2]]+'</b>')+' <button class="action wwNext" type="button">Дальше →</button>';stage.querySelector('.wwNext').onclick=()=>{box._pos++;showWordwall(box,key)}})
+ stage.innerHTML='<div class="wwTop"><span>QUESTION '+(box._pos+1)+' / '+box._items.length+'</span></div><div class="wwQ"><p><b>'+(box._pos+1)+'.</b> '+q[0]+'</p><div class="wwOpts">'+q[1].map((o,j)=>'<button type="button" data-i="'+j+'">'+o+'</button>').join('')+'</div></div>';
+ stage.querySelectorAll('.wwOpts button').forEach(btn=>btn.onclick=()=>{box._answers=box._answers||[];box._answers[box._pos]=+btn.dataset.i;box._pos++;showWordwall(box,key)})
 }
 function stativeQhtml(key){return wordwallTestHTML(stativeQuiz,key)}
 
@@ -228,7 +250,11 @@ function closeTaskWindow(){const m=document.getElementById('taskModal');if(m)m.s
 function openPresentPanel(type,key){
  if(type==='rule')openTaskWindow('Present Tenses · Rule',presentRuleHTML());
  else if(type==='markers')openTaskWindow('Present Tenses · Markers',markerReference());
- else openTaskWindow('Present Tenses · Grammar Test',wordwallTestHTML(quiz,key),m=>{const box=m.querySelector('.inlineTest');box.style.display='block';box.dataset.started='1';box._items=quiz.map((q,i)=>({q:q,i:i}));box._pos=0;box._score=0;showWordwall(box,key)})
+ else {
+   const submitKey='w0l0';
+   if(localStorage.getItem('submitted-'+submitKey)){openTaskWindow('Present Tenses · Grammar Test','<div class="wwQ"><p><b>Тест уже отправлен.</b></p><p>Повторная попытка недоступна.</p></div>');return}
+   openTaskWindow('Present Tenses · Grammar Test',studentTestHTML(quiz,key,submitKey,'Present Tenses'),m=>initStudentTest(m.querySelector('.studentTest')))
+ }
 }
 function presentRuleHTML(){
  return '<div class="presentGrid"><div class="rule"><b>Present Simple</b><span>facts, routines, permanent situations · do/does · V / V-s</span></div><div class="rule"><b>Present Continuous</b><span>now, temporary situations, changing situations · am/is/are + V-ing</span></div><div class="rule"><b>Present Perfect</b><span>result/experience connected with now · have/has + V3</span></div><div class="rule"><b>Present Perfect Continuous</b><span>duration/activity continuing to now · have/has been + V-ing</span></div></div>';
@@ -236,7 +262,7 @@ function presentRuleHTML(){
 function lessonStarter(w,i){
  const key='w'+w+'l'+i;
  if(w===0&&i===0){
-  return '<div class="lessonMenu"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">GRAMMAR TEST · 25</button></div>'+submitBox(key,'Present Tenses');
+  return '<div class="lessonMenu"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">GRAMMAR TEST · 25</button></div>';
  }
  if(w===0&&i===1){
   return '<details class="starter"><summary>Правило · Stative verbs / Dynamic meanings</summary><div class="starterBody">'+stativeInfo()+'</div></details>'+
