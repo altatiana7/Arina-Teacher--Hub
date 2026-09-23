@@ -98,6 +98,8 @@
 .stativeCompact .stBoth>b{color:#D52B1E}
 .stativeCompact .stTip{background:#eaf3ff}
 @media(max-width:600px){.stativeCompact{grid-template-columns:1fr}.stativeCompact .stBoth{grid-column:auto}}
+
+.tenseFormulaBoard{background:#f3efe5;border-radius:12px;padding:11px;margin:0 0 10px}.tenseFormulaTitle{text-align:center;font-size:16px;font-weight:900;color:#111;margin-bottom:8px}.tenseFormulaGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.tenseNote{padding:9px 7px;border-radius:4px;color:#111;box-shadow:0 3px 8px #0002}.tenseNote:nth-child(1){background:#ffe66f}.tenseNote:nth-child(2){background:#d8ef86}.tenseNote:nth-child(3){background:#f7c2cf}.tenseNote:nth-child(4){background:#bfe0f5}.tenseNote b{display:block;font-size:10px;text-align:center;margin-bottom:6px}.tenseNote code{display:block;background:#fff8;border:1px solid #333;padding:5px 3px;text-align:center;font:700 9px Arial;margin-bottom:6px}.tenseNote small{display:block;font-size:9px;line-height:1.25;text-align:center}.tenseNote em{color:#c5221f;font-style:normal;font-weight:900}@media(max-width:760px){.tenseFormulaGrid{grid-template-columns:1fr 1fr}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -332,7 +334,13 @@ function showMarkerTraining(box){
  stage.querySelectorAll('.markerTrainOpts button').forEach(btn=>btn.onclick=()=>{const ok=btn.dataset.tense===item.tense;if(ok)box._score++;const fb=stage.querySelector('.markerTrainFb');fb.className='markerTrainFb '+(ok?'good':'bad');fb.textContent=ok?'Correct':'Correct: '+item.tense;stage.querySelectorAll('.markerTrainOpts button').forEach(x=>x.disabled=true);setTimeout(()=>{box._pos++;showMarkerTraining(box)},650)})
 }
 function presentRuleHTML(){
- return '<div class="presentGrid">'+
+ return '<div class="tenseFormulaBoard"><div class="tenseFormulaTitle">ENGLISH TENSES FORMULAS · PRESENT</div><div class="tenseFormulaGrid">'+
+ '<div class="tenseNote"><b>1 · SIMPLE PRESENT</b><code>S + V(s/es) + O</code><small>She <em>studies</em> English every day.</small></div>'+
+ '<div class="tenseNote"><b>2 · PRESENT CONTINUOUS</b><code>S + am/is/are + V-ing + O</code><small>She <em>is studying</em> English right now.</small></div>'+
+ '<div class="tenseNote"><b>3 · PRESENT PERFECT</b><code>S + has/have + V³ + O</code><small>She <em>has studied</em> English for two hours.</small></div>'+
+ '<div class="tenseNote"><b>4 · PRESENT PERFECT CONTINUOUS</b><code>S + has/have + been + V-ing + O</code><small>She <em>has been studying</em> English since morning.</small></div>'+
+ '</div></div>'+
+ '<div class="presentGrid">'+
  '<div class="rule"><b>Present Simple</b><span>facts · routines · permanent situations</span><span><strong>+</strong> V1 / V-s</span><span><strong>−</strong> do/does not + V1</span><span><strong>?</strong> Do/Does + subject + V1?</span></div>'+
  '<div class="rule"><b>Present Continuous</b><span>now · temporary · changing situations</span><span><strong>+</strong> am/is/are + V-ing</span><span><strong>−</strong> am/is/are not + V-ing</span><span><strong>?</strong> Am/Is/Are + subject + V-ing?</span></div>'+
  '<div class="rule"><b>Present Perfect</b><span>result · experience · connection with now</span><span><strong>+</strong> have/has + V3</span><span><strong>−</strong> have/has not + V3</span><span><strong>?</strong> Have/Has + subject + V3?</span></div>'+
