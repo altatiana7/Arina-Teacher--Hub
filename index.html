@@ -107,6 +107,8 @@
 .egeCore{display:block!important;visibility:visible!important;opacity:1!important}
 
 .teacherReset{margin-top:10px;text-align:right}.teacherReset button{border:0;background:transparent;color:#94a3b8;font-size:9px;cursor:pointer;padding:3px 5px}.teacherReset button:hover{color:#D52B1E}
+
+.egePresentSet{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.egePresentSet h3{margin:0 0 5px;color:#0039A6;font-size:14px}.egePresentText{font-size:15px;line-height:1.75;color:#111}.egeGap{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}.egeGap input{width:118px;border:0;border-bottom:2px solid #0039A6;padding:2px 4px;font-weight:900;color:#0039A6;background:#f7f9fc}.egeBase{font-size:10px;font-weight:900;color:#D52B1E}.egeSetActions{display:flex;gap:7px;margin-top:10px}.egeSetActions button{border:0;border-radius:7px;padding:8px 11px;background:#0039A6;color:#fff;font-weight:900;font-size:10px}.egeSetResult{font-size:11px;font-weight:900;margin-top:7px;color:#0039A6}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -389,6 +391,22 @@ function speakReading(btn){
  const text=btn.closest('.readingPractice').querySelector('.readingText').textContent;
  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=.88;const vs=speechSynthesis.getVoices();u.voice=vs.find(v=>v.lang==='en-GB'&&/male|daniel|george|oliver/i.test(v.name))||vs.find(v=>v.lang==='en-GB')||null;speechSynthesis.speak(u)
 }
+const egePresentItems=[
+['When Emma was a child, she often ___ her summers at her grandparents’ house.','SPEND','spent'],
+['Today the old house ___ to another family, but Emma still remembers it well.','BELONG','belongs'],
+['She ___ the village several times since she moved to the city.','VISIT','has visited'],
+['At the moment, local residents ___ a new community centre near the school.','BUILD','are building'],
+['The project ___ more popular over the last few months.','BECOME','has become'],
+['For several weeks, volunteers ___ money for new equipment.','COLLECT','have been collecting']
+];
+function egePresentPractice(key){
+ return '<div class="egePresentSet"><h3>EGE 19–24 · Present forms</h3><div class="tiny">Преобразуй слово в скобках. Исходная форма должна измениться.</div><div class="egePresentText">'+egePresentItems.map((x,n)=>(n+19)+'. '+x[0].replace('___','<span class="egeGap"><input autocomplete="off" data-ege="'+n+'"><span class="egeBase">'+x[1]+'</span></span>')).join('<br>')+'</div><div class="egeSetActions"><button type="button" onclick="checkEgePresent(this)">CHECK</button></div><div class="egeSetResult"></div></div>';
+}
+function checkEgePresent(btn){
+ const box=btn.closest('.egePresentSet'),ins=box.querySelectorAll('[data-ege]');let good=0;
+ ins.forEach((x,i)=>{const ok=x.value.trim().toLowerCase()===egePresentItems[i][2].toLowerCase();if(ok)good++;x.style.borderBottomColor=ok?'#15803d':'#D52B1E'});
+ box.querySelector('.egeSetResult').textContent=good+' / '+egePresentItems.length;
+}
 function lessonStarter(w,i){
  const key='w'+w+'l'+i;
  if(w===0&&i===0){
@@ -397,7 +415,7 @@ function lessonStarter(w,i){
  if(w===0&&i===1){
   return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>';
  }
- return '<details class="starter"><summary>EGE 19–24 · Present forms</summary><div class="starterBody"><div class="readText">Present forms in exam context: choose tense, aspect and form from meaning, not from one marker word.</div></div></details>'+submitBox(key,'EGE Present forms');
+ return egePresentPractice(key)+submitBox(key,'EGE Present forms');
 }
 function submitBox(key,title){
  return '<div class="submitBox" data-submit="'+key+'"><b>ОТПРАВИТЬ РЕЗУЛЬТАТ УЧИТЕЛЮ</b><p>После отправки ответы блокируются. Исправить или пройти тест повторно нельзя.</p><button class="action submitOnce" type="button" onclick="submitOnce(this,\''+key+'\',\''+title+'\')">Отправить результат</button><div class="submitStatus"></div></div>';
@@ -414,6 +432,7 @@ function submitOnce(btn,key,title){
 }
 function lockSubmitted(box,key){
  const raw=localStorage.getItem('submitted-'+key);if(!raw)return;const d=JSON.parse(raw);
+ if((!d.total||d.total===0)&&box.querySelector('.egePresentSet')){localStorage.removeItem('submitted-'+key);return}
  box.querySelectorAll('input, .quizSet button, .kahootBox button, .submitOnce').forEach(x=>x.disabled=true);
  box.querySelectorAll('.submitOnce').forEach(x=>x.textContent='Результат уже отправлен');
  const s=box.querySelector('.submitStatus');if(s)s.innerHTML='ЗАВЕРШЕНО · '+d.score+' / '+d.total+' · код: <b>'+d.code+'</b><br>Повторное выполнение и исправление заблокированы.';
