@@ -116,6 +116,16 @@
 .stBoth>b,.stBoth>small{grid-column:1/-1}
 .stBoth>p{margin:0!important;padding:5px 0!important;border-bottom:1px solid var(--line)}
 @media(max-width:650px){.stBoth{grid-template-columns:1fr}}
+
+.stativeExtraGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:8px;margin-top:8px}
+.stativeExtra{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px}
+.stativeExtra h4{margin:0 0 5px;color:#0039A6;font-size:11px;text-transform:uppercase}
+.stativeExtra p{margin:3px 0;font-size:11px;line-height:1.35;color:#111}
+.stativeExtra .trap{padding:4px 6px;background:#f7f9fc;border-left:3px solid #D52B1E;margin:4px 0}
+.stativeMiniQ{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid var(--line);font-size:11px}
+.stativeMiniQ select{font-size:10px;padding:4px;border:1px solid #b7c9e8;border-radius:5px}
+.stativeMiniResult{font-size:10px;font-weight:900;color:#0039A6;margin-top:5px}
+@media(max-width:760px){.stativeExtraGrid{grid-template-columns:1fr}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -357,6 +367,27 @@ function openPresentPanel(type,key){
    openTaskWindow('Present Tenses · Grammar Test',studentTestHTML(quiz,key,submitKey,'Present Tenses'),m=>initStudentTest(m.querySelector('.studentTest')))
  }
 }
+function stativeExtraHTML(){
+ const qs=[
+  ['I ___ this is the best option.','think','am thinking','think'],
+  ['I ___ about changing my job.','think','am thinking','am thinking'],
+  ['The soup ___ strange.','tastes','is tasting','tastes'],
+  ['The chef ___ the soup now.','tastes','is tasting','is tasting'],
+  ['He ___ very rude today.','is','is being','is being'],
+  ['This suitcase ___ 20 kilos.','weighs','is weighing','weighs']
+ ];
+ return '<div class="stativeExtraGrid"><div class="stativeExtra"><h4>TRICKY CASES · QUICK HELP</h4>'+
+ '<div class="trap"><b>think</b> = opinion → Simple; consider → Continuous</div>'+
+ '<div class="trap"><b>have</b> = possession → Simple; activity/experience → Continuous</div>'+
+ '<div class="trap"><b>see</b> = understand/perceive → Simple; meet/appointment → Continuous</div>'+
+ '<div class="trap"><b>taste / smell / feel</b> = quality/state → Simple; deliberate action → Continuous</div>'+
+ '<div class="trap"><b>be</b> = permanent characteristic → Simple; temporary behaviour → Continuous</div>'+
+ '<div class="trap"><b>weigh / measure</b> = property → Simple; deliberate action → Continuous</div>'+
+ '</div><div class="stativeExtra"><h4>CHOOSE BY MEANING · 6 TRAPS</h4>'+
+ qs.map((q,i)=>'<div class="stativeMiniQ"><span>'+(i+1)+'. '+q[0]+'</span><select data-a="'+q[3]+'"><option value="">choose</option><option>'+q[1]+'</option><option>'+q[2]+'</option></select></div>').join('')+
+ '<button class="action" style="margin-top:6px;padding:6px 9px;font-size:9px" type="button" onclick="checkStativeMini(this)">CHECK</button><div class="stativeMiniResult"></div></div></div>';
+}
+function checkStativeMini(btn){const box=btn.closest('.stativeExtra'),ss=box.querySelectorAll('select');let n=0;ss.forEach(s=>{const ok=s.value===s.dataset.a;if(ok)n++;s.style.borderColor=ok?'#15803d':'#D52B1E'});box.querySelector('.stativeMiniResult').textContent=n+' / '+ss.length}
 function openStativePanel(type,key){
  if(type==='rule')openTaskWindow('Stative verbs · Rule',stativeInfo());
  else {
@@ -420,7 +451,7 @@ function lessonStarter(w,i){
   return '<div class="lesson1Workspace"><div><div class="lessonMenu"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 PRESENT TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS · REFERENCE</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markertrain\',\''+key+'m\')">MARKER → TENSE · TRAINING</button></div><div class="lessonTestCard"><b>GRAMMAR TEST · 25 QUESTIONS</b><button type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">START TEST</button></div></div>'+lesson1ReadingHTML()+'</div>';
  }
  if(w===0&&i===1){
-  return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>';
+  return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>'+stativeExtraHTML();
  }
  return egePresentPractice(key)+submitBox(key,'EGE Present forms');
 }
