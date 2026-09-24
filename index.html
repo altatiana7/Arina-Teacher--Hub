@@ -105,6 +105,8 @@
 
 .dwReadSplit{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px;align-items:start}.dwReadSplit .examCard{margin:0}.oralRead{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.oralReadTop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}.oralTimer{font-size:18px;font-weight:900;color:#D52B1E;min-width:58px;text-align:right}.oralReadText{font-size:13px;line-height:1.55;color:#111;max-height:250px;overflow:auto}.oralControls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:9px}.oralControls button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:7px 5px;font-size:9px;font-weight:900}.oralNav{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:900;color:#64748b;margin-top:7px}@media(max-width:850px){.dwReadSplit{grid-template-columns:1fr}}
 .egeCore{display:block!important;visibility:visible!important;opacity:1!important}
+
+.teacherReset{margin-top:10px;text-align:right}.teacherReset button{border:0;background:transparent;color:#94a3b8;font-size:9px;cursor:pointer;padding:3px 5px}.teacherReset button:hover{color:#D52B1E}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -308,13 +310,23 @@ function openTaskWindow(title,html,after){
  m.style.display='block';if(after)after(m)
 }
 function closeTaskWindow(){const m=document.getElementById('taskModal');if(m)m.style.display='none'}
+function teacherResetTest(submitKey,type,key){
+ const code=prompt('Teacher code');
+ if(code!=='2512')return;
+ localStorage.removeItem('submitted-'+submitKey);
+ if(type==='present')openTaskWindow('Present Tenses · Grammar Test',studentTestHTML(quiz,key,submitKey,'Present Tenses'),m=>initStudentTest(m.querySelector('.studentTest')));
+ else openTaskWindow('Stative vs Dynamic · Grammar Test',studentTestHTML(stativeQuiz,key,submitKey,'Stative verbs + Present contrast'),m=>initStudentTest(m.querySelector('.studentTest'),stativeQuiz));
+}
+function lockedTestHTML(submitKey,type,key){
+ return '<div class="wwQ"><p><b>Тест уже отправлен.</b></p><p>Повторная попытка недоступна.</p></div><div class="teacherReset"><button type="button" onclick="teacherResetTest(\''+submitKey+'\',\''+type+'\',\''+key+'\')">Teacher reset</button></div>';
+}
 function openPresentPanel(type,key){
  if(type==='rule')openTaskWindow('Present Tenses · Rule',presentRuleHTML());
  else if(type==='markers')openTaskWindow('Present Tenses · Markers','<div class="markerRef">'+markerGroups.map(g=>'<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('')+'</div>').join('')+'</div>');
  else if(type==='markertrain')openTaskWindow('Markers · Choose the tense',markerTrainingHTML(key),m=>initMarkerTraining(m.querySelector('.markerTrain')));
  else {
    const submitKey='w0l0';
-   if(localStorage.getItem('submitted-'+submitKey)){openTaskWindow('Present Tenses · Grammar Test','<div class="wwQ"><p><b>Тест уже отправлен.</b></p><p>Повторная попытка недоступна.</p></div>');return}
+   if(localStorage.getItem('submitted-'+submitKey)){openTaskWindow('Present Tenses · Grammar Test',lockedTestHTML(submitKey,'present',key));return}
    openTaskWindow('Present Tenses · Grammar Test',studentTestHTML(quiz,key,submitKey,'Present Tenses'),m=>initStudentTest(m.querySelector('.studentTest')))
  }
 }
@@ -322,7 +334,7 @@ function openStativePanel(type,key){
  if(type==='rule')openTaskWindow('Stative verbs · Rule',stativeInfo());
  else {
    const submitKey='w0l1';
-   if(localStorage.getItem('submitted-'+submitKey)){openTaskWindow('Stative vs Dynamic · Grammar Test','<div class="wwQ"><p><b>Тест уже отправлен.</b></p><p>Повторная попытка недоступна.</p></div>');return}
+   if(localStorage.getItem('submitted-'+submitKey)){openTaskWindow('Stative vs Dynamic · Grammar Test',lockedTestHTML(submitKey,'stative',key));return}
    openTaskWindow('Stative vs Dynamic · Grammar Test',studentTestHTML(stativeQuiz,key,submitKey,'Stative verbs + Present contrast'),m=>initStudentTest(m.querySelector('.studentTest'),stativeQuiz))
  }
 }
