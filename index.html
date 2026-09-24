@@ -128,7 +128,7 @@
 @media(max-width:760px){.stativeExtraGrid{grid-template-columns:1fr}}
 
 .studentRequiredTest{background:#fff7f7!important;border:1px solid #e7a3a3!important;color:#9f2d2d!important;box-shadow:none!important}
-.studentRequiredTest::before{content:"СДЕЛАТЬ · ";font-size:8px;font-weight:800;color:#b95b5b}
+.studentRequiredTest::before{content:"";display:none}
 .lessonTestCard{border-color:#e7a3a3!important;background:#fffafa!important}
 .lessonTestCard>b{color:#9f2d2d!important}
 .lessonTestCard button{background:#b85c5c!important}
@@ -457,7 +457,7 @@ function lessonStarter(w,i){
   return '<div class="lesson1Workspace"><div><div class="lessonMenu"><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'rule\',\''+key+'\')">RULE · 4 PRESENT TENSES</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markers\',\''+key+'\')">MARKERS · REFERENCE</button><button class="lessonMenuBtn" type="button" onclick="openPresentPanel(\'markertrain\',\''+key+'m\')">MARKER → TENSE · TRAINING</button></div><div class="lessonTestCard"><b>GRAMMAR TEST · 25 QUESTIONS</b><button type="button" onclick="openPresentPanel(\'test\',\''+key+'g\')">START TEST</button></div></div>'+lesson1ReadingHTML()+'</div>';
  }
  if(w===0&&i===1){
-  return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn studentRequiredTest" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>'+stativeExtraHTML();
+  return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn studentRequiredTest" style="background:#fff7f7!important;border:1px solid #e7a3a3!important;color:#9f2d2d!important;box-shadow:none!important" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')"><span style="font-size:8px;color:#b95b5b">СДЕЛАТЬ · </span>GRAMMAR TEST · 25</button></div>'+stativeExtraHTML();
  }
  return egePresentPractice(key)+submitBox(key,'EGE Present forms');
 }
