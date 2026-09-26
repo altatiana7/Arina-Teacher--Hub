@@ -133,6 +133,46 @@
 .lessonTestCard>b{color:#9f2d2d!important}
 .lessonTestCard button{background:#b85c5c!important}
 </style><meta name="theme-color" content="#ffffff">
+
+<style id="teacherHubDistinctTheme">
+:root{
+  --bg:#f4f6f8!important;
+  --paper:#ffffff!important;
+  --ink:#1f2937!important;
+  --mut:#6b7280!important;
+  --line:#d9dee5!important;
+  --teal:#315b7d!important;
+  --deep:#20364a!important;
+  --soft:#eef3f7!important;
+  --soft2:#f7f9fb!important;
+  --warn:#fff7df!important;
+}
+body{background:#f4f6f8!important;color:#1f2937!important}
+.top{background:#182532!important;border-bottom:0!important;box-shadow:0 3px 14px #0f172a22!important}
+.brand{color:#fff!important;letter-spacing:.02em!important}
+.brand b{color:#bcd3e6!important}
+.topnote{color:#d5e1eb!important}
+.side{background:#fbfcfd!important;border-right:1px solid #d7dde4!important}
+.sidehead{color:#20364a!important}
+.wbtn,.ebtn{background:#fff!important;border-color:#d7dde4!important;color:#253746!important}
+.wbtn.active{background:#e7eef4!important;border-color:#8fa9bf!important;color:#18364f!important}
+.wbtn:hover,.ebtn:hover{border-color:#315b7d!important}
+.hero{background:linear-gradient(135deg,#22384b,#315b7d)!important}
+.hero .eyebrow{color:#d9e7f2!important}
+.hero p{color:#e8eff5!important}
+.card,.lesson,.box,.task,.examCard,.hw,.q{border-color:#d9dee5!important}
+.result,.hw{background:#eef3f7!important}
+.lnum{background:#20364a!important}
+.chev,.eyebrow,.official,.pts{color:#315b7d!important}
+.action{background:#20364a!important}
+.lessonPage{background:#f4f6f8!important}
+.weekTitle{background:#e8eef4!important;border-color:#c7d3dd!important;border-left-color:#315b7d!important}
+.weekTitle b{color:#20364a!important}
+#weekView .lesson,#weekView .lesson:nth-of-type(even){background:#fff!important}
+.lessonMenuBtn{background:#eef3f7!important;border-color:#cbd7e1!important;border-left-color:#315b7d!important;color:#20364a!important}
+.taskModalCard{background:#f7f9fb!important;border-color:#ccd7e0!important}
+.teacherReset button:hover{color:#20364a!important}
+</style>
 </head><body>
 <header class="top"><div class="brand">TEACHER HUB · <b>ARINA EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
 <aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button><button class="ebtn" style="width:100%;margin-top:8px" onclick="renderExam('overview')">ЕГЭ 2027 · Структура<small>баллы за каждое задание</small></button></aside>
