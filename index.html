@@ -116,12 +116,10 @@
 .stBoth>b,.stBoth>small{grid-column:1/-1}
 .stBoth>p{margin:0!important;padding:5px 0!important;border-bottom:1px solid var(--line)}
 @media(max-width:650px){.stBoth{grid-template-columns:1fr}}
-
-.week1Layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:12px;align-items:start}.week1Tasks{min-width:0}.week1Right{position:sticky;top:48px}.expandedCard{background:#fff;border:1px solid #cbd8ea;border-radius:14px;padding:12px}.expandedCard h3{font-size:14px;margin:0 0 8px}.expandedRow{display:flex;justify-content:space-between;gap:8px;padding:7px 2px;border-bottom:1px dashed #dbe3ee;font-size:12px}.expandedRow:last-child{border-bottom:0}.expandedRow b{font-size:13px}.rightBig{display:block;width:100%;border:0;border-radius:11px;padding:12px 8px;margin-top:9px;text-align:center;font-weight:900;text-decoration:none}.rightBig.demo{background:#0039A6;color:#fff}.rightBig.fipi{background:#eef8fb;color:#0039A6;border:1px solid #cbd8ea}.rightNote{font-size:10px;line-height:1.45;color:#718096;margin-top:9px}@media(max-width:980px){.week1Layout{grid-template-columns:1fr}.week1Right{position:static}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
-<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" style="border:2px solid #D52B1E;background:#fff1f0" onclick="renderTrainer('homework')">ДОМАШНЯЯ РАБОТА · PRESENT + MARKERS</button><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
+<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button><button class="ebtn" style="width:100%;margin-top:8px" onclick="renderExam('overview')">ЕГЭ 2027 · Структура<small>баллы за каждое задание</small></button></aside>
 <main class="main"><section id="weekView" class="content on"></section><section id="examView" class="content"></section><section id="trainerView" class="content"></section></main>
 <script>
 const weeks=[
@@ -447,7 +445,7 @@ function lockSubmitted(box,key){
  const s=box.querySelector('.submitStatus');if(s)s.innerHTML='ЗАВЕРШЕНО · '+d.score+' / '+d.total+' · код: <b>'+d.code+'</b><br>Повторное выполнение и исправление заблокированы.';
 }
 function qhtml(key='q'){return '<div class="quiz quizSet">'+quiz.map((q,i)=>'<div class="q" data-answer="'+q[2]+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="opts">'+q[1].map((o,j)=>'<label class="opt"><input type="radio" name="'+key+'q'+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div><div class="fb"></div></div>').join('')+'</div><button class="action" type="button" onclick="checkQuizSet(this)">Проверить 25 заданий</button><span class="score"></span>'}
-function renderButtons(){const root=document.getElementById('weekBtns');weeks.slice(0,3).forEach((w,i)=>{const b=document.createElement('button');b.className='wbtn'+(i===0?' active':' locked');b.dataset.i=i;b.innerHTML='<b>Неделя '+(i+1)+'</b><small>'+w.d+(i===0?' · активна':' · скоро')+'</small>';if(i===0)b.onclick=()=>renderWeek(i);root.appendChild(b)})}
+function renderButtons(){const root=document.getElementById('weekBtns');weeks.slice(0,3).forEach((w,i)=>{const b=document.createElement('button');b.className='wbtn'+(i===0?' active':i===1?'':' locked');b.dataset.i=i;b.innerHTML='<b>Неделя '+(i+1)+'</b><small>'+w.d+(i<2?' · активна':' · скоро')+'</small>';if(i<2)b.onclick=()=>renderWeek(i);root.appendChild(b)})}
 function lessonHTML(x,i,w){
  return '<div class="lesson" onclick="openLesson('+w+','+i+')" style="cursor:pointer"><div class="lessonHead" style="display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:14px"><span class="lnum">'+(i+1)+'</span><span class="ltitle"><b>Урок '+(i+1)+' · '+x[0]+'</b><small>Открыть урок</small></span><span class="chev">→</span></div></div>'
 }
@@ -460,24 +458,7 @@ function lessonFullHTML(x,i,w){
 }
 function openLesson(w,i){let p=document.getElementById('lessonPage');if(!p){p=document.createElement('div');p.id='lessonPage';p.className='lessonPage';document.body.appendChild(p)}p.innerHTML=lessonFullHTML(weeks[w].l[i],i,w)+(w===1?'<div class="examCard" style="margin:10px 14px 20px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Grammar 19–24 + Word Formation 25–29 · материалы 2026</div></div><button class="action" type="button" onclick="closeLesson();renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');p.style.display='block';restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));initKahoots();const key='w'+w+'l'+i;if(localStorage.getItem('submitted-'+key))lockSubmitted(p,key);scrollTo(0,0)}
 function closeLesson(){const p=document.getElementById('lessonPage');if(p)p.style.display='none'}
-function week1RightPanel(){
- return '<aside class="week1Right"><div class="expandedCard"><h3>СТРУКТУРА ЕГЭ 2027</h3>'+
- '<div class="expandedRow"><span>1–4 · Listening</span><b>12</b></div>'+
- '<div class="expandedRow"><span>10–18 · Reading</span><b>12</b></div>'+
- '<div class="expandedRow"><span>19–24 · Grammar</span><b>6</b></div>'+
- '<div class="expandedRow"><span>25–29 · Word Formation</span><b>5</b></div>'+
- '<div class="expandedRow"><span>30–36 · Vocabulary</span><b>7</b></div>'+
- '<div class="expandedRow"><span>37 · Email</span><b>6</b></div>'+
- '<div class="expandedRow"><span>38 · Essay</span><b>14</b></div>'+
- '<div class="expandedRow"><span>39 · Reading aloud</span><b>1</b></div>'+
- '<div class="expandedRow"><span>40 · Questions</span><b>4</b></div>'+
- '<div class="expandedRow"><span>41 · Interview</span><b>5</b></div>'+
- '<div class="expandedRow"><span>42 · Photo project</span><b>10</b></div></div>'+
- '<a class="rightBig demo" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Пробная версия ЕГЭ 2027</a>'+
- '<a class="rightBig fipi" href="https://fipi.ru/ege/otkrytyy-bank-zadaniy-ege" target="_blank" rel="noopener">Открытый банк ФИПИ</a>'+
- '<div class="rightNote">Структура ЕГЭ всегда видна справа на экране Недели 1.</div></aside>';
-}
-function renderWeek(i){if(i<0||i>1)return;document.body.classList.remove('fullWeek');document.getElementById('examView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('weekView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.toggle('active',+b.dataset.i===i));const w=weeks[i];const lessons=w.l.map((x,j)=>lessonHTML(x,j,i)).join('')+(i===1?'<div class="examCard" style="margin-top:10px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Реальные материалы 2026 · Grammar 19–24 + Word Formation 25–29</div></div><button class="action" type="button" onclick="renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');const body=i===0?'<div class="week1Layout"><div class="week1Tasks">'+lessons+'</div>'+week1RightPanel()+'</div>':lessons;document.getElementById('weekView').innerHTML='<div class="weekTitle"><b>Неделя '+(i+1)+'</b> · '+w.d+'</div><div class="weekMeta"><div class="card"><div class="eyebrow">Цель недели</div><h2>'+w.g+'</h2></div><div class="card result"><div class="eyebrow">Критерий готовности</div><p><b>'+w.r+'</b></p></div></div>'+body;restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
+function renderWeek(i){if(i<0||i>1)return;document.body.classList.remove('fullWeek');document.getElementById('examView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('weekView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.toggle('active',+b.dataset.i===i));const w=weeks[i];document.getElementById('weekView').innerHTML='<div class="weekTitle"><b>Неделя '+(i+1)+'</b> · '+w.d+'</div><div class="weekMeta"><div class="card"><div class="eyebrow">Цель недели</div><h2>'+w.g+'</h2></div><div class="card result"><div class="eyebrow">Критерий готовности</div><p><b>'+w.r+'</b></p></div></div>'+w.l.map((x,j)=>lessonHTML(x,j,i)).join('')+(i===1?'<div class="examCard" style="margin-top:10px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Реальные материалы 2026 · Grammar 19–24 + Word Formation 25–29</div></div><button class="action" type="button" onclick="renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 let saved={};try{saved=JSON.parse(localStorage.getItem('arinaPlanV4')||'{}')}catch(e){}function restore(){document.querySelectorAll('[data-save]').forEach(x=>{x.checked=!!saved[x.dataset.save];x.onchange=()=>{saved[x.dataset.save]=x.checked;localStorage.setItem('arinaPlanV4',JSON.stringify(saved))}})}
 function exitWeek(){document.body.classList.remove('fullWeek');document.getElementById('side').classList.add('open')}function checkQuizSet(btn){let n=0;const set=btn.parentElement.querySelector('.quizSet');set.querySelectorAll('.q').forEach(box=>{const sel=box.querySelector('input:checked'),fb=box.querySelector('.fb'),ans=+box.dataset.answer;if(!sel){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+sel.value===ans){n++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Try again';fb.className='fb bad'}});btn.nextElementSibling.textContent=n+' / '+set.querySelectorAll('.q').length}function checkQuiz(){let n=0;quiz.forEach((q,i)=>{const box=document.querySelector('[data-q="'+i+'"]'),sel=box.querySelector('input:checked'),fb=box.querySelector('.fb');if(!sel){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+sel.value===q[2]){n++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Correct: '+q[1][q[2]];fb.className='fb bad'}});document.getElementById('score').textContent=n+' / '+quiz.length}
 const irregularVerbs=[
@@ -568,85 +549,9 @@ function moveOralRead(d){oralReadIndex=(oralReadIndex+d+oralReadingTexts.length)
 function resetOralTimer(){clearInterval(oralTimerId);oralSeconds=90;const e=document.getElementById('oralTimer');if(e)e.textContent='01:30'}
 function startOralTimer(s){clearInterval(oralTimerId);oralSeconds=s;const e=document.getElementById('oralTimer');const draw=()=>{const m=String(Math.floor(oralSeconds/60)).padStart(2,'0'),x=String(oralSeconds%60).padStart(2,'0');if(e)e.textContent=m+':'+x;if(oralSeconds<=0){clearInterval(oralTimerId);return}oralSeconds--};draw();oralTimerId=setInterval(draw,1000)}
 function speakOralReading(){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(oralReadingTexts[oralReadIndex]);u.lang='en-GB';u.rate=.88;const v=speechSynthesis.getVoices();u.voice=v.find(x=>x.lang==='en-GB'&&/male|daniel|george|oliver/i.test(x.name))||v.find(x=>x.lang==='en-GB')||null;speechSynthesis.speak(u)}
-function hwChoice(title,items,key){
- return '<div class="examCard hwPractice" data-key="'+key+'"><h3>'+title+'</h3>'+items.map((q,i)=>'<div class="q" data-answer="'+q[2]+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="opts">'+q[1].map((o,j)=>'<label class="opt"><input type="radio" name="'+key+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div><div class="fb"></div></div>').join('')+'<button class="action" type="button" onclick="checkHwChoice(this)">CHECK</button><span class="score"></span></div>'
-}
-function checkHwChoice(btn){let good=0;const box=btn.closest('.hwPractice'),qs=box.querySelectorAll('.q');qs.forEach(q=>{const x=q.querySelector('input:checked'),fb=q.querySelector('.fb');if(!x){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+x.value===+q.dataset.answer){good++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Try again';fb.className='fb bad'}});btn.nextElementSibling.textContent=good+' / '+qs.length}
-const pastMarkerGroups=[
- ['PAST SIMPLE',['yesterday','last week / month / year','... ago','in 2024','then','when I was a child']],
- ['PAST CONTINUOUS',['while','as','at 5 p.m. yesterday','at that moment','all evening (past context)']],
- ['PAST PERFECT',['before','after','by the time','already','just','never','until then + past reference point']],
- ['PAST PERFECT CONTINUOUS',['for ... before a past point','since ... before a past point','how long ... before','all day / morning + duration before a past point']]
-];
-const pastMarkerHW=[
- ['yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
- ['while',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
- ['by the time',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
- ['two days ago',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
- ['at 8 p.m. yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
- ['before + another past event',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
- ['last summer',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
- ['at that moment',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
- ['until then + past reference point',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
- ['for three hours before that',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],
- ['since morning before he left',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],
- ['as',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1]
-];
-const mixedMarkerHW=[
- ['usually',['Present','Past'],0],['right now',['Present','Past'],0],['since 2022',['Present','Past'],0],['for three hours',['Present','Past'],0],
- ['yesterday',['Present','Past'],1],['while',['Present','Past'],1],['by the time',['Present','Past'],1],['last week',['Present','Past'],1],
- ['at the moment',['Present','Past'],0],['so far',['Present','Past'],0],['every Friday',['Present','Past'],0],['these days',['Present','Past'],0],
- ['two years ago',['Present','Past'],1],['until then',['Present','Past'],1],['recently',['Present','Past'],0],['when I was a child',['Present','Past'],1]
-];
-const presentHW=[
- ['My sister usually ___ to school by bus.',['goes','is going','has gone','has been going'],0],
- ['Be quiet! I ___ to the recording.',['listen','am listening','have listened','have been listening'],1],
- ['We ___ the first task already.',['finish','are finishing','have finished','have been finishing'],2],
- ['She ___ English for four years and is still learning.',['studies','is studying','has studied','has been studying'],3],
- ['I ___ him since primary school.',['know','am knowing','have known','have been knowing'],2],
- ['This week we ___ especially hard.',['work','are working','have worked always','works'],1],
- ['How long ___ for me?',['do you wait','are you waiting','have you waited','have you been waiting'],3],
- ['The train ___ at 7:30 every morning.',['leaves','is leaving','has left','has been leaving'],0],
- ['Tom ___ this film.',['never sees','is never seeing','has never seen','has never been seeing'],2],
- ['Why ___ at me like that?',['do you look','are you looking','have you looked always','you look'],1],
- ['My parents ___ here since 2018.',['live','are living','have lived','lives'],2],
- ["I can't talk now. I ___.",['cook','am cooking','have cooked','have been cooked'],1]
-];
-function homeworkHTML(){
- return '<div class="hero"><div class="eyebrow">HOMEWORK · WEEK 1</div><h1>Домашняя работа</h1><p>Маркеры и тесты скрыты. Открывай только нужный блок.</p></div>'+
- '<div class="examCard"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">'+
- '<button class="trainerBtn" type="button" onclick="openHwSection(1)"><b>1 · PAST TENSES · MARKERS</b><small>маркеры 4 времён Past</small></button>'+
- '<button class="trainerBtn" type="button" onclick="openHwSection(2)"><b>2 · PAST MARKERS · TEST</b><small>тест без видимой таблицы маркеров</small></button>'+
- '<button class="trainerBtn" type="button" onclick="openHwSection(3)"><b>3 · PRESENT + PAST · MARKERS TEST</b><small>смешанная тренировка</small></button>'+
- '<button class="trainerBtn" type="button" onclick="openHwSection(4)"><b>4 · PRESENT TENSES · TEST</b><small>4 времени группы Present</small></button>'+
- '<button class="trainerBtn" type="button" onclick="openHwSection(5)"><b>5 · STATIVE vs DYNAMIC · TEST</b><small>значение и форма глагола</small></button>'+
- '<button class="trainerBtn" type="button" onclick="openHwSection(6)"><b>6 · IRREGULAR VERBS · TRAINING</b><small>V1 → V2 / V3</small></button>'+
- '</div></div>';
-}
-function hwBackButton(){
- return '<button class="action" type="button" onclick="renderTrainer(\'homework\')">← К КНОПКАМ ДОМАШНЕЙ РАБОТЫ</button>';
-}
-function openHwSection(n){
- let html=hwBackButton();
- if(n===1){
-   html+='<div class="hero"><div class="eyebrow">HOMEWORK · MARKERS</div><h1>Past Tenses · Markers</h1><p>Только маркеры. Формы Past пока не отрабатываем.</p></div><div class="examCard"><div class="markerRef">'+pastMarkerGroups.map(function(g){return '<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(function(x){return '<div><b>'+x+'</b></div>'}).join('')+'</div>'}).join('')+'</div></div>';
- }else if(n===2){
-   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Past Markers · Test</h1><p>Таблица маркеров здесь скрыта.</p></div>'+hwChoice('Выбери время по маркеру',pastMarkerHW,'pastmarkers');
- }else if(n===3){
-   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Present or Past?</h1></div>'+hwChoice('Определи группу времени по маркеру',mixedMarkerHW,'mixedmarkers');
- }else if(n===4){
-   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Present Tenses</h1></div>'+hwChoice('Present Simple / Continuous / Perfect / Perfect Continuous',presentHW,'presenthw');
- }else if(n===5){
-   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Stative vs Dynamic</h1></div>'+hwChoice('Выбери правильную форму по значению',stativeQuiz,'stativehw');
- }else if(n===6){
-   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TRAINING</div><h1>Irregular Verbs</h1><p>Первые 30 глаголов · V1 → V2 / V3.</p></div><div class="examCard">'+verbPractice(0,30,'hwverbs')+'</div>';
- }
- openFullScreen('',html,n===6?initVerbGames:null);
-}
 function renderTrainer(id){
  let html='';
- if(id==='homework'){html=homeworkHTML();openFullScreen('',html,initVerbGames)}
- else if(id==='verbs'){const blocks=[[0,30],[30,60]];html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Irregular Verbs · EGE Focus</h1></div><div class="verbTwoCols"><div class="verbLists">'+blocks.map((b,k)=>'<details class="verbBlock"><summary><b>Открыть глаголы · Block '+(k+1)+' · '+(b[0]+1)+'–'+b[1]+'</b></summary>'+irregularVerbs.slice(b[0],b[1]).map(s=>{const a=s.split('|');return '<div class="verbRow"><b>'+a[0]+'</b><span>'+a[1]+'</span><span>'+a[2]+'</span><span>'+a[3]+'</span></div>'}).join('')+'</details>').join('')+'</div><aside class="verbSide"><div class="verbSideTitle">TRAINING</div>'+verbPractice(0,60,'egeverbs')+'</aside></div>';openFullScreen('',html,initVerbGames)}
+ if(id==='verbs'){const blocks=[[0,30],[30,60]];html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Irregular Verbs · EGE Focus</h1></div><div class="verbTwoCols"><div class="verbLists">'+blocks.map((b,k)=>'<details class="verbBlock"><summary><b>Открыть глаголы · Block '+(k+1)+' · '+(b[0]+1)+'–'+b[1]+'</b></summary>'+irregularVerbs.slice(b[0],b[1]).map(s=>{const a=s.split('|');return '<div class="verbRow"><b>'+a[0]+'</b><span>'+a[1]+'</span><span>'+a[2]+'</span><span>'+a[3]+'</span></div>'}).join('')+'</details>').join('')+'</div><aside class="verbSide"><div class="verbSideTitle">TRAINING</div>'+verbPractice(0,60,'egeverbs')+'</aside></div>';openFullScreen('',html,initVerbGames)}
  else if(id==='markers'){html='<div class="hero"><div class="eyebrow">Правило</div><h1>Present Tenses · Markers</h1></div><div class="examCard">'+markerReference()+'</div>';openFullScreen('',html)}
  else{html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Difficult Words + Reading Aloud</h1></div><div class="dwReadSplit"><div class="examCard"><div class="difficult">'+difficultCards()+'</div></div>'+oralReadingHTML()+'</div>';openFullScreen('',html,renderDifficultCard)}
 }
