@@ -549,9 +549,10 @@ function moveOralRead(d){oralReadIndex=(oralReadIndex+d+oralReadingTexts.length)
 function resetOralTimer(){clearInterval(oralTimerId);oralSeconds=90;const e=document.getElementById('oralTimer');if(e)e.textContent='01:30'}
 function startOralTimer(s){clearInterval(oralTimerId);oralSeconds=s;const e=document.getElementById('oralTimer');const draw=()=>{const m=String(Math.floor(oralSeconds/60)).padStart(2,'0'),x=String(oralSeconds%60).padStart(2,'0');if(e)e.textContent=m+':'+x;if(oralSeconds<=0){clearInterval(oralTimerId);return}oralSeconds--};draw();oralTimerId=setInterval(draw,1000)}
 function speakOralReading(){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(oralReadingTexts[oralReadIndex]);u.lang='en-GB';u.rate=.88;const v=speechSynthesis.getVoices();u.voice=v.find(x=>x.lang==='en-GB'&&/male|daniel|george|oliver/i.test(x.name))||v.find(x=>x.lang==='en-GB')||null;speechSynthesis.speak(u)}
-function hwMenuButton(n,title,sub,action){
- return '<button type="button" class="examCard" style="width:100%;text-align:left;cursor:pointer;margin:8px 0;padding:18px" onclick="'+action+'"><div class="eyebrow">HOMEWORK '+n+'</div><h3 style="margin:5px 0">'+title+'</h3><p class="tiny" style="margin:0">'+sub+'</p></button>';
+function hwChoice(title,items,key){
+ return '<div class="examCard hwPractice" data-key="'+key+'"><h3>'+title+'</h3>'+items.map((q,i)=>'<div class="q" data-answer="'+q[2]+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="opts">'+q[1].map((o,j)=>'<label class="opt"><input type="radio" name="'+key+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div><div class="fb"></div></div>').join('')+'<button class="action" type="button" onclick="checkHwChoice(this)">CHECK</button><span class="score"></span></div>'
 }
+function checkHwChoice(btn){let good=0;const box=btn.closest('.hwPractice'),qs=box.querySelectorAll('.q');qs.forEach(q=>{const x=q.querySelector('input:checked'),fb=q.querySelector('.fb');if(!x){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+x.value===+q.dataset.answer){good++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Try again';fb.className='fb bad'}});btn.nextElementSibling.textContent=good+' / '+qs.length}
 const pastMarkerGroups=[
  ['PAST SIMPLE',['yesterday','last week / month / year','... ago','in 2024','then','when I was a child']],
  ['PAST CONTINUOUS',['while','as','at 5 p.m. yesterday','at that moment','all evening (past context)']],
@@ -559,12 +560,18 @@ const pastMarkerGroups=[
  ['PAST PERFECT CONTINUOUS',['for ... before a past point','since ... before a past point','how long ... before','all day / morning + duration before a past point']]
 ];
 const pastMarkerHW=[
- ['yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],['while',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
- ['by the time',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],['two days ago',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
- ['at 8 p.m. yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],['before + another past event',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
- ['last summer',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],['at that moment',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
- ['until then + past reference point',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],['for three hours before that',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],
- ['since morning before he left',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],['as',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1]
+ ['yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
+ ['while',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
+ ['by the time',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
+ ['two days ago',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
+ ['at 8 p.m. yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
+ ['before + another past event',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
+ ['last summer',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
+ ['at that moment',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
+ ['until then + past reference point',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
+ ['for three hours before that',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],
+ ['since morning before he left',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],
+ ['as',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1]
 ];
 const mixedMarkerHW=[
  ['usually',['Present','Past'],0],['right now',['Present','Past'],0],['since 2022',['Present','Past'],0],['for three hours',['Present','Past'],0],
@@ -573,43 +580,27 @@ const mixedMarkerHW=[
  ['two years ago',['Present','Past'],1],['until then',['Present','Past'],1],['recently',['Present','Past'],0],['when I was a child',['Present','Past'],1]
 ];
 const presentHW=[
- ['My sister usually ___ to school by bus.',['goes','is going','has gone','has been going'],0],['Be quiet! I ___ to the recording.',['listen','am listening','have listened','have been listening'],1],
- ['We ___ the first task already.',['finish','are finishing','have finished','have been finishing'],2],['She ___ English for four years and is still learning.',['studies','is studying','has studied','has been studying'],3],
- ['I ___ him since primary school.',['know','am knowing','have known','have been knowing'],2],['This week we ___ especially hard.',['work','are working','have worked always','works'],1],
- ['How long ___ for me?',['do you wait','are you waiting','have you waited','have you been waiting'],3],['The train ___ at 7:30 every morning.',['leaves','is leaving','has left','has been leaving'],0],
- ['Tom ___ this film.',['never sees','is never seeing','has never seen','has never been seeing'],2],['Why ___ at me like that?',['do you look','are you looking','have you looked always','you look'],1],
- ['My parents ___ here since 2018.',['live','are living','have lived','lives'],2],["I can't talk now. I ___.",['cook','am cooking','have cooked','have been cooked'],1]
+ ['My sister usually ___ to school by bus.',['goes','is going','has gone','has been going'],0],
+ ['Be quiet! I ___ to the recording.',['listen','am listening','have listened','have been listening'],1],
+ ['We ___ the first task already.',['finish','are finishing','have finished','have been finishing'],2],
+ ['She ___ English for four years and is still learning.',['studies','is studying','has studied','has been studying'],3],
+ ['I ___ him since primary school.',['know','am knowing','have known','have been knowing'],2],
+ ['This week we ___ especially hard.',['work','are working','have worked always','works'],1],
+ ['How long ___ for me?',['do you wait','are you waiting','have you waited','have you been waiting'],3],
+ ['The train ___ at 7:30 every morning.',['leaves','is leaving','has left','has been leaving'],0],
+ ['Tom ___ this film.',['never sees','is never seeing','has never seen','has never been seeing'],2],
+ ['Why ___ at me like that?',['do you look','are you looking','have you looked always','you look'],1],
+ ['My parents ___ here since 2018.',['live','are living','have lived','lives'],2],
+ ["I can't talk now. I ___.",['cook','am cooking','have cooked','have been cooked'],1]
 ];
-function openHwReference(){
- openTaskWindow('Past Tenses · Markers','<p class="tiny"><b>MARKERS ONLY.</b> Past grammar is not tested yet.</p><div class="markerRef">'+pastMarkerGroups.map(g=>'<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(x=>'<div><b>'+x+'</b></div>').join('')+'</div>').join('')+'</div>');
-}
-function openHwQuiz(title,items,key){openTaskWindow(title,'<div class="hwOne" data-key="'+key+'"></div>',m=>startHwOne(m.querySelector('.hwOne'),items))}
-function startHwOne(root,items){root._items=items;root._pos=0;root._score=0;root._answered=false;showHwOne(root)}
-function showHwOne(root){
- const q=root._items[root._pos];
- if(!q){root.innerHTML='<div class="kResult"><b>Finished</b><br>'+root._score+' / '+root._items.length+'</div>';return}
- root._answered=false;
- root.innerHTML='<div class="kCount">'+(root._pos+1)+' / '+root._items.length+'</div><div class="kWord" style="font-size:clamp(22px,4vw,38px);margin:24px 0">'+q[0]+'</div><div class="kOpts">'+q[1].map((o,j)=>'<button type="button" data-i="'+j+'">'+o+'</button>').join('')+'</div><div class="kFb" style="min-height:28px;margin:14px 0"></div><button type="button" class="action hwNext" disabled>NEXT →</button>';
- root.querySelectorAll('.kOpts button').forEach(b=>b.onclick=()=>{if(root._answered)return;root._answered=true;const ok=+b.dataset.i===q[2];if(ok)root._score++;b.classList.add(ok?'vGood':'vBad');root.querySelectorAll('.kOpts button').forEach(x=>x.disabled=true);root.querySelector('.kFb').textContent=ok?'Correct':'Answer: '+q[1][q[2]];root.querySelector('.hwNext').disabled=false});
- root.querySelector('.hwNext').onclick=()=>{root._pos++;showHwOne(root)};
-}
-function openHwIrregular(){
- openTaskWindow('Irregular Verbs · Training','<p class="tiny">30 verbs · V1 → V2 / V3</p>'+verbPractice(0,30,'hwverbs'),m=>initVerbGames());
-}
-function openHwNamedQuiz(n){
- if(n===2)openHwQuiz('Past Markers · Training',pastMarkerHW,'pastmarkers');
- else if(n===3)openHwQuiz('Present + Past · Markers',mixedMarkerHW,'mixedmarkers');
- else if(n===4)openHwQuiz('Present Tenses · Practice',presentHW,'presenthw');
- else if(n===5)openHwQuiz('Stative vs Dynamic',stativeQuiz,'stativehw');
-}
 function homeworkHTML(){
- return '<div class="hero"><div class="eyebrow">HOMEWORK · WEEK 1</div><h1>Homework</h1><p>Открывай задания по очереди. Правила и тесты разделены.</p></div>'+
- hwMenuButton('1','Past Tenses · Markers','Выучить маркеры 4 времён Past. Без грамматики Past.','openHwReference()')+
- hwMenuButton('2','Past Markers · Training','Интерактивный тест. Маркеры во время теста скрыты.','openHwNamedQuiz(2)')+
- hwMenuButton('3','Present + Past · Markers','Смешанная интерактивная тренировка маркеров.','openHwNamedQuiz(3)')+
- hwMenuButton('4','Present Tenses · Practice','Present Simple / Continuous / Perfect / Perfect Continuous.','openHwNamedQuiz(4)')+
- hwMenuButton('5','Stative vs Dynamic','Интерактивная тренировка значений и форм.','openHwNamedQuiz(5)')+
- hwMenuButton('6','Irregular Verbs','Отдельный тренажёр V1–V2–V3.','openHwIrregular()');
+ const pastRef='<div class="examCard"><h3>1 · PAST TENSES · MARKERS ONLY</h3><p class="tiny"><b>Важно:</b> формы Past пока не отрабатываем. Нужно выучить только сигналы времени.</p><div class="markerRef">'+pastMarkerGroups.map(g=>'<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(x=>'<div><b>'+x+'</b></div>').join('')+'</div>').join('')+'</div></div>';
+ return '<div class="hero"><div class="eyebrow">HOMEWORK</div><h1>Present + Past Markers · Week 1</h1></div>'+pastRef+
+ hwChoice('2 · TRAINING · Past markers',pastMarkerHW,'pastmarkers')+
+ hwChoice('3 · PRESENT or PAST? · Mixed markers',mixedMarkerHW,'mixedmarkers')+
+ hwChoice('4 · PRESENT TENSES · Grammar practice',presentHW,'presenthw')+
+ hwChoice('5 · STATIVE vs DYNAMIC · Present contrast',stativeQuiz,'stativehw')+
+ '<div class="examCard"><h3>6 · IRREGULAR VERBS</h3><p>Повтори V1–V2–V3. В тренировке используй первые 30 глаголов: форма → V2 / V3.</p>'+verbPractice(0,30,'hwverbs')+'</div>';
 }
 function renderTrainer(id){
  let html='';
