@@ -594,13 +594,35 @@ const presentHW=[
  ["I can't talk now. I ___.",['cook','am cooking','have cooked','have been cooked'],1]
 ];
 function homeworkHTML(){
- const pastRef='<div class="examCard"><h3>1 · PAST TENSES · MARKERS ONLY</h3><p class="tiny"><b>Важно:</b> формы Past пока не отрабатываем. Нужно выучить только сигналы времени.</p><div class="markerRef">'+pastMarkerGroups.map(g=>'<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(x=>'<div><b>'+x+'</b></div>').join('')+'</div>').join('')+'</div></div>';
- return '<div class="hero"><div class="eyebrow">HOMEWORK</div><h1>Present + Past Markers · Week 1</h1></div>'+pastRef+
- hwChoice('2 · TRAINING · Past markers',pastMarkerHW,'pastmarkers')+
- hwChoice('3 · PRESENT or PAST? · Mixed markers',mixedMarkerHW,'mixedmarkers')+
- hwChoice('4 · PRESENT TENSES · Grammar practice',presentHW,'presenthw')+
- hwChoice('5 · STATIVE vs DYNAMIC · Present contrast',stativeQuiz,'stativehw')+
- '<div class="examCard"><h3>6 · IRREGULAR VERBS</h3><p>Повтори V1–V2–V3. В тренировке используй первые 30 глаголов: форма → V2 / V3.</p>'+verbPractice(0,30,'hwverbs')+'</div>';
+ return '<div class="hero"><div class="eyebrow">HOMEWORK · WEEK 1</div><h1>Домашняя работа</h1><p>Маркеры и тесты скрыты. Открывай только нужный блок.</p></div>'+
+ '<div class="examCard"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">'+
+ '<button class="trainerBtn" type="button" onclick="openHwSection(1)"><b>1 · PAST TENSES · MARKERS</b><small>маркеры 4 времён Past</small></button>'+
+ '<button class="trainerBtn" type="button" onclick="openHwSection(2)"><b>2 · PAST MARKERS · TEST</b><small>тест без видимой таблицы маркеров</small></button>'+
+ '<button class="trainerBtn" type="button" onclick="openHwSection(3)"><b>3 · PRESENT + PAST · MARKERS TEST</b><small>смешанная тренировка</small></button>'+
+ '<button class="trainerBtn" type="button" onclick="openHwSection(4)"><b>4 · PRESENT TENSES · TEST</b><small>4 времени группы Present</small></button>'+
+ '<button class="trainerBtn" type="button" onclick="openHwSection(5)"><b>5 · STATIVE vs DYNAMIC · TEST</b><small>значение и форма глагола</small></button>'+
+ '<button class="trainerBtn" type="button" onclick="openHwSection(6)"><b>6 · IRREGULAR VERBS · TRAINING</b><small>V1 → V2 / V3</small></button>'+
+ '</div></div>';
+}
+function hwBackButton(){
+ return '<button class="action" type="button" onclick="renderTrainer(\'homework\')">← К КНОПКАМ ДОМАШНЕЙ РАБОТЫ</button>';
+}
+function openHwSection(n){
+ let html=hwBackButton();
+ if(n===1){
+   html+='<div class="hero"><div class="eyebrow">HOMEWORK · MARKERS</div><h1>Past Tenses · Markers</h1><p>Только маркеры. Формы Past пока не отрабатываем.</p></div><div class="examCard"><div class="markerRef">'+pastMarkerGroups.map(function(g){return '<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(function(x){return '<div><b>'+x+'</b></div>'}).join('')+'</div>'}).join('')+'</div></div>';
+ }else if(n===2){
+   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Past Markers · Test</h1><p>Таблица маркеров здесь скрыта.</p></div>'+hwChoice('Выбери время по маркеру',pastMarkerHW,'pastmarkers');
+ }else if(n===3){
+   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Present or Past?</h1></div>'+hwChoice('Определи группу времени по маркеру',mixedMarkerHW,'mixedmarkers');
+ }else if(n===4){
+   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Present Tenses</h1></div>'+hwChoice('Present Simple / Continuous / Perfect / Perfect Continuous',presentHW,'presenthw');
+ }else if(n===5){
+   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TEST</div><h1>Stative vs Dynamic</h1></div>'+hwChoice('Выбери правильную форму по значению',stativeQuiz,'stativehw');
+ }else if(n===6){
+   html+='<div class="hero"><div class="eyebrow">HOMEWORK · TRAINING</div><h1>Irregular Verbs</h1><p>Первые 30 глаголов · V1 → V2 / V3.</p></div><div class="examCard">'+verbPractice(0,30,'hwverbs')+'</div>';
+ }
+ openFullScreen('',html,n===6?initVerbGames:null);
 }
 function renderTrainer(id){
  let html='';
