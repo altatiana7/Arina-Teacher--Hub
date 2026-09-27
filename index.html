@@ -596,13 +596,19 @@ function showHwOne(root){
 function openHwIrregular(){
  openTaskWindow('Irregular Verbs · Training','<p class="tiny">30 verbs · V1 → V2 / V3</p>'+verbPractice(0,30,'hwverbs'),m=>initVerbGames());
 }
+function openHwNamedQuiz(n){
+ if(n===2)openHwQuiz('Past Markers · Training',pastMarkerHW,'pastmarkers');
+ else if(n===3)openHwQuiz('Present + Past · Markers',mixedMarkerHW,'mixedmarkers');
+ else if(n===4)openHwQuiz('Present Tenses · Practice',presentHW,'presenthw');
+ else if(n===5)openHwQuiz('Stative vs Dynamic',stativeQuiz,'stativehw');
+}
 function homeworkHTML(){
  return '<div class="hero"><div class="eyebrow">HOMEWORK · WEEK 1</div><h1>Homework</h1><p>Открывай задания по очереди. Правила и тесты разделены.</p></div>'+
  hwMenuButton('1','Past Tenses · Markers','Выучить маркеры 4 времён Past. Без грамматики Past.','openHwReference()')+
- hwMenuButton('2','Past Markers · Training','Интерактивный тест. Маркеры во время теста скрыты.','openHwQuiz(\\'Past Markers · Training\\',pastMarkerHW,\\'pastmarkers\\')')+
- hwMenuButton('3','Present + Past · Markers','Смешанная интерактивная тренировка маркеров.','openHwQuiz(\\'Present + Past · Markers\\',mixedMarkerHW,\\'mixedmarkers\\')')+
- hwMenuButton('4','Present Tenses · Practice','Present Simple / Continuous / Perfect / Perfect Continuous.','openHwQuiz(\\'Present Tenses · Practice\\',presentHW,\\'presenthw\\')')+
- hwMenuButton('5','Stative vs Dynamic','Интерактивная тренировка значений и форм.','openHwQuiz(\\'Stative vs Dynamic\\',stativeQuiz,\\'stativehw\\')')+
+ hwMenuButton('2','Past Markers · Training','Интерактивный тест. Маркеры во время теста скрыты.','openHwNamedQuiz(2)')+
+ hwMenuButton('3','Present + Past · Markers','Смешанная интерактивная тренировка маркеров.','openHwNamedQuiz(3)')+
+ hwMenuButton('4','Present Tenses · Practice','Present Simple / Continuous / Perfect / Perfect Continuous.','openHwNamedQuiz(4)')+
+ hwMenuButton('5','Stative vs Dynamic','Интерактивная тренировка значений и форм.','openHwNamedQuiz(5)')+
  hwMenuButton('6','Irregular Verbs','Отдельный тренажёр V1–V2–V3.','openHwIrregular()');
 }
 function renderTrainer(id){
