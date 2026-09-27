@@ -119,7 +119,7 @@
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
-<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button><button class="ebtn" style="width:100%;margin-top:8px" onclick="renderExam('overview')">ЕГЭ 2027 · Структура<small>баллы за каждое задание</small></button></aside>
+<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" style="border:2px solid #D52B1E;background:#fff1f0" onclick="renderTrainer('homework')">ДОМАШНЯЯ РАБОТА · PRESENT + MARKERS</button><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button><button class="ebtn" style="width:100%;margin-top:8px" onclick="renderExam('overview')">ЕГЭ 2027 · Структура<small>баллы за каждое задание</small></button></aside>
 <main class="main"><section id="weekView" class="content on"></section><section id="examView" class="content"></section><section id="trainerView" class="content"></section></main>
 <script>
 const weeks=[
@@ -549,9 +549,63 @@ function moveOralRead(d){oralReadIndex=(oralReadIndex+d+oralReadingTexts.length)
 function resetOralTimer(){clearInterval(oralTimerId);oralSeconds=90;const e=document.getElementById('oralTimer');if(e)e.textContent='01:30'}
 function startOralTimer(s){clearInterval(oralTimerId);oralSeconds=s;const e=document.getElementById('oralTimer');const draw=()=>{const m=String(Math.floor(oralSeconds/60)).padStart(2,'0'),x=String(oralSeconds%60).padStart(2,'0');if(e)e.textContent=m+':'+x;if(oralSeconds<=0){clearInterval(oralTimerId);return}oralSeconds--};draw();oralTimerId=setInterval(draw,1000)}
 function speakOralReading(){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(oralReadingTexts[oralReadIndex]);u.lang='en-GB';u.rate=.88;const v=speechSynthesis.getVoices();u.voice=v.find(x=>x.lang==='en-GB'&&/male|daniel|george|oliver/i.test(x.name))||v.find(x=>x.lang==='en-GB')||null;speechSynthesis.speak(u)}
+function hwChoice(title,items,key){
+ return '<div class="examCard hwPractice" data-key="'+key+'"><h3>'+title+'</h3>'+items.map((q,i)=>'<div class="q" data-answer="'+q[2]+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="opts">'+q[1].map((o,j)=>'<label class="opt"><input type="radio" name="'+key+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div><div class="fb"></div></div>').join('')+'<button class="action" type="button" onclick="checkHwChoice(this)">CHECK</button><span class="score"></span></div>'
+}
+function checkHwChoice(btn){let good=0;const box=btn.closest('.hwPractice'),qs=box.querySelectorAll('.q');qs.forEach(q=>{const x=q.querySelector('input:checked'),fb=q.querySelector('.fb');if(!x){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+x.value===+q.dataset.answer){good++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Try again';fb.className='fb bad'}});btn.nextElementSibling.textContent=good+' / '+qs.length}
+const pastMarkerGroups=[
+ ['PAST SIMPLE',['yesterday','last week / month / year','... ago','in 2024','then','when I was a child']],
+ ['PAST CONTINUOUS',['while','as','at 5 p.m. yesterday','at that moment','all evening (past context)']],
+ ['PAST PERFECT',['before','after','by the time','already','just','never','until then + past reference point']],
+ ['PAST PERFECT CONTINUOUS',['for ... before a past point','since ... before a past point','how long ... before','all day / morning + duration before a past point']]
+];
+const pastMarkerHW=[
+ ['yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
+ ['while',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
+ ['by the time',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
+ ['two days ago',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
+ ['at 8 p.m. yesterday',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
+ ['before + another past event',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
+ ['last summer',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],0],
+ ['at that moment',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1],
+ ['until then + past reference point',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],2],
+ ['for three hours before that',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],
+ ['since morning before he left',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],3],
+ ['as',['Past Simple','Past Continuous','Past Perfect','Past Perfect Continuous'],1]
+];
+const mixedMarkerHW=[
+ ['usually',['Present','Past'],0],['right now',['Present','Past'],0],['since 2022',['Present','Past'],0],['for three hours',['Present','Past'],0],
+ ['yesterday',['Present','Past'],1],['while',['Present','Past'],1],['by the time',['Present','Past'],1],['last week',['Present','Past'],1],
+ ['at the moment',['Present','Past'],0],['so far',['Present','Past'],0],['every Friday',['Present','Past'],0],['these days',['Present','Past'],0],
+ ['two years ago',['Present','Past'],1],['until then',['Present','Past'],1],['recently',['Present','Past'],0],['when I was a child',['Present','Past'],1]
+];
+const presentHW=[
+ ['My sister usually ___ to school by bus.',['goes','is going','has gone','has been going'],0],
+ ['Be quiet! I ___ to the recording.',['listen','am listening','have listened','have been listening'],1],
+ ['We ___ the first task already.',['finish','are finishing','have finished','have been finishing'],2],
+ ['She ___ English for four years and is still learning.',['studies','is studying','has studied','has been studying'],3],
+ ['I ___ him since primary school.',['know','am knowing','have known','have been knowing'],2],
+ ['This week we ___ especially hard.',['work','are working','have worked always','works'],1],
+ ['How long ___ for me?',['do you wait','are you waiting','have you waited','have you been waiting'],3],
+ ['The train ___ at 7:30 every morning.',['leaves','is leaving','has left','has been leaving'],0],
+ ['Tom ___ this film.',['never sees','is never seeing','has never seen','has never been seeing'],2],
+ ['Why ___ at me like that?',['do you look','are you looking','have you looked always','you look'],1],
+ ['My parents ___ here since 2018.',['live','are living','have lived','lives'],2],
+ ["I can't talk now. I ___.",['cook','am cooking','have cooked','have been cooked'],1]
+];
+function homeworkHTML(){
+ const pastRef='<div class="examCard"><h3>1 · PAST TENSES · MARKERS ONLY</h3><p class="tiny"><b>Важно:</b> формы Past пока не отрабатываем. Нужно выучить только сигналы времени.</p><div class="markerRef">'+pastMarkerGroups.map(g=>'<div class="markerCol"><h4>'+g[0]+'</h4>'+g[1].map(x=>'<div><b>'+x+'</b></div>').join('')+'</div>').join('')+'</div></div>';
+ return '<div class="hero"><div class="eyebrow">HOMEWORK</div><h1>Present + Past Markers · Week 1</h1></div>'+pastRef+
+ hwChoice('2 · TRAINING · Past markers',pastMarkerHW,'pastmarkers')+
+ hwChoice('3 · PRESENT or PAST? · Mixed markers',mixedMarkerHW,'mixedmarkers')+
+ hwChoice('4 · PRESENT TENSES · Grammar practice',presentHW,'presenthw')+
+ hwChoice('5 · STATIVE vs DYNAMIC · Present contrast',stativeQuiz,'stativehw')+
+ '<div class="examCard"><h3>6 · IRREGULAR VERBS</h3><p>Повтори V1–V2–V3. В тренировке используй первые 30 глаголов: форма → V2 / V3.</p>'+verbPractice(0,30,'hwverbs')+'</div>';
+}
 function renderTrainer(id){
  let html='';
- if(id==='verbs'){const blocks=[[0,30],[30,60]];html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Irregular Verbs · EGE Focus</h1></div><div class="verbTwoCols"><div class="verbLists">'+blocks.map((b,k)=>'<details class="verbBlock"><summary><b>Открыть глаголы · Block '+(k+1)+' · '+(b[0]+1)+'–'+b[1]+'</b></summary>'+irregularVerbs.slice(b[0],b[1]).map(s=>{const a=s.split('|');return '<div class="verbRow"><b>'+a[0]+'</b><span>'+a[1]+'</span><span>'+a[2]+'</span><span>'+a[3]+'</span></div>'}).join('')+'</details>').join('')+'</div><aside class="verbSide"><div class="verbSideTitle">TRAINING</div>'+verbPractice(0,60,'egeverbs')+'</aside></div>';openFullScreen('',html,initVerbGames)}
+ if(id==='homework'){html=homeworkHTML();openFullScreen('',html,initVerbGames)}
+ else if(id==='verbs'){const blocks=[[0,30],[30,60]];html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Irregular Verbs · EGE Focus</h1></div><div class="verbTwoCols"><div class="verbLists">'+blocks.map((b,k)=>'<details class="verbBlock"><summary><b>Открыть глаголы · Block '+(k+1)+' · '+(b[0]+1)+'–'+b[1]+'</b></summary>'+irregularVerbs.slice(b[0],b[1]).map(s=>{const a=s.split('|');return '<div class="verbRow"><b>'+a[0]+'</b><span>'+a[1]+'</span><span>'+a[2]+'</span><span>'+a[3]+'</span></div>'}).join('')+'</details>').join('')+'</div><aside class="verbSide"><div class="verbSideTitle">TRAINING</div>'+verbPractice(0,60,'egeverbs')+'</aside></div>';openFullScreen('',html,initVerbGames)}
  else if(id==='markers'){html='<div class="hero"><div class="eyebrow">Правило</div><h1>Present Tenses · Markers</h1></div><div class="examCard">'+markerReference()+'</div>';openFullScreen('',html)}
  else{html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Difficult Words + Reading Aloud</h1></div><div class="dwReadSplit"><div class="examCard"><div class="difficult">'+difficultCards()+'</div></div>'+oralReadingHTML()+'</div>';openFullScreen('',html,renderDifficultCard)}
 }
