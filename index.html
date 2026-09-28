@@ -130,6 +130,26 @@
 .rightBig.fipi{background:#eef8fb;color:#0039A6;border:1px solid #cbd8ea}
 .rightNote{font-size:10px;line-height:1.45;color:#718096;margin-top:9px}
 @media(max-width:980px){.week1Layout{grid-template-columns:1fr}.week1Right{position:static}}
+
+/* Week 2 Lesson 1 homework pack */
+.w2Pack{margin-top:12px;border:2px solid #0039A6;border-left:6px solid #D52B1E;border-radius:14px;background:#fff;padding:14px}
+.w2PackHead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}
+.w2PackHead b{font-size:16px;color:#0039A6}.w2PackHead span{font-size:10px;color:#64748b}
+.w2PackGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.w2PackBtn{border:1px solid #b7c9e8;border-left:4px solid #D52B1E;background:#fff;color:#0039A6;border-radius:10px;padding:11px 8px;font-size:11px;font-weight:900;min-height:62px}
+.w2Panel{max-width:1080px;margin:auto}.w2Panel h2{margin:3px 0 10px;color:#0039A6}
+.w2Progress{position:sticky;top:0;z-index:4;background:#edf3ff;border:1px solid #b7c9e8;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:900;margin-bottom:8px}
+.w2Item{border:1px solid #d9e1ec;background:#fff;border-radius:11px;padding:11px;margin:7px 0}.w2Item p{font-size:15px;color:#111;margin:0 0 8px}
+.w2Choices{display:grid;grid-template-columns:1fr 1fr;gap:6px}.w2Choices button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:8px;font-weight:800}
+.w2Choices button.correct{background:#ecfdf3;border-color:#22c55e;color:#166534}.w2Choices button.wrong{background:#fff1f0;border-color:#ef4444;color:#991b1b}
+.w2FipiGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.w2FipiSet{background:#fff;border:1px solid #d9e1ec;border-radius:12px;padding:13px}.w2FipiSet h3{margin:0 0 8px;color:#D52B1E}
+.w2FipiText{font-size:15px;line-height:1.75;color:#111}.w2Gap{display:inline-flex;align-items:center;gap:5px;border-bottom:2px solid #0039A6;margin:0 4px}.w2Gap input{width:125px;border:0;outline:0;padding:3px 5px}.w2Base{font-size:9px;font-weight:900;color:#64748b}
+.w2Check{border:0;background:#0039A6;color:#fff;border-radius:8px;padding:8px 11px;font-weight:900;margin-top:9px}.w2Result{font-size:11px;font-weight:900;margin-top:7px}
+.w2Reading{display:grid;grid-template-columns:1.25fr .75fr;gap:12px}.w2TextCard,.w2VocabCard{border:1px solid #d9e1ec;background:#fff;border-radius:13px;padding:15px}.w2TextCard h2{margin:0 0 8px}.w2TextCard p{font-size:17px;line-height:1.65;color:#111}
+.w2ReadNav{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}.w2ReadNav button{border:0;background:#0039A6;color:#fff;border-radius:8px;padding:8px 11px;font-weight:900}
+.w2VocabCard .qCard{height:260px}.w2VocabCard .qFront b{font-size:27px}.w2VocabCard .qBack b{font-size:22px}
+@media(max-width:950px){.w2PackGrid{grid-template-columns:1fr 1fr}.w2FipiGrid,.w2Reading{grid-template-columns:1fr}}
+@media(max-width:600px){.w2PackGrid,.w2Choices{grid-template-columns:1fr}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -468,11 +488,11 @@ function lessonFullHTML(x,i,w){
  if(w!==0){
   html+='<div class="cols"><div class="box"><h3>На уроке</h3><ul>'+x[1].split('; ').map(s=>'<li>'+s+'</li>').join('')+'</ul></div><div class="box"><h3>Контроль результата</h3><ul><li>полноценная тренировка</li><li>ошибки в personal error log</li><li>retrieval в начале следующего урока</li></ul></div></div>'+materialBox('w'+w+'l'+i+'-teacher')+'<details class="hw"><summary>Домашняя работа · открыть</summary><div class="hwbody"><div class="task">'+x[2].split('; ').map((s,n)=>'<b>'+(n+1)+'.</b> '+s).join('<br>')+'</div>'+materialBox('w'+w+'l'+i+'-hw')+'<label class="check"><input type="checkbox" data-save="w'+w+'l'+i+'"> Домашняя работа выполнена</label></div></details>';
  }
- return html+'</div></div>';
+ if(w===1&&i===0) html+=w2PackHTML(); return html+'</div></div>';
 }
 function openLesson(w,i){let p=document.getElementById('lessonPage');if(!p){p=document.createElement('div');p.id='lessonPage';p.className='lessonPage';document.body.appendChild(p)}p.innerHTML=lessonFullHTML(weeks[w].l[i],i,w)+(w===1?'<div class="examCard" style="margin:10px 14px 20px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Grammar 19–24 + Word Formation 25–29 · материалы 2026</div></div><button class="action" type="button" onclick="closeLesson();renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');p.style.display='block';restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));initKahoots();const key='w'+w+'l'+i;if(localStorage.getItem('submitted-'+key))lockSubmitted(p,key);scrollTo(0,0)}
 function closeLesson(){const p=document.getElementById('lessonPage');if(p)p.style.display='none'}
-function week1RightPanel(){
+function egeRightPanel(){
  return '<aside class="week1Right"><div class="expandedCard"><h3>СТРУКТУРА ЕГЭ 2027</h3>'+
  '<div class="expandedRow"><span>1–9 · Listening</span><b>12</b></div>'+
  '<div class="expandedRow"><span>10–18 · Reading</span><b>12</b></div>'+
@@ -487,9 +507,9 @@ function week1RightPanel(){
  '<div class="expandedRow"><span>42 · Photo project</span><b>10</b></div></div>'+
  '<a class="rightBig demo" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Пробная версия ЕГЭ 2027</a>'+
  '<a class="rightBig fipi" href="https://fipi.ru/ege/otkrytyy-bank-zadaniy-ege" target="_blank" rel="noopener">Открытый банк ФИПИ</a>'+
- '<div class="rightNote">Структура ЕГЭ и баллы всегда видны справа на экране Недели 1.</div></aside>';
+ '<div class="rightNote">Структура ЕГЭ и баллы всегда видны справа у каждой недели.</div></aside>';
 }
-function renderWeek(i){if(i<0||i>1)return;document.body.classList.remove('fullWeek');document.getElementById('examView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('weekView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.toggle('active',+b.dataset.i===i));const w=weeks[i];const lessons=w.l.map((x,j)=>lessonHTML(x,j,i)).join('')+(i===1?'<div class="examCard" style="margin-top:10px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Реальные материалы 2026 · Grammar 19–24 + Word Formation 25–29</div></div><button class="action" type="button" onclick="renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');const body=i===0?'<div class="week1Layout"><div class="week1Tasks">'+lessons+'</div>'+week1RightPanel()+'</div>':lessons;document.getElementById('weekView').innerHTML='<div class="weekTitle"><b>Неделя '+(i+1)+'</b> · '+w.d+'</div><div class="weekMeta"><div class="card"><div class="eyebrow">Цель недели</div><h2>'+w.g+'</h2></div><div class="card result"><div class="eyebrow">Критерий готовности</div><p><b>'+w.r+'</b></p></div></div>'+body;restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
+function renderWeek(i){if(i<0||i>1)return;document.body.classList.remove('fullWeek');document.getElementById('examView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('weekView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.toggle('active',+b.dataset.i===i));const w=weeks[i];const lessons=w.l.map((x,j)=>lessonHTML(x,j,i)).join('')+(i===1?'<div class="examCard" style="margin-top:10px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Реальные материалы 2026 · Grammar 19–24 + Word Formation 25–29</div></div><button class="action" type="button" onclick="renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');const body='<div class="week1Layout"><div class="week1Tasks">'+lessons+'</div>'+egeRightPanel()+'</div>';document.getElementById('weekView').innerHTML='<div class="weekTitle"><b>Неделя '+(i+1)+'</b> · '+w.d+'</div><div class="weekMeta"><div class="card"><div class="eyebrow">Цель недели</div><h2>'+w.g+'</h2></div><div class="card result"><div class="eyebrow">Критерий готовности</div><p><b>'+w.r+'</b></p></div></div>'+body;restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 let saved={};try{saved=JSON.parse(localStorage.getItem('arinaPlanV4')||'{}')}catch(e){}function restore(){document.querySelectorAll('[data-save]').forEach(x=>{x.checked=!!saved[x.dataset.save];x.onchange=()=>{saved[x.dataset.save]=x.checked;localStorage.setItem('arinaPlanV4',JSON.stringify(saved))}})}
 function exitWeek(){document.body.classList.remove('fullWeek');document.getElementById('side').classList.add('open')}function checkQuizSet(btn){let n=0;const set=btn.parentElement.querySelector('.quizSet');set.querySelectorAll('.q').forEach(box=>{const sel=box.querySelector('input:checked'),fb=box.querySelector('.fb'),ans=+box.dataset.answer;if(!sel){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+sel.value===ans){n++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Try again';fb.className='fb bad'}});btn.nextElementSibling.textContent=n+' / '+set.querySelectorAll('.q').length}function checkQuiz(){let n=0;quiz.forEach((q,i)=>{const box=document.querySelector('[data-q="'+i+'"]'),sel=box.querySelector('input:checked'),fb=box.querySelector('.fb');if(!sel){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+sel.value===q[2]){n++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Correct: '+q[1][q[2]];fb.className='fb bad'}});document.getElementById('score').textContent=n+' / '+quiz.length}
 const irregularVerbs=[
@@ -586,6 +606,110 @@ function renderTrainer(id){
  else if(id==='markers'){html='<div class="hero"><div class="eyebrow">Правило</div><h1>Present Tenses · Markers</h1></div><div class="examCard">'+markerReference()+'</div>';openFullScreen('',html)}
  else{html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Difficult Words + Reading Aloud</h1></div><div class="dwReadSplit"><div class="examCard"><div class="difficult">'+difficultCards()+'</div></div>'+oralReadingHTML()+'</div>';openFullScreen('',html,renderDifficultCard)}
 }
+
+
+const w2PresentMix=[
+['My sister usually ___ her homework before dinner.',['finishes','is finishing','has finished','has been finishing'],0],
+['Be quiet! I ___ to the news.',['listen','am listening','have listened','have been listening'],1],
+['We ___ three mock tests so far this month.',['do','are doing','have done','have been doing'],2],
+['She is exhausted because she ___ since early morning.',['studies','is studying','has studied','has been studying'],3],
+['The school bus ___ at 7:30 every day.',['leaves','is leaving','has left','has been leaving'],0],
+['This week I ___ with my grandparents.',['stay','am staying','have stayed','have been staying'],1],
+['I ___ this article twice already.',['read','am reading','have read','have been reading'],2],
+['It ___ for hours, so the ground is wet.',['rains','is raining','has rained','has been raining'],3],
+['Our teacher always ___ the answers carefully.',['checks','is checking','has checked','has been checking'],0],
+['Look! Someone ___ at the door.',['knocks','is knocking','has knocked','has been knocking'],1],
+['We ___ four chapters since September.',['complete','are completing','have completed','have been completing'],2],
+['How long ___ for the exam?',['do you prepare','are you preparing','have you prepared','have you been preparing'],3],
+['I ___ what you mean.',['see','am seeing','have seen','have been seeing'],0],
+['I ___ my dentist tomorrow afternoon.',['see','am seeing','have seen','have been seeing'],1],
+['This soup ___ delicious.',['tastes','is tasting','has tasted','has been tasting'],0],
+['The chef ___ the sauce at the moment.',['tastes','is tasting','has tasted','has been tasting'],1],
+['I ___ this is the best answer.',['think','am thinking','have thought','have been thinking'],0],
+['I ___ about changing my revision plan this week.',['think','am thinking','have thought','have been thinking'],1],
+['She ___ a new laptop.',['has','is having','has had','has been having'],0],
+['We ___ dinner right now.',['have','are having','have had','have been having'],1],
+['The bag ___ about five kilos.',['weighs','is weighing','has weighed','has been weighing'],0],
+['The assistant ___ the parcel now.',['weighs','is weighing','has weighed','has been weighing'],1],
+['This jacket ___ you perfectly.',['fits','is fitting','has fitted','has been fitting'],0],
+['The mechanic ___ a new part to the car now.',['fits','is fitting','has fitted','has been fitting'],1],
+['I ___ why this rule matters now.',['understand','am understanding','have been understanding','understanding'],0],
+['He ___ unusually rude today.',['is','is being','has been being','being'],1],
+['He ___ a very polite person in general.',['is','is being','has been','being'],0],
+['The box ___ old family photographs.',['contains','is containing','has contained','has been containing'],0],
+['The flowers ___ wonderful.',['smell','are smelling','have smelled','have been smelling'],0],
+['Why ___ the milk? Do you think it is fresh?',['do you smell','are you smelling','have you smelled','have you been smelling'],1]
+];
+
+const w2Readings=[
+{title:'Why sleep matters for learning',text:'Sleep is not simply a period when the brain switches off. While we sleep, the brain processes information collected during the day and strengthens important memories. Researchers have found that students who sleep well are often better able to concentrate, solve problems and recall new material. Lack of sleep, by contrast, may reduce attention and make even familiar tasks feel more difficult. Experts therefore recommend keeping a regular sleep schedule, especially before demanding periods of study. Short-term cramming late at night may seem productive, but it can interfere with memory consolidation and leave learners less alert the next day.',words:[['strengthen','укреплять'],['recall','вспоминать'],['lack','нехватка'],['demanding','требующий усилий'],['cramming','зубрёжка в последний момент'],['interfere with','мешать'],['consolidation','закрепление'],['alert','бодрый, внимательный']]},
+{title:'How cities are becoming greener',text:'Many cities are redesigning public spaces to make urban life healthier and more sustainable. Local authorities are planting trees, creating bicycle lanes and turning unused land into small parks. These changes can reduce air pollution, provide shade during hot weather and encourage people to walk more often. Green areas may also support biodiversity by giving insects and birds places to live. However, successful projects require careful planning. City planners must balance environmental goals with housing, transport and business needs so that improvements benefit residents rather than simply making neighbourhoods more expensive.',words:[['sustainable','устойчивый'],['authorities','власти'],['unused land','неиспользуемая земля'],['shade','тень'],['encourage','поощрять'],['biodiversity','биоразнообразие'],['balance','уравновешивать'],['residents','жители']]},
+{title:'Why digital libraries are growing',text:'Digital libraries have changed the way people find and use information. Instead of travelling to a building and searching shelves, readers can now access thousands of books, articles and historical documents online. This is especially useful for people who live far from major libraries or need specialist material quickly. Digital collections also protect fragile originals because researchers can study high-quality copies without handling old documents. At the same time, libraries must deal with copyright restrictions, reliable long-term storage and unequal access to technology. For this reason, digital services usually complement rather than completely replace traditional libraries.',words:[['access','получать доступ'],['specialist material','специализированный материал'],['fragile','хрупкий'],['handling','обращение с предметом'],['copyright restrictions','ограничения авторского права'],['storage','хранение'],['unequal access','неравный доступ'],['complement','дополнять']]}
+];
+
+let w2TestScore=0,w2Answered={},w2ReadingIndex=0,w2WordIndex=0;
+
+function w2PackHTML(){
+ return '<div class="w2Pack"><div class="w2PackHead"><div><b>HOMEWORK · PRESENT CONSOLIDATION</b><br><span>Present only · Past в этом уроке не вводится</span></div></div><div class="w2PackGrid">'+
+ '<button class="w2PackBtn" onclick="openW2Present()">PRESENT + STATIVE<br>30 QUESTIONS</button>'+
+ '<button class="w2PackBtn" onclick="openW2Fipi()">FIPI<br>4 BLOCKS</button>'+
+ '<button class="w2PackBtn" onclick="openW2Reading()">READING<br>3 NEW TEXTS</button>'+
+ '<button class="w2PackBtn" onclick="openW2Reading()">QUIZLET WORDS<br>FROM TEXTS</button>'+
+ '</div></div>';
+}
+
+function openW2Present(){
+ w2TestScore=0;w2Answered={};
+ const items=w2PresentMix.map((q,i)=>'<div class="w2Item" data-w2q="'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="w2Choices">'+q[1].map((o,j)=>'<button type="button" onclick="answerW2Present(this,'+i+','+j+')">'+o+'</button>').join('')+'</div></div>').join('');
+ openFullScreen('', '<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Present Tenses + Stative / Dynamic Verbs</h1></div><div class="w2Progress" id="w2Progress">Answered 0 / 30 · Score 0</div>'+items+'</div>');
+}
+function answerW2Present(btn,i,j){
+ if(w2Answered[i])return;
+ w2Answered[i]=true;
+ const q=w2PresentMix[i],box=btn.closest('.w2Item'),buttons=[...box.querySelectorAll('button')];
+ buttons.forEach(x=>x.disabled=true);
+ if(j===q[2]){w2TestScore++;btn.classList.add('correct')}else{btn.classList.add('wrong');buttons[q[2]].classList.add('correct')}
+ const done=Object.keys(w2Answered).length;
+ document.getElementById('w2Progress').textContent='Answered '+done+' / 30 · Score '+w2TestScore;
+}
+
+function w2FipiSetHTML(set,start,label){
+ return '<div class="w2FipiSet"><h3>'+label+' · '+set.t+'</h3><div class="w2FipiText">'+set.q.map((x,i)=>(start+i)+'. '+x[0].replace('___','<span class="w2Gap"><input autocomplete="off" data-answer="'+x[2].replace(/"/g,'&quot;')+'"><span class="w2Base">'+x[1]+'</span></span>')).join('<br>')+'</div><button class="w2Check" type="button" onclick="checkW2Fipi(this)">CHECK</button><div class="w2Result"></div></div>';
+}
+function openW2Fipi(){
+ const html='<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>FIPI · Grammar & Word Formation · 4 blocks</h1></div><div class="w2FipiGrid">'+
+ w2FipiSetHTML(exam26Grammar[0],19,'GRAMMAR 19–24')+
+ w2FipiSetHTML(exam26Grammar[1],19,'GRAMMAR 19–24')+
+ w2FipiSetHTML(exam26WF[0],25,'WORD FORMATION 25–29')+
+ w2FipiSetHTML(exam26WF[1],25,'WORD FORMATION 25–29')+
+ '</div></div>';
+ openFullScreen('',html);
+}
+function checkW2Fipi(btn){
+ const box=btn.closest('.w2FipiSet'),inputs=[...box.querySelectorAll('input')];let good=0;
+ inputs.forEach(inp=>{const ok=inp.value.trim().toLowerCase().replace(/\s+/g,' ')===inp.dataset.answer.trim().toLowerCase().replace(/\s+/g,' ');inp.style.borderBottomColor=ok?'#15803d':'#D52B1E';if(ok)good++});
+ box.querySelector('.w2Result').textContent=good+' / '+inputs.length;
+}
+
+function openW2Reading(){
+ w2ReadingIndex=0;w2WordIndex=0;
+ openFullScreen('', '<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Reading ×3 + Quizlet-style vocabulary</h1></div><div class="w2Reading"><div class="w2TextCard"><h2 id="w2ReadTitle"></h2><p id="w2ReadText"></p><div class="w2ReadNav"><button type="button" onclick="moveW2Reading(-1)">←</button><b id="w2ReadCount"></b><button type="button" onclick="moveW2Reading(1)">→</button></div></div><div class="w2VocabCard"><div id="w2WordCard"></div></div></div></div>',renderW2Reading);
+}
+function renderW2Reading(){
+ const r=w2Readings[w2ReadingIndex];
+ document.getElementById('w2ReadTitle').textContent=r.title;
+ document.getElementById('w2ReadText').textContent=r.text;
+ document.getElementById('w2ReadCount').textContent=(w2ReadingIndex+1)+' / '+w2Readings.length;
+ w2WordIndex=0;renderW2Word();
+}
+function moveW2Reading(d){w2ReadingIndex=(w2ReadingIndex+d+w2Readings.length)%w2Readings.length;renderW2Reading()}
+function renderW2Word(){
+ const root=document.getElementById('w2WordCard'),arr=w2Readings[w2ReadingIndex].words,x=arr[w2WordIndex];
+ root.innerHTML='<div class="qCard"><div class="qCardIn"><div class="qFace qFront"><button class="qAudio" type="button">▶</button><b>'+x[0]+'</b><span class="qHint">нажми — перевод</span></div><div class="qFace qBack"><b>'+x[1]+'</b><span class="qHint">нажми — слово</span></div></div></div><div class="qNav"><button type="button" onclick="moveW2Word(-1)">←</button><div class="qCount">'+(w2WordIndex+1)+' / '+arr.length+'</div><button type="button" onclick="moveW2Word(1)">→</button></div>';
+ const card=root.querySelector('.qCard');card.onclick=()=>card.classList.toggle('flip');
+ root.querySelector('.qAudio').onclick=e=>speakWord(e,x[0]);
+}
+function moveW2Word(d){const arr=w2Readings[w2ReadingIndex].words;w2WordIndex=(w2WordIndex+d+arr.length)%arr.length;renderW2Word()}
 
 const exam26Grammar=[
  {t:'The Palace of Westminster',q:[
