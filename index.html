@@ -478,6 +478,9 @@ function lessonStarter(w,i){
  if(w===0&&i===1){
   return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>';
  }
+ if(w===1&&i===0){
+  return '<div class="examCard" style="border-left:5px solid #D52B1E"><div class="eyebrow">WEEK 2 · LESSON 1</div><h2>Present Consolidation</h2><p>Сегодня не повторяем задания из Недели 1. Цель — закрепить четыре Present Tenses и stative / dynamic verbs перед переходом к Past.</p><div class="miniEge"><div class="miniTask"><b>1 · Contrast</b><br>Present Simple ↔ Continuous</div><div class="miniTask"><b>2 · Result / duration</b><br>Present Perfect ↔ Perfect Continuous</div><div class="miniTask"><b>3 · Meaning change</b><br>stative ↔ dynamic verbs</div><div class="miniTask"><b>4 · Homework</b><br>30 Present + 4 FIPI blocks + Reading Lab</div></div></div>';
+ }
  return egePresentPractice(key)+submitBox(key,'EGE Present forms');
 }
 function submitBox(key,title){
