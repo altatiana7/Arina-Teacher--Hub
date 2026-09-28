@@ -130,18 +130,6 @@
 .rightBig.fipi{background:#eef8fb;color:#0039A6;border:1px solid #cbd8ea}
 .rightNote{font-size:10px;line-height:1.45;color:#718096;margin-top:9px}
 @media(max-width:980px){.week1Layout{grid-template-columns:1fr}.week1Right{position:static}}
-
-/* W2L1 Present homework */
-.w2hw{margin-top:12px;border:2px solid #0039A6;border-left:6px solid #D52B1E;border-radius:14px;background:#fff;padding:14px}
-.w2hw h2{margin:0 0 4px;color:#0039A6}.w2hw>p{font-size:12px;color:#64748b}
-.w2hwBtns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
-.w2hwBtns button{min-height:62px;border:1px solid #b7c9e8;border-left:4px solid #D52B1E;border-radius:10px;background:#fff;color:#0039A6;font-weight:900;padding:9px}
-.w2test{max-width:980px;margin:auto}.w2score{position:sticky;top:0;z-index:3;background:#edf3ff;border:1px solid #b7c9e8;border-radius:10px;padding:9px 12px;font-weight:900;margin-bottom:9px}
-.w2q{background:#fff;border:1px solid #d9e1ec;border-radius:10px;padding:11px;margin:7px 0}.w2q p{font-size:15px;color:#111;margin:0 0 8px}
-.w2opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}.w2opts button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:9px;font-weight:800}.w2opts button.ok{background:#ecfdf3;border-color:#22c55e;color:#166534}.w2opts button.no{background:#fff1f0;border-color:#ef4444;color:#991b1b}
-.w2fipi{display:grid;grid-template-columns:1fr 1fr;gap:9px}.w2fipiCard{border:1px solid #d9e1ec;border-radius:11px;background:#fff;padding:12px}.w2fipiCard h3{margin:0 0 5px;color:#0039A6}.w2fipiCard p{font-size:12px;color:#334155}.w2fipiCard a{display:inline-block;background:#0039A6;color:#fff;text-decoration:none;border-radius:8px;padding:8px 10px;font-size:11px;font-weight:900}
-.w2read{display:grid;grid-template-columns:1.35fr .65fr;gap:10px}.w2paper,.w2cards{background:#fff;border:1px solid #d9e1ec;border-radius:12px;padding:14px}.w2paper h2{margin:0 0 8px;color:#0039A6}.w2paper p{font-size:17px;line-height:1.65;color:#111}.w2readnav{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}.w2readnav button{border:0;background:#0039A6;color:#fff;border-radius:8px;padding:8px 11px;font-weight:900}.w2cards .qCard{height:250px}.w2cards .qFront b{font-size:27px}.w2cards .qBack b{font-size:22px}
-@media(max-width:800px){.w2hwBtns,.w2fipi,.w2read,.w2opts{grid-template-columns:1fr}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -153,7 +141,7 @@ const weeks=[
 ['Present Tenses: система 4 времён','Сравнить Present Simple / Continuous / Perfect / Perfect Continuous; составить таблицу meaning → form → marker; разобрать 12 контекстов; выучить 20 irregular verbs.','Тест 12 вопросов на 4 Present forms; 8 трансформаций; восстановить V2/V3 20 глаголов; написать 8 своих предложений (по 2 на каждое время).','quiz'],
 ['Present contrast + stative verbs','16 mixed-context choices; сортировка 18 stative/action verbs; 8 error-correction sentences; 6 устных объяснений выбора времени.','15 mixed Present sentences; 10 stative-verb corrections; 6 предложений формата 19–24; повторить 20 irregular verbs.'],
 ['EGE 19–24: Present forms','2 мини-сета по 6 пропусков; определить грамматический сигнал; объяснить каждое изменение исходного слова; заполнить error log.','Сет 19–24 №1 и №2; исправить все ошибки по схеме answer → rule → new example; cumulative test 20 irregular verbs.']]},
-{d:'28 Sep–4 Oct',g:'Закрепить Present Simple / Continuous / Perfect / Perfect Continuous и stative verbs перед переходом к Past.',r:'Не менее 80% в mixed Present + stative test; ошибки разобраны до начала новой темы.',l:[['Present Tenses + Stative Verbs · Consolidation','Полная отработка Present Simple / Continuous / Perfect / Perfect Continuous; stative vs dynamic verbs; mixed contexts; FIPI practice; reading vocabulary.','30 mixed Present + stative/dynamic sentences; 4 FIPI grammar/word-formation sets; 3 reading texts; vocabulary flashcards.'],['Past Perfect + Past Perfect Continuous','Earlier past; result vs duration; 12 contrast items; narrative sequencing.','15 mixed Past items; 6 sentence transformations; 10 новых irregular verbs.'],['EGE 19–24: Past forms','2 экзаменационных мини-сета; анализ distractors; error log.','12 заданий 19–24 на Past forms; cumulative irregular verbs 40; исправить ошибки.']]},
+{d:'28 Sep–4 Oct',g:'Закрепить Present Simple / Continuous / Perfect / Perfect Continuous и stative verbs перед переходом к Past.',r:'Не менее 80% в mixed Present + stative test; ошибки разобраны до начала новой темы.',l:[['Present Tenses + Stative Verbs · Consolidation','Повторить Present Simple / Continuous / Perfect / Perfect Continuous; stative vs dynamic verbs; mixed contexts; работа с ошибками.','Повторить 4 Present tenses и stative verbs; выполнить cumulative Present practice; разобрать ошибки перед переходом к Past.'],['Past Perfect + Past Perfect Continuous','Earlier past; result vs duration; 12 contrast items; narrative sequencing.','15 mixed Past items; 6 sentence transformations; 10 новых irregular verbs.'],['EGE 19–24: Past forms','2 экзаменационных мини-сета; анализ distractors; error log.','12 заданий 19–24 на Past forms; cumulative irregular verbs 40; исправить ошибки.']]},
 {d:'5–11 Oct',g:'Различать способы выражения будущего и смешивать Present/Past/Future без опоры на маркеры.',r:'80%+ в mixed tenses checkpoint.',l:[['Future: will / be going to / Present forms','Predictions, plans, arrangements, timetables; 16 contexts.','16 future-form choices; 8 personal examples; 10 transformations.'],['Future Continuous + Future Perfect','Process at a future point; completed by a deadline; timeline practice.','12 items; 6 transformations; short plan “By 2030…” with 6 target forms.'],['Mixed tenses checkpoint','24 mixed tense items; explain 8 choices; error categories.','18 EGE-style grammar gaps; revise error log; irregular verbs cumulative 50.']]},
 {d:'12–18 Oct',g:'Строить Passive Voice в основных временах и узнавать его в заданиях 19–24.',r:'90% формообразования Passive; 80% exam set.',l:[['Passive: core tenses','Active → Passive in Present/Past/Future; 15 transformations.','12 transformations; 8 gap-fill items; learn V3 forms from error list.'],['Passive with modals + two objects','Modal passive; two-object verbs; by/with; 12 contexts.','10 modal-passive items; 6 two-object transformations; 6 error corrections.'],['EGE Passive practice','2 sets 19–24 with passive forms; tense + voice decision.','12 exam gaps; write rule for each mistake; mixed tense/passive test.']]},
 {d:'19–25 Oct',g:'Различать значения modal verbs и их эквивалентов.',r:'80%+ в modal meaning test; корректные past modals.',l:[['can/could/may/might','Ability, permission, possibility; degrees of certainty; 16 contexts.','15 choices; 8 paraphrases; 6 personal examples.'],['must/have to/should/need','Obligation, necessity, advice, absence of necessity; contrasts.','16 mixed modal items; 8 transformations; error correction.'],['Past modals','must have / might have / could have / should have; inference about past.','12 past-modal sentences; 6 paraphrases; mini EGE set.']]},
@@ -480,7 +468,7 @@ function lessonFullHTML(x,i,w){
  if(w!==0){
   html+='<div class="cols"><div class="box"><h3>На уроке</h3><ul>'+x[1].split('; ').map(s=>'<li>'+s+'</li>').join('')+'</ul></div><div class="box"><h3>Контроль результата</h3><ul><li>полноценная тренировка</li><li>ошибки в personal error log</li><li>retrieval в начале следующего урока</li></ul></div></div>'+materialBox('w'+w+'l'+i+'-teacher')+'<details class="hw"><summary>Домашняя работа · открыть</summary><div class="hwbody"><div class="task">'+x[2].split('; ').map((s,n)=>'<b>'+(n+1)+'.</b> '+s).join('<br>')+'</div>'+materialBox('w'+w+'l'+i+'-hw')+'<label class="check"><input type="checkbox" data-save="w'+w+'l'+i+'"> Домашняя работа выполнена</label></div></details>';
  }
- if(w===1&&i===0) html+=w2HomeworkHTML(); return html+'</div></div>';
+ return html+'</div></div>';
 }
 function openLesson(w,i){let p=document.getElementById('lessonPage');if(!p){p=document.createElement('div');p.id='lessonPage';p.className='lessonPage';document.body.appendChild(p)}p.innerHTML=lessonFullHTML(weeks[w].l[i],i,w)+(w===1?'<div class="examCard" style="margin:10px 14px 20px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Grammar 19–24 + Word Formation 25–29 · материалы 2026</div></div><button class="action" type="button" onclick="closeLesson();renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');p.style.display='block';restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));initKahoots();const key='w'+w+'l'+i;if(localStorage.getItem('submitted-'+key))lockSubmitted(p,key);scrollTo(0,0)}
 function closeLesson(){const p=document.getElementById('lessonPage');if(p)p.style.display='none'}
@@ -598,69 +586,6 @@ function renderTrainer(id){
  else if(id==='markers'){html='<div class="hero"><div class="eyebrow">Правило</div><h1>Present Tenses · Markers</h1></div><div class="examCard">'+markerReference()+'</div>';openFullScreen('',html)}
  else{html='<div class="hero"><div class="eyebrow">Тренажёры</div><h1>Difficult Words + Reading Aloud</h1></div><div class="dwReadSplit"><div class="examCard"><div class="difficult">'+difficultCards()+'</div></div>'+oralReadingHTML()+'</div>';openFullScreen('',html,renderDifficultCard)}
 }
-
-
-const w2Present=[
-['My brother usually ___ to university by bus.',['goes','is going','has gone','has been going'],0],
-['Please be quiet. I ___ to an important lecture.',['listen','am listening','have listened','have been listening'],1],
-['We ___ three practice tests so far this month.',['do','are doing','have done','have been doing'],2],
-['She is tired because she ___ since six o’clock.',['studies','is studying','has studied','has been studying'],3],
-['The train ___ at 7:15 every weekday.',['leaves','is leaving','has left','has been leaving'],0],
-['This week I ___ at my aunt’s because our flat is being renovated.',['stay','am staying','have stayed','have been staying'],1],
-['I ___ this article twice, so I know the main argument.',['read','am reading','have read','have been reading'],2],
-['It ___ all morning, and the streets are still wet.',['rains','is raining','has rained','has been raining'],3],
-['Scientists often ___ new evidence before changing a theory.',['check','are checking','have checked','have been checking'],0],
-['Look! The children ___ across the road.',['run','are running','have run','have been running'],1],
-['Our class ___ four units since September.',['finishes','is finishing','has finished','has been finishing'],2],
-['How long ___ for the EGE?',['do you prepare','are you preparing','have you prepared','have you been preparing'],3],
-['I ___ what you mean.',['see','am seeing','have been seeing','seeing'],0],
-['I ___ my tutor after school tomorrow.',['see','am seeing','have seen','have been seeing'],1],
-['This soup ___ much better with fresh herbs.',['tastes','is tasting','has tasted','has been tasting'],0],
-['The chef ___ the sauce now.',['tastes','is tasting','has tasted','has been tasting'],1],
-['I ___ this answer is correct.',['think','am thinking','have been thinking','thinking'],0],
-['I ___ about changing my study routine this week.',['think','am thinking','have thought always','thinking'],1],
-['She ___ a new laptop.',['has','is having','has had now','has been having'],0],
-['We ___ lunch at the moment.',['have','are having','have had','have been having'],1],
-['The parcel ___ nearly five kilos.',['weighs','is weighing','has weighed','has been weighing'],0],
-['The assistant ___ the parcel right now.',['weighs','is weighing','has weighed','has been weighing'],1],
-['This jacket ___ you perfectly.',['fits','is fitting','has fit now','has been fitting'],0],
-['The mechanic ___ a new tyre at the moment.',['fits','is fitting','has fit','has been fitting'],1],
-['I ___ why this grammar rule matters now.',['understand','am understanding','have been understanding','understanding'],0],
-['He ___ unusually quiet today.',['is','is being','has been being','being'],1],
-['He ___ a very calm person in general.',['is','is being','has being','be'],0],
-['The box ___ old family photographs.',['contains','is containing','has been containing','contain'],0],
-['The flowers ___ wonderful.',['smell','are smelling','have been smelling','smelling'],0],
-['Why ___ the milk? Do you think it is off?',['do you smell','are you smelling','have you smelled always','smell you'],1]
-];
-const w2Fipi=[
-['FIPI · Grammar 19–24','Официальный открытый банк: один связный текст на грамматические формы. После выполнения выпиши каждую ошибку: base word → answer → rule.','https://ege.fipi.ru/bank/index.php?proj=4B53A6CB75B0B5E1427E596EB4931A2A&qid=7F57cD'],
-['FIPI · Grammar 19–24 · Set 2','Второй официальный сет. Сначала определи tense / voice / number / comparison, затем вводи форму.','https://ege.fipi.ru/bank/index.php?proj=4B53A6CB75B0B5E1427E596EB4931A2A&zid=EA7FC7'],
-['FIPI · Word Formation 25–29','Using a digital library. Исходное слово обязательно должно измениться.','https://ege.fipi.ru/bank/index.php?proj=4B53A6CB75B0B5E1427E596EB4931A2A&zid=2251F0'],
-['FIPI · Word Formation 25–29 · Set 2','Libraries and education. После выполнения занеси сложные производные в error log.','https://ege.fipi.ru/bank/index.php?proj=4B53A6CB75B0B5E1427E596EB4931A2A&zid=AA6353']
-];
-const w2Reading=[
-{t:'Why sleep matters for learning',x:'Sleep is not simply a period when the brain switches off. While we sleep, the brain processes information collected during the day and strengthens important memories. Researchers have found that students who sleep well are often better able to concentrate, solve problems and recall new material. Lack of sleep, by contrast, may reduce attention and make even familiar tasks feel more difficult. Experts therefore recommend keeping a regular sleep schedule, especially before demanding periods of study. Short-term cramming late at night may seem productive, but it can interfere with memory consolidation and leave learners less alert the next day.',v:[['strengthen','укреплять'],['recall','вспоминать'],['lack','нехватка'],['demanding','требующий усилий'],['cramming','зубрёжка в последний момент'],['interfere with','мешать'],['consolidation','закрепление'],['alert','бодрый, внимательный']]},
-{t:'How cities are becoming greener',x:'Many cities are redesigning public spaces to make urban life healthier and more sustainable. Local authorities are planting trees, creating bicycle lanes and turning unused land into small parks. These changes can reduce air pollution, provide shade during hot weather and encourage people to walk more often. Green areas may also support biodiversity by giving insects and birds places to live. However, successful projects require careful planning. City planners must balance environmental goals with housing, transport and business needs so that improvements benefit residents rather than simply making neighbourhoods more expensive.',v:[['sustainable','устойчивый'],['authorities','власти'],['unused land','неиспользуемая земля'],['shade','тень'],['encourage','поощрять'],['biodiversity','биоразнообразие'],['balance','уравновешивать'],['residents','жители']]},
-{t:'Why digital libraries are growing',x:'Digital libraries have changed the way people find and use information. Instead of travelling to a building and searching shelves, readers can now access thousands of books, articles and historical documents online. This is especially useful for people who live far from major libraries or need specialist material quickly. Digital collections also protect fragile originals because researchers can study high-quality copies without handling old documents. At the same time, libraries must deal with copyright restrictions, reliable long-term storage and unequal access to technology. For this reason, digital services usually complement rather than completely replace traditional libraries.',v:[['access','получать доступ'],['specialist material','специализированный материал'],['fragile','хрупкий'],['handling','физическое обращение'],['copyright restrictions','ограничения авторского права'],['storage','хранение'],['unequal access','неравный доступ'],['complement','дополнять']]}
-];
-let w2ri=0,w2vi=0,w2score=0,w2done={};
-function w2HomeworkHTML(){return '<div class="w2hw"><h2>HOMEWORK · PRESENT CONSOLIDATION</h2><p>Закрываем Present Tenses + Stative Verbs до перехода к Past.</p><div class="w2hwBtns"><button onclick="openW2Present()">PRESENT TEST<br>30 QUESTIONS</button><button onclick="openW2Fipi()">FIPI PRACTICE<br>4 SETS</button><button onclick="openW2Reading()">READING ×3<br>+ VOCAB CARDS</button></div></div>'}
-function openW2Present(){w2score=0;w2done={};openFullScreen('', '<div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Present Tenses + Stative Verbs · 30</h1></div><div class="w2test"><div class="w2score" id="w2score">0 / 30</div>'+w2Present.map((q,i)=>'<div class="w2q" data-i="'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="w2opts">'+q[1].map((o,j)=>'<button onclick="answerW2(this,'+i+','+j+')">'+o+'</button>').join('')+'</div></div>').join('')+'</div>')}
-function answerW2(btn,i,j){if(w2done[i])return;w2done[i]=1;const q=w2Present[i],box=btn.closest('.w2q');box.querySelectorAll('button').forEach(x=>x.disabled=true);if(j===q[2]){w2score++;btn.classList.add('ok')}else{btn.classList.add('no');box.querySelectorAll('button')[q[2]].classList.add('ok')}document.getElementById('w2score').textContent=w2score+' / 30'}
-function openW2Fipi(){openFullScreen('', '<div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>FIPI · Grammar & Word Formation</h1></div><div class="w2fipi">'+w2Fipi.map(x=>'<div class="w2fipiCard"><h3>'+x[0]+'</h3><p>'+x[1]+'</p><a href="'+x[2]+'" target="_blank" rel="noopener">ОТКРЫТЬ ФИПИ ↗</a></div>').join('')+'</div>')}
-function openW2Reading(){w2ri=0;w2vi=0;openFullScreen('', '<div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Reading ×3 + Difficult Words</h1></div><div class="w2read"><div class="w2paper"><h2 id="w2rt"></h2><p id="w2rx"></p><div class="w2readnav"><button onclick="moveW2Read(-1)">←</button><b id="w2rc"></b><button onclick="moveW2Read(1)">→</button></div></div><div class="w2cards"><div id="w2vcard"></div></div></div>',renderW2Read)}
-function renderW2Read(){const r=w2Reading[w2ri];document.getElementById('w2rt').textContent=r.t;document.getElementById('w2rx').textContent=r.x;document.getElementById('w2rc').textContent=(w2ri+1)+' / 3';w2vi=0;renderW2Vocab()}
-function moveW2Read(d){w2ri=(w2ri+d+w2Reading.length)%w2Reading.length;renderW2Read()}
-function renderW2Vocab(){
- const arr=w2Reading[w2ri].v,x=arr[w2vi],root=document.getElementById('w2vcard');
- if(!root)return;
- root.innerHTML='<div class="qCard"><div class="qCardIn"><div class="qFace qFront"><button class="qAudio" type="button">▶</button><b>'+x[0]+'</b><span class="qHint">нажми — перевод</span></div><div class="qFace qBack"><b>'+x[1]+'</b><span class="qHint">нажми — вернуться к слову</span></div></div></div><div class="qNav"><button type="button" onclick="moveW2Vocab(-1)">←</button><div class="qCount">'+(w2vi+1)+' / '+arr.length+'</div><button type="button" onclick="moveW2Vocab(1)">→</button></div>';
- const card=root.querySelector('.qCard');
- card.onclick=()=>card.classList.toggle('flip');
- const audio=root.querySelector('.qAudio');
- audio.onclick=(e)=>speakWord(e,x[0]);
-}
-function moveW2Vocab(d){const arr=w2Reading[w2ri].v;w2vi=(w2vi+d+arr.length)%arr.length;renderW2Vocab()}
 
 const exam26Grammar=[
  {t:'The Palace of Westminster',q:[
