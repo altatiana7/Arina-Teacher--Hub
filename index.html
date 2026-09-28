@@ -651,7 +651,15 @@ function openW2Fipi(){openFullScreen('', '<div class="hero"><div class="eyebrow"
 function openW2Reading(){w2ri=0;w2vi=0;openFullScreen('', '<div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Reading ×3 + Difficult Words</h1></div><div class="w2read"><div class="w2paper"><h2 id="w2rt"></h2><p id="w2rx"></p><div class="w2readnav"><button onclick="moveW2Read(-1)">←</button><b id="w2rc"></b><button onclick="moveW2Read(1)">→</button></div></div><div class="w2cards"><div id="w2vcard"></div></div></div>',renderW2Read)}
 function renderW2Read(){const r=w2Reading[w2ri];document.getElementById('w2rt').textContent=r.t;document.getElementById('w2rx').textContent=r.x;document.getElementById('w2rc').textContent=(w2ri+1)+' / 3';w2vi=0;renderW2Vocab()}
 function moveW2Read(d){w2ri=(w2ri+d+w2Reading.length)%w2Reading.length;renderW2Read()}
-function renderW2Vocab(){const arr=w2Reading[w2ri].v,x=arr[w2vi],root=document.getElementById('w2vcard');root.innerHTML='<div class="qCard" onclick="this.classList.toggle(\\'flip\\')"><div class="qCardIn"><div class="qFace qFront"><button class="qAudio" onclick="speakWord(event,\\''+x[0].replace(/'/g,"\\'")+'\\')">▶</button><b>'+x[0]+'</b><span class="qHint">нажми — перевод</span></div><div class="qFace qBack"><b>'+x[1]+'</b></div></div></div><div class="qNav"><button onclick="moveW2Vocab(-1)">←</button><div class="qCount">'+(w2vi+1)+' / '+arr.length+'</div><button onclick="moveW2Vocab(1)">→</button></div>'}
+function renderW2Vocab(){
+ const arr=w2Reading[w2ri].v,x=arr[w2vi],root=document.getElementById('w2vcard');
+ if(!root)return;
+ root.innerHTML='<div class="qCard"><div class="qCardIn"><div class="qFace qFront"><button class="qAudio" type="button">▶</button><b>'+x[0]+'</b><span class="qHint">нажми — перевод</span></div><div class="qFace qBack"><b>'+x[1]+'</b><span class="qHint">нажми — вернуться к слову</span></div></div></div><div class="qNav"><button type="button" onclick="moveW2Vocab(-1)">←</button><div class="qCount">'+(w2vi+1)+' / '+arr.length+'</div><button type="button" onclick="moveW2Vocab(1)">→</button></div>';
+ const card=root.querySelector('.qCard');
+ card.onclick=()=>card.classList.toggle('flip');
+ const audio=root.querySelector('.qAudio');
+ audio.onclick=(e)=>speakWord(e,x[0]);
+}
 function moveW2Vocab(d){const arr=w2Reading[w2ri].v;w2vi=(w2vi+d+arr.length)%arr.length;renderW2Vocab()}
 
 const exam26Grammar=[
