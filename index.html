@@ -157,8 +157,8 @@
 .lessonLocked{opacity:.42;cursor:not-allowed!important;background:#f5f7fb}
 .lessonLocked .lnum{background:#94a3b8}.lessonLocked .chev{color:#94a3b8}
 .lessonLocked .ltitle small{color:#94a3b8}
-.hwSide{background:#fff;border:2px solid #D52B1E;border-radius:14px;padding:12px;margin-bottom:10px}
-.hwSide h3{margin:0 0 3px;color:#D52B1E;font-size:14px}
+.hwSide{background:#fff7f6;border:3px solid #D52B1E;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 6px 18px #D52B1E18}
+.hwSide h3{margin:0 0 4px;color:#D52B1E;font-size:17px}
 .hwSide p{margin:0 0 9px;font-size:10px;line-height:1.4;color:#64748b}
 .hwSideBtn{display:block;width:100%;border:1px solid #b7c9e8;border-left:4px solid #D52B1E;background:#fff;color:#0039A6;border-radius:9px;padding:10px 8px;margin-top:7px;text-align:left;font-size:11px;font-weight:900}
 .hwSideBtn small{display:block;color:#64748b;font-size:9px;margin-top:2px}
@@ -166,6 +166,12 @@
  .week1Right{order:-1}
  .hwSide{margin-bottom:8px}
 }
+
+.w2ReadTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.w2ReadTabs button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:9px;padding:9px 7px;text-align:left;font-size:10px;font-weight:900;line-height:1.25}
+.w2ReadTabs button.active{background:#0039A6;color:#fff;border-color:#0039A6}
+.w2ReadTabs button span{display:block;font-size:9px;font-weight:700;opacity:.8;margin-top:2px}
+@media(max-width:700px){.w2ReadTabs{grid-template-columns:1fr 1fr}}
 </style><meta name="theme-color" content="#ffffff">
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
@@ -511,10 +517,10 @@ function lessonFullHTML(x,i,w){
 function openLesson(w,i){if(w===1&&i>0)return;let p=document.getElementById('lessonPage');if(!p){p=document.createElement('div');p.id='lessonPage';p.className='lessonPage';document.body.appendChild(p)}p.innerHTML=lessonFullHTML(weeks[w].l[i],i,w)+(w===1?'<div class="examCard" style="margin:10px 14px 20px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Grammar 19–24 + Word Formation 25–29 · материалы 2026</div></div><button class="action" type="button" onclick="closeLesson();renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');p.style.display='block';restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));initKahoots();const key='w'+w+'l'+i;if(localStorage.getItem('submitted-'+key))lockSubmitted(p,key);scrollTo(0,0)}
 function closeLesson(){const p=document.getElementById('lessonPage');if(p)p.style.display='none'}
 function egeRightPanel(weekIndex){
- const hw=weekIndex===1?'<div class="hwSide"><h3>ДОМАШКА · УРОК 1</h3><p>Present закрепляем полностью. Past пока не начинаем.</p>'+
+ const hw=weekIndex===1?'<div class="hwSide"><h3>HOMEWORK · LESSON 1</h3><p>Present закрепляем полностью. Past в Уроке 1 не вводится.</p>'+
  '<button class="hwSideBtn" type="button" onclick="openW2Present()">PRESENT + STATIVE · 30<small>4 Present tenses + stative / dynamic verbs</small></button>'+
  '<button class="hwSideBtn" type="button" onclick="openW2Fipi()">ФИПИ · 4 БЛОКА<small>Grammar 19–24 + Word Formation 25–29</small></button>'+
- '<button class="hwSideBtn" type="button" onclick="openW2Reading()">READING LAB · 6 TEXTS<small>Quizlet cards · перевод · British audio</small></button>'+
+ '<button class="hwSideBtn" type="button" onclick="openW2Reading()">READING LAB · 6 TEXTS<small>6 отдельных текстов + Quizlet cards + British audio</small></button>'+
  '</div>':'';
  return '<aside class="week1Right">'+hw+'<div class="expandedCard"><h3>СТРУКТУРА ЕГЭ 2027</h3>'+
  '<div class="expandedRow"><span>1–9 · Listening</span><b>12</b></div>'+
@@ -718,16 +724,21 @@ function checkW2Fipi(btn){
 
 function openW2Reading(){
  w2ReadingIndex=0;w2WordIndex=0;
- openFullScreen('', '<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Reading ×6 + Quizlet-style vocabulary</h1></div><div class="w2Reading"><div class="w2TextCard"><h2 id="w2ReadTitle"></h2><p id="w2ReadText"></p><div class="w2ReadNav"><button type="button" onclick="moveW2Reading(-1)">←</button><b id="w2ReadCount"></b><button type="button" onclick="moveW2Reading(1)">→</button></div></div><div class="w2VocabCard"><div id="w2WordCard"></div></div></div></div>',renderW2Reading);
+ const tabs=w2Readings.map((r,i)=>'<button type="button" data-ri="'+i+'" onclick="selectW2Reading('+i+')"><b>TEXT '+(i+1)+'</b><span>'+r.title+'</span></button>').join('');
+ openFullScreen('', '<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Reading Lab · 6 texts + Quizlet vocabulary</h1></div><div class="w2ReadTabs" id="w2ReadTabs">'+tabs+'</div><div class="w2Reading"><div class="w2TextCard"><h2 id="w2ReadTitle"></h2><p id="w2ReadText"></p><div class="w2ReadNav"><button type="button" onclick="moveW2Reading(-1)">← PREVIOUS</button><b id="w2ReadCount"></b><button type="button" onclick="moveW2Reading(1)">NEXT →</button></div></div><div class="w2VocabCard"><div id="w2WordCard"></div></div></div></div>',renderW2Reading);
 }
+function selectW2Reading(i){w2ReadingIndex=i;w2WordIndex=0;renderW2Reading()}
 function renderW2Reading(){
  const r=w2Readings[w2ReadingIndex];
- document.getElementById('w2ReadTitle').textContent=r.title;
- document.getElementById('w2ReadText').textContent=r.text;
- document.getElementById('w2ReadCount').textContent=(w2ReadingIndex+1)+' / '+w2Readings.length;
+ const title=document.getElementById('w2ReadTitle'),text=document.getElementById('w2ReadText'),count=document.getElementById('w2ReadCount');
+ if(!title||!text||!count)return;
+ title.textContent=r.title;
+ text.textContent=r.text;
+ count.textContent='TEXT '+(w2ReadingIndex+1)+' / '+w2Readings.length;
+ document.querySelectorAll('#w2ReadTabs button').forEach((b,i)=>b.classList.toggle('active',i===w2ReadingIndex));
  w2WordIndex=0;renderW2Word();
 }
-function moveW2Reading(d){w2ReadingIndex=(w2ReadingIndex+d+w2Readings.length)%w2Readings.length;renderW2Reading()}
+function moveW2Reading(d){w2ReadingIndex=(w2ReadingIndex+d+w2Readings.length)%w2Readings.length;w2WordIndex=0;renderW2Reading()}
 function renderW2Word(){
  const root=document.getElementById('w2WordCard'),arr=w2Readings[w2ReadingIndex].words,x=arr[w2WordIndex];
  root.innerHTML='<div class="qCard"><div class="qCardIn"><div class="qFace qFront"><button class="qAudio" type="button">▶</button><b>'+x[0]+'</b><span class="qHint">нажми — перевод</span></div><div class="qFace qBack"><b>'+x[1]+'</b><span class="qHint">нажми — слово</span></div></div></div><div class="qNav"><button type="button" onclick="moveW2Word(-1)">←</button><div class="qCount">'+(w2WordIndex+1)+' / '+arr.length+'</div><button type="button" onclick="moveW2Word(1)">→</button></div>';
