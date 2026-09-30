@@ -178,6 +178,27 @@
 <aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
 <main class="main"><section id="weekView" class="content on"></section><section id="examView" class="content"></section><section id="trainerView" class="content"></section></main>
 <script>
+
+const ARINA_DB_URL='https://lzxcmrlubhjfdhtqvqzt.supabase.co';
+const ARINA_DB_KEY='sb_publishable_PmyZRwzWne8lqprej4XJQA_XiujtjEI';
+async function saveArinaHomework(payload){
+ const r=await fetch(ARINA_DB_URL+'/rest/v1/rpc/submit_arina_homework',{
+  method:'POST',
+  headers:{'apikey':ARINA_DB_KEY,'Authorization':'Bearer '+ARINA_DB_KEY,'Content-Type':'application/json'},
+  body:JSON.stringify({
+   p_test_id:payload.test_id,
+   p_test_title:payload.test_title,
+   p_score:payload.score,
+   p_max_score:payload.max_score,
+   p_answers:payload.answers||{},
+   p_details:payload.details||[]
+  })
+ });
+ if(!r.ok) throw new Error('submit_failed');
+ const data=await r.json();
+ return Array.isArray(data)?data[0]:data;
+}
+
 const weeks=[
 {d:'21–27 Sep',g:'Различать 4 времени группы Present и начать системное повторение irregular verbs.',r:'80%+ в смешанном тесте Present; 20 irregular verbs без подсказки.',l:[
 ['Present Tenses: система 4 времён','Сравнить Present Simple / Continuous / Perfect / Perfect Continuous; составить таблицу meaning → form → marker; разобрать 12 контекстов; выучить 20 irregular verbs.','Тест 12 вопросов на 4 Present forms; 8 трансформаций; восстановить V2/V3 20 глаголов; написать 8 своих предложений (по 2 на каждое время).','quiz'],
@@ -316,14 +337,26 @@ function showFinalSubmit(box){
  const stage=box.querySelector('.wwStage');
  stage.innerHTML='<div class="wwQ"><p><b>25 / 25</b></p><p>Все ответы сохранены. После отправки изменить их или пройти тест повторно нельзя.</p><button class="action" type="button" onclick="submitStudentTest(this)">SUBMIT</button><div class="submitStatus"></div></div>';
 }
-function submitStudentTest(btn){
- const box=btn.closest('.studentTest'),submitKey=box.dataset.submitkey;
+async function submitStudentTest(btn){
+ const box=btn.closest('.studentTest'),submitKey=box.dataset.submitkey,status=box.querySelector('.submitStatus');
  if(localStorage.getItem('submitted-'+submitKey)){btn.disabled=true;btn.textContent='Уже отправлено';return}
- let good=0;box._items.forEach((it,i)=>{if(box._answers[i]===+it.q[2])good++});
- const stamp=new Date().toLocaleString('ru-RU'),code=(submitKey+'-'+good+'-'+box._items.length).toUpperCase();
- localStorage.setItem('submitted-'+submitKey,JSON.stringify({title:box.dataset.title,score:good,total:box._items.length,date:stamp,code:code,answers:box._answers}));
- btn.disabled=true;btn.textContent='Отправлено';
- box.querySelector('.submitStatus').textContent='Результат отправлен учителю. Повторная попытка заблокирована.';
+ let good=0;
+ const details=box._items.map((it,i)=>{
+  const chosen=box._answers[i],correct=+it.q[2];
+  if(chosen===correct)good++;
+  return {question:it.q[0],chosen_index:chosen,chosen:it.q[1][chosen]??'',correct_index:correct,correct:it.q[1][correct]??'',is_correct:chosen===correct};
+ });
+ btn.disabled=true;btn.textContent='Отправка...';status.textContent='Сохраняем результат.';
+ try{
+  const saved=await saveArinaHomework({test_id:submitKey,test_title:box.dataset.title||'Homework',score:good,max_score:box._items.length,answers:box._answers,details});
+  const stamp=new Date().toLocaleString('ru-RU');
+  localStorage.setItem('submitted-'+submitKey,JSON.stringify({title:box.dataset.title,score:good,total:box._items.length,date:stamp,code:saved?.code||'',answers:box._answers}));
+  btn.textContent='Отправлено';
+  status.textContent='Результат отправлен учителю. Повторная попытка заблокирована.';
+ }catch(e){
+  btn.disabled=false;btn.textContent='SUBMIT';
+  status.textContent='Не удалось отправить. Проверь интернет и нажми SUBMIT ещё раз.';
+ }
 }
 function showWordwall(box,key){
  const stage=box.querySelector('.wwStage'),item=box._items[box._pos];
@@ -486,15 +519,34 @@ function lessonStarter(w,i){
 function submitBox(key,title){
  return '<div class="submitBox" data-submit="'+key+'"><b>ОТПРАВИТЬ РЕЗУЛЬТАТ УЧИТЕЛЮ</b><p>После отправки ответы блокируются. Исправить или пройти тест повторно нельзя.</p><button class="action submitOnce" type="button" onclick="submitOnce(this,\''+key+'\',\''+title+'\')">Отправить результат</button><div class="submitStatus"></div></div>';
 }
-function submitOnce(btn,key,title){
+function collectSubmitDetails(box){
+ const answers={},details=[];
+ box.querySelectorAll('.quizSet .q').forEach((q,i)=>{
+  const s=q.querySelector('input:checked');
+  const labels=[...q.querySelectorAll('.opt')].map(x=>x.textContent.trim());
+  const correct=+q.dataset.answer,chosen=s?+s.value:null;
+  answers['q'+(i+1)]=chosen;
+  details.push({question:(q.querySelector('p')?.textContent||'').trim(),chosen_index:chosen,chosen:chosen===null?'':(labels[chosen]||''),correct_index:correct,correct:labels[correct]||'',is_correct:chosen===correct});
+ });
+ return {answers,details};
+}
+async function submitOnce(btn,key,title){
  const box=btn.closest('.lessonbody'),wrap=btn.closest('.submitBox'),sets=box.querySelectorAll('.quizSet');let total=0,good=0,answered=0;
  sets.forEach(set=>set.querySelectorAll('.q').forEach(q=>{total++;const s=q.querySelector('input:checked');if(s){answered++;if(+s.value===+q.dataset.answer)good++}}));
  if(total&&answered<total){wrap.querySelector('.submitStatus').textContent='Сначала ответь на все '+total+' вопросов.';return}
  if(localStorage.getItem('submitted-'+key)){lockSubmitted(box,key);return}
- const stamp=new Date().toLocaleString('ru-RU'),code=(key+'-'+good+'-'+total).toUpperCase();
- localStorage.setItem('submitted-'+key,JSON.stringify({title:title,score:good,total:total,date:stamp,code:code}));
- lockSubmitted(box,key);
- wrap.querySelector('.submitStatus').innerHTML='Отправлено · '+good+' / '+total+' · код: <b>'+code+'</b><br>Покажи или пришли этот короткий код учителю.';
+ const payload=collectSubmitDetails(box);
+ btn.disabled=true;btn.textContent='Отправка...';
+ try{
+  const saved=await saveArinaHomework({test_id:key,test_title:title,score:good,max_score:total,answers:payload.answers,details:payload.details});
+  const stamp=new Date().toLocaleString('ru-RU');
+  localStorage.setItem('submitted-'+key,JSON.stringify({title:title,score:good,total:total,date:stamp,code:saved?.code||''}));
+  lockSubmitted(box,key);
+  wrap.querySelector('.submitStatus').innerHTML='Отправлено · '+good+' / '+total+'<br>Ответы сохранены у учителя.';
+ }catch(e){
+  btn.disabled=false;btn.textContent='Отправить результат';
+  wrap.querySelector('.submitStatus').textContent='Не удалось отправить. Проверь интернет и попробуй ещё раз.';
+ }
 }
 function lockSubmitted(box,key){
  const raw=localStorage.getItem('submitted-'+key);if(!raw)return;const d=JSON.parse(raw);
