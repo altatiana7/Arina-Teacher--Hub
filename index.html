@@ -335,7 +335,7 @@ function showStudentQuestion(box){
 }
 function showFinalSubmit(box){
  const stage=box.querySelector('.wwStage');
- stage.innerHTML='<div class="wwQ"><p><b>25 / 25</b></p><p>Все ответы сохранены. После отправки изменить их или пройти тест повторно нельзя.</p><button class="action" type="button" onclick="submitStudentTest(this)">SUBMIT</button><div class="submitStatus"></div></div>';
+ stage.innerHTML='<div class="wwQ"><p><b>'+box._items.length+' / '+box._items.length+' ANSWERS READY</b></p><p>Ответы готовы к отправке учителю. После отправки повторная попытка будет заблокирована.</p><button class="action" type="button" onclick="submitStudentTest(this)">SUBMIT HOMEWORK</button><div class="submitStatus"></div></div>';
 }
 async function submitStudentTest(btn){
  const box=btn.closest('.studentTest'),submitKey=box.dataset.submitkey,status=box.querySelector('.submitStatus');
@@ -354,7 +354,7 @@ async function submitStudentTest(btn){
   btn.textContent='Отправлено';
   status.textContent='Результат отправлен учителю. Повторная попытка заблокирована.';
  }catch(e){
-  btn.disabled=false;btn.textContent='SUBMIT';
+  btn.disabled=false;btn.textContent='SUBMIT HOMEWORK';
   status.textContent='Не удалось отправить. Проверь интернет и нажми SUBMIT ещё раз.';
  }
 }
