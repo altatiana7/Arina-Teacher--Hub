@@ -173,9 +173,52 @@
 .w2ReadTabs button span{display:block;font-size:9px;font-weight:700;opacity:.8;margin-top:2px}
 @media(max-width:700px){.w2ReadTabs{grid-template-columns:1fr 1fr}}
 </style><meta name="theme-color" content="#ffffff">
-</head><body>
+
+<style id="arinaRussiaStyles">
+.arinaTopicsHead{margin-top:14px!important;color:#0039A6!important}
+.arinaTopicButtons{display:grid;gap:4px}
+.arinaTopicBtn{width:100%;border:1px solid #b7c9e8;border-left:4px solid #D52B1E;background:#fff;color:#0039A6;border-radius:8px;padding:8px 9px;text-align:left;font-size:11px;font-weight:900}
+.arinaTopicBtn small{display:block;color:#64748b;font-size:8px;font-weight:700;margin-top:2px;text-transform:none}
+.arinaTopicBtn.active{background:#edf3ff}
+.arinaTopicBtn.locked{opacity:.38;border-left-color:#94a3b8;color:#64748b}
+#arinaRussiaPanel{position:fixed;z-index:110;inset:38px 0 0 var(--side);background:#f7f9fc;display:none;overflow:hidden}
+#arinaRussiaPanel.open{display:grid;grid-template-rows:auto minmax(0,1fr)}
+.russiaTop{display:flex;align-items:center;gap:10px;padding:8px 14px;background:#fff;border-bottom:1px solid var(--line)}
+.russiaBack{border:0;border-radius:8px;background:#0039A6;color:#fff;padding:8px 11px;font-size:10px;font-weight:900}
+.russiaTitle{min-width:0}.russiaTitle b{display:block;color:#0039A6;font-size:14px}.russiaTitle small{color:#64748b;font-size:9px}
+.russiaTabs{margin-left:auto;display:flex;gap:5px;overflow:auto}
+.russiaTabs button{white-space:nowrap;border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:7px 9px;font-size:9px;font-weight:900}
+.russiaTabs button.active{background:#0039A6;color:#fff}
+.russiaStage{min-height:0;overflow:auto;padding:12px 16px 24px}
+.russiaPage{display:none;max-width:1320px;margin:0 auto}.russiaPage.active{display:block}
+.russiaHero{background:#fff;border:1px solid var(--line);border-left:6px solid #D52B1E;border-radius:14px;padding:18px 20px;margin-bottom:10px}
+.russiaHero .ey{font-size:10px;font-weight:900;letter-spacing:.13em;color:#D52B1E}.russiaHero h2{margin:4px 0 6px;color:#0039A6;font-size:25px}.russiaHero p{margin:0;color:#64748b;font-size:13px;line-height:1.45}
+.russiaGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.russiaCard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px}.russiaCard h3{margin:0 0 5px;color:#0039A6;font-size:14px}.russiaCard p{margin:0;color:#26364a;font-size:12px;line-height:1.45}
+.russiaCard strong{color:#D52B1E}.russiaSub{font-size:11px;color:#64748b;line-height:1.45}
+.russiaVocabWrap{max-width:700px;margin:0 auto}.russiaFlip{height:330px;perspective:1100px;cursor:pointer}.russiaFlipIn{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .35s}.russiaFlip.flip .russiaFlipIn{transform:rotateY(180deg)}
+.russiaFace{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;box-shadow:0 8px 24px #0039A610}
+.russiaFace.back{transform:rotateY(180deg);background:#edf3ff}.russiaFace b{font-size:34px;color:#0039A6}.russiaFace.back b{font-size:28px;color:#D52B1E}.russiaFace p{max-width:580px;color:#334155;font-size:15px;line-height:1.45}
+.russiaSpeakWord{position:absolute;right:14px;top:14px;border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:7px 9px;font-size:9px;font-weight:900}
+.russiaNav{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:12px}.russiaNav button,.russiaAction{border:0;background:#0039A6;color:#fff;border-radius:8px;padding:9px 12px;font-size:10px;font-weight:900}.russiaNav span{font-size:11px;color:#64748b;font-weight:900}
+.readingShell{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.55fr);gap:10px;min-height:calc(100vh - 154px)}
+.readingTextPane,.readingAnswerPane{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;min-height:0;overflow:auto}
+.readingTextPane h3{color:#0039A6;margin:0 0 8px;font-size:16px}.readingHeadings{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:9px}.readingHeadings div{border:1px solid #e2e8f0;border-radius:7px;padding:6px;font-size:10px;color:#334155}
+.readingTextPane p{font-size:13px;line-height:1.46;color:#111;margin:0 0 8px}.readingTextPane p b{color:#D52B1E}
+.readingAnswers{display:grid;gap:6px}.readingRow{display:grid;grid-template-columns:28px 1fr;gap:7px;align-items:center}.readingRow b{color:#D52B1E}.readingRow select{width:100%;border:1px solid #b7c9e8;border-radius:8px;padding:8px;background:#fff;color:#0039A6;font-weight:900}
+.readingResult{min-height:22px;margin-top:8px;font-size:12px;font-weight:900;color:#0039A6}.readingPager{display:flex;gap:7px;margin-bottom:8px}.readingPager button{flex:1;border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:8px;font-size:10px;font-weight:900}.readingPager button.active{background:#0039A6;color:#fff}
+.oralOne{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:10px}.oralText,.oralTools{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px}.oralText h3{margin:0 0 9px;color:#0039A6}.oralText p{font-size:18px;line-height:1.68;color:#111}.oralTimerBig{font-size:48px;font-weight:900;color:#D52B1E;text-align:center;margin:12px 0}.oralTools button{width:100%;border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:9px;padding:10px;margin:4px 0;font-size:10px;font-weight:900}.oralTools button.primary{background:#0039A6;color:#fff}
+.interviewGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.interviewCard{background:#fff;border:1px solid var(--line);border-top:5px solid #0039A6;border-radius:14px;padding:13px}.interviewCard h3{margin:0;color:#0039A6;font-size:17px}.interviewCard .meta{color:#64748b;font-size:10px;margin:3px 0 10px}
+.interviewQ{height:245px;perspective:900px}.interviewIn{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .35s}.interviewQ.flip .interviewIn{transform:rotateY(180deg)}
+.interviewFace{position:absolute;inset:0;backface-visibility:hidden;border:1px solid #d9e1ec;border-radius:12px;background:#f7f9fc;padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.interviewFace.back{transform:rotateY(180deg);background:#fff7f6}
+.interviewFace b{font-size:14px;color:#D52B1E}.interviewFace p{font-size:13px;line-height:1.5;color:#26364a}.interviewAudio{border:0;background:#0039A6;color:#fff;border-radius:10px;padding:13px 18px;font-weight:900;font-size:11px}.interviewCounter{font-size:10px;color:#64748b;margin-top:8px;font-weight:900}
+.interviewControls{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.interviewControls button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:8px 5px;font-size:9px;font-weight:900}.interviewControls button.primary{background:#0039A6;color:#fff}
+.interviewTimer{font-size:30px;font-weight:900;color:#D52B1E;text-align:center;margin-top:7px}
+.russiaNotice{border:1px solid #b7c9e8;border-left:5px solid #D52B1E;background:#fff;border-radius:10px;padding:10px 12px;font-size:11px;color:#475569;margin-bottom:9px}
+@media(max-width:1000px){.russiaGrid{grid-template-columns:1fr 1fr}.readingShell,.oralOne{grid-template-columns:1fr}.interviewGrid{grid-template-columns:1fr}.readingShell{min-height:0}}
+@media(max-width:800px){#arinaRussiaPanel{inset:48px 0 0 0}.russiaTop{align-items:flex-start;flex-wrap:wrap}.russiaTabs{width:100%;margin-left:0}.russiaStage{padding:9px}.russiaGrid{grid-template-columns:1fr}.readingHeadings{grid-template-columns:1fr}.russiaFlip{height:290px}}
+</style></head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
-<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
+<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
 <main class="main"><section id="weekView" class="content on"></section><section id="examView" class="content"></section><section id="trainerView" class="content"></section></main>
 <script>
 
@@ -845,4 +888,157 @@ function renderExam(id){document.body.classList.remove('fullWeek');document.getE
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(0);
 </script>
 <!-- pages-republish-20260928-2251 -->
-</body></html>
+
+<script id="arinaRussiaScript">
+(function(){
+const RUSSIA_VOCAB=[
+ ['cultural heritage','культурное наследие','Historic buildings, traditions and works of art form a country’s cultural heritage.'],
+ ['diverse regions','разнообразные регионы','Russia has diverse regions with different climates, landscapes and traditions.'],
+ ['natural resources','природные ресурсы','The country is rich in natural resources.'],
+ ['historic landmark','историческая достопримечательность','The Kremlin is one of the best-known historic landmarks in Moscow.'],
+ ['preserve','сохранять, беречь','Museums and reserves help preserve cultural and natural heritage.'],
+ ['remote area','отдалённый район','Some remote areas are difficult to reach but attract adventurous travellers.'],
+ ['domestic tourism','внутренний туризм','Domestic tourism encourages people to explore their own country.'],
+ ['accommodation','размещение, жильё','Travellers usually compare accommodation before a trip.'],
+ ['overwhelmed','растерянный, перегруженный впечатлениями','A traveller may feel overwhelmed on the first day in a new city.'],
+ ['artificial habitat','искусственная среда обитания','Wild animals may behave differently in an artificial habitat.'],
+ ['conservation','охрана природы','Conservation projects protect endangered species and natural areas.'],
+ ['scientific breakthrough','научный прорыв','Space exploration has produced many important scientific breakthroughs.'],
+ ['distinguished','выдающийся, известный','The gallery contains portraits of distinguished writers, scientists and artists.'],
+ ['by-product','побочный результат','Some discoveries appear as a by-product of another experiment.'],
+ ['volunteer project','волонтёрский проект','Teenagers can join a volunteer project to help their local community.'],
+ ['national identity','национальная идентичность','History and traditions can shape a person’s sense of national identity.']
+];
+const READINGS=[
+ {title:'Text 1 · Travel, nature and responsible tourism',heads:[
+ 'Perfect for a quiet holiday.','Land of nature wonders.','Bad for animals.','A visit to the zoo.','Perfect for an active holiday.','Difficult start.','New perspectives.','New rules to follow.'
+ ],parts:[
+ ['A','The mountains of Scotland, known as the Highlands, are a wild and beautiful part of Europe. A golden eagle flies over the mountains, deer walk through quiet forests, and salmon and trout swim in clean rivers. The deep waters of Loch Ness are also famous for stories about a mysterious monster.'],
+ ['B','Tresco is a beautiful island with no cars, crowds or noise — only flowers, birds, sandy beaches and gardens. Visitors can stay in comfortable accommodation, enjoy good food and use indoor leisure facilities.'],
+ ['C','A camel and wildlife safari in Kenya combines traditional travel with modern comfort. Travellers can explore the countryside on camelback, sleep under the stars or use safari vehicles if they prefer a more comfortable journey.'],
+ ['D','Arrival can be the hardest part of a trip. A traveller may be tired, everything seems new, and there are immediate practical problems: finding an affordable place to sleep, getting food and understanding how to travel around the city.'],
+ ['E','Zoos do not always have enough money or space to reproduce the natural habitats of every species. Animals may live in an artificial environment and remain isolated from conditions they would normally experience in the wild.'],
+ ['F','A long-term London Zoo project was designed to improve conditions for animals and support endangered species. It also aims to inform visitors about conservation and redesign parts of the zoo.'],
+ ['G','Leave-no-trace camping is a way of travelling through wilderness while leaving as little impact as possible. Its basic principle is simple: take your rubbish away and leave the place as you found it.']
+ ],key:[2,1,5,6,3,4,8]},
+ {title:'Text 2 · The Ashmolean Museum',heads:[
+ 'Reason for extension.','Presents begin to enrich the collection.','New collections for the new building.','New field for the old museum.','Shift towards history.','First famous exhibits.','One on the basis of two.','Location of the museum.'
+ ],parts:[
+ ['A','The present Ashmolean Museum was created in 1908 by combining two old Oxford institutions: the University Art Collection and the original Ashmolean Museum.'],
+ ['B','The collection began modestly in the 1620s with a few portraits and curiosities. Later it gained notable coins, medals and unusual objects, including Guy Fawkes’ lantern.'],
+ ['C','During the 1660s and 1670s the collection grew rapidly. It first focused on portraits of important contemporaries, but then began to include people from the past: founders, scientists, soldiers, monarchs, writers and artists.'],
+ ['D','In the eighteenth century painters donated self-portraits, landscapes and historical scenes. Other former members of the university gave collections of Old Masters, and the gallery became an important place for visitors.'],
+ ['E','A large collection of ancient Greek and Roman statues arrived in 1755. The marble figures were too heavy for the upstairs gallery, so the need for a new building became urgent.'],
+ ['F','Before the new museum was completed, important drawings by Raphael and Michelangelo were purchased for its galleries. The new museum also attracted further gifts of paintings.'],
+ ['G','In the 1850s Oxford created a separate Natural History Museum. After the natural-history specimens moved there, the Ashmolean developed a major new role in archaeology.']
+ ],key:[7,6,5,2,1,3,4]},
+ {title:'Text 3 · Accidental discoveries',heads:[
+ 'Changing the face of the planet.','No effort, just luck!','Have the right neighbour!','The unexpected side of a failure.','Good for war, good for peace.','No sense of humour.','Messy can be good!','True story and myth.'
+ ],parts:[
+ ['A','Important inventions often require years of hard work, but some discoveries are made by accident — as a by-product of another project or while someone is doing something unrelated.'],
+ ['B','Christopher Columbus was trying to find a shorter route to India when he reached a new continent. The discovery changed Europeans’ understanding of the world and even affected their cuisine.'],
+ ['C','A famous story links Isaac Newton’s thinking about gravity with an apple falling from a tree. His biographers recorded the event, while the later story about an apple hitting him on the head became a popular myth.'],
+ ['D','Alexander Fleming was known for being untidy. After leaving bacteria samples in his lab, he returned to find that mould had killed the bacteria in one cup. That observation led to penicillin.'],
+ ['E','During the Second World War Percy Spencer worked with military radar. He noticed that microwave signals had melted a chocolate bar in his pocket, and after the war this discovery helped him create a microwave oven.'],
+ ['F','Harry Coover tried to create transparent plastic for gun sights, but produced a substance that was far too sticky. Years later he realised the failed formula could be used as a powerful glue.'],
+ ['G','At the 1904 World Fair an ice-cream seller ran out of paper cups. A nearby waffle seller helped by rolling waffles into cones, and the improvised solution became a new way to serve ice cream.']
+ ],key:[2,1,8,7,5,4,3]}
+];
+const ORAL_READ=[
+ {title:'Lake Baikal',text:'Lake Baikal is one of Russia’s best-known natural landmarks. It is located in Siberia and is famous for its exceptional depth and clear water. The lake contains a remarkable variety of plants and animals, including species that cannot be found anywhere else in the world. Baikal attracts visitors in every season. In summer, travellers come for hiking, boat trips and wildlife watching. In winter, the frozen surface creates unusual landscapes and allows visitors to experience a very different side of the region. Protecting the lake is an important environmental task because tourism, pollution and climate change can affect its fragile ecosystem.'},
+ {title:'Saint Petersburg',text:'Saint Petersburg was founded by Peter the Great in the early eighteenth century. The city stands on the Neva River and is known for its canals, bridges and impressive architecture. Many visitors come to see the Hermitage Museum, Palace Square and the Peter and Paul Fortress. The city is also famous for the White Nights, a period in early summer when the sky remains light for most of the night. Saint Petersburg has played an important role in Russian history and culture, and today it remains one of the country’s major tourist destinations.'},
+ {title:'The Golden Ring',text:'The Golden Ring is a popular tourist route through a group of historic towns to the north-east of Moscow. Places such as Suzdal, Vladimir and Sergiev Posad are known for old churches, monasteries and traditional architecture. Travelling around these towns gives visitors a chance to see a quieter side of Russia and learn how people lived in earlier centuries. Many historic buildings have been preserved, while local museums explain regional traditions and crafts. The route is especially attractive to travellers who are interested in history, photography and cultural heritage.'}
+];
+const INTERVIEWS={
+ shopping:{title:'Shopping',questions:[
+  'How often do you go shopping and what do you usually buy?',
+  'Do you prefer shopping online or in physical shops, and why?',
+  'Who do you usually go shopping with?',
+  'How do you decide whether something is worth buying?',
+  'What would you change about shopping facilities in your town?'
+ ],answers:[
+  'I go shopping once or twice a week, mostly for everyday things and clothes. I usually make a short list so that I do not buy unnecessary items.',
+  'I prefer physical shops for clothes because I can try things on. However, online shopping is useful when I already know exactly what I need.',
+  'I usually go shopping with a friend or a family member. It is useful to get another opinion, especially when I am choosing clothes or presents.',
+  'I compare the price and quality and think about how often I will use the item. If I do not really need it, I usually decide not to buy it.',
+  'I would like to have more affordable shops and better public transport to shopping areas. It would also be useful to have more places where people can recycle packaging.'
+ ]},
+ schools:{title:'Schools',questions:[
+  'What is your school like?',
+  'Which school subject do you consider the most useful, and why?',
+  'Do you think homework is important for students?',
+  'What qualities make a good teacher?',
+  'What would you change in your school if you could?'
+ ],answers:[
+  'My school is quite large and offers a wide range of subjects. I spend a lot of time there, so I think a friendly atmosphere is very important.',
+  'I think English is one of the most useful subjects because it helps people study, travel and communicate internationally. It also gives access to a lot of information online.',
+  'Yes, homework can be useful because it helps students practise independently. However, the amount should be reasonable and the tasks should have a clear purpose.',
+  'A good teacher should know the subject well and explain difficult ideas clearly. I also think patience and the ability to motivate students are important.',
+  'I would create more practical projects and flexible study spaces. I would also give students more opportunities to choose activities connected with their interests.'
+ ]},
+ sport:{title:'Sport',questions:[
+  'What sports are popular among teenagers in your country?',
+  'Do you do any sport or physical activity regularly?',
+  'Why is physical activity important for young people?',
+  'Do you prefer team sports or individual sports, and why?',
+  'What sporting event would you like to watch live?'
+ ],answers:[
+  'Football, volleyball, swimming and fitness activities are popular among teenagers. Many young people also enjoy cycling and going to the gym.',
+  'I try to stay active several times a week. Even when I do not have time for a full workout, I can walk more or do a short exercise session at home.',
+  'Physical activity improves health, energy and concentration. It can also reduce stress, which is especially useful when students are preparing for exams.',
+  'I prefer individual activities because I can choose my own pace and schedule. Still, team sports are good for communication and learning to cooperate.',
+  'I would like to watch a major international figure-skating or football event live. The atmosphere in a stadium or arena must be very different from watching it on a screen.'
+ ]}
+};
+let vocabIndex=0,readingIndex=0,oralIndex=0;
+const interviewState={shopping:{i:0,t:40,timer:null},schools:{i:0,t:40,timer:null},sport:{i:0,t:40,timer:null}};
+
+function ensurePanel(){
+ let p=document.getElementById('arinaRussiaPanel');
+ if(p)return p;
+ p=document.createElement('section');p.id='arinaRussiaPanel';
+ p.innerHTML='<div class="russiaTop"><button class="russiaBack" type="button" onclick="closeArinaRussia()">← ARINA HUB</button><div class="russiaTitle"><b>TOPIC 01 · RUSSIA</b><small>EGE topic block · student version</small></div><div class="russiaTabs"><button data-rus-tab="overview" class="active">OVERVIEW</button><button data-rus-tab="vocab">VOCABULARY</button><button data-rus-tab="reading">READING 10</button><button data-rus-tab="oral1">ORAL TASK 1</button><button data-rus-tab="oral3">ORAL TASK 3</button></div></div><div class="russiaStage" id="russiaStage"></div>';
+ document.body.appendChild(p);
+ p.querySelectorAll('[data-rus-tab]').forEach(b=>b.addEventListener('click',()=>renderRussiaTab(b.dataset.rusTab)));
+ return p;
+}
+window.openArinaRussia=function(){ensurePanel().classList.add('open');renderRussiaTab('overview');document.body.style.overflow='hidden';}
+window.closeArinaRussia=function(){const p=document.getElementById('arinaRussiaPanel');if(p)p.classList.remove('open');document.body.style.overflow='';Object.values(interviewState).forEach(s=>{if(s.timer)clearInterval(s.timer);s.timer=null});}
+function setTab(tab){document.querySelectorAll('[data-rus-tab]').forEach(b=>b.classList.toggle('active',b.dataset.rusTab===tab));}
+function renderRussiaTab(tab){setTab(tab);const stage=document.getElementById('russiaStage');if(!stage)return;
+ if(tab==='overview')stage.innerHTML=overviewHTML();
+ if(tab==='vocab')stage.innerHTML=vocabHTML();
+ if(tab==='reading')stage.innerHTML=readingHTML();
+ if(tab==='oral1')stage.innerHTML=oral1HTML();
+ if(tab==='oral3')stage.innerHTML=oral3HTML();
+}
+function overviewHTML(){return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">TOPICS · RUSSIA</div><h2>Russia, Traditions & Culture</h2><p>Use this block to build precise EGE answers: facts first, then useful language, reading, pronunciation and interview practice.</p></div><div class="russiaGrid">'+[
+ ['Geography','Russia stretches across Eastern Europe and northern Asia. Its landscapes range from Arctic areas and taiga to mountains, steppes and subtropical coastline.'],
+ ['Nature','Lake Baikal, the Altai Mountains, Kamchatka and large forest areas are useful concrete examples for answers about nature and tourism.'],
+ ['Cities','Moscow and Saint Petersburg are major cultural centres; historic towns of the Golden Ring show another side of the country.'],
+ ['Culture','Russian literature, music, theatre, museums, traditional holidays and regional customs provide specific examples instead of general statements.'],
+ ['Science','Space exploration is a strong topic example. Yuri Gagarin became the first human in space, while Russian science also has a long tradition in mathematics, chemistry and engineering.'],
+ ['Tourism','A strong answer can mention cultural tourism, domestic tourism, nature trips and practical issues such as transport, climate and accommodation.'],
+ ['Education','School, state exams, universities, vocational routes and extracurricular activities can be used in Task 3 answers about education.'],
+ ['Answer rule','Give 2–3 complete sentences: answer the question directly, add one reason or example, then stop. Avoid memorised introductions that do not answer the question.'],
+ ['Progress','Complete Vocabulary, three Reading 10 sets, Oral Task 1 and the three Task 3 interview cards. Results from checked Reading sets are sent to the teacher.']
+ ].map(x=>'<article class="russiaCard"><h3>'+x[0]+'</h3><p>'+x[1]+'</p></article>').join('')+'</div></section>'}
+function vocabHTML(){const v=RUSSIA_VOCAB[vocabIndex];return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">ACTIVE VOCABULARY</div><h2>Russia · vocabulary cards</h2><p>Audio is available only on the front side. Flip the card for meaning and context.</p></div><div class="russiaVocabWrap"><div class="russiaFlip" id="russiaFlip" onclick="this.classList.toggle(\'flip\')"><div class="russiaFlipIn"><div class="russiaFace"><button class="russiaSpeakWord" type="button" onclick="event.stopPropagation();speakRussiaWord()">PLAY WORD</button><b>'+v[0]+'</b><p>Tap the card to see the meaning.</p></div><div class="russiaFace back"><b>'+v[1]+'</b><p>'+v[2]+'</p></div></div></div><div class="russiaNav"><button type="button" onclick="moveRussiaVocab(-1)">← BACK</button><span>'+(vocabIndex+1)+' / '+RUSSIA_VOCAB.length+'</span><button type="button" onclick="moveRussiaVocab(1)">NEXT →</button></div></div></section>'}
+window.moveRussiaVocab=function(d){vocabIndex=(vocabIndex+d+RUSSIA_VOCAB.length)%RUSSIA_VOCAB.length;renderRussiaTab('vocab')}
+window.speakRussiaWord=function(){speakUK(RUSSIA_VOCAB[vocabIndex][0],.82)}
+function readingHTML(){const r=READINGS[readingIndex];return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">EGE · READING 10</div><h2>'+r.title+'</h2><p>Match texts A–G with headings 1–8. One heading is extra. CHECK shows only the score; the answer key is not displayed.</p></div><div class="readingPager">'+READINGS.map((x,i)=>'<button class="'+(i===readingIndex?'active':'')+'" onclick="setRussiaReading('+i+')">TEXT '+(i+1)+'</button>').join('')+'</div><div class="readingShell"><div class="readingTextPane"><div class="readingHeadings">'+r.heads.map((h,i)=>'<div><b>'+(i+1)+'.</b> '+h+'</div>').join('')+'</div>'+r.parts.map(x=>'<p><b>'+x[0]+'.</b> '+x[1]+'</p>').join('')+'</div><div class="readingAnswerPane"><h3 style="margin:0 0 8px;color:#0039A6">Your answers</h3><div class="readingAnswers">'+r.parts.map((x,i)=>'<label class="readingRow"><b>'+x[0]+'</b><select data-read="'+i+'"><option value="">—</option>'+r.heads.map((h,n)=>'<option value="'+(n+1)+'">'+(n+1)+' · '+h+'</option>').join('')+'</select></label>').join('')+'</div><button class="russiaAction" style="width:100%;margin-top:10px" type="button" onclick="checkRussiaReading()">CHECK</button><div class="readingResult" id="readingResult"></div><div class="russiaSub">Your detailed answer set is sent to the teacher. Correct headings are not revealed here.</div></div></div></section>'}
+window.setRussiaReading=function(i){readingIndex=i;renderRussiaTab('reading')}
+window.checkRussiaReading=async function(){const r=READINGS[readingIndex],sels=[...document.querySelectorAll('[data-read]')],vals=sels.map(x=>Number(x.value));const out=document.getElementById('readingResult');if(vals.some(x=>!x)){out.textContent='Complete A–G first.';return}let score=0;vals.forEach((x,i)=>{if(x===r.key[i])score++});out.textContent=score+' / 7 · saving…';try{if(typeof saveArinaHomework==='function'){await saveArinaHomework({test_id:'russia-reading10-'+(readingIndex+1),test_title:'Russia Topic · Reading 10 · Text '+(readingIndex+1),score:score,max_score:7,answers:Object.fromEntries(vals.map((v,i)=>[String.fromCharCode(65+i),v])),details:r.parts.map((p,i)=>({item:p[0],answer:vals[i],correct:vals[i]===r.key[i]}))});out.textContent=score+' / 7 · sent to teacher'}else out.textContent=score+' / 7'}catch(e){out.textContent=score+' / 7 · saved on this device';try{localStorage.setItem('arina_pending_russia_reading_'+readingIndex,JSON.stringify({score,vals,at:new Date().toISOString()}))}catch(_){}}}
+function oral1HTML(){const x=ORAL_READ[oralIndex];return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">ORAL PART · TASK 1</div><h2>Reading aloud</h2><p>Preparation: 1.5 minutes. Reading: up to 1.5 minutes. Focus on sense groups, stress and natural pauses.</p></div><div class="oralOne"><article class="oralText"><h3>'+x.title+'</h3><p>'+x.text+'</p></article><aside class="oralTools"><div class="russiaSub">TEXT '+(oralIndex+1)+' / '+ORAL_READ.length+'</div><div class="oralTimerBig" id="oral1Timer">01:30</div><button class="primary" type="button" onclick="startOral1Timer()">START 90 SEC</button><button type="button" onclick="speakUK(ORAL_READ[oralIndex].text,.78)">MODEL READING</button><button type="button" onclick="moveOral1(-1)">← PREVIOUS TEXT</button><button type="button" onclick="moveOral1(1)">NEXT TEXT →</button><div class="russiaSub" style="margin-top:8px">Do not imitate word by word. Listen for stress, pauses and linking, then read the text yourself.</div></aside></div></section>'}
+let oralTimer=null,oralLeft=90;
+window.moveOral1=function(d){if(oralTimer){clearInterval(oralTimer);oralTimer=null}oralIndex=(oralIndex+d+ORAL_READ.length)%ORAL_READ.length;renderRussiaTab('oral1')}
+window.startOral1Timer=function(){if(oralTimer)clearInterval(oralTimer);oralLeft=90;const el=document.getElementById('oral1Timer');const paint=()=>{if(el)el.textContent=String(Math.floor(oralLeft/60)).padStart(2,'0')+':'+String(oralLeft%60).padStart(2,'0')};paint();oralTimer=setInterval(()=>{oralLeft--;paint();if(oralLeft<=0){clearInterval(oralTimer);oralTimer=null}},1000)}
+function oral3HTML(){return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">ORAL PART · TASK 3</div><h2>Interview · 3 cards</h2><p>The question is never shown on screen. Listen, answer in 2–3 complete sentences, then flip the card to compare with a model answer.</p></div><div class="russiaNotice">Each card contains five interview questions. Use NEXT QUESTION only after answering. The reverse side shows a model answer for the current question, not a script of the audio.</div><div class="interviewGrid">'+['shopping','schools','sport'].map(k=>interviewCardHTML(k)).join('')+'</div></section>'}
+function interviewCardHTML(k){const d=INTERVIEWS[k],s=interviewState[k];return '<article class="interviewCard"><h3>'+d.title+'</h3><div class="meta">Task 3 · 5 questions · 40 sec each</div><div class="interviewQ" id="iq-'+k+'"><div class="interviewIn"><div class="interviewFace"><button class="interviewAudio" type="button" onclick="playInterview(\''+k+'\')">PLAY QUESTION</button><div class="interviewCounter">QUESTION '+(s.i+1)+' / 5</div><div class="interviewTimer" id="it-'+k+'">'+s.t+' sec</div></div><div class="interviewFace back"><b>MODEL ANSWER</b><p>'+d.answers[s.i]+'</p><div class="interviewCounter">QUESTION '+(s.i+1)+' / 5</div></div></div></div><div class="interviewControls"><button type="button" onclick="flipInterview(\''+k+'\')">FLIP / MODEL</button><button class="primary" type="button" onclick="nextInterview(\''+k+'\')">NEXT QUESTION →</button></div></article>'}
+window.playInterview=function(k){const s=interviewState[k];if(s.timer)clearInterval(s.timer);s.t=40;speakUK(INTERVIEWS[k].questions[s.i],.78);const el=document.getElementById('it-'+k);if(el)el.textContent='40 sec';s.timer=setInterval(()=>{s.t--;const e=document.getElementById('it-'+k);if(e)e.textContent=s.t+' sec';if(s.t<=0){clearInterval(s.timer);s.timer=null}},1000)}
+window.flipInterview=function(k){const q=document.getElementById('iq-'+k);if(q)q.classList.toggle('flip')}
+window.nextInterview=function(k){const s=interviewState[k];if(s.timer){clearInterval(s.timer);s.timer=null}s.i=(s.i+1)%INTERVIEWS[k].questions.length;s.t=40;renderRussiaTab('oral3')}
+window.speakUK=function(text,rate){if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=rate||.82;const vs=window.speechSynthesis.getVoices();const v=vs.find(x=>/^en-GB/i.test(x.lang))||vs.find(x=>/^en/i.test(x.lang));if(v)u.voice=v;window.speechSynthesis.speak(u)}
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('arinaRussiaPanel')?.classList.contains('open'))closeArinaRussia()});
+})();
+</script></body></html>
