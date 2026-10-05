@@ -997,7 +997,7 @@ function w3NextQuestion(id){
  if(no)no.textContent='QUESTION '+(w3Speak.i+1)+' / '+n;if(el){el.hidden=true;el.innerHTML=''}if(c)c.textContent='00:40';
 }
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261005h';
+const ARINA_BUILD='20261005i';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1663,7 +1663,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261005h -->
+<!-- build:20261005i -->
 
 <script id="arinaRussiaScript">
 (function(){
@@ -1773,32 +1773,20 @@ function ensurePanel(){
  let p=document.getElementById('arinaRussiaPanel');
  if(p)return p;
  p=document.createElement('section');p.id='arinaRussiaPanel';
- p.innerHTML='<div class="russiaTop"><button class="russiaBack" type="button" onclick="closeArinaRussia()">← ARINA HUB</button><div class="russiaTitle"><b>TOPIC 01 · RUSSIA</b><small>EGE topic block · student version</small></div><div class="russiaTabs"><button data-rus-tab="overview" class="active">OVERVIEW</button><button data-rus-tab="vocab">VOCABULARY</button><button data-rus-tab="reading">READING 10</button><button data-rus-tab="oral1">ORAL TASK 1</button><button data-rus-tab="oral3">ORAL TASK 3</button></div></div><div class="russiaStage" id="russiaStage"></div>';
+ p.innerHTML='<div class="russiaTop"><button class="russiaBack" type="button" onclick="closeArinaRussia()">← ARINA HUB</button><div class="russiaTitle"><b>TOPIC 01 · RUSSIA</b><small>EGE topic block · student version</small></div><div class="russiaTabs"><button data-rus-tab="vocab">VOCABULARY</button><button data-rus-tab="reading">READING 10</button><button data-rus-tab="oral1">ORAL TASK 1</button><button data-rus-tab="oral3">ORAL TASK 3</button></div></div><div class="russiaStage" id="russiaStage"></div>';
  document.body.appendChild(p);
  p.querySelectorAll('[data-rus-tab]').forEach(b=>b.addEventListener('click',()=>renderRussiaTab(b.dataset.rusTab)));
  return p;
 }
-window.openArinaRussia=function(){ensurePanel().classList.add('open');renderRussiaTab('overview');document.body.style.overflow='hidden';}
+window.openArinaRussia=function(){ensurePanel().classList.add('open');renderRussiaTab('vocab');document.body.style.overflow='hidden';}
 window.closeArinaRussia=function(){const p=document.getElementById('arinaRussiaPanel');if(p)p.classList.remove('open');document.body.style.overflow='';Object.values(interviewState).forEach(s=>{if(s.timer)clearInterval(s.timer);s.timer=null});}
 function setTab(tab){document.querySelectorAll('[data-rus-tab]').forEach(b=>b.classList.toggle('active',b.dataset.rusTab===tab));}
 function renderRussiaTab(tab){setTab(tab);const stage=document.getElementById('russiaStage');if(!stage)return;
- if(tab==='overview')stage.innerHTML=overviewHTML();
  if(tab==='vocab')stage.innerHTML=vocabHTML();
  if(tab==='reading')stage.innerHTML=readingHTML();
  if(tab==='oral1')stage.innerHTML=oral1HTML();
  if(tab==='oral3')stage.innerHTML=oral3HTML();
 }
-function overviewHTML(){return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">TOPICS · RUSSIA</div><h2>Russia, Traditions & Culture</h2><p>Use this block to build precise EGE answers: facts first, then useful language, reading, pronunciation and interview practice.</p></div><div class="russiaGrid">'+[
- ['Geography','Russia stretches across Eastern Europe and northern Asia. Its landscapes range from Arctic areas and taiga to mountains, steppes and subtropical coastline.'],
- ['Nature','Lake Baikal, the Altai Mountains, Kamchatka and large forest areas are useful concrete examples for answers about nature and tourism.'],
- ['Cities','Moscow and Saint Petersburg are major cultural centres; historic towns of the Golden Ring show another side of the country.'],
- ['Culture','Russian literature, music, theatre, museums, traditional holidays and regional customs provide specific examples instead of general statements.'],
- ['Science','Space exploration is a strong topic example. Yuri Gagarin became the first human in space, while Russian science also has a long tradition in mathematics, chemistry and engineering.'],
- ['Tourism','A strong answer can mention cultural tourism, domestic tourism, nature trips and practical issues such as transport, climate and accommodation.'],
- ['Education','School, state exams, universities, vocational routes and extracurricular activities can be used in Task 3 answers about education.'],
- ['Answer rule','Give 2–3 complete sentences: answer the question directly, add one reason or example, then stop. Avoid memorised introductions that do not answer the question.'],
- ['Progress','Complete Vocabulary, three Reading 10 sets, Oral Task 1 and the three Task 3 interview cards. Results from checked Reading sets are sent to the teacher.']
- ].map(x=>'<article class="russiaCard"><h3>'+x[0]+'</h3><p>'+x[1]+'</p></article>').join('')+'</div></section>'}
 function vocabHTML(){const v=RUSSIA_VOCAB[vocabIndex];return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">ACTIVE VOCABULARY</div><h2>Russia · vocabulary cards</h2><p>Audio is available only on the front side. Flip the card for meaning and context.</p></div><div class="russiaVocabWrap"><div class="russiaFlip" id="russiaFlip" onclick="this.classList.toggle(\'flip\')"><div class="russiaFlipIn"><div class="russiaFace"><button class="russiaSpeakWord" type="button" onclick="event.stopPropagation();speakRussiaWord()">PLAY WORD</button><b>'+v[0]+'</b><p>Tap the card to see the meaning.</p></div><div class="russiaFace back"><b>'+v[1]+'</b><p>'+v[2]+'</p></div></div></div><div class="russiaNav"><button type="button" onclick="moveRussiaVocab(-1)">← BACK</button><span>'+(vocabIndex+1)+' / '+RUSSIA_VOCAB.length+'</span><button type="button" onclick="moveRussiaVocab(1)">NEXT →</button></div></div></section>'}
 window.moveRussiaVocab=function(d){vocabIndex=(vocabIndex+d+RUSSIA_VOCAB.length)%RUSSIA_VOCAB.length;renderRussiaTab('vocab')}
 window.speakRussiaWord=function(){speakUK(RUSSIA_VOCAB[vocabIndex][0],.82)}
