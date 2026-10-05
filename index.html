@@ -1004,8 +1004,9 @@ function arinaCopyLink(btn){
  const link=arinaAssignLink(),done=()=>{btn.textContent='Ссылка скопирована — отправьте её Арине'};
  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(link).then(done,()=>prompt('Ссылка для Арины',link));else prompt('Ссылка для Арины',link);
 }
-function arinaIsDebt(id){for(let w=0;w<ACTIVE_WEEK;w++)for(let i=0;i<3;i++)if(lessonTaskIds(w,i).includes(id))return !w3Get(id).done&&!arinaAssigned().includes(id);return false}
-function arinaWeekLeft(w){let n=0;for(let i=0;i<3;i++)if(!(w===ACTIVE_WEEK&&i>ACTIVE_LESSON))n+=lessonTaskIds(w,i).filter(id=>!w3Get(id).done).length;return n}
+function lessonHomeIds(w,i){const L=ARINA_LESSONS[w+'-'+i];return L?L.parts.filter(p=>p[2]).flatMap(p=>p[1].filter(c=>c[0]==='task').map(c=>c[1])):[]}
+function arinaIsDebt(id){for(let w=0;w<ACTIVE_WEEK;w++)for(let i=0;i<3;i++)if(lessonHomeIds(w,i).includes(id))return !w3Get(id).done&&!arinaAssigned().includes(id);return false}
+function arinaWeekLeft(w){let n=0;for(let i=0;i<3;i++)if(!(w===ACTIVE_WEEK&&i>ACTIVE_LESSON))n+=lessonTaskIds(w,i).filter(id=>arinaIsDue(id)||arinaIsDebt(id)).length;return n}
 function plural(n){const a=n%10,b=n%100;return n+' '+(a===1&&b!==11?'задание':a>=2&&a<=4&&(b<10||b>=20)?'задания':'заданий')}
 function debtPanelHTML(){
  let rows='',total=0;
@@ -1190,7 +1191,7 @@ function w3NextQuestion(id){
  if(no)no.textContent='QUESTION '+(w3Speak.i+1)+' / '+n;if(el){el.hidden=true;el.innerHTML=''}if(c)c.textContent='00:40';
 }
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261005p';
+const ARINA_BUILD='20261005q';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1856,7 +1857,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261005p -->
+<!-- build:20261005q -->
 
 <script id="arinaRussiaScript">
 (function(){
