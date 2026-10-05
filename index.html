@@ -322,59 +322,77 @@
 .w3SpeakText span{font-size:14px;color:#475569}
 .w3Small{font-size:13px;color:#64748b;margin:14px 0 0}
 @media(max-width:800px){.side{z-index:120}.w3Head{flex-direction:column;align-items:flex-start}.plOpts{grid-template-columns:1fr}.plQ{font-size:19px}.plCard{padding:16px}.w3Gap input{width:150px}.plText p{font-size:17px}.plNav{position:sticky;bottom:0;background:var(--bg);padding:8px 0}.plBtn{padding:12px 14px;font-size:15px}.w3Card{grid-template-columns:34px 1fr}.w3Card .w3State{grid-column:2;justify-self:start}}
-.memo{max-width:1000px;margin:0 auto;padding-bottom:36px}
-.mTop{position:sticky;top:-18px;z-index:3;background:var(--bg);padding:6px 0 10px}
-.mTabs{display:flex;gap:7px;overflow-x:auto;margin-top:6px;scrollbar-width:none}
-.mTabs button{flex:0 0 auto;border:2px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:24px;padding:9px 16px;font-size:15px;font-weight:900;cursor:pointer}
+.memo{max-width:1120px;margin:0 auto;font-size:15px}
+.mTabs,.mSecs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:7px}
+.mTabs button,.mSecs button{flex:0 0 auto;border:2px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:22px;padding:7px 14px;font-size:15px;font-weight:900;cursor:pointer}
 .mTabs button.on{background:#0039A6;border-color:#0039A6;color:#fff}
-.mLead{background:#fff;border:1px solid #cbd9ea;border-left:5px solid #D52B1E;border-radius:12px;padding:14px 18px;margin-bottom:12px}
-.mLead h2{margin:0 0 4px;font-size:24px;color:#0039A6}
-.mLead p{margin:0;font-size:16px;line-height:1.5;color:#334155}
-.mBlock{margin-bottom:16px}
-.mBlock h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:#64748b}
+.mTabs .mBack{background:#0039A6;border-color:#0039A6;color:#fff;border-radius:9px;margin-right:8px}
+.mSecs button{border-width:1px;border-radius:9px;padding:6px 12px;font-weight:800;color:#475569;background:#f1f5fb}
+.mSecs button.on{background:#fff;color:#D52B1E;border:2px solid #D52B1E;padding:5px 11px}
+.mBody{margin-top:3px}
+.mLeadLine{margin:0 0 8px;font-size:15px;line-height:1.45;color:#334155}
 .mc1{--c:#0039A6;--t:#eaf1ff}.mc2{--c:#15803d;--t:#e9f8ee}.mc3{--c:#c2410c;--t:#fff1e6}.mc4{--c:#7e22ce;--t:#f5ecfe}
-.mChoose{background:#fff;border:1px solid #cbd9ea;border-radius:12px;overflow:hidden}
-.mChoose div{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:11px 16px;border-bottom:1px solid #e5ebf3}
+.mChoose,.mT{background:#fff;border:1px solid #cbd9ea;border-radius:12px;overflow:hidden}
+.mChoose div{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:9px 14px;border-bottom:1px solid #e5ebf3}
 .mChoose div:last-child{border-bottom:0}
-.mChoose span{font-size:16px;line-height:1.4;color:#111}
-.mChoose b{font-size:14px;color:var(--c);background:var(--t);border-radius:20px;padding:6px 12px;white-space:nowrap}
-.mGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mCard{background:#fff;border:1px solid #cbd9ea;border-top:5px solid var(--c);border-radius:12px;padding:14px 16px}
-.mCard header b{display:block;font-size:19px;color:var(--c)}
-.mCard header span{display:block;font-size:14px;line-height:1.4;color:#475569;margin-top:2px}
-.mForm{margin:11px 0;display:grid;gap:5px}
-.mForm div{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:center}
-.mForm i{font-style:normal;display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--t);color:var(--c);font-weight:900;font-size:15px}
-.mForm code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;font-weight:700;color:#111;background:#f5f7fb;border-radius:7px;padding:6px 9px}
-.mEx{margin:0 0 10px;font-size:17px;line-height:1.45;color:#111}
-.mEx b,.mRow span b{color:var(--c,#0039A6)}
-.mChips{display:flex;flex-wrap:wrap;gap:6px}
-.mChips span{font-size:14px;font-weight:700;color:#334155;background:#eef2f7;border-radius:20px;padding:4px 10px}
-.mWords{margin-top:9px}
-.mWords div{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:6px 0;border-bottom:1px dashed #dbe3ee;font-size:15px}
-.mWords div:last-child{border-bottom:0}
-.mWords b{color:#111}.mWords span{color:#64748b}
-.mGroups{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mGroup{background:#fff;border:1px solid #cbd9ea;border-left:5px solid var(--c);border-radius:12px;padding:12px 14px}
-.mGroup>b{display:block;font-size:15px;color:var(--c);margin-bottom:8px}
-.mTable{background:#fff;border:1px solid #cbd9ea;border-radius:12px;overflow:hidden}
-.mRow{display:grid;grid-template-columns:90px 1fr 1fr;gap:12px;padding:10px 16px;border-bottom:1px solid #e5ebf3;font-size:16px;line-height:1.4;color:#111;align-items:start}
-.mRow:last-child{border-bottom:0}
-.mRow>b{color:#0039A6;font-size:16px}
-.mRow small{display:block;font-size:13px;color:#64748b}
-.mHeadRow{background:#f1f5fb;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;color:#64748b}
-.mRow span:nth-child(2) b{color:#0039A6}.mRow span:nth-child(3) b{color:#15803d}
+.mChoose span{font-size:15px;line-height:1.35;color:#111}
+.mChoose b{font-size:15px;color:var(--c);background:var(--t);border-radius:20px;padding:4px 12px;white-space:nowrap}
+.mTr{display:grid;gap:12px;padding:9px 14px;border-bottom:1px solid #e5ebf3;align-items:center;font-size:15px;line-height:1.35;color:#111;border-left:5px solid var(--c,transparent)}
+.mTr:last-child{border-bottom:0}
+.mT4 .mTr{grid-template-columns:1.1fr 1fr 1.15fr 1.5fr}
+.mT4b .mTr{grid-template-columns:1.1fr 1.3fr 1.6fr 1.5fr}
+.mT3 .mTr{grid-template-columns:90px 1fr 1fr}
+.mTr>b{font-size:15px;color:var(--c,#0039A6)}
+.mTh{background:#f1f5fb;border-left-color:transparent}
+.mTh span{font-size:15px;font-weight:900;color:#64748b}
+.mTr code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;font-weight:700;color:#111}
+.mTr em{font-style:normal}.mTr em b,.mT3 .mTr span b{color:var(--c,#0039A6)}
+.mT3 .mTr span:nth-child(3) b{color:#15803d}
+.mTr small{font-size:15px;color:#64748b}
+.mTr small::before{content:"— "}
+.mGroups{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mGroup{background:#fff;border:1px solid #cbd9ea;border-left:5px solid var(--c);border-radius:12px;padding:10px 13px}
+.mGroup>b{display:block;font-size:15px;color:var(--c);margin-bottom:7px}
+.mChips{display:flex;flex-wrap:wrap;gap:5px}
+.mChips span{font-size:15px;font-weight:700;color:#334155;background:#eef2f7;border-radius:20px;padding:3px 10px}
+.mCols4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mWordCol{background:#fff;border:1px solid #cbd9ea;border-top:5px solid var(--c);border-radius:12px;padding:9px 12px}
+.mWordCol>b{display:block;font-size:15px;color:var(--c);margin-bottom:5px}
+.mWordCol div{padding:4px 0;border-bottom:1px dashed #dbe3ee;font-size:15px;line-height:1.3}
+.mWordCol div:last-child{border-bottom:0}
+.mWordCol span{display:block;font-weight:800;color:#111}.mWordCol small{font-size:15px;color:#64748b}
 .mMistakes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mMistakes div{background:#fff;border:1px solid #cbd9ea;border-radius:12px;padding:11px 14px;display:grid;gap:4px}
-.wrong{font-size:16px;color:#991b1b;text-decoration:line-through;text-decoration-color:#ef4444}
-.right{font-size:16px;font-weight:800;color:#166534}
-.mMistakes small{font-size:13px;color:#64748b}
-.mNote,.mTip{background:#edf3ff;border:1px solid #b7c9e8;border-radius:12px;padding:14px 18px}
-.mNote h3,.mTip h3{color:#0039A6}
-.mNote p,.mTip p{margin:0;font-size:16px;line-height:1.55;color:#111}
-.mPair{display:grid;gap:4px;margin-top:9px}
-.mPair .right b{text-decoration:underline}
-@media(max-width:800px){.mTop{top:-12px}.mGrid,.mGroups,.mMistakes{grid-template-columns:1fr}.mChoose div{grid-template-columns:1fr}.mChoose b{justify-self:start}.mRow{grid-template-columns:1fr;gap:4px}.mHeadRow{display:none}.mLead h2{font-size:21px}}
+.mMistakes div{background:#fff;border:1px solid #cbd9ea;border-radius:12px;padding:9px 13px;display:grid;gap:2px}
+.wrong{font-size:15px;color:#991b1b;text-decoration:line-through;text-decoration-color:#ef4444}
+.right{font-size:15px;font-weight:800;color:#166534}
+.mMistakes small{font-size:15px;color:#64748b}
+.mNote,.mTip{background:#edf3ff;border:1px solid #b7c9e8;border-radius:12px;padding:11px 14px;font-size:15px;line-height:1.5;color:#111;margin-top:8px}
+.mNote{margin-top:0}.mNote>b,.mTip b{color:#0039A6}
+.mNote p{margin:4px 0 8px}
+.mPair{display:grid;gap:3px}.mPair .right b{text-decoration:underline}
+.mPager{display:flex;justify-content:space-between;align-items:center;margin-top:9px}
+.mPager span{font-size:15px;font-weight:900;color:#64748b}
+.mPager .plBtn{padding:8px 16px;min-height:0;font-size:15px}
+@media(max-width:800px){.mGroups,.mMistakes{grid-template-columns:1fr}.mCols4{grid-template-columns:1fr 1fr}.mChoose div{grid-template-columns:1fr;gap:5px}.mChoose b{justify-self:start}.mT .mTr{grid-template-columns:1fr;gap:3px}.mTh{display:none}}
+.w3Hub{max-width:1240px}
+.w3Cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.w3Cols1{grid-template-columns:minmax(0,620px)}
+.w3Cols3{grid-template-columns:1fr 1fr 1fr}
+.w3Cols .w3Part{margin-bottom:0}
+.w3Cols3 .w3State{padding:4px 8px;font-size:10px}
+@media(max-width:1050px){.w3Cols3{grid-template-columns:1fr 1fr}.w3Cols3 .w3Home{grid-column:2;grid-row:1 / span 2}}
+.w3Head{padding:9px 14px;margin-bottom:8px}
+.w3Head h2{font-size:18px;margin:1px 0 2px}
+.w3Head p{font-size:13px}
+.w3Count{padding:4px 12px}.w3Count b{font-size:18px}
+.w3Part{padding:9px 11px 11px;margin-bottom:8px}
+.w3Part h3{margin-bottom:7px}
+.w3List{gap:5px}
+.w3Card{grid-template-columns:28px 1fr auto;gap:9px;padding:6px 10px;min-height:46px}
+.w3Num{width:28px;height:28px;border-radius:8px;font-size:13px}
+.w3CardText b{font-size:15px}
+.w3CardText small{margin-top:1px}
+@media(max-width:800px){.w3Cols,.w3Cols3{grid-template-columns:1fr}.w3Cols3 .w3Home{grid-column:auto;grid-row:auto}.w3Card{grid-template-columns:28px 1fr}}
 </style></head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
 <aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Памятки</div><button class="trainerBtn" onclick="openMemo('present')">Памятки · времена и маркеры</button><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="openPresentPanel('markertrain','side')">Marker → Tense · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
@@ -447,7 +465,7 @@ const W3_TASKS={
    ['When I arrived, they <u>have already left</u>.',null,['had already left'],'Раньше другого прошлого события → Past Perfect.'],
    ['I <u>am knowing</u> him for five years.',null,['have known'],'Know — состояние; for five years → Present Perfect.']
   ]},
- 'w3l1-interview':{part:'B',title:'Interview · Plans and the future',sub:'5 вопросов на слух · 40 секунд',type:'speak',
+ 'w3l1-interview':{part:'B',title:'Interview · Future plans',sub:'5 вопросов на слух · 40 секунд',type:'speak',
   intro:'Как на экзамене: вопрос не показывается, его нужно услышать. Ответь 2–3 полными предложениями и используй нужную форму будущего.',
   items:[
    ['What are you going to do next weekend?','be going to: I’m going to… / Present Continuous для договорённостей.'],
@@ -582,24 +600,28 @@ const MEMOS={
   ],
   tip:'Since и for бывают и с Present Perfect, и с Present Perfect Continuous. Already встречается и в Present Perfect, и в Past Perfect. Поэтому сначала смысл, потом маркер.'}
 };
-function memoCard(c,i){return '<article class="mCard mc'+(i+1)+'"><header><b>'+c.n+'</b><span>'+c.use+'</span></header><div class="mForm"><div><i>+</i><code>'+c.f[0]+'</code></div><div><i>−</i><code>'+c.f[1]+'</code></div><div><i>?</i><code>'+c.f[2]+'</code></div></div><p class="mEx">'+c.ex+'</p><div class="mChips">'+c.m.map(x=>'<span>'+x+'</span>').join('')+'</div></article>'}
-function memoHTML(id){
- const m=MEMOS[id];let h='<div class="mLead"><h2>'+m.title+'</h2><p>'+m.lead+'</p></div>';
- if(m.choose)h+='<section class="mBlock"><h3>Как выбрать</h3><div class="mChoose">'+m.choose.map(x=>'<div><span>'+x[0]+'</span><b class="mc'+x[2]+'">'+x[1]+'</b></div>').join('')+'</div></section>';
- if(m.cards)h+='<section class="mBlock"><h3>Форма, пример, маркеры</h3><div class="mGrid">'+m.cards.map(memoCard).join('')+'</div></section>';
- if(m.note)h+='<section class="mBlock mNote"><h3>'+m.note[0]+'</h3><p>'+m.note[1]+'</p><div class="mPair"><span class="right">'+m.note[2]+'</span><span class="wrong">'+m.note[3]+'</span></div></section>';
- if(m.groups)h+='<section class="mBlock"><h3>Глаголы состояния · обычно без Continuous</h3><div class="mGroups">'+m.groups.map((g,i)=>'<div class="mGroup mc'+(i+1)+'"><b>'+g[0]+'</b><div class="mChips">'+g[1].map(x=>'<span>'+x+'</span>').join('')+'</div></div>').join('')+'</div></section>';
- if(m.pairs)h+='<section class="mBlock"><h3>Значение меняется</h3><div class="mTable"><div class="mRow mHeadRow"><span>Глагол</span><span>Состояние · Simple</span><span>Действие · Continuous</span></div>'+m.pairs.map(p=>'<div class="mRow"><b>'+p[0]+'</b><span>'+p[1]+'<small>'+p[2]+'</small></span><span>'+p[3]+'<small>'+p[4]+'</small></span></div>').join('')+'</div></section>';
- if(m.tables)h+=m.tables.map(t=>'<section class="mBlock"><h3>'+t[0]+'</h3><div class="mGrid">'+t[1].map(g=>'<article class="mCard mc'+g[1]+'"><header><b>'+g[0]+'</b></header><div class="mWords">'+g[2].map(w=>'<div><b>'+w[0]+'</b><span>'+w[1]+'</span></div>').join('')+'</div></article>').join('')+'</div></section>').join('');
- if(m.mistakes)h+='<section class="mBlock"><h3>Типичные ошибки</h3><div class="mMistakes">'+m.mistakes.map(x=>'<div><span class="wrong">'+x[0]+'</span><span class="right">'+x[1]+'</span><small>'+x[2]+'</small></div>').join('')+'</div></section>';
- if(m.tip)h+='<section class="mBlock mTip"><h3>Запомни</h3><p>'+m.tip+'</p></section>';
- return h;
+function memoTable(head,rows,cls){return '<div class="mT '+(cls||'')+'"><div class="mTr mTh">'+head.map(h=>'<span>'+h+'</span>').join('')+'</div>'+rows.map(r=>'<div class="mTr'+(r.c?' mc'+r.c:'')+'">'+r.v.map((x,k)=>k?'<span>'+x+'</span>':'<b>'+x+'</b>').join('')+'</div>').join('')+'</div>'}
+function memoSections(id){
+ const m=MEMOS[id],S=[],tip=m.tip?'<div class="mTip"><b>Запомни.</b> '+m.tip+'</div>':'';
+ if(m.choose)S.push(['Как выбрать','<p class="mLeadLine">'+m.lead+'</p><div class="mChoose">'+m.choose.map(x=>'<div><span>'+x[0]+'</span><b class="mc'+x[2]+'">'+x[1]+'</b></div>').join('')+'</div>']);
+ if(m.cards){
+  S.push(['Формулы',memoTable(['Время','+ утверждение','− отрицание','? вопрос'],m.cards.map((c,i)=>({c:i+1,v:[c.n,'<code>'+c.f[0]+'</code>','<code>'+c.f[1]+'</code>','<code>'+c.f[2]+'</code>']})),'mT4')]);
+  S.push(['Примеры и маркеры',memoTable(['Время','Когда','Пример','Маркеры'],m.cards.map((c,i)=>({c:i+1,v:[c.n,c.use,'<em>'+c.ex+'</em>',c.m.join(' · ')]})),'mT4b')]);
+ }
+ if(m.note)S.push(['После when / if','<div class="mNote"><b>'+m.note[0]+'</b><p>'+m.note[1]+'</p><div class="mPair"><span class="right">'+m.note[2]+'</span><span class="wrong">'+m.note[3]+'</span></div></div>']);
+ if(m.groups)S.push(['Глаголы состояния','<p class="mLeadLine">'+m.lead+'</p><div class="mGroups">'+m.groups.map((g,i)=>'<div class="mGroup mc'+(i+1)+'"><b>'+g[0]+'</b><div class="mChips">'+g[1].map(x=>'<span>'+x+'</span>').join('')+'</div></div>').join('')+'</div>']);
+ if(m.pairs){const half=Math.ceil(m.pairs.length/2);[m.pairs.slice(0,half),m.pairs.slice(half)].forEach((part,k)=>S.push(['Значение меняется · '+(k+1),memoTable(['Глагол','Состояние · Simple','Действие · Continuous'],part.map(p=>({v:[p[0],p[1]+' <small>'+p[2]+'</small>',p[3]+' <small>'+p[4]+'</small>']})),'mT3')]))}
+ if(m.tables){S.push(['Как пользоваться','<p class="mLeadLine">'+m.lead+'</p>'+tip]);m.tables.forEach(t=>S.push([t[0],'<div class="mCols4">'+t[1].map(g=>'<div class="mWordCol mc'+g[1]+'"><b>'+g[0]+'</b>'+g[2].map(w=>'<div><span>'+w[0]+'</span><small>'+w[1]+'</small></div>').join('')+'</div>').join('')+'</div>']))}
+ if(m.mistakes)S.push(['Ошибки','<div class="mMistakes">'+m.mistakes.map(x=>'<div><span class="wrong">'+x[0]+'</span><span class="right">'+x[1]+'</span><small>'+x[2]+'</small></div>').join('')+'</div>'+(m.tables?'':tip)]);
+ return S;
 }
-function openMemo(id){
+function openMemo(id,sec){
  if(!MEMOS[id])id='present';
- openFullScreen('','<div class="memo"><div class="mTop"><div class="eyebrow">Памятки</div><div class="mTabs">'+MEMO_TABS.map(t=>'<button type="button" class="'+(t[0]===id?'on':'')+'" onclick="openMemo(\''+t[0]+'\')">'+t[1]+'</button>').join('')+'</div></div><div id="memoBody">'+memoHTML(id)+'</div></div>');
+ const S=memoSections(id);sec=Math.max(0,Math.min(S.length-1,sec||0));
+ openFullScreen('','<div class="memo"><div class="mTabs"><button type="button" class="mBack" onclick="closeFullScreen()">← Назад</button>'+MEMO_TABS.map(t=>'<button type="button" class="'+(t[0]===id?'on':'')+'" onclick="openMemo(\''+t[0]+'\')">'+t[1]+'</button>').join('')+'</div><div class="mSecs">'+S.map((x,k)=>'<button type="button" class="'+(k===sec?'on':'')+'" onclick="openMemo(\''+id+'\','+k+')">'+x[0]+'</button>').join('')+'</div><div class="mBody">'+S[sec][1]+'</div><div class="mPager"><button type="button" class="plBtn" '+(sec?'':'disabled')+' onclick="openMemo(\''+id+'\','+(sec-1)+')">←</button><span>'+(sec+1)+' / '+S.length+'</span><button type="button" class="plBtn plMain" '+(sec<S.length-1?'':'disabled')+' onclick="openMemo(\''+id+'\','+(sec+1)+')">Дальше →</button></div></div>');
+ const fb=document.querySelector('#fullScreenPanel .fullScreenBack');if(fb)fb.remove();
  PL=null;closeTaskWindow();
- const on=document.querySelector('.mTabs .on');if(on&&on.scrollIntoView)on.scrollIntoView({inline:'center',block:'nearest'});
+ document.querySelectorAll('.mTabs .on,.mSecs .on').forEach(on=>{if(on.scrollIntoView)on.scrollIntoView({inline:'center',block:'nearest'})});
 }
 function openW3Rule(kind){openMemo(kind)}
 /* ---------- tasks from Weeks 1–2 use the same player (built lazily: their data lives in the main script) ---------- */
@@ -663,7 +685,7 @@ function w3Card(c,n){
 function w3LessonHTML(w,i){
  const L=ARINA_LESSONS[w+'-'+i],pr=lessonProgress(w,i);let n=0;
  return '<div class="w3Hub"><div class="w3Head"><div><div class="eyebrow">Неделя '+(w+1)+' · Урок '+(i+1)+'</div><h2>'+weeks[w].l[i][0]+'</h2><p>'+L.intro+(pr[1]?' Выполняй задания по порядку — ответы сразу уходят учителю.':'')+'</p></div>'+(pr[1]?'<div class="w3Count" id="w3Count" data-w="'+w+'" data-i="'+i+'"><b>'+pr[0]+' / '+pr[1]+'</b><span>сдано</span></div>':'')+'</div>'+
- L.parts.map(p=>'<div class="w3Part'+(p[2]?' w3Home':'')+'"><h3>'+p[0]+'</h3><div class="w3List">'+p[1].map(c=>w3Card(c,++n)).join('')+'</div></div>').join('')+'</div>';
+ '<div class="w3Cols w3Cols'+L.parts.length+'">'+L.parts.map(p=>'<div class="w3Part'+(p[2]?' w3Home':'')+'"><h3>'+p[0]+'</h3><div class="w3List">'+p[1].map(c=>w3Card(c,++n)).join('')+'</div></div>').join('')+'</div></div>';
 }
 function lessonChip(w,i){const pr=lessonProgress(w,i);if(!pr[1])return 'справочник';return pr[0]===pr[1]?'все задания сданы':'сдано '+pr[0]+' из '+pr[1];}
 function w3Refresh(){
@@ -1450,7 +1472,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- week3-lesson1-20261005c -->
+<!-- week3-lesson1-20261005d -->
 
 <script id="arinaRussiaScript">
 (function(){
