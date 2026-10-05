@@ -216,10 +216,416 @@
 .russiaNotice{border:1px solid #b7c9e8;border-left:5px solid #D52B1E;background:#fff;border-radius:10px;padding:10px 12px;font-size:11px;color:#475569;margin-bottom:9px}
 @media(max-width:1000px){.russiaGrid{grid-template-columns:1fr 1fr}.readingShell,.oralOne{grid-template-columns:1fr}.interviewGrid{grid-template-columns:1fr}.readingShell{min-height:0}}
 @media(max-width:800px){#arinaRussiaPanel{inset:48px 0 0 0}.russiaTop{align-items:flex-start;flex-wrap:wrap}.russiaTabs{width:100%;margin-left:0}.russiaStage{padding:9px}.russiaGrid{grid-template-columns:1fr}.readingHeadings{grid-template-columns:1fr}.russiaFlip{height:290px}}
+</style>
+<style id="arinaWeek3Styles">
+.fullScreenPanel{z-index:90}
+.wbtn.locked{opacity:.5;cursor:not-allowed}
+.lockTag{font-size:10px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:.6px;border:1px solid #cbd5e1;border-radius:20px;padding:3px 8px}
+.w3Hub{padding:2px}
+.w3Head{display:flex;gap:14px;align-items:center;justify-content:space-between;background:#fff;border:1px solid #cbd9ea;border-left:5px solid #D52B1E;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.w3Head h2{margin:3px 0 5px;font-size:21px;color:#0039A6}
+.w3Head p{margin:0;font-size:13px;line-height:1.45;color:#334155;max-width:70ch}
+.w3Count{flex:0 0 auto;text-align:center;border:2px solid #0039A6;border-radius:12px;padding:8px 14px;background:#edf3ff}
+.w3Count b{display:block;font-size:22px;color:#0039A6}
+.w3Count span{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;color:#64748b}
+.w3Part{background:#fff;border:1px solid #cbd9ea;border-radius:12px;padding:12px 14px 14px;margin-bottom:10px}
+.w3Part h3{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.7px;color:#0039A6;display:flex;align-items:center;gap:8px}
+.w3Part h3 i{font-style:normal;display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#0039A6;color:#fff;font-size:12px}
+.w3Home{border:2px solid #D52B1E;background:#fff7f6}
+.w3Home h3{color:#D52B1E}.w3Home h3 i{background:#D52B1E}
+.w3Grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px}
+.w3Card{display:flex;flex-direction:column;gap:4px;text-align:left;background:#f7faff;border:1px solid #b7c9e8;border-left:4px solid #0039A6;border-radius:10px;padding:11px 12px;min-height:92px;cursor:pointer;color:#0039A6}
+.w3Card:hover{background:#edf3ff;border-color:#0039A6}
+.w3Card b{font-size:14px;line-height:1.25}
+.w3Card small{font-size:11px;color:#475569;line-height:1.3}
+.w3Card.w3Ref{background:#fff;border-left-color:#94a3b8}
+.w3Home .w3Card{border-left-color:#D52B1E;background:#fff}
+.w3State{margin-top:auto;align-self:flex-start;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:#64748b;background:#eef2f7;border-radius:20px;padding:3px 8px}
+.w3State.done{color:#166534;background:#dcfce7}
+.w3State.wait{color:#9a3412;background:#ffedd5}
+.hwSideBtn .w3State{display:inline-block;margin-top:6px}
+.w3Panel{max-width:980px;margin:auto;padding-bottom:40px}
+.w3Panel .hero h1{font-size:22px;margin:3px 0 4px}
+.w3Intro{margin:8px 2px 10px;font-size:14px;line-height:1.5;color:#334155}
+.w3Item{border:1px solid #d9e1ec;background:#fff;border-radius:11px;padding:12px 13px;margin:8px 0}
+.w3Item p{font-size:16px;line-height:1.5;color:#111;margin:0 0 9px}
+.w3Item p b{color:#0039A6}
+.w3Item p u{text-decoration-color:#D52B1E;text-decoration-thickness:2px;text-underline-offset:3px}
+.w3Src{font-size:14px!important;color:#475569!important;border-left:3px solid #cbd5e1;padding-left:9px}
+.w3Key{font-style:normal;font-weight:900;font-size:12px;color:#D52B1E;letter-spacing:.4px;white-space:nowrap}
+.w3Blank{color:#0039A6;font-weight:900;letter-spacing:1px}
+.w3Opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.w3Opts.w3Shared{grid-template-columns:repeat(3,1fr)}
+.w3Opts button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:10px 8px;font-size:14px;font-weight:800;cursor:pointer;min-height:42px}
+.w3Opts.w3Shared button{font-size:12px}
+.w3Opts button.picked{background:#0039A6;color:#fff;border-color:#0039A6}
+.w3Opts button:disabled{cursor:default;opacity:1}
+.w3Opts button.ok{background:#ecfdf3;border-color:#22c55e;color:#166534}
+.w3Opts button.bad{background:#fff1f0;border-color:#ef4444;color:#991b1b}
+.w3Why{font-size:12px;line-height:1.4;color:#475569;margin-top:7px}
+.w3Why:empty{display:none}
+.w3Line,.w3Area{width:100%;border:1px solid #9eb4d1;border-radius:8px;padding:10px;font-size:16px;color:#111;background:#fff;font-family:inherit}
+.w3Area{resize:vertical;line-height:1.4}
+.w3Line.ok,.w3Gap input.ok{border-color:#22c55e;background:#ecfdf3;color:#166534}
+.w3Line.bad,.w3Gap input.bad{border-color:#ef4444;background:#fff1f0;color:#991b1b}
+.w3Text{border:1px solid #d9e1ec;background:#fff;border-radius:11px;padding:14px 16px;margin:8px 0}
+.w3Text h3{margin:0 0 8px;font-size:15px;color:#0039A6}
+.w3Text p{font-size:16px;line-height:2.1;color:#111;margin:0 0 4px}
+.w3Gap{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.w3Gap small{font-size:11px;font-weight:900;color:#0039A6}
+.w3Gap input{width:170px;border:1px solid #9eb4d1;border-radius:7px;padding:6px 8px;font-size:15px;color:#111}
+.w3Gap em{font-style:normal;font-size:11px;font-weight:900;color:#D52B1E}
+.w3Text .w3Why{display:block;line-height:1.4;margin:0 0 6px}
+.w3Submit{position:sticky;bottom:0;background:#f7f9fc;border-top:1px solid #d9e1ec;padding:10px 0 12px;margin-top:10px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.w3Submit .action{font-size:13px;padding:11px 16px;margin:0;cursor:pointer}
+.w3Submit .action:disabled{background:#94a3b8;cursor:default}
+.w3Result{font-size:13px;font-weight:800;color:#334155;flex:1;min-width:200px}
+.w3Result.good{color:#166534}.w3Result.bad{color:#b91c1c}
+.w3Reset{border:0;background:none;color:#94a3b8;font-size:10px;cursor:pointer;text-decoration:underline}
+.w3Note{background:#edf3ff;border:1px solid #b7c9e8;border-radius:9px;padding:10px 12px;margin-top:9px;font-size:13px;line-height:1.5;color:#111}
+.w3Note b{color:#0039A6}.w3Note em{font-style:normal;font-weight:700}
+.w3Speak{background:#fff;border:1px solid #d9e1ec;border-radius:12px;padding:18px;margin:8px 0;text-align:center}
+.w3SpeakTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.w3SpeakTop span{font-size:12px;font-weight:900;letter-spacing:.7px;color:#64748b}
+.w3SpeakTop b{font-size:34px;color:#D52B1E;font-variant-numeric:tabular-nums}
+.w3SpeakBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.w3SpeakBtns .action{font-size:14px;padding:13px 22px;margin:0;cursor:pointer}
+.w3Ghost{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:900;cursor:pointer}
+.w3SpeakText{margin-top:14px;background:#edf3ff;border-radius:9px;padding:12px;text-align:left}
+.w3SpeakText b{display:block;font-size:17px;color:#111;margin-bottom:5px}
+.w3SpeakText span{font-size:13px;color:#475569}
+.w3Small{font-size:12px;color:#64748b;margin:14px 0 0}
+.exam26Sent{font-size:12px;font-weight:800;color:#166534;margin-top:6px}
+@media(max-width:800px){.side{z-index:120}.w3Head{flex-direction:column;align-items:flex-start}.w3Opts,.w3Opts.w3Shared{grid-template-columns:1fr}.w3Gap input{width:140px}.w3Grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.w3Grid{grid-template-columns:1fr}.w3Card{min-height:0}}
 </style></head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
 <aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="renderTrainer('markers')">Present Markers · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
 <main class="main"><section id="weekView" class="content on"></section><section id="examView" class="content"></section><section id="trainerView" class="content"></section></main>
+<script id="arinaWeek3Script">
+/* ===== ARINA · WEEK 3 · LESSON 1 · Future forms + revision of Present / Past ===== */
+/* Every checked task is sent to the teacher through saveArinaHomework (same table as Weeks 1–2). */
+const W3_TEACHER_CODE='2512';
+const W3_FUNCTIONS=['Prediction · will','Decision now / promise / offer · will','Plan · be going to','Evidence now · be going to','Arrangement · Present Continuous','Timetable · Present Simple'];
+const W3_TASKS={
+ 'w3l1-revision':{part:'A',title:'Revision · Present + Past',sub:'12 заданий · 8 времён',type:'mc',
+  intro:'Повторение перед новой темой. Выбери форму и назови про себя причину: факт, процесс, результат или длительность.',
+  items:[
+   ['My cousin ___ in a bank, but this month she is helping at a charity.',['works','is working','has worked','worked'],0,'Постоянная ситуация → Present Simple.'],
+   ['Sorry, I can’t talk — I ___ dinner for six people.',['cook','am cooking','have cooked','was cooking'],1,'Действие в момент речи → Present Continuous.'],
+   ['We ___ each other since primary school.',['know','are knowing','have known','have been knowing'],2,'Know — глагол состояния; since → Present Perfect.'],
+   ['Your eyes are red. ___ onions?',['Do you chop','Have you been chopping','Did you chop','Had you chopped'],1,'Видимый след недавнего процесса → Present Perfect Continuous.'],
+   ['This bag ___ to the girl who sits next to me.',['belongs','is belonging','has belonged','was belonging'],0,'Belong — состояние, не Continuous.'],
+   ['How many pages ___ so far?',['do you write','are you writing','have you written','have you been writing'],2,'How many + so far → результат, Present Perfect.'],
+   ['Two years ago our family ___ to a smaller town.',['moved','has moved','was moving','had moved'],0,'Ago → завершённое событие, Past Simple.'],
+   ['While the teacher ___ the task, somebody’s phone rang.',['explained','was explaining','has explained','had explained'],1,'Фоновый процесс + короткое событие → Past Continuous.'],
+   ['When we got to the cinema, the film ___, so we missed the first scene.',['already started','was already starting','had already started','has already started'],2,'Фильм начался раньше нашего прихода → Past Perfect.'],
+   ['When she finally came inside, she was exhausted: she ___ in the garden since breakfast.',['worked','was working','has been working','had been working'],3,'Длительность до момента в прошлом → Past Perfect Continuous.'],
+   ['By the time the concert began, I ___ a single song by this singer.',['didn’t hear','wasn’t hearing','hadn’t heard','haven’t heard'],2,'By the time + прошлое → Past Perfect.'],
+   ['He ___ what the word meant, so he looked it up.',['didn’t know','wasn’t knowing','hadn’t been knowing','doesn’t know'],0,'Know — состояние; рассказ о прошлом → Past Simple.']
+  ]},
+ 'w3l1-meaning':{part:'B',title:'Meaning → form',sub:'12 ситуаций · почему эта форма',type:'mc',shared:W3_FUNCTIONS,
+  intro:'Форма уже стоит в предложении. Определи, что она выражает. Маркер — подсказка, но решает смысл.',
+  items:[
+   ['The lecture <b>starts</b> at 9.30 on Thursday.',null,5,'Расписание → Present Simple.'],
+   ['I’ve bought the paint — I<b>’m going to redecorate</b> my room this weekend.',null,2,'Решение принято заранее → be going to.'],
+   ['It’s cold in here. — I<b>’ll close</b> the window.',null,1,'Решение в момент речи → will.'],
+   ['Watch out! That shelf <b>is going to fall</b>.',null,3,'Мы видим, что это сейчас случится → be going to.'],
+   ['We<b>’re having</b> lunch with my aunt on Sunday; she has booked a table.',null,4,'Договорённость с местом и временем → Present Continuous.'],
+   ['I think robots <b>will do</b> most housework in fifty years.',null,0,'Мнение о будущем (I think) → will.'],
+   ['The last bus <b>leaves</b> at 23.10.',null,5,'Расписание транспорта → Present Simple.'],
+   ['Don’t worry, I<b>’ll help</b> you with the essay.',null,1,'Обещание / предложение помощи → will.'],
+   ['She<b>’s seeing</b> the head teacher at 3 p.m. tomorrow.',null,4,'Назначенная встреча → Present Continuous.'],
+   ['He hasn’t opened a book all month — he<b>’s going to fail</b> the test.',null,3,'Вывод по тому, что видим сейчас → be going to.'],
+   ['I<b>’m going to learn</b> to drive next summer.',null,2,'Намерение, план → be going to.'],
+   ['Experts believe that prices <b>will rise</b> next year.',null,0,'Прогноз-мнение (believe) → will.']
+  ]},
+ 'w3l1-ege':{part:'B',title:'EGE 19–24 · два текста',sub:'12 преобразований · Present + Past + Future',type:'gap',
+  intro:'Формат ЕГЭ: преобразуй слово справа так, чтобы оно грамматически подходило. В каждом тексте смешаны прошлое, настоящее и будущее.',
+  sets:[
+   {title:'Set A · A class trip',lines:[
+    ['Our class loves travelling. Last spring we ___ Veliky Novgorod.','VISIT',['visited'],'Last spring → Past Simple.'],
+    ['It was the first time most of us ___ such an ancient city.','SEE',['had seen'],'It was the first time + Past Perfect.'],
+    ['At the moment our teacher ___ a new trip.','ORGANISE',['is organising','is organizing'],'At the moment → Present Continuous.'],
+    ['The train ___ at 6.40 next Friday morning, so we must get up early.','LEAVE',['leaves','will leave'],'Расписание → Present Simple (will leave тоже засчитывается).'],
+    ['Our guide says that we ___ bored: there are museums for every taste.','NOT GET',['will not get','won’t get'],'Прогноз → will not + V.'],
+    ['As soon as we ___ back, each of us will write a short report.','COME',['come'],'После as soon as — Present, не will.']]},
+   {title:'Set B · Daniel’s decision',lines:[
+    ['Daniel ___ the guitar since he was seven.','PLAY',['has been playing','has played'],'Since + действие продолжается → Present Perfect (Continuous).'],
+    ['Last year he ___ a regional competition.','WIN',['won'],'Last year → Past Simple, win–won–won.'],
+    ['While he ___ for it, he practised for three hours a day.','PREPARE',['was preparing'],'While + процесс → Past Continuous.'],
+    ['Now he ___ exactly what he wants.','KNOW',['knows'],'Know — состояние → Present Simple.'],
+    ['He hopes that next year he ___ a student of a music college.','BECOME',['will become'],'Hope + будущее → will + V.'],
+    ['If he ___ all his exams, his parents will buy him a new instrument.','PASS',['passes'],'После if — Present Simple, не will.']]}
+  ]},
+ 'w3l1-repair':{part:'B',title:'Repair clinic',sub:'8 ошибок · исправь форму',type:'typed',
+  intro:'В каждом предложении одна ошибка в форме глагола. Введи только исправленную форму, без остального предложения.',
+  items:[
+   ['I will call you when I <u>will get</u> home.',null,['get'],'После when в значении будущего — Present Simple.'],
+   ['Look at the sky! It <u>will rain</u>.',null,['is going to rain','’s going to rain'],'Видим тучи сейчас → be going to.'],
+   ['My train <u>is leave</u> at nine tomorrow.',null,['leaves','is leaving'],'Расписание → leaves (is leaving — договорённость).'],
+   ['I think she <u>is passing</u> the exam easily.',null,['will pass'],'I think + прогноз → will.'],
+   ['If you <u>will heat</u> ice, it melts.',null,['heat'],'После if — Present Simple.'],
+   ['We <u>going to visit</u> our cousins next weekend.',null,['are going to visit','’re going to visit'],'am / is / are + going to + V.'],
+   ['When I arrived, they <u>have already left</u>.',null,['had already left'],'Раньше другого прошлого события → Past Perfect.'],
+   ['I <u>am knowing</u> him for five years.',null,['have known'],'Know — состояние; for five years → Present Perfect.']
+  ]},
+ 'w3l1-interview':{part:'B',title:'Interview · Plans and the future',sub:'5 вопросов на слух · 40 секунд',type:'speak',
+  intro:'Как на экзамене: вопрос не показывается, его нужно услышать. Ответь 2–3 полными предложениями и используй нужную форму будущего.',
+  items:[
+   ['What are you going to do next weekend?','be going to: I’m going to… / Present Continuous для договорённостей.'],
+   ['What exams are you taking at the end of this school year, and why?','Present Continuous для того, что уже решено: I’m taking…'],
+   ['How do you think schools will change in the next twenty years?','will для прогноза: I think schools will…'],
+   ['Where will you probably live after you finish school?','will + probably; after you finish — Present, не will.'],
+   ['What will you do as soon as your exams are over?','As soon as + Present: As soon as my exams are over, I’ll…']
+  ]},
+ 'w3l1-future16':{part:'C',title:'Future forms · 16',sub:'16 контекстов · выбор формы',type:'mc',
+  intro:'Домашняя работа по плану. Сначала реши, что это: прогноз, решение сейчас, план, договорённость, расписание или придаточное времени / условия.',
+  items:[
+   ['Look at that queue! We ___ ages to get in.',['will wait','are going to wait','wait','are waiting'],1,'Вывод по тому, что видим → be going to.'],
+   ['The phone is ringing. — OK, I ___ it.',['’ll answer','’m going to answer','answer','’m answering'],0,'Решение в момент речи → will.'],
+   ['According to the programme, the conference ___ at 10 a.m. on Friday.',['opens','is going to open','has opened','opened'],0,'Программа, расписание → Present Simple.'],
+   ['I can’t come on Saturday — I ___ my grandmother to the airport. It’s all arranged.',['take','’m taking','’ll take','have taken'],1,'Договорённость → Present Continuous.'],
+   ['I’ve decided: I ___ medicine at university.',['’m going to study','’ll study','study','studied'],0,'Решение уже принято → be going to.'],
+   ['I’m sure you ___ the new teacher. She’s very friendly.',['will like','are liking','have liked','liked'],0,'I’m sure + прогноз → will.'],
+   ['I’ll text you as soon as the train ___.',['will arrive','arrives','is going to arrive','arrived'],1,'После as soon as — Present Simple.'],
+   ['If it ___ tomorrow, we’ll move the picnic indoors.',['will rain','rains','is going to rain','rained'],1,'После if — Present Simple.'],
+   ['I promise I ___ anyone your secret.',['won’t tell','don’t tell','’m not telling','haven’t told'],0,'Обещание → will / won’t.'],
+   ['Be careful! You ___ that glass.',['will drop','are going to drop','drop','have dropped'],1,'Видим, что сейчас случится → be going to.'],
+   ['What time ___ on Monday?',['does your flight leave','will your flight leaving','is your flight going leave','has your flight left'],0,'Расписание → Present Simple; вопрос с does.'],
+   ['We ___ a party next Friday; we’ve already sent the invitations.',['have','are having','had','have had'],1,'Всё организовано → Present Continuous.'],
+   ['Perhaps people ___ on Mars one day.',['will live','are living','live','have lived'],0,'Perhaps + прогноз → will.'],
+   ['Wait here until I ___ back.',['will come','come','am going to come','came'],1,'После until — Present Simple.'],
+   ['This box is heavy. — ___ it for you?',['Shall I carry','Will I carrying','Am I carrying','Do I carry'],0,'Предложение помощи → Shall I…?'],
+   ['Tom has saved enough money. He ___ a new laptop next month.',['is going to buy','buys','has bought','bought'],0,'Намерение, к которому уже готовился → be going to.']
+  ]},
+ 'w3l1-transform':{part:'C',title:'Transformations · 10',sub:'10 перефразирований с ключевым словом',type:'typed',
+  intro:'Закончи второе предложение так, чтобы смысл сохранился. Используй слово в скобках, не меняя его.',
+  items:[
+   ['I ___ Anna at six.','MEETING',['am meeting','’m meeting'],'Договорённость → Present Continuous.','I have arranged to meet Anna at six.'],
+   ['I ___ Spanish next year.','GOING',['am going to learn','’m going to learn'],'Намерение → be going to + V.','My intention is to learn Spanish next year.'],
+   ['The bus ___ 8.15.','LEAVES',['leaves at'],'Расписание → Present Simple.','The departure time of the bus is 8.15.'],
+   ['I ___ the book tomorrow.','WILL',['will return'],'Обещание → will + V.','I promise to return the book tomorrow.'],
+   ['___ you?','SHALL',['Shall I help'],'Предложение помощи → Shall I…?','Do you want me to help you?'],
+   ['I’ll go out when I ___ the essay.','FINISH',['finish','have finished'],'После when — Present, не will.','First I’ll finish the essay. Then I’ll go out.'],
+   ['They ___ the doctor on Monday.','SEEING',['are seeing','’re seeing'],'Назначенная встреча → Present Continuous.','They have an appointment with the doctor on Monday.'],
+   ['It ___ rain.','GOING',['is going to','’s going to'],'Вывод по тому, что видим → be going to.','The clouds are black — rain is certain.'],
+   ['I ___ to him again.','WON’T',['won’t speak','will not speak'],'Отказ → won’t + V.','I refuse to speak to him again.'],
+   ['Call me as soon as you ___ the result.','GET',['get','have got'],'После as soon as — Present, не will.','You’ll get the result. Call me immediately after that.']
+  ]},
+ 'w3l1-personal':{part:'C',title:'Personal examples · 8',sub:'8 своих предложений · проверяет учитель',type:'write',
+  intro:'Напиши по одному полному предложению о себе. Учитель увидит твой текст и проверит его вручную.',
+  items:[
+   ['Твой план на эти выходные.','be going to'],
+   ['Договорённость на этой неделе: с кем, где и когда.','Present Continuous'],
+   ['Расписание: урок, поезд или фильм.','Present Simple'],
+   ['Прогноз о своей жизни в 2030 году.','I think … will'],
+   ['Обещание учителю.','will / won’t'],
+   ['Что ты сделаешь завтра, как только вернёшься домой.','as soon as + Present'],
+   ['Условие про экзамен.','If + Present, … will'],
+   ['Повторение: что ты уже успела сделать вчера к моменту, когда легла спать.','Past Perfect']
+  ]}
+};
+const W3_ORDER=['w3l1-revision','w3l1-meaning','w3l1-ege','w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal'];
+const W3_HOMEWORK=['w3l1-future16','w3l1-transform','w3l1-personal'];
+
+/* ---------- storage + sending ---------- */
+function w3Get(id){try{return JSON.parse(localStorage.getItem('arinaTask:'+id)||'{}')}catch(e){return {}}}
+function w3Set(id,st){try{localStorage.setItem('arinaTask:'+id,JSON.stringify(st))}catch(e){}}
+function w3Esc(v){return String(v==null?'':v).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function w3Plain(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent.replace(/\s+/g,' ').trim()}
+function w3Norm(s){
+ return String(s||'').toLowerCase().replace(/[’‘`´]/g,"'").replace(/[.,!?;:]/g,' ')
+  .replace(/\bwon't\b/g,'will not').replace(/\bcan't\b/g,'cannot').replace(/n't\b/g,' not')
+  .replace(/'ll\b/g,' will').replace(/'m\b/g,' am').replace(/'re\b/g,' are').replace(/'ve\b/g,' have')
+  .replace(/\b(it|he|she|that|there)'s\b/g,'$1 is').replace(/^'s\b/,'is').replace(/\s+/g,' ').trim();
+}
+function w3Match(value,accepted){const v=w3Norm(value);return !!v&&accepted.some(a=>w3Norm(a)===v)}
+/* Sends one result to the teacher. If the network fails, the result waits in a queue and is re-sent automatically. */
+async function arinaSendResult(payload){
+ try{const saved=await saveArinaHomework(payload);return {ok:true,code:(saved&&saved.code)||''}}
+ catch(e){
+  try{const q=JSON.parse(localStorage.getItem('arinaPendingResults')||'[]');if(!q.some(x=>x.test_id===payload.test_id))q.push(payload);localStorage.setItem('arinaPendingResults',JSON.stringify(q))}catch(_){}
+  return {ok:false,code:''};
+ }
+}
+async function arinaFlushPending(){
+ let q=[];try{q=JSON.parse(localStorage.getItem('arinaPendingResults')||'[]')}catch(e){}
+ if(!q.length)return;
+ const left=[];
+ for(const p of q){
+  try{const saved=await saveArinaHomework(p);const st=w3Get(p.test_id);if(st.done){st.done.pending=false;st.done.code=(saved&&saved.code)||'';w3Set(p.test_id,st)}}
+  catch(e){left.push(p)}
+ }
+ try{localStorage.setItem('arinaPendingResults',JSON.stringify(left))}catch(e){}
+ w3Refresh();
+}
+
+/* ---------- reference cards ---------- */
+function pastRuleHTML(){
+ return '<div class="tenseFormulaBoard"><div class="tenseFormulaTitle">ENGLISH TENSES FORMULAS · PAST</div><div class="tenseFormulaGrid">'+
+ '<div class="tenseNote"><b>1 · PAST SIMPLE</b><code>S + V2 / did not + V</code><small>She <em>finished</em> the test at noon.</small></div>'+
+ '<div class="tenseNote"><b>2 · PAST CONTINUOUS</b><code>S + was/were + V-ing</code><small>She <em>was writing</em> when the bell rang.</small></div>'+
+ '<div class="tenseNote"><b>3 · PAST PERFECT</b><code>S + had + V³</code><small>She <em>had finished</em> before the bell rang.</small></div>'+
+ '<div class="tenseNote"><b>4 · PAST PERFECT CONTINUOUS</b><code>S + had been + V-ing</code><small>She <em>had been writing</em> for an hour by then.</small></div>'+
+ '</div></div><div class="presentGrid">'+
+ '<div class="rule"><b>Past Simple</b><span>finished fact · chain of events</span><span><strong>markers:</strong> yesterday, ago, last week, in 2020</span><span><strong>?</strong> Did + subject + V1?</span></div>'+
+ '<div class="rule"><b>Past Continuous</b><span>process at a past moment · background</span><span><strong>markers:</strong> while, at 5 p.m. yesterday, all evening</span><span><strong>?</strong> Was/Were + subject + V-ing?</span></div>'+
+ '<div class="rule"><b>Past Perfect</b><span>earlier than another past moment · result</span><span><strong>markers:</strong> by the time, already, before, it was the first time</span><span><strong>?</strong> Had + subject + V3?</span></div>'+
+ '<div class="rule"><b>Past Perfect Continuous</b><span>duration up to a past moment</span><span><strong>markers:</strong> for, since, how long + past moment</span><span><strong>?</strong> Had + subject + been + V-ing?</span></div>'+
+ '</div><div class="w3Note"><b>Remember.</b> Маркер — подсказка, а не правило: сначала реши, что было раньше и что было в процессе. Глаголы состояния (know, believe, belong, want) не ставим в Continuous.</div>';
+}
+function futureRuleHTML(){
+ return '<div class="tenseFormulaBoard"><div class="tenseFormulaTitle">FUTURE FORMS · HOW TO CHOOSE</div><div class="tenseFormulaGrid">'+
+ '<div class="tenseNote"><b>1 · WILL + V</b><code>S + will / won’t + V</code><small>I think it <em>will be</em> cold. · I<em>’ll help</em> you.</small></div>'+
+ '<div class="tenseNote"><b>2 · BE GOING TO + V</b><code>S + am/is/are going to + V</code><small>I<em>’m going to study</em> law. · It<em>’s going to rain</em>.</small></div>'+
+ '<div class="tenseNote"><b>3 · PRESENT CONTINUOUS</b><code>S + am/is/are + V-ing</code><small>We<em>’re meeting</em> at six tomorrow.</small></div>'+
+ '<div class="tenseNote"><b>4 · PRESENT SIMPLE</b><code>S + V(s/es)</code><small>The train <em>leaves</em> at 7.15.</small></div>'+
+ '</div></div><div class="presentGrid">'+
+ '<div class="rule"><b>will</b><span>prediction based on opinion: I think, I’m sure, probably, perhaps</span><span>decision at the moment of speaking</span><span>promise · offer · request · refusal (won’t)</span><span><strong>Shall I / we…?</strong> offer or suggestion</span></div>'+
+ '<div class="rule"><b>be going to</b><span>plan or intention decided before speaking</span><span>prediction from what we can see now</span><span><strong>−</strong> am/is/are not going to + V</span><span><strong>?</strong> Am/Is/Are + subject + going to + V?</span></div>'+
+ '<div class="rule"><b>Present Continuous</b><span>fixed arrangement: time, place or person is agreed</span><span>typical verbs: meet, see, have, go, come, leave</span><span>needs a future time: tomorrow, on Friday</span></div>'+
+ '<div class="rule"><b>Present Simple</b><span>timetables and programmes: trains, lessons, films, events</span><span>typical verbs: start, begin, open, close, leave, arrive</span></div>'+
+ '</div><div class="w3Note"><b>Time and condition clauses.</b> После <b>when, as soon as, until, before, after, if, unless</b> будущее выражаем настоящим: <em>I’ll call you when I <u>get</u> home.</em> — не «when I will get». В главной части остаётся will.</div>'+
+ '<div class="w3Note"><b>ЕГЭ 19–24.</b> Если пропуск про будущее, чаще всего нужна форма <b>will + V</b> или <b>will not + V</b>. Но после if / when / as soon as ставим Present Simple.</div>';
+}
+function openW3Rule(kind){
+ if(kind==='present')openTaskWindow('Present Tenses · Rule',presentRuleHTML());
+ else if(kind==='past')openTaskWindow('Past Tenses · Rule',pastRuleHTML());
+ else openTaskWindow('Future forms · Rule',futureRuleHTML());
+}
+
+/* ---------- lesson hub ---------- */
+function w3StatusText(id){
+ const d=w3Get(id).done;
+ if(!d)return ['не начато',''];
+ const t=W3_TASKS[id].type;
+ const res=t==='write'?'текст отправлен':t==='speak'?'выполнено':d.score+' / '+d.total;
+ return [d.pending?res+' · ждёт отправки':res+' · у учителя',d.pending?'wait':'done'];
+}
+function w3Card(id){
+ const t=W3_TASKS[id],s=w3StatusText(id);
+ return '<button class="w3Card" type="button" data-w3card="'+id+'" onclick="openW3Task(\''+id+'\')"><b>'+t.title+'</b><small>'+t.sub+'</small><span class="w3State '+s[1]+'">'+s[0]+'</span></button>';
+}
+function w3RuleCard(kind,title,sub){return '<button class="w3Card w3Ref" type="button" onclick="openW3Rule(\''+kind+'\')"><b>'+title+'</b><small>'+sub+'</small><span class="w3State">справочник</span></button>'}
+function w3LessonHTML(){
+ const done=W3_ORDER.filter(id=>w3Get(id).done).length;
+ return '<div class="w3Hub"><div class="w3Head"><div><div class="eyebrow">WEEK 3 · LESSON 1 · 5 октября</div><h2>Future: will / be going to / Present forms</h2><p>Сначала повторяем Present и Past, затем учимся выбирать форму будущего по смыслу. Все ответы уходят учителю.</p></div><div class="w3Count" id="w3Count"><b>'+done+' / '+W3_ORDER.length+'</b><span>отправлено</span></div></div>'+
+ '<div class="w3Part"><h3><i>A</i> Повторение · Present + Past</h3><div class="w3Grid">'+w3Card('w3l1-revision')+w3RuleCard('present','Present Tenses · Rule','4 времени + формулы')+w3RuleCard('past','Past Tenses · Rule','4 времени + маркеры')+'</div></div>'+
+ '<div class="w3Part"><h3><i>B</i> Новая тема · на уроке</h3><div class="w3Grid">'+w3RuleCard('future','Future forms · Rule','will · be going to · Present forms')+w3Card('w3l1-meaning')+w3Card('w3l1-ege')+w3Card('w3l1-repair')+w3Card('w3l1-interview')+'</div></div>'+
+ '<div class="w3Part w3Home"><h3><i>C</i> Домашняя работа</h3><div class="w3Grid">'+W3_HOMEWORK.map(w3Card).join('')+'<button class="w3Card w3Ref" type="button" onclick="renderTrainer(\'verbs\')"><b>Irregular verbs · 60</b><small>повтори V2 / V3 перед следующим уроком</small><span class="w3State">тренажёр</span></button></div></div></div>';
+}
+function w3HomeworkPanel(){
+ return '<div class="hwSide"><h3>HOMEWORK · LESSON 1</h3><p>Future forms. Ответы автоматически приходят учителю.</p>'+W3_HOMEWORK.map(id=>{const t=W3_TASKS[id],s=w3StatusText(id);return '<button class="hwSideBtn" type="button" data-w3card="'+id+'" onclick="openW3Task(\''+id+'\')">'+t.title.toUpperCase()+'<small>'+t.sub+'</small><span class="w3State '+s[1]+'">'+s[0]+'</span></button>'}).join('')+'</div>';
+}
+function w3Refresh(){
+ document.querySelectorAll('[data-w3card]').forEach(b=>{const s=w3StatusText(b.dataset.w3card),el=b.querySelector('.w3State');if(el){el.textContent=s[0];el.className='w3State '+s[1]}});
+ const c=document.getElementById('w3Count');if(c)c.querySelector('b').textContent=W3_ORDER.filter(id=>w3Get(id).done).length+' / '+W3_ORDER.length;
+}
+
+/* ---------- task player ---------- */
+let w3Speak={i:0,timer:null,left:40};
+function w3StopSpeak(){if(w3Speak.timer){clearInterval(w3Speak.timer);w3Speak.timer=null}if('speechSynthesis' in window)speechSynthesis.cancel()}
+function openW3Task(id){
+ const t=W3_TASKS[id],st=w3Get(id),draft=st.done?st.done.answers:(st.draft||{}),locked=!!st.done;
+ let body='';
+ if(t.type==='mc'){
+  body=t.items.map((q,i)=>{const opts=t.shared||q[1];return '<div class="w3Item" data-i="'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="w3Opts'+(t.shared?' w3Shared':'')+'">'+opts.map((o,j)=>'<button type="button" data-j="'+j+'" class="'+(draft[i]===j?'picked':'')+'">'+o+'</button>').join('')+'</div><div class="w3Why"></div></div>'}).join('');
+ }else if(t.type==='gap'){
+  let n=0;
+  body=t.sets.map(set=>'<div class="w3Text"><h3>'+set.title+'</h3>'+set.lines.map((q,j)=>{const k=n++;return '<p data-i="'+k+'">'+q[0].replace('___','<span class="w3Gap"><small>'+(19+j)+'</small><input autocomplete="off" autocapitalize="off" spellcheck="false" data-k="'+k+'" value="'+w3Esc(draft[k]||'')+'"><em>'+q[1]+'</em></span>')+'<span class="w3Why"></span></p>'}).join('')+'</div>').join('');
+ }else if(t.type==='typed'){
+  body=t.items.map((q,i)=>'<div class="w3Item" data-i="'+i+'">'+(q[4]?'<p class="w3Src">'+q[4]+'</p>':'')+'<p><b>'+(i+1)+'.</b> '+q[0].replace('___','<span class="w3Blank">______</span>')+(q[1]?' <em class="w3Key">'+q[1]+'</em>':'')+'</p><input class="w3Line" autocomplete="off" autocapitalize="off" spellcheck="false" data-k="'+i+'" placeholder="'+(q[4]?'пропущенные слова':'исправленная форма')+'" value="'+w3Esc(draft[i]||'')+'"><div class="w3Why"></div></div>').join('');
+ }else if(t.type==='write'){
+  body=t.items.map((q,i)=>'<div class="w3Item" data-i="'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+' <em class="w3Key">'+q[1]+'</em></p><textarea class="w3Area" rows="2" data-k="'+i+'" placeholder="Write one full sentence in English">'+w3Esc(draft[i]||'')+'</textarea></div>').join('');
+ }else{
+  body='<div class="w3Speak"><div class="w3SpeakTop"><span id="w3SpeakNo">QUESTION 1 / '+t.items.length+'</span><b id="w3SpeakClock">00:40</b></div><div class="w3SpeakBtns"><button type="button" class="action" onclick="w3PlayQuestion(\''+id+'\')">PLAY QUESTION</button><button type="button" class="w3Ghost" onclick="w3ShowQuestion(\''+id+'\')">Показать текст и подсказку</button><button type="button" class="w3Ghost" onclick="w3NextQuestion(\''+id+'\')">NEXT QUESTION</button></div><div class="w3SpeakText" id="w3SpeakText" hidden></div><p class="w3Small">Чек-лист ответа: прямой ответ · причина или пример · 2–3 полных предложения · правильная форма будущего.</p></div>';
+ }
+ const btnText=t.type==='speak'?'Я ответила на все вопросы · отметить у учителя':t.type==='write'?'Отправить учителю':'Проверить и отправить учителю';
+ const html='<div class="w3Panel" data-task="'+id+'"><div class="hero"><div class="eyebrow">Неделя 3 · Урок 1'+(t.part==='C'?' · домашняя работа':t.part==='A'?' · повторение':'')+'</div><h1>'+t.title+'</h1></div><p class="w3Intro">'+t.intro+'</p>'+body+'<div class="w3Submit"><button class="action w3Send" type="button" onclick="w3Submit(\''+id+'\')">'+btnText+'</button><div class="w3Result" id="w3Result"></div><button class="w3Reset" type="button" onclick="w3TeacherReset(\''+id+'\')">Teacher reset</button></div></div>';
+ w3Speak={i:0,timer:null,left:40};
+ openFullScreen('',html,()=>w3Bind(id));
+ if(locked)w3ShowResult(id);
+}
+function w3Draft(id){
+ const t=W3_TASKS[id],root=document.querySelector('.w3Panel[data-task="'+id+'"]'),a={};
+ if(!root)return a;
+ if(t.type==='mc')root.querySelectorAll('.w3Item').forEach(it=>{const p=it.querySelector('button.picked');if(p)a[it.dataset.i]=+p.dataset.j});
+ else root.querySelectorAll('[data-k]').forEach(x=>{if(x.value.trim())a[x.dataset.k]=x.value.trim()});
+ return a;
+}
+function w3Bind(id){
+ const t=W3_TASKS[id],root=document.querySelector('.w3Panel[data-task="'+id+'"]');
+ if(!root||w3Get(id).done)return;
+ const save=()=>{const st=w3Get(id);if(st.done)return;st.draft=w3Draft(id);w3Set(id,st)};
+ if(t.type==='mc')root.querySelectorAll('.w3Opts button').forEach(b=>b.onclick=()=>{if(w3Get(id).done)return;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('picked'));b.classList.add('picked');save()});
+ root.querySelectorAll('[data-k]').forEach(x=>x.oninput=save);
+}
+function w3Details(id,a){
+ const t=W3_TASKS[id];let details=[],score=0;
+ const push=(question,chosen,correct,ok)=>{if(ok)score++;details.push({question,chosen,correct,is_correct:ok})};
+ if(t.type==='mc')t.items.forEach((q,i)=>{const opts=t.shared||q[1],c=a[i];push(w3Plain(q[0]),c==null?'':w3Plain(opts[c]),w3Plain(opts[q[2]]),c===q[2])});
+ else if(t.type==='gap'){let k=0;t.sets.forEach(set=>set.lines.forEach(q=>{const v=a[k++]||'';push(q[0]+' ('+q[1]+')',v,q[2][0],w3Match(v,q[2]))}))}
+ else if(t.type==='typed')t.items.forEach((q,i)=>{const v=a[i]||'';push((q[4]?q[4]+' → ':'')+w3Plain(q[0])+(q[1]?' ('+q[1]+')':''),v,q[2][0],w3Match(v,q[2]))});
+ else if(t.type==='write')t.items.forEach((q,i)=>{const v=a[i]||'';push(q[0]+' ('+q[1]+')',v,'проверяет учитель',!!v)});
+ else t.items.forEach(q=>push(q[0],'ответила устно','устный ответ',true));
+ return {details,score,total:details.length};
+}
+async function w3Submit(id){
+ const t=W3_TASKS[id],st=w3Get(id),out=document.getElementById('w3Result');
+ if(st.done){if(st.done.pending)w3Resend(id);return}
+ const a=w3Draft(id),need=t.type==='mc'||t.type==='typed'||t.type==='write'?t.items.length:t.type==='gap'?t.sets.reduce((n,s)=>n+s.lines.length,0):0;
+ if(Object.keys(a).length<need){out.className='w3Result bad';out.textContent='Сначала ответь на все задания: готово '+Object.keys(a).length+' из '+need+'.';return}
+ const r=w3Details(id,a);
+ st.done={answers:a,score:r.score,total:r.total,date:new Date().toLocaleString('ru-RU'),pending:true,code:''};delete st.draft;w3Set(id,st);
+ w3ShowResult(id);{const b=document.querySelector('.w3Panel[data-task="'+id+'"] .w3Send');if(b){b.disabled=true;b.textContent='Отправка…'}out.className='w3Result';out.textContent=(t.type==='write'||t.type==='speak'?'':'Результат: '+r.score+' / '+r.total+' · ')+'отправка учителю…'}
+ const res=await arinaSendResult({test_id:id,test_title:'Week 3 · Lesson 1 · '+t.title,score:r.score,max_score:r.total,answers:a,details:r.details});
+ const now=w3Get(id);if(now.done){now.done.pending=!res.ok;now.done.code=res.code;w3Set(id,now)}
+ w3ShowResult(id);w3Refresh();
+}
+async function w3Resend(id){
+ const t=W3_TASKS[id],st=w3Get(id);if(!st.done)return;
+ const r=w3Details(id,st.done.answers),out=document.getElementById('w3Result');if(out)out.textContent='Отправка…';
+ let ok=false,code='';
+ try{const saved=await saveArinaHomework({test_id:id,test_title:'Week 3 · Lesson 1 · '+t.title,score:r.score,max_score:r.total,answers:st.done.answers,details:r.details});ok=true;code=(saved&&saved.code)||'';
+  try{const q=JSON.parse(localStorage.getItem('arinaPendingResults')||'[]').filter(x=>x.test_id!==id);localStorage.setItem('arinaPendingResults',JSON.stringify(q))}catch(_){}
+ }catch(e){}
+ st.done.pending=!ok;st.done.code=code;w3Set(id,st);w3ShowResult(id);w3Refresh();
+}
+function w3ShowResult(id){
+ const t=W3_TASKS[id],d=w3Get(id).done,root=document.querySelector('.w3Panel[data-task="'+id+'"]');
+ if(!d||!root)return;
+ const a=d.answers,mark=(el,ok)=>{el.classList.add(ok?'ok':'bad')};
+ root.querySelectorAll('input,textarea').forEach(x=>x.disabled=true);
+ if(t.type==='mc')root.querySelectorAll('.w3Item').forEach(it=>{const i=+it.dataset.i,q=t.items[i];it.querySelectorAll('.w3Opts button').forEach(b=>{b.disabled=true;const j=+b.dataset.j;b.classList.toggle('picked',a[i]===j);if(j===q[2])b.classList.add('ok');else if(a[i]===j)b.classList.add('bad')});it.querySelector('.w3Why').textContent=q[3]});
+ else if(t.type==='gap'){const flat=[];t.sets.forEach(s=>s.lines.forEach(q=>flat.push(q)));root.querySelectorAll('p[data-i]').forEach(p=>{const k=+p.dataset.i,q=flat[k],ok=w3Match(a[k],q[2]);mark(p.querySelector('input'),ok);p.querySelector('.w3Why').textContent=(ok?'':'Верно: '+q[2][0]+'. ')+q[3]})}
+ else if(t.type==='typed')root.querySelectorAll('.w3Item').forEach(it=>{const i=+it.dataset.i,q=t.items[i],ok=w3Match(a[i],q[2]);mark(it.querySelector('input'),ok);it.querySelector('.w3Why').textContent=(ok?'':'Верно: '+q[2][0]+'. ')+q[3]});
+ const out=root.querySelector('.w3Result'),btn=root.querySelector('.w3Send');
+ const res=t.type==='write'?'Текст сохранён':t.type==='speak'?'Отмечено':'Результат: '+d.score+' / '+d.total;
+ if(d.pending){out.className='w3Result bad';out.textContent=res+'. Не удалось отправить учителю — проверь интернет.';btn.disabled=false;btn.textContent='Отправить ещё раз';btn.onclick=()=>w3Resend(id)}
+ else{out.className='w3Result good';out.textContent=res+' · отправлено учителю'+(d.code?' · код '+d.code:'')+'. Повторная попытка закрыта.';btn.disabled=true;btn.textContent='Результат отправлен'}
+}
+function w3TeacherReset(id){
+ const code=prompt('Teacher code');if(code!==W3_TEACHER_CODE)return;
+ localStorage.removeItem('arinaTask:'+id);
+ try{const q=JSON.parse(localStorage.getItem('arinaPendingResults')||'[]').filter(x=>x.test_id!==id);localStorage.setItem('arinaPendingResults',JSON.stringify(q))}catch(e){}
+ openW3Task(id);w3Refresh();
+}
+function w3PlayQuestion(id){
+ const q=W3_TASKS[id].items[w3Speak.i],clock=document.getElementById('w3SpeakClock');
+ w3StopSpeak();w3Speak.left=40;if(clock)clock.textContent='00:40';
+ if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(q[0]);u.lang='en-GB';u.rate=.8;const vs=speechSynthesis.getVoices();u.voice=vs.find(v=>/^en-GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;speechSynthesis.speak(u)}
+ w3Speak.timer=setInterval(()=>{w3Speak.left--;const c=document.getElementById('w3SpeakClock');if(c)c.textContent='00:'+String(Math.max(w3Speak.left,0)).padStart(2,'0');if(w3Speak.left<=0||!c){clearInterval(w3Speak.timer);w3Speak.timer=null}},1000);
+}
+function w3ShowQuestion(id){const q=W3_TASKS[id].items[w3Speak.i],el=document.getElementById('w3SpeakText');if(!el)return;el.hidden=false;el.innerHTML='<b>'+q[0]+'</b><span>'+q[1]+'</span>'}
+function w3NextQuestion(id){
+ const n=W3_TASKS[id].items.length;w3StopSpeak();w3Speak.i=(w3Speak.i+1)%n;
+ const no=document.getElementById('w3SpeakNo'),el=document.getElementById('w3SpeakText'),c=document.getElementById('w3SpeakClock');
+ if(no)no.textContent='QUESTION '+(w3Speak.i+1)+' / '+n;if(el){el.hidden=true;el.innerHTML=''}if(c)c.textContent='00:40';
+}
+window.addEventListener('online',arinaFlushPending);
+window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
+</script>
 <script>
 
 const ARINA_DB_URL='https://lzxcmrlubhjfdhtqvqzt.supabase.co';
@@ -242,12 +648,13 @@ async function saveArinaHomework(payload){
  return Array.isArray(data)?data[0]:data;
 }
 
+const ACTIVE_WEEK=2,ACTIVE_LESSON=0;let currentWeek=ACTIVE_WEEK;
 const weeks=[
 {d:'21–27 Sep',g:'Различать 4 времени группы Present и начать системное повторение irregular verbs.',r:'80%+ в смешанном тесте Present; 20 irregular verbs без подсказки.',l:[
 ['Present Tenses: система 4 времён','Сравнить Present Simple / Continuous / Perfect / Perfect Continuous; составить таблицу meaning → form → marker; разобрать 12 контекстов; выучить 20 irregular verbs.','Тест 12 вопросов на 4 Present forms; 8 трансформаций; восстановить V2/V3 20 глаголов; написать 8 своих предложений (по 2 на каждое время).','quiz'],
 ['Present contrast + stative verbs','16 mixed-context choices; сортировка 18 stative/action verbs; 8 error-correction sentences; 6 устных объяснений выбора времени.','15 mixed Present sentences; 10 stative-verb corrections; 6 предложений формата 19–24; повторить 20 irregular verbs.'],
 ['EGE 19–24: Present forms','2 мини-сета по 6 пропусков; определить грамматический сигнал; объяснить каждое изменение исходного слова; заполнить error log.','Сет 19–24 №1 и №2; исправить все ошибки по схеме answer → rule → new example; cumulative test 20 irregular verbs.']]},
-{d:'28 Sep–4 Oct',g:'Закрепить Present Simple / Continuous / Perfect / Perfect Continuous и stative verbs перед переходом к Past.',r:'Не менее 80% в mixed Present + stative test; ошибки разобраны до начала новой темы.',l:[['Present Tenses + Stative Verbs · Consolidation','Повторить Present Simple / Continuous / Perfect / Perfect Continuous; stative vs dynamic verbs; mixed contexts; работа с ошибками.','Повторить 4 Present tenses и stative verbs; выполнить cumulative Present practice; разобрать ошибки перед переходом к Past.'],['Past Perfect + Past Perfect Continuous','Earlier past; result vs duration; 12 contrast items; narrative sequencing.','15 mixed Past items; 6 sentence transformations; 10 новых irregular verbs.'],['EGE 19–24: Past forms','2 экзаменационных мини-сета; анализ distractors; error log.','12 заданий 19–24 на Past forms; cumulative irregular verbs 40; исправить ошибки.']]},
+{d:'28 Sep–4 Oct',g:'Закрепить четыре Present tenses со stative verbs и уверенно использовать Past Simple / Continuous / Perfect / Perfect Continuous.',r:'Не менее 80% в mixed Present + stative test и в mixed Past set; правильная последовательность событий.',l:[['Present Tenses + Stative Verbs · Consolidation','Повторить Present Simple / Continuous / Perfect / Perfect Continuous; stative vs dynamic verbs; mixed contexts; работа с ошибками.','Повторить 4 Present tenses и stative verbs; выполнить cumulative Present practice; разобрать ошибки перед переходом к Past.'],['Past Perfect + Past Perfect Continuous','Earlier past; result vs duration; 12 contrast items; narrative sequencing.','15 mixed Past items; 6 sentence transformations; 10 новых irregular verbs.'],['EGE 19–24: Past forms','2 экзаменационных мини-сета; анализ distractors; error log.','12 заданий 19–24 на Past forms; cumulative irregular verbs 40; исправить ошибки.']]},
 {d:'5–11 Oct',g:'Различать способы выражения будущего и смешивать Present/Past/Future без опоры на маркеры.',r:'80%+ в mixed tenses checkpoint.',l:[['Future: will / be going to / Present forms','Predictions, plans, arrangements, timetables; 16 contexts.','16 future-form choices; 8 personal examples; 10 transformations.'],['Future Continuous + Future Perfect','Process at a future point; completed by a deadline; timeline practice.','12 items; 6 transformations; short plan “By 2030…” with 6 target forms.'],['Mixed tenses checkpoint','24 mixed tense items; explain 8 choices; error categories.','18 EGE-style grammar gaps; revise error log; irregular verbs cumulative 50.']]},
 {d:'12–18 Oct',g:'Строить Passive Voice в основных временах и узнавать его в заданиях 19–24.',r:'90% формообразования Passive; 80% exam set.',l:[['Passive: core tenses','Active → Passive in Present/Past/Future; 15 transformations.','12 transformations; 8 gap-fill items; learn V3 forms from error list.'],['Passive with modals + two objects','Modal passive; two-object verbs; by/with; 12 contexts.','10 modal-passive items; 6 two-object transformations; 6 error corrections.'],['EGE Passive practice','2 sets 19–24 with passive forms; tense + voice decision.','12 exam gaps; write rule for each mistake; mixed tense/passive test.']]},
 {d:'19–25 Oct',g:'Различать значения modal verbs и их эквивалентов.',r:'80%+ в modal meaning test; корректные past modals.',l:[['can/could/may/might','Ability, permission, possibility; degrees of certainty; 16 contexts.','15 choices; 8 paraphrases; 6 personal examples.'],['must/have to/should/need','Obligation, necessity, advice, absence of necessity; contrasts.','16 mixed modal items; 8 transformations; error correction.'],['Past modals','must have / might have / could have / should have; inference about past.','12 past-modal sentences; 6 paraphrases; mini EGE set.']]},
@@ -410,18 +817,6 @@ function showWordwall(box,key){
 }
 function stativeQhtml(key){return wordwallTestHTML(stativeQuiz,key)}
 
-const starterTexts=[
-'Education has changed considerably over the last few decades. Students can now use digital libraries, online courses and educational applications to find information almost instantly. Yet technology does not automatically make learning effective. Successful students still need to organise their time, read critically and practise new skills regularly. Teachers also remain important because they help learners select reliable sources, understand difficult ideas and receive useful feedback. Another essential skill is the ability to work independently. At university and in professional life, people are often expected to plan complex tasks without constant supervision. For this reason, school students benefit from learning how to set realistic goals, monitor their progress and reflect on mistakes. These habits may seem simple, but together they can make learning more efficient and prepare young people for situations in which they have to make decisions on their own.',
-'Scientists have long been interested in the connection between sleep and learning. During sleep, the brain continues to process information received during the day. Research suggests that regular sleep is important for attention, memory and problem-solving. Teenagers, however, often sleep less than they need because of homework, social media and irregular schedules. Lack of sleep can make it more difficult to concentrate in class and may reduce the effectiveness of revision. Studying late into the night is therefore not always the best strategy before an important test. A more productive approach is to distribute revision over several days, take short breaks and maintain a regular sleeping routine. These habits do not remove the need for serious study, but they can help learners use their study time more effectively and arrive at an examination able to focus on the tasks in front of them.',
-'Many cities are trying to make public spaces more comfortable and environmentally friendly. One approach is to create more areas where people can walk or cycle safely. Such projects can reduce traffic in crowded districts and encourage residents to be more physically active. They can also make neighbourhoods quieter and provide additional space for trees and outdoor cafés. However, changing a city transport system is rarely simple. Local authorities have to consider the needs of residents, businesses, drivers and public transport users. A successful project therefore requires careful planning and clear communication. Before introducing permanent changes, some cities test new street designs for a limited period and collect feedback from the public. This allows planners to identify practical problems and improve the project before large amounts of money are spent.',
-'Learning a foreign language involves much more than memorising individual words. Learners need to notice how vocabulary works in phrases, how grammar changes meaning and how pronunciation affects communication. Reading can support all three areas because it exposes students to language in context. When learners meet an unfamiliar word, they can first try to infer its meaning from the surrounding sentences instead of immediately consulting a dictionary. They can also record useful collocations rather than isolated words. Reading aloud adds another dimension: it forces the learner to pay attention to word stress, sentence rhythm and endings that may be easy to ignore during silent reading. Regular practice with short texts can therefore support vocabulary, grammar and speaking at the same time. The most useful approach is not simply to read more, but to read actively and return to language that is worth remembering.'
-];
-const markerSets=[
-[['usually','обычно'],['every day','каждый день'],['often','часто'],['rarely','редко'],['always','всегда'],['sometimes','иногда'],['now','сейчас'],['at the moment','в данный момент']],
-[['already','уже'],['just','только что'],['yet','ещё / уже'],['since','с'],['for','в течение'],['so far','до сих пор'],['recently','недавно'],['ever','когда-либо']],
-[['while','пока / в то время как'],['when','когда'],['by the time','к тому времени как'],['before','до'],['after','после'],['yesterday','вчера'],['last week','на прошлой неделе'],['ago','назад']],
-[['tomorrow','завтра'],['next week','на следующей неделе'],['by 2030','к 2030 году'],['this time tomorrow','завтра в это время'],['soon','скоро'],['in two days','через два дня'],['tonight','сегодня вечером'],['in the future','в будущем']]
-];
 function materialBox(key){
  return '<div class="materialBox"><b>Мои материалы к этому блоку</b><input type="file" multiple onchange="saveMaterials(this,\''+key+'\')"><div class="savedFiles" id="files-'+key+'"></div></div>';
 }
@@ -554,8 +949,9 @@ function lessonStarter(w,i){
  if(w===0&&i===1){
   return '<div class="lessonMenu" style="grid-template-columns:1fr 1fr"><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'rule\',\''+key+'\')">RULE · STATIVE / DYNAMIC</button><button class="lessonMenuBtn" type="button" onclick="openStativePanel(\'test\',\''+key+'s\')">GRAMMAR TEST · 25</button></div>';
  }
+ if(w===2&&i===0)return w3LessonHTML();
  if(w===1&&i===0){
-  return '<div class="examCard" style="border-left:5px solid #D52B1E"><div class="eyebrow">WEEK 2 · LESSON 1</div><h2>Present Consolidation</h2><p>Сегодня не повторяем задания из Недели 1. Цель — закрепить четыре Present Tenses и stative / dynamic verbs перед переходом к Past.</p><div class="miniEge"><div class="miniTask"><b>1 · Contrast</b><br>Present Simple ↔ Continuous</div><div class="miniTask"><b>2 · Result / duration</b><br>Present Perfect ↔ Perfect Continuous</div><div class="miniTask"><b>3 · Meaning change</b><br>stative ↔ dynamic verbs</div><div class="miniTask"><b>4 · Homework</b><br>30 Present + 4 FIPI blocks + Reading Lab</div></div></div>';
+  return '<div class="examCard" style="border-left:5px solid #D52B1E"><div class="eyebrow">WEEK 2 · LESSON 1</div><h2>Present Consolidation</h2><p>Сегодня не повторяем задания из Недели 1. Цель — закрепить четыре Present Tenses и stative / dynamic verbs перед переходом к Past.</p><div class="miniEge"><div class="miniTask"><b>1 · Contrast</b><br>Present Simple ↔ Continuous</div><div class="miniTask"><b>2 · Result / duration</b><br>Present Perfect ↔ Perfect Continuous</div><div class="miniTask"><b>3 · Meaning change</b><br>stative ↔ dynamic verbs</div><div class="miniTask"><b>4 · Homework</b><br>30 Present + 4 FIPI blocks + Reading Lab — кнопки справа на странице недели</div></div></div>';
  }
  return egePresentPractice(key)+submitBox(key,'EGE Present forms');
 }
@@ -599,27 +995,28 @@ function lockSubmitted(box,key){
  const s=box.querySelector('.submitStatus');if(s)s.innerHTML='ЗАВЕРШЕНО · '+d.score+' / '+d.total+' · код: <b>'+d.code+'</b><br>Повторное выполнение и исправление заблокированы.';
 }
 function qhtml(key='q'){return '<div class="quiz quizSet">'+quiz.map((q,i)=>'<div class="q" data-answer="'+q[2]+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="opts">'+q[1].map((o,j)=>'<label class="opt"><input type="radio" name="'+key+'q'+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div><div class="fb"></div></div>').join('')+'</div><button class="action" type="button" onclick="checkQuizSet(this)">Проверить 25 заданий</button><span class="score"></span>'}
-function renderButtons(){const root=document.getElementById('weekBtns');weeks.slice(0,3).forEach((w,i)=>{const b=document.createElement('button');b.className='wbtn'+(i===0?' active':i===1?'':' locked');b.dataset.i=i;b.innerHTML='<b>Неделя '+(i+1)+'</b><small>'+w.d+(i<2?' · активна':' · скоро')+'</small>';if(i<2)b.onclick=()=>renderWeek(i);root.appendChild(b)})}
+function renderButtons(){const root=document.getElementById('weekBtns');weeks.slice(0,ACTIVE_WEEK+2).forEach((w,i)=>{const open=i<=ACTIVE_WEEK;const b=document.createElement('button');b.type='button';b.className='wbtn'+(open?'':' locked');b.dataset.i=i;b.innerHTML='<b>Неделя '+(i+1)+'</b><small>'+w.d+(i===ACTIVE_WEEK?' · текущая':open?' · пройдена':' · скоро')+'</small>';if(open)b.onclick=()=>renderWeek(i);else b.disabled=true;root.appendChild(b)})}
 function lessonHTML(x,i,w){
- const locked=w===1&&i>0;
- return '<div class="lesson '+(locked?'lessonLocked':'')+'" '+(locked?'':'onclick="openLesson('+w+','+i+')"')+' style="cursor:'+(locked?'not-allowed':'pointer')+'"><div class="lessonHead" style="display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:14px"><span class="lnum">'+(i+1)+'</span><span class="ltitle"><b>Урок '+(i+1)+' · '+x[0]+'</b><small>'+(locked?'Пока неактивен':'Открыть урок')+'</small></span><span class="chev">'+(locked?'🔒':'→')+'</span></div></div>'
+ const locked=w===ACTIVE_WEEK&&i>ACTIVE_LESSON,ruleOnly=w===1&&i>0;
+ const click=locked?'':ruleOnly?'onclick="openW3Rule(\'past\')"':'onclick="openLesson('+w+','+i+')"';
+ const note=locked?'Откроется в день урока':ruleOnly?'Пройдено на занятии · открыть правило Past':'Открыть урок';
+ return '<div class="lesson '+(locked?'lessonLocked':'')+'" '+click+' style="cursor:'+(locked?'not-allowed':'pointer')+'"><div class="lessonHead" style="display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:14px"><span class="lnum">'+(i+1)+'</span><span class="ltitle"><b>Урок '+(i+1)+' · '+x[0]+'</b><small>'+note+'</small></span>'+(locked?'<span class="lockTag">закрыт</span>':'<span class="chev">→</span>')+'</div></div>'
 }
 function lessonFullHTML(x,i,w){
- let html='<button class="lessonBack" onclick="closeLesson()">← Неделя 1</button><div class="lesson"><div class="lessonbody">'+lessonStarter(w,i);
- if(w!==0){
+ let html='<button class="lessonBack" onclick="closeLesson()">← Неделя '+(w+1)+'</button><div class="lesson"><div class="lessonbody">'+lessonStarter(w,i);
+ if(w===1){
   html+='<div class="cols"><div class="box"><h3>На уроке</h3><ul>'+x[1].split('; ').map(s=>'<li>'+s+'</li>').join('')+'</ul></div><div class="box"><h3>Контроль результата</h3><ul><li>полноценная тренировка</li><li>ошибки в personal error log</li><li>retrieval в начале следующего урока</li></ul></div></div>'+materialBox('w'+w+'l'+i+'-teacher');
-  if(!(w===1&&i===0)) html+='<details class="hw"><summary>Домашняя работа · открыть</summary><div class="hwbody"><div class="task">'+x[2].split('; ').map((s,n)=>'<b>'+(n+1)+'.</b> '+s).join('<br>')+'</div>'+materialBox('w'+w+'l'+i+'-hw')+'<label class="check"><input type="checkbox" data-save="w'+w+'l'+i+'"> Домашняя работа выполнена</label></div></details>';
  }
  return html+'</div></div>';
 }
-function openLesson(w,i){if(w===1&&i>0)return;let p=document.getElementById('lessonPage');if(!p){p=document.createElement('div');p.id='lessonPage';p.className='lessonPage';document.body.appendChild(p)}p.innerHTML=lessonFullHTML(weeks[w].l[i],i,w)+(w===1?'<div class="examCard" style="margin:10px 14px 20px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Grammar 19–24 + Word Formation 25–29 · материалы 2026</div></div><button class="action" type="button" onclick="closeLesson();renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');p.style.display='block';restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));initKahoots();const key='w'+w+'l'+i;if(localStorage.getItem('submitted-'+key))lockSubmitted(p,key);scrollTo(0,0)}
+function openLesson(w,i){if((w===ACTIVE_WEEK&&i>ACTIVE_LESSON)||(w===1&&i>0)||w>ACTIVE_WEEK)return;let p=document.getElementById('lessonPage');if(!p){p=document.createElement('div');p.id='lessonPage';p.className='lessonPage';document.body.appendChild(p)}p.innerHTML=lessonFullHTML(weeks[w].l[i],i,w);p.style.display='block';restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));initKahoots();const key='w'+w+'l'+i;if(localStorage.getItem('submitted-'+key))lockSubmitted(p,key);scrollTo(0,0)}
 function closeLesson(){const p=document.getElementById('lessonPage');if(p)p.style.display='none'}
 function egeRightPanel(weekIndex){
  const hw=weekIndex===1?'<div class="hwSide"><h3>HOMEWORK · LESSON 1</h3><p>Present закрепляем полностью. Past в Уроке 1 не вводится.</p>'+
  '<button class="hwSideBtn" type="button" onclick="openW2Present()">PRESENT + STATIVE · 30<small>4 Present tenses + stative / dynamic verbs</small></button>'+
  '<button class="hwSideBtn" type="button" onclick="openW2Fipi()">ФИПИ · 4 БЛОКА<small>Grammar 19–24 + Word Formation 25–29</small></button>'+
  '<button class="hwSideBtn" type="button" onclick="openW2Reading()">READING LAB · 6 TEXTS<small>6 отдельных текстов + Quizlet cards + British audio</small></button>'+
- '</div>':'';
+ '</div>':weekIndex===2?w3HomeworkPanel():'';
  return '<aside class="week1Right">'+hw+'<div class="expandedCard"><h3>СТРУКТУРА ЕГЭ 2027</h3>'+
  '<div class="expandedRow"><span>1–9 · Listening</span><b>12</b></div>'+
  '<div class="expandedRow"><span>10–18 · Reading</span><b>12</b></div>'+
@@ -636,7 +1033,7 @@ function egeRightPanel(weekIndex){
  '<a class="rightBig fipi" href="https://fipi.ru/ege/otkrytyy-bank-zadaniy-ege" target="_blank" rel="noopener">Открытый банк ФИПИ</a>'+
  '<div class="rightNote">Структура ЕГЭ и баллы всегда видны справа у каждой недели.</div></aside>';
 }
-function renderWeek(i){if(i<0||i>1)return;document.body.classList.remove('fullWeek');document.getElementById('examView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('weekView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.toggle('active',+b.dataset.i===i));const w=weeks[i];const lessons=w.l.map((x,j)=>lessonHTML(x,j,i)).join('')+(i===1?'<div class="examCard" style="margin-top:10px;border:2px solid #D52B1E;background:#fff"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b style="color:#D52B1E;font-size:14px">EXAM 2026</b><div class="tiny">Реальные материалы 2026 · Grammar 19–24 + Word Formation 25–29</div></div><button class="action" type="button" onclick="renderExam2026()">ОТКРЫТЬ EXAM 2026</button></div></div>':'');const body='<div class="week1Layout"><div class="week1Tasks">'+lessons+'</div>'+egeRightPanel(i)+'</div>';document.getElementById('weekView').innerHTML='<div class="weekTitle"><b>Неделя '+(i+1)+'</b> · '+w.d+'</div><div class="weekMeta"><div class="card"><div class="eyebrow">Цель недели</div><h2>'+w.g+'</h2></div><div class="card result"><div class="eyebrow">Критерий готовности</div><p><b>'+w.r+'</b></p></div></div>'+body;restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
+function renderWeek(i){if(i<0||i>ACTIVE_WEEK)return;currentWeek=i;closeLesson();closeFullScreen();closeTaskWindow();if(window.closeArinaRussia)closeArinaRussia();['weekView','examView','trainerView'].forEach(id=>{const v=document.getElementById(id);v.style.display='';v.classList.toggle('on',id==='weekView')});document.body.classList.remove('fullWeek');document.querySelectorAll('.wbtn').forEach(b=>b.classList.toggle('active',+b.dataset.i===i));const w=weeks[i];const lessons=w.l.map((x,j)=>lessonHTML(x,j,i)).join('');const body='<div class="week1Layout"><div class="week1Tasks">'+lessons+'</div>'+egeRightPanel(i)+'</div>';document.getElementById('weekView').innerHTML='<div class="weekTitle"><b>Неделя '+(i+1)+'</b> · '+w.d+'</div><div class="weekMeta"><div class="card"><div class="eyebrow">Цель недели</div><h2>'+w.g+'</h2></div><div class="card result"><div class="eyebrow">Критерий готовности</div><p><b>'+w.r+'</b></p></div></div>'+body;restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 let saved={};try{saved=JSON.parse(localStorage.getItem('arinaPlanV4')||'{}')}catch(e){}function restore(){document.querySelectorAll('[data-save]').forEach(x=>{x.checked=!!saved[x.dataset.save];x.onchange=()=>{saved[x.dataset.save]=x.checked;localStorage.setItem('arinaPlanV4',JSON.stringify(saved))}})}
 function exitWeek(){document.body.classList.remove('fullWeek');document.getElementById('side').classList.add('open')}function checkQuizSet(btn){let n=0;const set=btn.parentElement.querySelector('.quizSet');set.querySelectorAll('.q').forEach(box=>{const sel=box.querySelector('input:checked'),fb=box.querySelector('.fb'),ans=+box.dataset.answer;if(!sel){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+sel.value===ans){n++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Try again';fb.className='fb bad'}});btn.nextElementSibling.textContent=n+' / '+set.querySelectorAll('.q').length}function checkQuiz(){let n=0;quiz.forEach((q,i)=>{const box=document.querySelector('[data-q="'+i+'"]'),sel=box.querySelector('input:checked'),fb=box.querySelector('.fb');if(!sel){fb.textContent='Выбери ответ.';fb.className='fb bad'}else if(+sel.value===q[2]){n++;fb.textContent='Correct';fb.className='fb good'}else{fb.textContent='Correct: '+q[1][q[2]];fb.className='fb bad'}});document.getElementById('score').textContent=n+' / '+quiz.length}
 const irregularVerbs=[
@@ -715,7 +1112,7 @@ function openFullScreen(title,html,after){
  p.innerHTML='<div class="content"><button class="lessonBack fullScreenBack" onclick="closeFullScreen()">← Назад</button>'+html+'</div>';
  p.style.display='block';scrollTo(0,0);if(after)after();
 }
-function closeFullScreen(){const p=document.getElementById('fullScreenPanel');if(p)p.style.display='none'}
+function closeFullScreen(){const p=document.getElementById('fullScreenPanel');if(p)p.style.display='none';if(typeof w3StopSpeak==='function'){w3StopSpeak();w3Refresh()}}
 const oralReadingTexts=[
 'People have always been interested in the night sky. Today, powerful telescopes allow scientists to observe distant stars and galaxies in remarkable detail. Space research also helps us understand our own planet. Satellites provide information about weather, oceans and changes in the environment. Although travelling into space remains difficult and expensive, new technology is making scientific missions more efficient. Researchers believe that future discoveries may answer important questions about the origin of the universe and the possibility of life beyond Earth.',
 'Learning a foreign language changes more than the way people communicate. Researchers have found that regular language practice can improve attention and memory. Learners also become more aware of how languages are organised and how meaning can change in different situations. Digital tools now make it possible to practise pronunciation, vocabulary and listening almost anywhere. However, successful learning still depends on regular practice, clear goals and active use of the language in meaningful communication.',
@@ -735,37 +1132,38 @@ function renderTrainer(id){
 }
 
 
+
 const w2PresentMix=[
-['My sister usually ___ her homework before dinner.',['finishes','is finishing','has finished','has been finishing'],0],
-['Be quiet! I ___ to the news.',['listen','am listening','have listened','have been listening'],1],
-['We ___ three mock tests so far this month.',['do','are doing','have done','have been doing'],2],
-['She is exhausted because she ___ since early morning.',['studies','is studying','has studied','has been studying'],3],
-['The school bus ___ at 7:30 every day.',['leaves','is leaving','has left','has been leaving'],0],
-['This week I ___ with my grandparents.',['stay','am staying','have stayed','have been staying'],1],
-['I ___ this article twice already.',['read','am reading','have read','have been reading'],2],
-['It ___ for hours, so the ground is wet.',['rains','is raining','has rained','has been raining'],3],
-['Our teacher always ___ the answers carefully.',['checks','is checking','has checked','has been checking'],0],
-['Look! Someone ___ at the door.',['knocks','is knocking','has knocked','has been knocking'],1],
-['We ___ four chapters since September.',['complete','are completing','have completed','have been completing'],2],
-['How long ___ for the exam?',['do you prepare','are you preparing','have you prepared','have you been preparing'],3],
-['I ___ what you mean.',['see','am seeing','have seen','have been seeing'],0],
-['I ___ my dentist tomorrow afternoon.',['see','am seeing','have seen','have been seeing'],1],
-['This soup ___ delicious.',['tastes','is tasting','has tasted','has been tasting'],0],
-['The chef ___ the sauce at the moment.',['tastes','is tasting','has tasted','has been tasting'],1],
-['I ___ this is the best answer.',['think','am thinking','have thought','have been thinking'],0],
-['I ___ about changing my revision plan this week.',['think','am thinking','have thought','have been thinking'],1],
-['She ___ a new laptop.',['has','is having','has had','has been having'],0],
-['We ___ dinner right now.',['have','are having','have had','have been having'],1],
-['The bag ___ about five kilos.',['weighs','is weighing','has weighed','has been weighing'],0],
-['The assistant ___ the parcel now.',['weighs','is weighing','has weighed','has been weighing'],1],
-['This jacket ___ you perfectly.',['fits','is fitting','has fitted','has been fitting'],0],
-['The mechanic ___ a new part to the car now.',['fits','is fitting','has fitted','has been fitting'],1],
-['I ___ why this rule matters now.',['understand','am understanding','have been understanding','understanding'],0],
-['He ___ unusually rude today.',['is','is being','has been being','being'],1],
-['He ___ a very polite person in general.',['is','is being','has been','being'],0],
-['The box ___ old family photographs.',['contains','is containing','has contained','has been containing'],0],
-['The flowers ___ wonderful.',['smell','are smelling','have smelled','have been smelling'],0],
-['Why ___ the milk? Do you think it is fresh?',['do you smell','are you smelling','have you smelled','have you been smelling'],1]
+['The library ___ at nine on weekdays.',['opens','is opening','has opened','has been opening'],0],
+['Please don’t switch off the light — I ___ for my keys.',['look','am looking','have looked','have been looking'],1],
+['Our team ___ every match this season.',['wins','is winning','has won','has been winning'],2],
+['My back hurts because I ___ boxes since lunchtime.',['carry','am carrying','have carried','have been carrying'],3],
+['Nurses often ___ at night.',['work','are working','have worked','have been working'],0],
+['Where is Dad? — He ___ the car in the yard.',['washes','is washing','has washed','has been washing'],1],
+['She ___ her passport, so she cannot check in.',['loses','is losing','has lost','has been losing'],2],
+['You look hot. — Yes, I ___ tennis for two hours.',['play','am playing','have played','have been playing'],3],
+['In our school, the first lesson ___ at 8.30.',['begins','is beginning','has begun','has been beginning'],0],
+['My brother ___ at a café until he finds a permanent job.',['works','is working','has worked','has been working'],1],
+['This is the best book I ___ this year.',['read','am reading','have read','have been reading'],2],
+['How long ___ English?',['do you learn','are you learning','have you learnt','have you been learning'],3],
+['You ___ pale. Are you all right?',['look','are looking','have looked','have been looking'],0],
+['Why ___ at me like that?',['do you look','are you looking','have you looked','have you been looking'],1],
+['He ___ to be the youngest player in the team.',['appears','is appearing','has appeared','has been appearing'],0],
+['The actor ___ in a new play this month.',['appears','is appearing','has appeared','has been appearing'],1],
+['We ___ visitors this evening, so I am tidying the flat.',['expect','are expecting','have expected','have been expecting'],1],
+['I ___ you are tired after the journey.',['expect','am expecting','have expected','have been expecting'],0],
+['The committee ___ three candidates at the moment.',['considers','is considering','has considered','has been considering'],1],
+['Most critics ___ her the best writer of her generation.',['consider','are considering','have considered','have been considering'],0],
+['This room ___ four metres by five.',['measures','is measuring','has measured','has been measuring'],0],
+['The builders ___ the kitchen wall right now.',['measure','are measuring','have measured','have been measuring'],1],
+['Tina ___ cooking for her friends at weekends.',['enjoys','is enjoying','has enjoyed','has been enjoying'],0],
+['How ___ your first week at the new school?',['do you enjoy','are you enjoying','have you enjoyed','have you been enjoying'],1],
+['This old coin ___ to the city museum.',['belongs','is belonging','has belonged','has been belonging'],0],
+['The success of the project ___ on the weather.',['depends','is depending','has depended','has been depending'],0],
+['My grandparents ___ a small house by the river.',['own','are owning','have owned','have been owning'],0],
+['That idea ___ interesting. Tell me more.',['sounds','is sounding','has sounded','has been sounding'],0],
+['This sign ___ that parking is not allowed.',['means','is meaning','has meant','has been meaning'],0],
+['Maria ___ from Brazil, but she lives in Lisbon.',['comes','is coming','has come','has been coming'],0]
 ];
 
 const w2Readings=[
@@ -778,32 +1176,28 @@ const w2Readings=[
 ]
 let w2TestScore=0,w2Answered={},w2ReadingIndex=0,w2WordIndex=0;
 
-function w2PackHTML(){
- return '<div class="w2Pack"><div class="w2PackHead"><div><b>HOMEWORK · PRESENT CONSOLIDATION</b><br><span>Present only · Past в этом уроке не вводится</span></div></div><div class="w2PackGrid">'+
- '<button class="w2PackBtn" onclick="openW2Present()">PRESENT + STATIVE<br>30 QUESTIONS</button>'+
- '<button class="w2PackBtn" onclick="openW2Fipi()">FIPI<br>4 BLOCKS</button>'+
- '<button class="w2PackBtn" onclick="openW2Reading()">READING<br>3 NEW TEXTS</button>'+
- '<button class="w2PackBtn" onclick="openW2Reading()">QUIZLET WORDS<br>FROM TEXTS</button>'+
- '</div></div>';
-}
-
 function openW2Present(){
  w2TestScore=0;w2Answered={};
  const items=w2PresentMix.map((q,i)=>'<div class="w2Item" data-w2q="'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="w2Choices">'+q[1].map((o,j)=>'<button type="button" onclick="answerW2Present(this,'+i+','+j+')">'+o+'</button>').join('')+'</div></div>').join('');
- openFullScreen('', '<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Present Tenses + Stative / Dynamic Verbs</h1></div><div class="w2Progress" id="w2Progress">Answered 0 / 30 · Score 0</div>'+items+'</div>');
+ openFullScreen('', '<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>Present Tenses + Stative / Dynamic Verbs</h1></div><div class="w2Progress" id="w2Progress">Answered 0 / '+w2PresentMix.length+' · Score 0</div>'+items+'</div>');
 }
 function answerW2Present(btn,i,j){
- if(w2Answered[i])return;
- w2Answered[i]=true;
+ if(w2Answered[i]!==undefined)return;
+ w2Answered[i]=j;
  const q=w2PresentMix[i],box=btn.closest('.w2Item'),buttons=[...box.querySelectorAll('button')];
  buttons.forEach(x=>x.disabled=true);
  if(j===q[2]){w2TestScore++;btn.classList.add('correct')}else{btn.classList.add('wrong');buttons[q[2]].classList.add('correct')}
- const done=Object.keys(w2Answered).length;
- document.getElementById('w2Progress').textContent='Answered '+done+' / 30 · Score '+w2TestScore;
+ const done=Object.keys(w2Answered).length,total=w2PresentMix.length,bar=document.getElementById('w2Progress');
+ bar.textContent='Answered '+done+' / '+total+' · Score '+w2TestScore;
+ if(done===total){
+  if(localStorage.getItem('sent-w2-present')){bar.textContent+=' · первая попытка уже у учителя';return}
+  bar.textContent+=' · отправка учителю…';
+  arinaSendResult({test_id:'w2-present-stative',test_title:'Week 2 · Lesson 1 · Present + Stative · 30',score:w2TestScore,max_score:total,answers:w2Answered,details:w2PresentMix.map((x,k)=>({question:x[0],chosen:x[1][w2Answered[k]],correct:x[1][x[2]],is_correct:w2Answered[k]===x[2]}))}).then(r=>{localStorage.setItem('sent-w2-present','1');bar.textContent='Answered '+done+' / '+total+' · Score '+w2TestScore+(r.ok?' · отправлено учителю':' · отправится учителю, когда появится интернет')});
+ }
 }
 
 function w2FipiSetHTML(set,start,label){
- return '<div class="w2FipiSet"><h3>'+label+' · '+set.t+'</h3><div class="w2FipiText">'+set.q.map((x,i)=>(start+i)+'. '+x[0].replace('___','<span class="w2Gap"><input autocomplete="off" data-answer="'+x[2].replace(/"/g,'&quot;')+'"><span class="w2Base">'+x[1]+'</span></span>')).join('<br>')+'</div><button class="w2Check" type="button" onclick="checkW2Fipi(this)">CHECK</button><div class="w2Result"></div></div>';
+ return '<div class="w2FipiSet" data-title="'+label+' · '+set.t+'"><h3>'+label+' · '+set.t+'</h3><div class="w2FipiText">'+set.q.map((x,i)=>(start+i)+'. '+x[0].replace('___','<span class="w2Gap"><input autocomplete="off" data-q="'+w3Esc(x[0]+' ('+x[1]+')')+'" data-answer="'+x[2].replace(/"/g,'&quot;')+'"><span class="w2Base">'+x[1]+'</span></span>')).join('<br>')+'</div><button class="w2Check" type="button" onclick="checkW2Fipi(this)">CHECK</button><div class="w2Result"></div></div>';
 }
 function openW2Fipi(){
  const html='<div class="w2Panel"><div class="hero"><div class="eyebrow">Неделя 2 · Урок 1</div><h1>FIPI · Grammar & Word Formation · 4 blocks</h1></div><div class="w2FipiGrid">'+
@@ -818,6 +1212,14 @@ function checkW2Fipi(btn){
  const box=btn.closest('.w2FipiSet'),inputs=[...box.querySelectorAll('input')];let good=0;
  inputs.forEach(inp=>{const ok=inp.value.trim().toLowerCase().replace(/\s+/g,' ')===inp.dataset.answer.trim().toLowerCase().replace(/\s+/g,' ');inp.style.borderBottomColor=ok?'#15803d':'#D52B1E';if(ok)good++});
  box.querySelector('.w2Result').textContent=good+' / '+inputs.length;
+ arinaSendGapSet(box.dataset.title,inputs.map(inp=>({question:inp.dataset.q,chosen:inp.value.trim(),correct:inp.dataset.answer,is_correct:inp.style.borderBottomColor==='rgb(21, 128, 61)'})),box.querySelector('.w2Result'));
+}
+function arinaSendGapSet(title,rows,out){
+ if(rows.some(r=>!r.chosen))return;
+ const id='fipi26-'+title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+ if(localStorage.getItem('sent-'+id)){if(out)out.textContent+=' · первая попытка уже у учителя';return}
+ const score=rows.filter(r=>r.is_correct).length;localStorage.setItem('sent-'+id,'1');
+ arinaSendResult({test_id:id,test_title:'FIPI 2026 · '+title,score:score,max_score:rows.length,answers:Object.fromEntries(rows.map((r,i)=>['q'+(i+1),r.chosen])),details:rows}).then(r=>{if(out)out.textContent+=r.ok?' · отправлено учителю':' · отправится учителю, когда появится интернет'});
 }
 
 function openW2Reading(){
@@ -878,16 +1280,19 @@ const exam26WF=[
 let exam26Mode='grammar',exam26Index=0;
 function renderExam2026(){exam26Mode='grammar';exam26Index=0;renderExam26View()}
 function renderExam26View(){
- document.getElementById('lessonPage').style.display='none';document.getElementById('examView').style.display='block';document.getElementById('weekView').style.display='none';
+ closeLesson();closeFullScreen();
+ ['weekView','examView','trainerView'].forEach(id=>{const v=document.getElementById(id);v.style.display='';v.classList.toggle('on',id==='examView')});
+ document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));
  const data=exam26Mode==='grammar'?exam26Grammar:exam26WF,set=data[exam26Index],start=exam26Mode==='grammar'?19:25;
- document.getElementById('examView').innerHTML='<button class="lessonBack" onclick="renderWeek(currentWeek)">← Назад</button><div class="hero"><div class="eyebrow">EXAM 2026</div><h1>'+(exam26Mode==='grammar'?'Grammar 19–24':'Word Formation 25–29')+'</h1></div><div class="exam26Tabs"><button onclick="exam26Mode=\'grammar\';exam26Index=0;renderExam26View()">GRAMMAR · 19–24</button><button onclick="exam26Mode=\'wf\';exam26Index=0;renderExam26View()">WORD FORMATION · 25–29</button></div><div class="exam26Set"><h3>'+set.t+'</h3><div class="exam26Text">'+set.q.map((x,i)=>(start+i)+'. '+x[0].replace('___','<span class="exam26Gap"><input data-i="'+i+'" autocomplete="off"><span class="exam26Base">'+x[1]+'</span></span>')).join('<br>')+'</div><div class="exam26Nav"><button onclick="checkExam26(this)">CHECK</button><button onclick="exam26Index=(exam26Index+1)%'+data.length+';renderExam26View()">NEXT SET →</button></div><div class="exam26Result"></div></div>';
+ document.getElementById('examView').innerHTML='<button class="lessonBack" type="button" onclick="renderWeek(currentWeek)">← Неделя '+(currentWeek+1)+'</button><div class="hero"><div class="eyebrow">ФИПИ · материалы 2026</div><h1>'+(exam26Mode==='grammar'?'Grammar 19–24':'Word Formation 25–29')+'</h1></div><div class="exam26Tabs"><button type="button" onclick="exam26Mode=\'grammar\';exam26Index=0;renderExam26View()">GRAMMAR · 19–24</button><button type="button" onclick="exam26Mode=\'wf\';exam26Index=0;renderExam26View()">WORD FORMATION · 25–29</button></div><div class="exam26Set"><h3>'+set.t+' · '+(exam26Index+1)+' / '+data.length+'</h3><div class="exam26Text">'+set.q.map((x,i)=>(start+i)+'. '+x[0].replace('___','<span class="exam26Gap"><input data-i="'+i+'" autocomplete="off"><span class="exam26Base">'+x[1]+'</span></span>')).join('<br>')+'</div><div class="exam26Nav"><button type="button" onclick="checkExam26(this)">CHECK</button><button type="button" onclick="exam26Index=(exam26Index+1)%'+data.length+';renderExam26View()">NEXT SET →</button></div><div class="exam26Result"></div></div>';
+ if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo(0,0);
 }
-function checkExam26(btn){const data=exam26Mode==='grammar'?exam26Grammar:exam26WF,set=data[exam26Index],box=btn.closest('.exam26Set');let good=0;box.querySelectorAll('input').forEach((x,i)=>{const a=x.value.trim().toLowerCase().replace(/\s+/g,' '),ok=a===set.q[i][2];if(ok)good++;x.style.borderBottomColor=ok?'#15803d':'#D52B1E'});box.querySelector('.exam26Result').textContent=good+' / '+set.q.length}
-const EX={grammar1924:['19–24 · Грамматика','<div class="examCard"><h3>Место для заданий 19–24</h3><p>Грамматические формы. Задания будут добавляться сюда отдельно.</p></div>'],wordformation:['25–29 · Словообразование','<div class="examCard"><h3>Место для заданий 25–29</h3><p>Word Formation. Задания будут добавляться сюда отдельно.</p></div>'],vocabulary3036:['30–36 · Лексика','<div class="examCard"><h3>Место для заданий 30–36</h3><p>Лексико-грамматический выбор. Задания будут добавляться сюда отдельно.</p></div>'],overview:['ЕГЭ 2027 · баллы по заданиям','<table class="table"><tr><th>Задание</th><th>Макс.</th></tr><tr><td>1</td><td>2</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3–9</td><td>по 1</td></tr><tr><td>10</td><td>3</td></tr><tr><td>11</td><td>2</td></tr><tr><td>12–18</td><td>по 1</td></tr><tr><td>19–24</td><td>по 1</td></tr><tr><td>25–29</td><td>по 1</td></tr><tr><td>30–36</td><td>по 1</td></tr><tr><td>37 · email</td><td>6</td></tr><tr><td>38 · письменное высказывание</td><td>14</td></tr><tr><td>39 · чтение вслух</td><td>1</td></tr><tr><td>40 · 4 вопроса</td><td>4</td></tr><tr><td>41 · интервью</td><td>5</td></tr><tr><td>42 · монолог</td><td>10</td></tr><tr><td><b>Итого</b></td><td><b>82</b></td></tr></table>'],listen:['1–9 · Аудирование · 12 баллов','<div class="crit"><span>№1 · понимание основного содержания</span><span class="pts">2</span></div><div class="crit"><span>№2 · понимание запрашиваемой информации</span><span class="pts">3</span></div><div class="crit"><span>№3–9 · полное понимание текста</span><span class="pts">7</span></div>'],read:['10–18 · Чтение · 12 баллов','<div class="crit"><span>№10 · основное содержание</span><span class="pts">3</span></div><div class="crit"><span>№11 · структурно-смысловые связи</span><span class="pts">2</span></div><div class="crit"><span>№12–18 · полное понимание</span><span class="pts">7</span></div>'],grammar:['19–36 · Грамматика и лексика · 18 баллов','<div class="crit"><span>19–24 · грамматические формы</span><span class="pts">6</span></div><div class="crit"><span>25–29 · словообразование</span><span class="pts">5</span></div><div class="crit"><span>30–36 · лексико-грамматический выбор</span><span class="pts">7</span></div>'],write:['37–38 · Письменная речь · 20 баллов','<h3>№37 · email · 100–140 слов · 6 баллов</h3><div class="crit"><span>К1 Решение коммуникативной задачи</span><span class="pts">2</span></div><div class="crit"><span>К2 Организация текста</span><span class="pts">2</span></div><div class="crit"><span>К3 Языковое оформление</span><span class="pts">2</span></div><h3>№38 · 200–250 слов · 14 баллов</h3><div class="crit"><span>К1 Решение коммуникативной задачи</span><span class="pts">3</span></div><div class="crit"><span>К2 Организация</span><span class="pts">3</span></div><div class="crit"><span>К3 Лексика</span><span class="pts">3</span></div><div class="crit"><span>К4 Грамматика</span><span class="pts">3</span></div><div class="crit"><span>К5 Орфография и пунктуация</span><span class="pts">2</span></div><p class="tiny">0 по К1 обнуляет соответствующее задание. При проверке учитываются правила объёма и 10%-го допуска из критериев ФИПИ.</p>'],speak:['39–42 · Устная часть · 20 баллов','<div class="crit"><span>39 · чтение текста вслух</span><span class="pts">1</span></div><div class="crit"><span>40 · 4 прямых вопроса</span><span class="pts">4</span></div><div class="crit"><span>41 · 5 ответов интервью</span><span class="pts">5</span></div><div class="crit"><span>42 · связный монолог: К1 РКЗ + К2 организация + К3 язык</span><span class="pts">10</span></div><p class="tiny">Устная часть — 17 минут. Для задания 42: 12–15 фраз, подготовка 2,5 минуты, ответ до 3 минут.</p>']};
-function renderExam(id){document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
-document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(0);
+function checkExam26(btn){const data=exam26Mode==='grammar'?exam26Grammar:exam26WF,set=data[exam26Index],box=btn.closest('.exam26Set');let good=0;box.querySelectorAll('input').forEach((x,i)=>{const a=x.value.trim().toLowerCase().replace(/\s+/g,' '),ok=a===set.q[i][2];if(ok)good++;x.style.borderBottomColor=ok?'#15803d':'#D52B1E'});const out=box.querySelector('.exam26Result');out.textContent=good+' / '+set.q.length;arinaSendGapSet((exam26Mode==='grammar'?'GRAMMAR 19–24':'WORD FORMATION 25–29')+' · '+set.t,[...box.querySelectorAll('input')].map((x,i)=>({question:set.q[i][0]+' ('+set.q[i][1]+')',chosen:x.value.trim(),correct:set.q[i][2],is_correct:x.value.trim().toLowerCase().replace(/\s+/g,' ')===set.q[i][2]})),out)}
+const EX={grammar1924:['19–24 · Грамматика','<div class="examCard"><h3>Место для заданий 19–24</h3><p>Грамматические формы. Задания будут добавляться сюда отдельно.</p></div>'],wordformation:['25–29 · Словообразование','<div class="examCard"><h3>Место для заданий 25–29</h3><p>Word Formation. Задания будут добавляться сюда отдельно.</p></div>'],vocabulary3036:['30–36 · Лексика','<div class="examCard"><h3>Задания 30–36</h3><p>Лексико-грамматический выбор откроется, когда дойдём до этой темы по плану (январь).</p></div>'],overview:['ЕГЭ 2027 · баллы по заданиям','<table class="table"><tr><th>Задание</th><th>Макс.</th></tr><tr><td>1</td><td>2</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3–9</td><td>по 1</td></tr><tr><td>10</td><td>3</td></tr><tr><td>11</td><td>2</td></tr><tr><td>12–18</td><td>по 1</td></tr><tr><td>19–24</td><td>по 1</td></tr><tr><td>25–29</td><td>по 1</td></tr><tr><td>30–36</td><td>по 1</td></tr><tr><td>37 · email</td><td>6</td></tr><tr><td>38 · письменное высказывание</td><td>14</td></tr><tr><td>39 · чтение вслух</td><td>1</td></tr><tr><td>40 · 4 вопроса</td><td>4</td></tr><tr><td>41 · интервью</td><td>5</td></tr><tr><td>42 · монолог</td><td>10</td></tr><tr><td><b>Итого</b></td><td><b>82</b></td></tr></table>'],listen:['1–9 · Аудирование · 12 баллов','<div class="crit"><span>№1 · понимание основного содержания</span><span class="pts">2</span></div><div class="crit"><span>№2 · понимание запрашиваемой информации</span><span class="pts">3</span></div><div class="crit"><span>№3–9 · полное понимание текста</span><span class="pts">7</span></div>'],read:['10–18 · Чтение · 12 баллов','<div class="crit"><span>№10 · основное содержание</span><span class="pts">3</span></div><div class="crit"><span>№11 · структурно-смысловые связи</span><span class="pts">2</span></div><div class="crit"><span>№12–18 · полное понимание</span><span class="pts">7</span></div>'],grammar:['19–36 · Грамматика и лексика · 18 баллов','<div class="crit"><span>19–24 · грамматические формы</span><span class="pts">6</span></div><div class="crit"><span>25–29 · словообразование</span><span class="pts">5</span></div><div class="crit"><span>30–36 · лексико-грамматический выбор</span><span class="pts">7</span></div>'],write:['37–38 · Письменная речь · 20 баллов','<h3>№37 · email · 100–140 слов · 6 баллов</h3><div class="crit"><span>К1 Решение коммуникативной задачи</span><span class="pts">2</span></div><div class="crit"><span>К2 Организация текста</span><span class="pts">2</span></div><div class="crit"><span>К3 Языковое оформление</span><span class="pts">2</span></div><h3>№38 · 200–250 слов · 14 баллов</h3><div class="crit"><span>К1 Решение коммуникативной задачи</span><span class="pts">3</span></div><div class="crit"><span>К2 Организация</span><span class="pts">3</span></div><div class="crit"><span>К3 Лексика</span><span class="pts">3</span></div><div class="crit"><span>К4 Грамматика</span><span class="pts">3</span></div><div class="crit"><span>К5 Орфография и пунктуация</span><span class="pts">2</span></div><p class="tiny">0 по К1 обнуляет соответствующее задание. При проверке учитываются правила объёма и 10%-го допуска из критериев ФИПИ.</p>'],speak:['39–42 · Устная часть · 20 баллов','<div class="crit"><span>39 · чтение текста вслух</span><span class="pts">1</span></div><div class="crit"><span>40 · 4 прямых вопроса</span><span class="pts">4</span></div><div class="crit"><span>41 · 5 ответов интервью</span><span class="pts">5</span></div><div class="crit"><span>42 · связный монолог: К1 РКЗ + К2 организация + К3 язык</span><span class="pts">10</span></div><p class="tiny">Устная часть — 17 минут. Для задания 42: 12–15 фраз, подготовка 2,5 минуты, ответ до 3 минут.</p>']};
+function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
+document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- pages-republish-20260928-2251 -->
+<!-- week3-lesson1-20261005 -->
 
 <script id="arinaRussiaScript">
 (function(){
@@ -1028,7 +1433,7 @@ window.moveRussiaVocab=function(d){vocabIndex=(vocabIndex+d+RUSSIA_VOCAB.length)
 window.speakRussiaWord=function(){speakUK(RUSSIA_VOCAB[vocabIndex][0],.82)}
 function readingHTML(){const r=READINGS[readingIndex];return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">EGE · READING 10</div><h2>'+r.title+'</h2><p>Match texts A–G with headings 1–8. One heading is extra. CHECK shows only the score; the answer key is not displayed.</p></div><div class="readingPager">'+READINGS.map((x,i)=>'<button class="'+(i===readingIndex?'active':'')+'" onclick="setRussiaReading('+i+')">TEXT '+(i+1)+'</button>').join('')+'</div><div class="readingShell"><div class="readingTextPane"><div class="readingHeadings">'+r.heads.map((h,i)=>'<div><b>'+(i+1)+'.</b> '+h+'</div>').join('')+'</div>'+r.parts.map(x=>'<p><b>'+x[0]+'.</b> '+x[1]+'</p>').join('')+'</div><div class="readingAnswerPane"><h3 style="margin:0 0 8px;color:#0039A6">Your answers</h3><div class="readingAnswers">'+r.parts.map((x,i)=>'<label class="readingRow"><b>'+x[0]+'</b><select data-read="'+i+'"><option value="">—</option>'+r.heads.map((h,n)=>'<option value="'+(n+1)+'">'+(n+1)+' · '+h+'</option>').join('')+'</select></label>').join('')+'</div><button class="russiaAction" style="width:100%;margin-top:10px" type="button" onclick="checkRussiaReading()">CHECK</button><div class="readingResult" id="readingResult"></div><div class="russiaSub">Your detailed answer set is sent to the teacher. Correct headings are not revealed here.</div></div></div></section>'}
 window.setRussiaReading=function(i){readingIndex=i;renderRussiaTab('reading')}
-window.checkRussiaReading=async function(){const r=READINGS[readingIndex],sels=[...document.querySelectorAll('[data-read]')],vals=sels.map(x=>Number(x.value));const out=document.getElementById('readingResult');if(vals.some(x=>!x)){out.textContent='Complete A–G first.';return}let score=0;vals.forEach((x,i)=>{if(x===r.key[i])score++});out.textContent=score+' / 7 · saving…';try{if(typeof saveArinaHomework==='function'){await saveArinaHomework({test_id:'russia-reading10-'+(readingIndex+1),test_title:'Russia Topic · Reading 10 · Text '+(readingIndex+1),score:score,max_score:7,answers:Object.fromEntries(vals.map((v,i)=>[String.fromCharCode(65+i),v])),details:r.parts.map((p,i)=>({item:p[0],answer:vals[i],correct:vals[i]===r.key[i]}))});out.textContent=score+' / 7 · sent to teacher'}else out.textContent=score+' / 7'}catch(e){out.textContent=score+' / 7 · saved on this device';try{localStorage.setItem('arina_pending_russia_reading_'+readingIndex,JSON.stringify({score,vals,at:new Date().toISOString()}))}catch(_){}}}
+window.checkRussiaReading=async function(){const r=READINGS[readingIndex],sels=[...document.querySelectorAll('[data-read]')],vals=sels.map(x=>Number(x.value));const out=document.getElementById('readingResult');if(vals.some(x=>!x)){out.textContent='Complete A–G first.';return}let score=0;vals.forEach((x,i)=>{if(x===r.key[i])score++});out.textContent=score+' / 7 · saving…';try{if(typeof saveArinaHomework==='function'){await saveArinaHomework({test_id:'russia-reading10-'+(readingIndex+1),test_title:'Russia Topic · Reading 10 · Text '+(readingIndex+1),score:score,max_score:7,answers:Object.fromEntries(vals.map((v,i)=>[String.fromCharCode(65+i),v])),details:r.parts.map((p,i)=>({question:'Text '+p[0]+' · '+p[1].slice(0,80)+'…',chosen:vals[i]+'. '+r.heads[vals[i]-1],correct:r.key[i]+'. '+r.heads[r.key[i]-1],is_correct:vals[i]===r.key[i]}))});out.textContent=score+' / 7 · sent to teacher'}else out.textContent=score+' / 7'}catch(e){out.textContent=score+' / 7 · saved on this device';try{localStorage.setItem('arina_pending_russia_reading_'+readingIndex,JSON.stringify({score,vals,at:new Date().toISOString()}))}catch(_){}}}
 function oral1HTML(){const x=ORAL_READ[oralIndex];return '<section class="russiaPage active"><div class="russiaHero"><div class="ey">ORAL PART · TASK 1</div><h2>Reading aloud</h2><p>Preparation: 1.5 minutes. Reading: up to 1.5 minutes. Focus on sense groups, stress and natural pauses.</p></div><div class="oralOne"><article class="oralText"><h3>'+x.title+'</h3><p>'+x.text+'</p></article><aside class="oralTools"><div class="russiaSub">TEXT '+(oralIndex+1)+' / '+ORAL_READ.length+'</div><div class="oralTimerBig" id="oral1Timer">01:30</div><button class="primary" type="button" onclick="startOral1Timer()">START 90 SEC</button><button type="button" onclick="speakUK(ORAL_READ[oralIndex].text,.78)">MODEL READING</button><button type="button" onclick="moveOral1(-1)">← PREVIOUS TEXT</button><button type="button" onclick="moveOral1(1)">NEXT TEXT →</button><div class="russiaSub" style="margin-top:8px">Do not imitate word by word. Listen for stress, pauses and linking, then read the text yourself.</div></aside></div></section>'}
 let oralTimer=null,oralLeft=90;
 window.moveOral1=function(d){if(oralTimer){clearInterval(oralTimer);oralTimer=null}oralIndex=(oralIndex+d+ORAL_READ.length)%ORAL_READ.length;renderRussiaTab('oral1')}
