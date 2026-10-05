@@ -948,7 +948,16 @@ window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
 
 const ARINA_DB_URL='https://lzxcmrlubhjfdhtqvqzt.supabase.co';
 const ARINA_DB_KEY='sb_publishable_PmyZRwzWne8lqprej4XJQA_XiujtjEI';
-async function saveArinaHomework(payload){
+/* Одна и та же работа с теми же ответами отправляется один раз, сколько бы раз ни нажали кнопку */
+const arinaSentOnce={};
+function saveArinaHomework(payload){
+ const sig=payload.test_id+'|'+payload.score+'|'+payload.max_score+'|'+JSON.stringify(payload.answers||{});
+ if(arinaSentOnce[sig])return arinaSentOnce[sig];
+ const pr=saveArinaHomeworkNow(payload);
+ arinaSentOnce[sig]=pr;pr.catch(()=>{delete arinaSentOnce[sig]});
+ return pr;
+}
+async function saveArinaHomeworkNow(payload){
  const r=await fetch(ARINA_DB_URL+'/rest/v1/rpc/submit_arina_homework',{
   method:'POST',
   headers:{'apikey':ARINA_DB_KEY,'Authorization':'Bearer '+ARINA_DB_KEY,'Content-Type':'application/json'},
