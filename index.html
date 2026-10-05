@@ -510,22 +510,61 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 .weekTitle em{font-style:normal;font-weight:600;color:#64748b}
 .weekTitle.now em{color:#166534}
 .weekTitle button{border:0;background:#0039A6;color:#fff;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
-.duePanel{padding:10px 11px;margin-bottom:8px}
+.duePanel{padding:8px 11px;margin-bottom:7px}
+.dueHead{margin-bottom:6px}.dueList{gap:5px}.dueRow{padding:6px 10px}
 .dueRow{grid-template-columns:1fr auto;gap:8px;padding:7px 10px}
 .dueRow .w3Tag{display:none}
 .dueText b{font-size:15px}
 .dueRow em{font-size:13px;padding:6px 10px}
 .egeStruct{padding:9px 12px}
 .egeStruct summary{cursor:pointer;font-size:14px;font-weight:700;color:#0039A6}
+.debtRow{padding:5px 10px;margin-bottom:4px}.debtPanel{padding:8px 11px}.navOpen{padding:7px}
 .egeStruct[open] summary{margin-bottom:6px}
 .egeStruct .expandedRow{padding:4px 2px;font-size:13px}
 .week1Right{display:block}
 .rightBig{display:inline-block;width:calc(50% - 4px);padding:8px 6px;margin-top:8px;font-size:13px;font-weight:700;border-radius:9px}
 .rightBig.fipi{margin-left:4px}
 @media(max-width:900px){.week1Layout{grid-template-columns:1fr}.week1Right{order:-1}}
+.w3TagDebt{background:#c2410c}
+.w3Due .w3TagDebt,.w3Card:not(.w3Debt) .w3TagDebt{display:none}
+.w3Debt .w3TagDebt{display:inline-block;margin:0 7px 0 0;vertical-align:2px}
+.w3Card.w3Debt{border:2px solid #fb923c;background:#fff7ed}
+.lessonChip.debt{background:#ffedd5;color:#9a3412;border:1px solid #fb923c}
+.wbtn{position:relative}
+.wLeft{position:absolute;right:7px;top:7px;font-style:normal;font-size:11px;font-weight:700;color:#9a3412;background:#ffedd5;border-radius:20px;padding:1px 7px}
+.wLeft:empty{display:none}
+.navSide{margin-top:6px!important;border-left-color:#fb923c!important}
+.debtPanel{background:#fff7ed;border:2px solid #fb923c;border-radius:14px;padding:10px 11px;margin-bottom:8px}
+.debtHead{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.debtHead b{font-size:16px;font-weight:700;color:#9a3412}
+.debtHead i{font-style:normal;font-weight:700;font-size:13px;background:#c2410c;color:#fff;border-radius:20px;padding:2px 9px}
+.debtRow{display:flex;justify-content:space-between;align-items:center;width:100%;background:#fff;border:1px solid #fdba74;border-radius:10px;padding:7px 10px;margin-bottom:5px;cursor:pointer;font-size:15px}
+.debtRow b{font-weight:600;color:#0b2a66}.debtRow span{font-weight:700;color:#c2410c;font-size:14px}
+.debtRow.clear span{color:#166534}
+.navOpen{width:100%;border:0;background:#c2410c;color:#fff;border-radius:10px;padding:8px;font-size:14px;font-weight:700;cursor:pointer;margin-top:2px}
+.nav{max-width:1280px;margin:0 auto}
+.navTop{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 6px}
+.navTop h1{margin:0;font-size:20px;color:#0039A6;font-weight:700}
+.navLegend{display:flex;gap:6px;flex-wrap:wrap}
+.navLegend i,.navRow i{font-style:normal;font-size:12px;font-weight:700;border-radius:20px;padding:2px 9px;white-space:nowrap;background:#eef2f7;color:#475569}
+.navLegend i.due,.navRow.due i{background:#D52B1E;color:#fff}
+.navLegend i.debt,.navRow.debt i{background:#c2410c;color:#fff}
+.navLegend i.done,.navRow.done i{background:#dcfce7;color:#166534}
+.navCols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:start}
+.navCol{background:#fff;border:1px solid #cbd9ea;border-radius:13px;padding:10px 11px}
+.navWeek{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.navWeek b{font-size:17px;color:#0039A6;font-weight:700}.navWeek span{font-size:13px;font-weight:700;color:#c2410c}
+.navLesson{font-size:12px;font-weight:700;color:#64748b;margin:5px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.navRow{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;border:1px solid #d9e1ec;background:#fff;border-radius:8px;padding:4px 9px;margin-bottom:3px;cursor:pointer;font-size:15px;color:#0b2a66}
+.navRow span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.navRow:hover{border-color:#0039A6}
+.navRow.due{background:#fff8e1;border-color:#f59e0b}
+.navRow.debt{background:#fff7ed;border-color:#fb923c}
+.navRow.done{background:#f6fef9;color:#475569}
+@media(max-width:800px){.navCols{grid-template-columns:1fr}.navTop{flex-direction:column;align-items:flex-start}}
 </style></head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
-<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Памятки</div><button class="trainerBtn" onclick="openMemo('present')">Памятки · времена и маркеры</button><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="openPresentPanel('markertrain','side')">Marker → Tense · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
+<aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><button class="trainerBtn navSide" type="button" onclick="openNavigator()">Навигатор заданий</button><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Памятки</div><button class="trainerBtn" onclick="openMemo('present')">Памятки · времена и маркеры</button><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="openPresentPanel('markertrain','side')">Marker → Tense · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
 <main class="main"><section id="weekView" class="content on"></section><section id="examView" class="content"></section><section id="trainerView" class="content"></section></main>
 <script id="arinaWeek3Script">
 /* ===== ARINA · WEEK 3 · LESSON 1 · Future forms + revision of Present / Past ===== */
@@ -965,6 +1004,29 @@ function arinaCopyLink(btn){
  const link=arinaAssignLink(),done=()=>{btn.textContent='Ссылка скопирована — отправьте её Арине'};
  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(link).then(done,()=>prompt('Ссылка для Арины',link));else prompt('Ссылка для Арины',link);
 }
+function arinaIsDebt(id){for(let w=0;w<ACTIVE_WEEK;w++)for(let i=0;i<3;i++)if(lessonTaskIds(w,i).includes(id))return !w3Get(id).done&&!arinaAssigned().includes(id);return false}
+function arinaWeekLeft(w){let n=0;for(let i=0;i<3;i++)if(!(w===ACTIVE_WEEK&&i>ACTIVE_LESSON))n+=lessonTaskIds(w,i).filter(id=>!w3Get(id).done).length;return n}
+function plural(n){const a=n%10,b=n%100;return n+' '+(a===1&&b!==11?'задание':a>=2&&a<=4&&(b<10||b>=20)?'задания':'заданий')}
+function debtPanelHTML(){
+ let rows='',total=0;
+ for(let w=0;w<ACTIVE_WEEK;w++){const n=arinaWeekLeft(w);total+=n;rows+='<button type="button" class="debtRow'+(n?'':' clear')+'" onclick="openNavigator()"><b>Неделя '+(w+1)+'</b><span>'+(n?'осталось '+plural(n):'всё сдано')+'</span></button>'}
+ return '<div class="debtPanel" id="debtPanel"><div class="debtHead"><b>Прошлые недели</b>'+(total?'<i>'+total+'</i>':'')+'</div>'+rows+'<button type="button" class="navOpen" onclick="openNavigator()">Навигатор · все задания на одном экране</button></div>';
+}
+function navRowHTML(id){
+ const t=taskDef(id),st=w3Get(id),d=st.done,due=arinaIsDue(id),debt=arinaIsDebt(id),started=!d&&st.draft&&Object.keys(st.draft).length;
+ const cls=d?'done':due?'due':debt?'debt':'',mark=d?(t.type==='write'||t.type==='speak'?'сдано':d.score+' / '+d.total):due?'задано':started?'начато':debt?'сделать':'по желанию';
+ return '<button type="button" class="navRow '+cls+'" onclick="openW3Task(\''+id+'\')"><span>'+t.title+'</span><i>'+mark+'</i></button>';
+}
+function openNavigator(){
+ let cols='';
+ for(let w=0;w<=ACTIVE_WEEK;w++){
+  let body='';const left=arinaWeekLeft(w);
+  for(let i=0;i<3;i++){if(w===ACTIVE_WEEK&&i>ACTIVE_LESSON)continue;const ids=lessonTaskIds(w,i);if(!ids.length)continue;body+='<div class="navLesson">Урок '+(i+1)+' · '+weeks[w].l[i][0]+'</div>'+ids.map(navRowHTML).join('')}
+  cols+='<div class="navCol"><div class="navWeek"><b>Неделя '+(w+1)+'</b><span>'+(left?'осталось '+left:'всё сдано')+'</span></div>'+body+'</div>';
+ }
+ openFullScreen('','<div class="nav" id="navRoot"><div class="navTop"><h1>Навигатор заданий</h1><div class="navLegend"><i class="due">задано</i><i class="debt">сделать · прошлые недели</i><i class="done">сдано</i></div></div><div class="navCols">'+cols+'</div></div>');
+ PL=null;
+}
 function duePanelHTML(){
  const due=arinaDue(),ru=t=>(t.label||'Week 3 · Lesson 1').replace('Week','Неделя').replace('Lesson','Урок');
  if(!due.length)return '<div class="duePanel dueEmpty" id="duePanel"><b>Задано сейчас</b><span>Все заданные работы сданы.</span></div>';
@@ -979,7 +1041,7 @@ function w3StatusText(id){
  return d.pending?[res+' · ждёт отправки','wait']:[res+' · у учителя','done'];
 }
 function w3Card(c,n){
- if(c[0]==='task'){const t=taskDef(c[1]),s=w3StatusText(c[1]);const card='<button class="w3Card'+(arinaIsDue(c[1])?' w3Due':'')+'" type="button" data-w3card="'+c[1]+'" onclick="openW3Task(\''+c[1]+'\')"><i class="w3Num">'+n+'</i><span class="w3CardText"><span class="w3Tag">задано</span><b>'+t.title+'</b><small>'+t.sub+'</small></span><span class="w3State '+s[1]+'">'+s[0]+'</span></button>';
+ if(c[0]==='task'){const t=taskDef(c[1]),s=w3StatusText(c[1]);const card='<button class="w3Card'+(arinaIsDue(c[1])?' w3Due':'')+(arinaIsDebt(c[1])?' w3Debt':'')+'" type="button" data-w3card="'+c[1]+'" onclick="openW3Task(\''+c[1]+'\')"><i class="w3Num">'+n+'</i><span class="w3CardText"><span class="w3Tag">задано</span><span class="w3Tag w3TagDebt">сделать</span><b>'+t.title+'</b><small>'+t.sub+'</small></span><span class="w3State '+s[1]+'">'+s[0]+'</span></button>';
   if(!arinaTeacher())return card;const on=arinaAssigned().includes(c[1]);return '<div class="w3Row">'+card+'<button type="button" class="w3Assign'+(on?' on':'')+'" onclick="arinaToggleAssign(\''+c[1]+'\')">'+(on?'снять':'задать')+'</button></div>'}
  const click=c[0]==='rule'?"openW3Rule('"+c[1]+"')":c[1];
  return '<button class="w3Card w3Ref" type="button" onclick="'+click+'"><i class="w3Num">'+n+'</i><span class="w3CardText"><b>'+c[2]+'</b><small>'+c[3]+'</small></span><span class="w3State">открыть</span></button>';
@@ -990,11 +1052,13 @@ function w3LessonHTML(w,i){
  return '<div class="w3Hub">'+tbar+'<div class="w3Head"><div><div class="eyebrow">Неделя '+(w+1)+' · Урок '+(i+1)+'</div><h2>'+weeks[w].l[i][0]+'</h2><p>'+L.intro+(pr[1]?' Жёлтая рамка и метка «задано» — это нужно сделать.':'')+(arinaTeacher()?'':' <button class="w3Reset" type="button" onclick="arinaTeacherMode(true)">Режим учителя</button>')+'</p></div>'+(pr[1]?'<div class="w3Count" id="w3Count" data-w="'+w+'" data-i="'+i+'"><b>'+pr[0]+' / '+pr[1]+'</b><span>сдано</span></div>':'')+'</div>'+
  '<div class="w3Cols w3Cols'+L.parts.length+'">'+L.parts.map(p=>'<div class="w3Part'+(p[2]?' w3Home':'')+'"><h3>'+p[0]+'</h3><div class="w3List">'+p[1].map(c=>w3Card(c,++n)).join('')+'</div></div>').join('')+'</div>'+'</div>';
 }
-function lessonChip(w,i){const pr=lessonProgress(w,i);if(!pr[1])return 'справочник';const due=lessonTaskIds(w,i).filter(arinaIsDue).length;return (pr[0]===pr[1]?'все задания сданы':'сдано '+pr[0]+' из '+pr[1])+(due?' · задано: '+due:'');}
+function lessonChip(w,i){const pr=lessonProgress(w,i);if(!pr[1])return 'справочник';const due=lessonTaskIds(w,i).filter(arinaIsDue).length;const debt=lessonTaskIds(w,i).filter(arinaIsDebt).length;return (pr[0]===pr[1]?'все задания сданы':'сдано '+pr[0]+' из '+pr[1])+(due?' · задано: '+due:'')+(debt?' · сделать: '+debt:'');}
 function w3Refresh(){
  const dp=document.getElementById('duePanel');if(dp)dp.outerHTML=duePanelHTML();
- document.querySelectorAll('[data-chip]').forEach(el=>{const a=el.dataset.chip.split('-');el.classList.toggle('due',lessonTaskIds(+a[0],+a[1]).some(arinaIsDue))});
- document.querySelectorAll('[data-w3card]').forEach(b=>{b.classList.toggle('w3Due',arinaIsDue(b.dataset.w3card));const s=w3StatusText(b.dataset.w3card),el=b.querySelector('.w3State');if(el){el.textContent=s[0];el.className='w3State '+s[1]}});
+ const db=document.getElementById('debtPanel');if(db)db.outerHTML=debtPanelHTML();
+ document.querySelectorAll('[data-left]').forEach(el=>{const n=arinaWeekLeft(+el.dataset.left);el.textContent=n?'осталось '+n:'';});
+ document.querySelectorAll('[data-chip]').forEach(el=>{const a=el.dataset.chip.split('-');el.classList.toggle('due',lessonTaskIds(+a[0],+a[1]).some(arinaIsDue));el.classList.toggle('debt',lessonTaskIds(+a[0],+a[1]).some(arinaIsDebt))});
+ document.querySelectorAll('[data-w3card]').forEach(b=>{b.classList.toggle('w3Due',arinaIsDue(b.dataset.w3card));b.classList.toggle('w3Debt',arinaIsDebt(b.dataset.w3card));const s=w3StatusText(b.dataset.w3card),el=b.querySelector('.w3State');if(el){el.textContent=s[0];el.className='w3State '+s[1]}});
  const c=document.getElementById('w3Count');if(c){const pr=lessonProgress(+c.dataset.w,+c.dataset.i);c.querySelector('b').textContent=pr[0]+' / '+pr[1]}
  document.querySelectorAll('[data-chip]').forEach(el=>{const a=el.dataset.chip.split('-'),pr=lessonProgress(+a[0],+a[1]);el.textContent=lessonChip(+a[0],+a[1]);el.classList.toggle('done',pr[1]>0&&pr[0]===pr[1])});
 }
@@ -1008,12 +1072,13 @@ function plGapOffset(t,step){let k=0;for(let s=0;s<step;s++)k+=t.sets[s].lines.l
 function plStepDone(t,a,step){if(t.type==='gap'){const o=plGapOffset(t,step);return t.sets[step].lines.every((q,j)=>a[o+j]!=null&&a[o+j]!=='')}return a[step]!=null&&a[step]!==''}
 function plAnswered(t,a){return Object.keys(a).filter(k=>a[k]!=null&&a[k]!=='').length}
 function openW3Task(id){
+ const fromNav=!!document.getElementById('navRoot')&&document.getElementById('fullScreenPanel').style.display!=='none';
  const t=taskDef(id),st=w3Get(id);
- PL={id:id,t:t,pos:0,a:st.done?st.done.answers:Object.assign({},st.draft||{}),mode:st.done?'result':t.type==='speak'?'speak':'solve',onlyWrong:false};
+ PL={id:id,t:t,pos:0,a:st.done?st.done.answers:Object.assign({},st.draft||{}),mode:st.done?'result':t.type==='speak'?'speak':'solve',onlyWrong:false,fromNav:fromNav};
  if(PL.mode==='solve'){const n=plSteps(t);let first=0;while(first<n-1&&plStepDone(t,PL.a,first))first++;PL.pos=first}
  w3Speak={i:0,timer:null,left:40};
  openFullScreen('','<div class="pl" id="plRoot"></div>',plRender);
- const fb=document.querySelector('#fullScreenPanel .fullScreenBack');if(fb)fb.textContent='← К уроку';
+ const fb=document.querySelector('#fullScreenPanel .fullScreenBack');if(fb){fb.textContent=fromNav?'← К навигатору':'← К уроку';if(fromNav)fb.onclick=()=>{w3StopSpeak();openNavigator()}}
 }
 function plSave(){if(!PL||w3Get(PL.id).done)return;const st=w3Get(PL.id);st.draft=PL.a;w3Set(PL.id,st)}
 function plHead(right){const t=PL.t;return '<div class="plTop"><div><div class="eyebrow">'+(t.label||'Week 3 · Lesson 1').replace('Week','Неделя').replace('Lesson','Урок')+'</div><h1>'+t.title+'</h1></div><div class="plCount">'+right+'</div></div>'}
@@ -1047,6 +1112,7 @@ function plRender(){
 }
 function plDotsHTML(){const t=PL.t,n=plSteps(t);let h='';for(let s=0;s<n;s++)h+='<button type="button" class="'+(s===PL.pos&&PL.mode==='solve'?'cur ':'')+(plStepDone(t,PL.a,s)?'done':PL.mode==='review'?'miss':'')+'" onclick="plGo('+s+')">'+(s+1)+'</button>';return h}
 function plMarks(){const root=document.getElementById('plRoot');if(!root||PL.mode!=='solve')return;const dots=root.querySelectorAll('.plDots button');dots.forEach((d,s)=>d.classList.toggle('done',plStepDone(PL.t,PL.a,s)));const bar=root.querySelector('.plBar i');if(bar)bar.style.width=Math.round(plAnswered(PL.t,PL.a)/plUnits(PL.t)*100)+'%'}
+function plBackTarget(){return PL&&PL.fromNav}
 function plGo(s){if(!PL||w3Get(PL.id).done)return;PL.mode='solve';PL.pos=Math.max(0,Math.min(plSteps(PL.t)-1,s));plRender();const p=document.getElementById('fullScreenPanel');if(p)p.scrollTop=0}
 function plReview(){if(!PL)return;PL.mode='review';plRender()}
 function plPick(j){
@@ -1102,7 +1168,7 @@ function plResultHTML(){
   list=(auto&&wrong?'<div class="plFilter"><button type="button" class="'+(PL.onlyWrong?'':'on')+'" onclick="PL.onlyWrong=false;plRender()">Все задания · '+r.total+'</button><button type="button" class="'+(PL.onlyWrong?'on':'')+'" onclick="PL.onlyWrong=true;plRender()">Только ошибки · '+wrong+'</button></div>':'')+
   r.details.map((x,i)=>(PL.onlyWrong&&x.is_correct)?'':'<div class="plRow '+(auto?(x.is_correct?'ok':'bad'):'')+'"><i>'+(i+1)+'</i><div><p>'+w3Esc(x.question)+'</p>'+(auto?'<div class="plAns"><span class="'+(x.is_correct?'ok':'bad')+'">'+(w3Esc(x.chosen)||'—')+'</span>'+(x.is_correct?'':'<span class="right">верно: '+w3Esc(x.correct)+'</span>')+'</div>':t.type==='write'?'<div class="plAns"><span>'+w3Esc(x.chosen)+'</span></div>':'')+(r.why[i]?'<small>'+r.why[i]+'</small>':'')+'</div></div>').join('');
  }else list='<p class="plIntro">Этот тест был отправлен раньше — подробные ответы хранятся у учителя.</p>';
- return plHead('готово')+'<div class="plResult">'+big+send+'</div>'+list+'<div class="plNav"><button type="button" class="plBtn plMain" onclick="closeFullScreen()">← Вернуться к уроку</button><button class="w3Reset" type="button" onclick="w3TeacherReset(\''+id+'\')">Teacher reset</button></div>';
+ return plHead('готово')+'<div class="plResult">'+big+send+'</div>'+list+'<div class="plNav"><button type="button" class="plBtn plMain" onclick="'+(PL.fromNav?'openNavigator()':'closeFullScreen()')+'">'+(PL.fromNav?'← К навигатору':'← Вернуться к уроку')+'</button><button class="w3Reset" type="button" onclick="w3TeacherReset(\''+id+'\')">Teacher reset</button></div>';
 }
 function w3TeacherReset(id){
  const code=prompt('Teacher code');if(code!==W3_TEACHER_CODE)return;
@@ -1124,7 +1190,7 @@ function w3NextQuestion(id){
  if(no)no.textContent='QUESTION '+(w3Speak.i+1)+' / '+n;if(el){el.hidden=true;el.innerHTML=''}if(c)c.textContent='00:40';
 }
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261005n';
+const ARINA_BUILD='20261005p';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1504,10 +1570,10 @@ function lockSubmitted(box,key){
  const s=box.querySelector('.submitStatus');if(s)s.innerHTML='ЗАВЕРШЕНО · '+d.score+' / '+d.total+' · код: <b>'+d.code+'</b><br>Повторное выполнение и исправление заблокированы.';
 }
 function qhtml(key='q'){return '<div class="quiz quizSet">'+quiz.map((q,i)=>'<div class="q" data-answer="'+q[2]+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p><div class="opts">'+q[1].map((o,j)=>'<label class="opt"><input type="radio" name="'+key+'q'+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div><div class="fb"></div></div>').join('')+'</div><button class="action" type="button" onclick="checkQuizSet(this)">Проверить 25 заданий</button><span class="score"></span>'}
-function renderButtons(){const root=document.getElementById('weekBtns');weeks.slice(0,ACTIVE_WEEK+2).forEach((w,i)=>{const open=i<=ACTIVE_WEEK;const b=document.createElement('button');b.type='button';b.className='wbtn'+(open?'':' locked');b.dataset.i=i;b.innerHTML='<b>Неделя '+(i+1)+'</b><small>'+w.d+(i===ACTIVE_WEEK?' · текущая':open?' · пройдена':' · скоро')+'</small>';if(open)b.onclick=()=>renderWeek(i);else b.disabled=true;root.appendChild(b)})}
+function renderButtons(){const root=document.getElementById('weekBtns');weeks.slice(0,ACTIVE_WEEK+2).forEach((w,i)=>{const open=i<=ACTIVE_WEEK;const b=document.createElement('button');b.type='button';b.className='wbtn'+(open?'':' locked');b.dataset.i=i;b.innerHTML='<b>Неделя '+(i+1)+'</b><small>'+w.d+(i===ACTIVE_WEEK?' · текущая':open?' · пройдена':' · скоро')+'</small>'+(open&&i<ACTIVE_WEEK?'<em class="wLeft" data-left="'+i+'">'+(arinaWeekLeft(i)?'осталось '+arinaWeekLeft(i):'')+'</em>':'');if(open)b.onclick=()=>renderWeek(i);else b.disabled=true;root.appendChild(b)})}
 function lessonHTML(x,i,w){
  const locked=w===ACTIVE_WEEK&&i>ACTIVE_LESSON,pr=locked?[0,0]:lessonProgress(w,i);
- return '<div class="lesson '+(locked?'lessonLocked':'')+'" '+(locked?'':'onclick="openLesson('+w+','+i+')"')+' style="cursor:'+(locked?'not-allowed':'pointer')+'"><div class="lessonHead" style="display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:14px"><span class="lnum">'+(i+1)+'</span><span class="ltitle"><b>Урок '+(i+1)+' · '+x[0]+'</b>'+(locked?'<small>Откроется в день урока</small>':'<span class="lessonChip'+(pr[1]&&pr[0]===pr[1]?' done':'')+(lessonTaskIds(w,i).some(arinaIsDue)?' due':'')+'" data-chip="'+w+'-'+i+'">'+lessonChip(w,i)+'</span>')+'</span>'+(locked?'<span class="lockTag">закрыт</span>':'<span class="chev">→</span>')+'</div></div>'
+ return '<div class="lesson '+(locked?'lessonLocked':'')+'" '+(locked?'':'onclick="openLesson('+w+','+i+')"')+' style="cursor:'+(locked?'not-allowed':'pointer')+'"><div class="lessonHead" style="display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:14px"><span class="lnum">'+(i+1)+'</span><span class="ltitle"><b>Урок '+(i+1)+' · '+x[0]+'</b>'+(locked?'<small>Откроется в день урока</small>':'<span class="lessonChip'+(pr[1]&&pr[0]===pr[1]?' done':'')+(lessonTaskIds(w,i).some(arinaIsDue)?' due':'')+(lessonTaskIds(w,i).some(arinaIsDebt)?' debt':'')+'" data-chip="'+w+'-'+i+'">'+lessonChip(w,i)+'</span>')+'</span>'+(locked?'<span class="lockTag">закрыт</span>':'<span class="chev">→</span>')+'</div></div>'
 }
 function lessonFullHTML(x,i,w){
  return '<button class="lessonBack" type="button" onclick="closeLesson()">← Неделя '+(w+1)+'</button>'+w3LessonHTML(w,i);
@@ -1515,7 +1581,7 @@ function lessonFullHTML(x,i,w){
 function openLesson(w,i){if((w===ACTIVE_WEEK&&i>ACTIVE_LESSON)||w>ACTIVE_WEEK||!ARINA_LESSONS[w+'-'+i])return;let p=document.getElementById('lessonPage');if(!p){p=document.createElement('div');p.id='lessonPage';p.className='lessonPage';document.body.appendChild(p)}p.innerHTML=lessonFullHTML(weeks[w].l[i],i,w);p.style.display='block';p.scrollTop=0}
 function closeLesson(){const p=document.getElementById('lessonPage');if(p)p.style.display='none';if(typeof w3Refresh==='function')w3Refresh()}
 function egeRightPanel(weekIndex){
- return '<aside class="week1Right">'+duePanelHTML()+'<details class="expandedCard egeStruct"><summary>Структура ЕГЭ 2027 · баллы</summary>'+
+ return '<aside class="week1Right">'+duePanelHTML()+(ACTIVE_WEEK?debtPanelHTML():'')+'<details class="expandedCard egeStruct"><summary>Структура ЕГЭ 2027 · баллы</summary>'+
  '<div class="expandedRow"><span>1–9 · Listening</span><b>12</b></div>'+
  '<div class="expandedRow"><span>10–18 · Reading</span><b>12</b></div>'+
  '<div class="expandedRow"><span>19–24 · Grammar</span><b>6</b></div>'+
@@ -1526,9 +1592,9 @@ function egeRightPanel(weekIndex){
  '<div class="expandedRow"><span>39 · Reading aloud</span><b>1</b></div>'+
  '<div class="expandedRow"><span>40 · Questions</span><b>4</b></div>'+
  '<div class="expandedRow"><span>41 · Interview</span><b>5</b></div>'+
- '<div class="expandedRow"><span>42 · Photo project</span><b>10</b></div></details>'+
- '<a class="rightBig demo" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Демоверсия 2027</a>'+
+ '<div class="expandedRow"><span>42 · Photo project</span><b>10</b></div>'+'<a class="rightBig demo" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Демоверсия 2027</a>'+
  '<a class="rightBig fipi" href="https://fipi.ru/ege/otkrytyy-bank-zadaniy-ege" target="_blank" rel="noopener">Открытый банк ФИПИ</a>'+
+ '</details>'+
  '</aside>';
 }
 function renderWeek(i){if(i<0||i>ACTIVE_WEEK)return;currentWeek=i;closeLesson();closeFullScreen();closeTaskWindow();if(window.closeArinaRussia)closeArinaRussia();['weekView','examView','trainerView'].forEach(id=>{const v=document.getElementById(id);v.style.display='';v.classList.toggle('on',id==='weekView')});document.body.classList.remove('fullWeek');document.querySelectorAll('.wbtn').forEach(b=>b.classList.toggle('active',+b.dataset.i===i));const w=weeks[i];const lessons=w.l.map((x,j)=>lessonHTML(x,j,i)).join('');const body='<div class="week1Layout"><div class="week1Tasks">'+lessons+'</div>'+egeRightPanel(i)+'</div>';document.getElementById('weekView').innerHTML='<div class="weekTitle'+(i===ACTIVE_WEEK?' now':'')+'"><span><b>Неделя '+(i+1)+'</b> · '+w.d+' · <em>'+(i===ACTIVE_WEEK?'текущая неделя':'пройдена — здесь можно повторить')+'</em></span>'+(i===ACTIVE_WEEK?'':'<button type="button" onclick="renderWeek(ACTIVE_WEEK)">К текущей неделе '+(ACTIVE_WEEK+1)+' →</button>')+'</div><div class="weekMeta"><div class="card"><div class="eyebrow">Цель недели</div><h2>'+w.g+'</h2></div><div class="card result"><div class="eyebrow">Критерий готовности</div><p><b>'+w.r+'</b></p></div></div>'+body;restore();document.querySelectorAll('[id^="files-"]').forEach(x=>showMaterials(x.id.slice(6)));if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
@@ -1790,7 +1856,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261005n -->
+<!-- build:20261005p -->
 
 <script id="arinaRussiaScript">
 (function(){
