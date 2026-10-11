@@ -569,6 +569,57 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 .plWide .plBar{display:none}.plWide .plDots{padding:0;grid-column:2;grid-row:1}
 .plWide .plNav{grid-column:3;grid-row:1;margin:0}.plWide .plNav .plBtn{padding:8px 16px;min-height:42px}
 .plWide .plCard{grid-column:1/-1;grid-row:2;padding:10px 14px;margin-top:8px}
+.fullScreenPanel:has(.ro){padding:8px 14px}
+.fullScreenPanel:has(.ro) .fullScreenBack{position:static;float:left;margin:0 12px 0 0}
+.roTabs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:42px}
+.roTabs button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:9px;padding:8px 12px;font-size:16px;font-weight:700;cursor:pointer}
+.roTabs button.on{background:#0039A6;color:#fff;border-color:#0039A6}
+.roTabs span{margin-left:auto;font-size:16px;color:#475569;font-weight:700}
+.roGrid{clear:both;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:12px;margin-top:8px}
+.roText{background:#fff;border:1px solid #cbd9ea;border-radius:14px;padding:12px 16px;max-height:calc(100vh - 116px);overflow:auto}
+.roText p{margin:0 0 6px;font-size:18px;line-height:1.5;color:#111}
+.roText small{font-size:14px;color:#64748b}
+.roSide{background:#fff;border:1px solid #cbd9ea;border-radius:14px;padding:10px 12px;max-height:calc(100vh - 116px);overflow:auto}
+.roClock{display:flex;align-items:baseline;gap:10px}
+.roClock b{font-size:32px;color:#0039A6;line-height:1}.roClock b.end{color:#D52B1E}
+.roClock span{font-size:15px;color:#475569}
+.roBtns{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin:8px 0 2px}
+.roBtns .plBtn{padding:7px 4px;min-height:38px;font-size:15px;border-radius:9px}
+.roSide .rec{display:block;min-width:0;margin:8px 0;text-align:left}.roSide .recRow{justify-content:flex-start}
+.qCard.roQ{height:150px}.roQ .qFace{padding:10px 14px}.roQ .qFace b{font-size:24px;line-height:1.25}.roQ .qHint{font-size:15px}
+.qNav.roNav{margin-top:8px}.roNav button{height:38px}.roNav .qCount{font-size:15px}
+.ivBar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.ivBar>b{font-size:17px;color:#0039A6;margin-right:8px}
+.ivBar button{border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:9px;padding:7px 12px;font-size:16px;font-weight:700;cursor:pointer}
+.ivBar button.other{font-weight:400;color:#475569}
+.ivBar button.on{background:#0039A6;color:#fff;border-color:#0039A6}
+.ivWrap{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,1fr);gap:12px;align-items:start}
+.ivCard{height:310px;perspective:1100px}
+.ivIn{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .4s}
+.ivCard.flip .ivIn{transform:rotateY(180deg)}
+.ivFace{position:absolute;inset:0;backface-visibility:hidden;background:#fff;border:1px solid #cbd9ea;border-top:5px solid #0039A6;border-radius:14px;padding:10px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
+.ivFace.back{transform:rotateY(180deg);border-top-color:#D52B1E;align-items:flex-start;text-align:left;justify-content:flex-start;overflow:auto;padding-top:14px}
+.ivFace h3{margin:0;font-size:18px;color:#0039A6}
+.ivNums{display:flex;gap:6px}
+.ivNums button{width:38px;height:34px;border:1px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer}
+.ivNums button.on{background:#0039A6;color:#fff;border-color:#0039A6}
+.ivClock{position:relative;width:112px;height:112px}
+.ivClock svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ivClock circle{fill:none;stroke-width:9}.ivClock .bg{stroke:#dbe5f3}.ivClock .fg{stroke:#0039A6;stroke-linecap:round;stroke-dasharray:339.3;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear}.ivClock .fg.end{stroke:#D52B1E}
+.ivClock b{position:absolute;inset:0;display:grid;place-items:center;font-size:34px;color:#0039A6}
+.ivPlay{display:flex;gap:8px}
+.ivPlay button,.ivNav button{border:2px solid #b7c9e8;background:#fff;color:#0039A6;border-radius:10px;padding:8px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.ivPlay button.ivGo,.ivNav button.ivGo{background:#0039A6;border-color:#0039A6;color:#fff}
+.ivHint{margin:0;font-size:15px;color:#475569}
+.ivFace.back small{font-size:14px;font-weight:700;color:#D52B1E;letter-spacing:.04em}
+.ivFace.back h4{margin:0 0 8px;font-size:21px;line-height:1.35;color:#0039A6}
+.ivFace.back p{margin:0;font-size:18px;line-height:1.5;color:#111}
+.ivFace.back em{margin-top:auto;font-style:normal;font-size:14px;color:#64748b}
+.ivNav{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:8px;margin-top:8px}
+.ivSide{background:#fff;border:1px solid #cbd9ea;border-radius:14px;padding:12px 14px}
+.ivSide b{font-size:17px;color:#0039A6}.ivSide p{margin:8px 0 0;font-size:15px;line-height:1.45;color:#475569}
+.ivSide .rec{display:block;min-width:0;margin:8px 0 0;text-align:left}.ivSide .recRow{justify-content:flex-start}
+@media(max-width:800px){.roGrid,.ivWrap{grid-template-columns:1fr}.roText,.roSide{max-height:none}.roBtns{grid-template-columns:1fr 1fr}.ivCard{height:360px}}
 .rdGrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
 .rdText{max-height:calc(100vh - 138px);min-height:220px;overflow:auto;border-right:1px solid #d9e1ec;padding-right:14px}
 .rdText h3{margin:0 0 6px;font-size:17px;color:#0039A6}
@@ -1034,7 +1085,7 @@ const ARINA_LESSONS={
  '2-0':{intro:'Сначала повторяем Present и Past, затем учимся выбирать форму будущего по смыслу.',parts:[
   ['Повторение · Present + Past',[['task','w3l1-revision'],['rule','present','Памятка · Present','как выбрать · формулы · ошибки'],['rule','past','Памятка · Past','как выбрать · формулы · ошибки']]],
   ['Новая тема · на уроке',[['rule','future','Памятка · Future','will · be going to · Present forms'],['task','w3l1-meaning'],['task','w3l1-ege'],['task','w3l1-repair'],['task','w3l1-interview']]],
-  ['Домашняя работа',[['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['task','w3l1-reading-fipi'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
+  ['Домашняя работа',[['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['task','w3l1-reading-fipi'],['fn','openW3Oral()','Reading aloud · Russia · 3 текста','устное задание 1 · таймер · запись · карточки слов'],['fn',"openArinaRussiaTab('oral3')",'Interview · Russia · 3 карточки','устное задание 3 · 5 вопросов на слух · примерные ответы'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
 };
 /* ---------- what is assigned: highlighted for the student, switched by the teacher ---------- */
 const ARINA_ASSIGNED_DEFAULT=['w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi'];
@@ -1256,8 +1307,37 @@ function w3NextQuestion(id){
  const rb=document.getElementById('w3RecBox');if(rb)rb.innerHTML=recorderHTML('w3-interview-q'+(w3Speak.i+1),'Week 3 · Interview · Future plans · Q'+(w3Speak.i+1),taskDef(id).items[w3Speak.i][0]);
  if(no)no.textContent='QUESTION '+(w3Speak.i+1)+' / '+n;if(el){el.hidden=true;el.innerHTML=''}if(c)c.textContent='00:40';
 }
+/* ===== RUSSIA · Reading aloud (oral task 1): 3 texts copied unchanged from the teacher library, book «Устная часть · задания» (expert/pdf/speaking-tasks.pdf). Word cards: hard words from these texts. Nothing is saved: opens from text 1 every time. ===== */
+const W3_ORAL=[{"title": "Travelling in Russia", "topic": "Travelling", "text": "Travelling in Russia can be an exciting and unique experience. The country is known for its vast landscapes, rich history, and cultural heritage. From the bustling cities of Moscow and St. Petersburg to the picturesque countryside and remote villages, there is something for everyone to explore. One of the highlights of travelling in Russia is visiting Moscow, the capital and largest city in the country, home to the Kremlin and St. Basil's Cathedral. In St. Petersburg, visitors can admire the beautiful architecture of the Hermitage Museum, the Winter Palace and the Church of the Saviour on Spilled Blood. Another must-see destination in Russia is Lake Baikal, the largest and deepest lake in the world. If you're looking for something more adventurous, take a Trans-Siberian railway trip, which is one of the most famous train journeys in the world. In the recent years, Russia has been receiving around 20-25 million tourists per year, with most of them being from neighbouring countries like Kazakhstan and Belarus, followed by China and Turkey.", "words": [["unique", "уникальный", "/juˈniːk/"], ["landscapes", "пейзажи", "/ˈlændskeɪps/"], ["heritage", "наследие", "/ˈherɪtɪdʒ/"], ["bustling", "шумный, оживлённый", "/ˈbʌslɪŋ/"], ["picturesque", "живописный", "/ˌpɪktʃəˈresk/"], ["remote", "отдалённый", "/rɪˈməʊt/"], ["highlights", "самое интересное", "/ˈhaɪlaɪts/"], ["Cathedral", "собор", "/kəˈθiːdrəl/"], ["architecture", "архитектура", "/ˈɑːkɪtektʃə/"], ["Hermitage", "Эрмитаж", "/ˈhɜːmɪtɪdʒ/"], ["Saviour", "Спаситель", "/ˈseɪvjə/"], ["adventurous", "полный приключений", "/ədˈventʃərəs/"], ["Trans-Siberian", "Транссибирская", "/ˌtrænz saɪˈbɪəriən/"], ["neighbouring", "соседний", "/ˈneɪbərɪŋ/"], ["St. Petersburg · St. Basil's", "Saint Petersburg · Saint Basil's", "как читать вслух"], ["20-25 million", "twenty to twenty-five million", "как читать вслух"]]}, {"title": "Weather in Russia", "topic": "Weather and environment", "text": "Russia is a vast country with a diverse climate, but in general, the weather is characterised by long, cold winters and short, mild summers. The coldest temperature ever recorded in Russia was -67.7°C in the village of Verkhoyansk in 1892, and the highest temperature ever recorded was +44.6°C in the village of Orai in 2010. The winter months can be particularly harsh in Russia, with heavy snowfall and freezing temperatures. The highest snowfall ever recorded in Russia was in November 1971 in the village of Kolyvan, where 1.5 meters of snow fell in 24 hours. On the other hand, summers can be mild to warm in some regions, with temperatures reaching up to 30°C in some areas. Russia is known for its extreme weather conditions, both in the cold and hot side. Travelling in Russia can be pleasant with comfortable weather during the spring, summer, and autumn months, making it ideal for outdoor activities and exploring cities.", "words": [["vast", "огромный", "/vɑːst/"], ["diverse", "разнообразный", "/daɪˈvɜːs/"], ["climate", "климат", "/ˈklaɪmət/"], ["characterised", "характеризуется", "/ˈkærəktəraɪzd/"], ["temperature", "температура", "/ˈtemprətʃə/"], ["harsh", "суровый", "/hɑːʃ/"], ["snowfall", "снегопад", "/ˈsnəʊfɔːl/"], ["extreme", "экстремальный", "/ɪkˈstriːm/"], ["pleasant", "приятный", "/ˈpleznt/"], ["autumn", "осень", "/ˈɔːtəm/"], ["-67.7°C", "minus sixty-seven point seven degrees Celsius", "как читать вслух"], ["+44.6°C", "plus forty-four point six degrees Celsius", "как читать вслух"], ["1892 · 1971 · 2010", "eighteen ninety-two · nineteen seventy-one · twenty ten", "как читать вслух"], ["1.5 meters · 24 hours · 30°C", "one point five metres · twenty-four hours · thirty degrees Celsius", "как читать вслух"]]}, {"title": "Russian cuisine", "topic": "Food and drink", "text": "Russian cuisine is known for its hearty and comforting dishes that are perfect for cold winter days. Some of the most popular traditional dishes include borscht, a hearty soup made from beets and vegetables, and pelmeni, a type of dumpling filled with meat or fish. Another staple of Russian cuisine is blini, a type of thin pancake that is often served with sour cream, caviar, or other toppings. One of the most famous dishes in Russia is shashlik, a type of skewered meat, often marinated in a mixture of spices and grilled to perfection. Russian cuisine has been influenced by many cultures over the centuries, such as Tartar, Mongol, and Turkish, for example shashlik, pilaf, shish kebab and plov were introduced by the Turkic peoples. Overall, Russian cuisine offers a diverse range of dishes that are sure to please any palate, from hearty soups and stews to delicious meat and fish dishes, and sweet treats like vatrushka and medovik.", "words": [["cuisine", "кухня (блюда страны)", "/kwɪˈziːn/"], ["hearty", "сытный", "/ˈhɑːti/"], ["comforting", "согревающий, уютный", "/ˈkʌmfətɪŋ/"], ["borscht", "борщ", "/bɔːʃt/"], ["beets", "свёкла", "/biːts/"], ["dumpling", "пельмень, клёцка", "/ˈdʌmplɪŋ/"], ["staple", "основное блюдо", "/ˈsteɪpl/"], ["sour cream", "сметана", "/ˌsaʊə ˈkriːm/"], ["caviar", "икра", "/ˈkæviɑː/"], ["skewered", "на шампуре", "/ˈskjuːəd/"], ["marinated", "маринованный", "/ˈmærɪneɪtɪd/"], ["influenced", "испытала влияние", "/ˈɪnfluənst/"], ["centuries", "века", "/ˈsentʃəriz/"], ["Turkic", "тюркский", "/ˈtɜːkɪk/"], ["stews", "тушёные блюда", "/stjuːz/"], ["palate", "вкус", "/ˈpælət/"]]}];
+let w3Oral={i:0,w:0,timer:null};
+function openW3Oral(){w3Oral={i:0,w:0,timer:null};openFullScreen('','<div class="ro" id="roRoot"></div>',renderW3Oral)}
+function w3OralStop(){if(w3Oral.timer){clearInterval(w3Oral.timer);w3Oral.timer=null}if('speechSynthesis' in window)speechSynthesis.cancel();if(typeof recStop==='function')recStop()}
+function renderW3Oral(){
+ const root=document.getElementById('roRoot');if(!root)return;w3OralStop();
+ const x=W3_ORAL[w3Oral.i];
+ root.innerHTML='<div class="roTabs">'+W3_ORAL.map((t,k)=>'<button type="button" class="'+(k===w3Oral.i?'on':'')+'" onclick="w3Oral.i='+k+';w3Oral.w=0;renderW3Oral()">TEXT '+(k+1)+' · '+t.title+'</button>').join('')+'<span>Устное задание 1 · чтение вслух</span></div>'+
+ '<div class="roGrid"><article class="roText"><p>'+x.text+'</p><small>Источник: пособие «Устная часть · задания», тема '+x.topic+'</small></article>'+
+ '<aside class="roSide"><div class="roClock"><b id="roClock">01:30</b><span id="roPhase">подготовка 1,5 мин · чтение до 1,5 мин</span></div>'+
+ '<div class="roBtns"><button type="button" class="plBtn plMain" onclick="w3OralTimer(\'готовлюсь: читаю про себя\')">Подготовка</button><button type="button" class="plBtn plMain" onclick="w3OralTimer(\'читаю вслух\')">Чтение</button><button type="button" class="plBtn" onclick="w3OralStop();w3OralClock(90,\'остановлено\')">Стоп</button><button type="button" class="plBtn" onclick="w3OralModel()">Образец</button></div>'+
+ recorderHTML('w3-oral1-'+(w3Oral.i+1),'Russia · Reading aloud · '+x.title,x.title)+
+ '<div id="roCard"></div></aside></div>';
+ renderW3OralCard();
+}
+function w3OralClock(left,phase){const c=document.getElementById('roClock'),p=document.getElementById('roPhase');if(!c)return false;c.textContent='0'+Math.floor(left/60)+':'+String(left%60).padStart(2,'0');c.classList.toggle('end',left<=0);if(p&&phase)p.textContent=phase;return true}
+function w3OralTimer(phase){
+ w3OralStop();let left=90;w3OralClock(left,phase);
+ w3Oral.timer=setInterval(()=>{left--;if(!w3OralClock(Math.max(left,0),left<=0?'время вышло':'')||left<=0){clearInterval(w3Oral.timer);w3Oral.timer=null}},1000);
+}
+function w3OralModel(){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(W3_ORAL[w3Oral.i].text);u.lang='en-GB';u.rate=.8;const vs=speechSynthesis.getVoices();u.voice=vs.find(v=>/^en-GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;speechSynthesis.speak(u)}
+function renderW3OralCard(){
+ const root=document.getElementById('roCard');if(!root)return;const arr=W3_ORAL[w3Oral.i].words,x=arr[w3Oral.w],num=x[2]==='как читать вслух';
+ root.innerHTML='<div class="qCard roQ"><div class="qCardIn"><div class="qFace qFront"><button class="qAudio" type="button" title="British pronunciation">▶</button><b>'+x[0]+'</b><span class="qHint">'+(num?'как это прочитать? нажми':'нажми — перевод')+'</span></div><div class="qFace qBack"><b>'+x[1]+'</b><span class="qHint">'+x[2]+'</span></div></div></div><div class="qNav roNav"><button type="button" onclick="w3OralWord(-1)">←</button><div class="qCount">слово '+(w3Oral.w+1)+' / '+arr.length+'</div><button type="button" onclick="w3OralWord(1)">→</button></div>';
+ const card=root.querySelector('.qCard');card.onclick=()=>card.classList.toggle('flip');
+ root.querySelector('.qAudio').onclick=e=>speakWord(e,num?x[1].replace(/ · /g,', '):x[0]);
+}
+function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261011c';
+const ARINA_BUILD='20261011d';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1923,7 +2003,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261011c -->
+<!-- build:20261011d -->
 
 <script id="arinaRussiaScript">
 (function(){
@@ -2039,13 +2119,13 @@ function ensurePanel(){
  return p;
 }
 window.openArinaRussia=function(){ensurePanel().classList.add('open');renderRussiaTab('vocab');document.body.style.overflow='hidden';}
-window.closeArinaRussia=function(){const p=document.getElementById('arinaRussiaPanel');if(p)p.classList.remove('open');document.body.style.overflow='';Object.values(interviewState).forEach(s=>{if(s.timer)clearInterval(s.timer);s.timer=null});}
+window.closeArinaRussia=function(){const p=document.getElementById('arinaRussiaPanel');if(p)p.classList.remove('open');document.body.style.overflow='';Object.values(interviewState).forEach(s=>{if(s.timer)clearInterval(s.timer);s.timer=null});ivStop();if(typeof recStop==='function')recStop();}
 function setTab(tab){document.querySelectorAll('[data-rus-tab]').forEach(b=>b.classList.toggle('active',b.dataset.rusTab===tab));}
 function renderRussiaTab(tab){setTab(tab);const stage=document.getElementById('russiaStage');if(!stage)return;
  if(tab==='vocab')stage.innerHTML=vocabHTML();
  if(tab==='reading')stage.innerHTML=readingHTML();
  if(tab==='oral1')stage.innerHTML=oral1HTML();
- if(tab==='oral3')stage.innerHTML=oral3HTML();
+ if(tab==='oral3'){ivStop();ivS.v=0;ivS.i=0;ivS.t=40;ivS.flip=false;stage.innerHTML=oral3HTML();ivRing()}else if(typeof ivStop==='function')ivStop();
 }
 const RUSSIA_THESES=[
  ['Sights','Достопримечательности',['The Moscow Kremlin and Red Square are <b>historic landmarks</b> known all over the world.','The Hermitage in Saint Petersburg is <b>one of the largest art museums</b> in the world.','The towns of the Golden Ring <b>attract tourists with</b> their ancient churches and monasteries.','Lake Baikal and the Kremlin <b>are on the UNESCO World Heritage List</b>.'],['go sightseeing','visit a landmark','be famous for','date back to the 12th century']],
@@ -2074,7 +2154,27 @@ function oral1HTML(){const x=ORAL_READ[oralIndex];return '<section class="russia
 let oralTimer=null,oralLeft=90;
 window.moveOral1=function(d){if(oralTimer){clearInterval(oralTimer);oralTimer=null}oralIndex=(oralIndex+d+ORAL_READ.length)%ORAL_READ.length;renderRussiaTab('oral1')}
 window.startOral1Timer=function(){if(oralTimer)clearInterval(oralTimer);oralLeft=90;const el=document.getElementById('oral1Timer');const paint=()=>{if(el)el.textContent=String(Math.floor(oralLeft/60)).padStart(2,'0')+':'+String(oralLeft%60).padStart(2,'0')};paint();oralTimer=setInterval(()=>{oralLeft--;paint();if(oralLeft<=0){clearInterval(oralTimer);oralTimer=null}},1000)}
-function oral3HTML(){return '<section class="russiaPage active"><div class="rdBar"><b>ORAL TASK 3 · Interview</b><span class="rdNote">вопрос только на слух · ответ 2–3 предложения · 40 секунд</span></div><div class="interviewGrid">'+['shopping','schools','sport'].map(k=>interviewCardHTML(k)).join('')+'</div></section>'}
+/* ORAL TASK 3: one card at a time. Russia cards: questions copied unchanged from the FIPI open bank in the teacher library (fipi/data5.js); sample answers are written for this site. */
+const IV_SETS=[{"title": "Russia 1 · Travelling around Russia", "src": "ФИПИ, открытый банк · интервью 21", "questions": ["What is the best way of travelling around Russia?", "What is your most memorable trip? Why has it made such a big impression on you?", "What places in Russia do you think are worth visiting? Why?", "What problems can people have when they travel?", "Why is it important for teenagers to travel the world?"], "answers": ["I think it depends on the distance. For long distances a plane is the fastest, but I prefer trains because they are comfortable and you can see the country from the window.", "My most memorable trip was a trip to Saint Petersburg with my family. I was impressed by the palaces and the bridges, and we walked a lot along the river.", "I think Lake Baikal and Saint Petersburg are worth visiting. Baikal is the deepest lake in the world, and Saint Petersburg is famous for its museums and architecture.", "People can miss their train or plane, lose their luggage or get ill. That is why it is important to plan the trip carefully and keep your documents safe.", "Travelling helps teenagers learn about other cultures and practise foreign languages. It also makes them more independent and open-minded."]}, {"title": "Russia 2 · Life in Russia", "src": "ФИПИ, открытый банк · вопросы из интервью 24, 19, 22, 25, 18", "questions": ["What is a typical Russian family like?", "What household chores do teenagers usually have in Russia?", "What pets are popular in Russia?", "Do you like shopping? Is shopping a popular activity in Russia?", "Do Russian teens often use the Internet? Can they use the Internet only when they are at home?"], "answers": ["A typical Russian family is not very big: usually parents and one or two children. Grandparents often help a lot, and many families spend weekends together.", "Teenagers usually tidy their rooms, wash the dishes and take out the rubbish. Some of them also go shopping for food or look after their younger brothers and sisters.", "Cats and dogs are the most popular pets in Russia. Some people also keep hamsters, parrots or fish because they are easier to look after in a flat.", "I like shopping when I need something special, but I don’t do it very often. Yes, it is popular in Russia: many people go to shopping centres at weekends, and a lot of people shop online.", "Yes, most Russian teens use the Internet every day for studying and for talking to friends. They can use it almost anywhere, not only at home, because nearly everyone has a smartphone."]}, {"title": "Russia 3 · My region and famous Russians", "src": "ФИПИ, открытый банк · вопросы из интервью 15, 7, 5, 3, 35", "questions": ["What part of Russia do you live in? What is the climate like in your region?", "What are some of the places of interest in your region? Why should a tourist see them?", "Which famous Russian sportsmen do you know and admire? What are they famous for?", "How are children encouraged to do sports in Russian schools?", "What famous Russian inventors do you know? What are they famous for? Name at least one."], "answers": ["I live in … (назови свой регион). The winters here are cold and snowy, and the summers are short but warm.", "There are some old churches, a local history museum and beautiful nature near my town. A tourist should see them to learn how people lived here in the past.", "I admire the figure skater Evgeni Plushenko and the ice hockey player Alexander Ovechkin. Plushenko is famous for his Olympic gold medals, and Ovechkin is one of the best hockey players in the world.", "Children have PE lessons two or three times a week, and many schools have sports clubs. Schools also organise competitions where pupils can win medals and prizes.", "I know Alexander Popov, who is known in Russia as the inventor of the radio. I also know Sergei Korolev, who designed the first space rockets."]}].concat(['shopping','schools','sport'].map(k=>({title:INTERVIEWS[k].title,src:'другая тема',questions:INTERVIEWS[k].questions,answers:INTERVIEWS[k].answers})));
+const ivS={v:0,i:0,t:40,timer:null,flip:false};
+function ivStop(){if(ivS.timer){clearInterval(ivS.timer);ivS.timer=null}if('speechSynthesis' in window)speechSynthesis.cancel()}
+function ivRing(){const r=document.getElementById('ivRing'),n=document.getElementById('ivNum');if(!r||!n)return false;r.style.strokeDashoffset=String(339.3*(1-ivS.t/40));n.textContent=ivS.t;r.classList.toggle('end',ivS.t<=0);return true}
+function oral3HTML(){const d=IV_SETS[ivS.v],q=d.questions[ivS.i];
+ return '<section class="russiaPage active"><div class="ivBar"><b>ORAL TASK 3 · Interview</b>'+IV_SETS.map((x,k)=>'<button type="button" class="'+(k===ivS.v?'on':'')+(k>2?' other':'')+'" onclick="ivGo('+k+',0)">'+(k<3?'Карточка '+(k+1):x.title)+'</button>').join('')+'</div>'+
+ '<div class="ivWrap"><div class="ivCardBox"><div class="ivCard'+(ivS.flip?' flip':'')+'" id="ivCard"><div class="ivIn">'+
+ '<div class="ivFace"><h3>'+d.title+'</h3><div class="ivNums">'+d.questions.map((x,k)=>'<button type="button" class="'+(k===ivS.i?'on':'')+'" onclick="ivGo('+ivS.v+','+k+')">'+(k+1)+'</button>').join('')+'</div>'+
+ '<div class="ivClock"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" class="bg"/><circle cx="60" cy="60" r="54" class="fg" id="ivRing"/></svg><b id="ivNum">40</b></div>'+
+ '<div class="ivPlay"><button type="button" class="ivGo" onclick="ivPlay(true)">Play</button><button type="button" onclick="ivPlay(false)">Replay</button><button type="button" onclick="ivStop();ivS.t=40;ivRing()">Stop</button></div><p class="ivHint">Вопрос только звучит. Ответь 2–3 предложениями за 40 секунд.</p></div>'+
+ '<div class="ivFace back"><small>QUESTION '+(ivS.i+1)+' / '+d.questions.length+'</small><h4>'+q+'</h4><small>ПРИМЕРНЫЙ ОТВЕТ</small><p>'+d.answers[ivS.i]+'</p><em>'+d.src+'</em></div>'+
+ '</div></div><div class="ivNav"><button type="button" onclick="ivMove(-1)">← Назад</button><button type="button" class="ivGo" onclick="ivFlip()">Перевернуть карточку</button><button type="button" onclick="ivMove(1)">Вперёд →</button></div></div>'+
+ '<aside class="ivSide"><b>Запиши свой ответ</b>'+recorderHTML('russia-iv'+(ivS.v+1)+'-q'+(ivS.i+1),'Russia · Interview · '+d.title+' · Q'+(ivS.i+1),q)+'<p>Сначала ответь сама, потом переверни карточку и сравни с примерным ответом.</p></aside></div></section>'}
+function ivDraw(){const st=document.getElementById('russiaStage');if(st)st.innerHTML=oral3HTML();ivRing()}
+window.ivGo=function(v,i){ivStop();if(typeof recStop==='function')recStop();ivS.v=v;ivS.i=i;ivS.t=40;ivS.flip=false;ivDraw()}
+window.ivMove=function(d){const n=IV_SETS[ivS.v].questions.length;ivGo(ivS.v,(ivS.i+d+n)%n)}
+window.ivFlip=function(){ivS.flip=!ivS.flip;const c=document.getElementById('ivCard');if(c)c.classList.toggle('flip',ivS.flip)}
+window.ivStop=ivStop;window.ivS=ivS;window.ivRing=ivRing;
+window.ivPlay=function(restart){speakUK(IV_SETS[ivS.v].questions[ivS.i],.78);if(!restart&&ivS.timer)return;if(ivS.timer)clearInterval(ivS.timer);ivS.t=40;ivRing();ivS.timer=setInterval(()=>{ivS.t--;if(!ivRing()||ivS.t<=0){clearInterval(ivS.timer);ivS.timer=null}},1000)}
+window.openArinaRussiaTab=function(tab){ensurePanel().classList.add('open');renderRussiaTab(tab);document.body.style.overflow='hidden'}
 function interviewCardHTML(k){const d=INTERVIEWS[k],s=interviewState[k];return '<article class="interviewCard"><h3>'+d.title+'</h3><div class="meta">Task 3 · 5 questions · 40 sec each</div><div class="interviewQ" id="iq-'+k+'"><div class="interviewIn"><div class="interviewFace"><button class="interviewAudio" type="button" onclick="playInterview(\''+k+'\')">PLAY QUESTION</button><div class="interviewCounter">QUESTION '+(s.i+1)+' / 5</div><div class="interviewTimer" id="it-'+k+'">'+s.t+' sec</div></div><div class="interviewFace back"><b>MODEL ANSWER</b><p>'+d.answers[s.i]+'</p><div class="interviewCounter">QUESTION '+(s.i+1)+' / 5</div></div></div></div><div class="interviewControls"><button type="button" onclick="flipInterview(\''+k+'\')">FLIP / MODEL</button><button class="primary" type="button" onclick="nextInterview(\''+k+'\')">NEXT QUESTION →</button></div>'+recorderHTML('russia-int-'+k+'-q'+(s.i+1),'Russia · Interview · '+d.title+' · Q'+(s.i+1),d.questions[s.i])+'</article>'}
 window.playInterview=function(k){const s=interviewState[k];if(s.timer)clearInterval(s.timer);s.t=40;speakUK(INTERVIEWS[k].questions[s.i],.78);const el=document.getElementById('it-'+k);if(el)el.textContent='40 sec';s.timer=setInterval(()=>{s.t--;const e=document.getElementById('it-'+k);if(e)e.textContent=s.t+' sec';if(s.t<=0){clearInterval(s.timer);s.timer=null}},1000)}
 window.flipInterview=function(k){const q=document.getElementById('iq-'+k);if(q)q.classList.toggle('flip')}
