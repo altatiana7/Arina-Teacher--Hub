@@ -562,6 +562,28 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 .navRow.debt{background:#fff7ed;border-color:#fb923c}
 .navRow.done{background:#f6fef9;color:#475569}
 @media(max-width:800px){.navCols{grid-template-columns:1fr}.navTop{flex-direction:column;align-items:flex-start}}
+.pl.plWide{max-width:none;padding-bottom:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:14px;align-items:center}
+.fullScreenPanel:has(.plWide){padding:8px 14px}
+.fullScreenPanel:has(.plWide) .fullScreenBack{position:static;float:left;margin:4px 14px 0 0}
+.plWide .plTop{margin:0;display:block}.plWide .plTop .eyebrow{display:none}.plWide .plTop h1{font-size:20px;margin:0}.plWide .plCount{font-size:14px}
+.plWide .plBar{display:none}.plWide .plDots{padding:0;grid-column:2;grid-row:1}
+.plWide .plNav{grid-column:3;grid-row:1;margin:0}.plWide .plNav .plBtn{padding:8px 16px;min-height:42px}
+.plWide .plCard{grid-column:1/-1;grid-row:2;padding:10px 14px;margin-top:8px}
+.rdGrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+.rdText{max-height:calc(100vh - 140px);min-height:220px;overflow:auto;border-right:1px solid #d9e1ec;padding-right:14px}
+.rdText h3{margin:0 0 6px;font-size:17px;color:#0039A6}
+.rdText p{margin:0 0 7px;font-size:17px;line-height:1.5;color:#111}
+.rdText .rdF{background:#fff1b8;border-radius:5px;padding:1px 4px;color:#111}
+.rdText .rdF sup{font-size:12px;color:#D52B1E;margin-right:3px}
+.rdTask{margin:0 0 6px;font-size:16px;line-height:1.35;color:#475569}
+.rdQ{border:1px solid #d5deea;border-left:4px solid #0039A6;border-radius:10px;padding:7px 10px;margin-bottom:7px}
+.rdQ p{margin:0 0 6px;font-size:17px;line-height:1.35;color:#111}
+.rdQ p b{color:#0039A6}
+.rdOpts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.rdOpts button{border:2px solid #b7c9e8;background:#fff;color:#0f2a5c;border-radius:9px;padding:6px 4px;font-size:16px;font-weight:700;cursor:pointer}
+.rdOpts button:hover{border-color:#0039A6;background:#f4f8ff}
+.rdOpts button.picked{background:#0039A6;border-color:#0039A6;color:#fff}
+@media(max-width:800px){.pl.plWide{display:block}.plWide .plNav{margin-top:10px}.rdGrid{grid-template-columns:1fr}.rdText{max-height:none;border-right:0;padding-right:0}.rdOpts{grid-template-columns:1fr}}
 </style><script defer src="tense/tense-logic.js?v=20261011"></script></head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
 <aside class="side" id="side"><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><button class="trainerBtn navSide" type="button" onclick="openNavigator()">Навигатор заданий</button><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Памятки</div><button class="trainerBtn" type="button" onclick="openTenseLogicTrainer()">Времена · шаг за шагом<small style="display:block;font-weight:400">Когда? → Какая картинка? → Форма</small></button><button class="trainerBtn" onclick="openMemo('present')">Памятки · времена и маркеры</button><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="openPresentPanel('markertrain','side')">Marker → Tense · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
@@ -795,8 +817,53 @@ Object.assign(W3_TASKS,{
     ['He was so impressed that he ___ her the job the same day.','OFFER',['offered'],'Событие в прошлом → Past Simple.']]}
   ]}
 });
-const W3_ORDER=['w3l1-revision','w3l1-meaning','w3l1-ege','w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal'];
-const W3_HOMEWORK=['w3l1-future16','w3l1-transform','w3l1-personal'];
+/* ===== WEEK 3 · LESSON 1 · Reading · Future forms: 3 texts, each = understanding + why this form ===== */
+(function(){
+ const F=(n,t)=>'<b class="rdF"><sup>'+n+'</sup>'+t+'</b>';
+ const plain=s=>s.replace(/<b class="rdF"><sup>\d<\/sup>(.*?)<\/b>/g,'$1');
+ const TFN=['True','False','Not stated'];
+ const T1='<p>Hi Liza!</p><p>Great news: Mum has finally agreed, so I '+F(1,'am coming')+' to Kazan next weekend. I have already bought the ticket. My train '+F(2,'leaves')+' Moscow at 22.50 on Friday and arrives at 10.15 on Saturday morning. Don’t come to the station — I'+F(3,'’ll take')+' the metro, it’s only three stops.</p><p>I have made a list for Saturday: first I '+F(4,'am going to visit')+' the Kremlin, and after that I want to try chak-chak in the old town. On Sunday we are meeting your friends at the riverside café at noon, aren’t we?</p><p>The forecast says it will be cold and windy, so I’m going to pack my warm jacket. I’ll text you as soon as I get on the train.</p><p>See you soon! Dasha</p>';
+ const T2='<p>There are only eight months left before my final exams, and everybody keeps asking me about my plans. Here they are.</p><p>I '+F(1,'am going to apply')+' to a university in St Petersburg — I decided that last year, and I have already chosen the faculty. My parents think I '+F(2,'will miss')+' home, and they are probably right. But I promise I '+F(3,'will call')+' them every Sunday.</p><p>If I '+F(4,'pass')+' all my exams well, I will study biology. If I don’t get enough points, I won’t give up: I’ll work for a year and try again.</p><p>Before I leave, my grandfather is going to teach me how to cook, because he says nobody will do it for me there. I won’t relax until I see my name on the list of students. And when the exams are over, I’ll sleep for three days!</p>';
+ const T3='<p>— Look at those black clouds! It '+F(1,'is going to rain')+' in a minute, and we have left the posters outside.</p><p>— Don’t worry, I'+F(2,'’ll bring')+' them in.</p><p>— Thanks. Is everything ready for Friday?</p><p>— Almost. The concert '+F(3,'starts')+' at 6 p.m., and the doors open at half past five. Nika and Timur are playing the first song; they have been rehearsing all week.</p><p>— And the sound?</p><p>— Mr Orlov '+F(4,'is checking')+' the microphones on Thursday after lessons — we have agreed on that.</p><p>— Great. I think the hall will be full: we have sold ninety tickets already.</p><p>— Then we are going to need more chairs. Shall I ask the caretaker?</p><p>— Yes, please. And I’ll text everyone as soon as he says yes.</p>';
+ const A='True, False или Not stated — в тексте об этом не сказано?';
+ const B='Почему в тексте стоит именно эта форма?';
+ W3_TASKS['w3l1-reading']={part:'C',title:'Reading · Future forms',sub:'3 текста · 24 вопроса · понимание + почему эта форма',type:'read',
+  intro:'Три коротких текста о будущем. К каждому два экрана: сначала понимание, потом — почему в тексте стоит именно эта форма.',
+  sets:[
+   {title:'Text 1 · A weekend in Kazan',tab:'понимание',task:A,text:plain(T1),items:[
+    ['Dasha still has to buy her train ticket.',TFN,1,'I have already bought the ticket — билет уже куплен.'],
+    ['The train journey takes more than eleven hours.',TFN,0,'Leaves at 22.50, arrives at 10.15 — это 11 часов 25 минут.'],
+    ['Dasha wants Liza to meet her at the station.',TFN,1,'Don’t come to the station — она доедет на метро сама.'],
+    ['Liza’s friends have met Dasha before.',TFN,2,'Про встречу в воскресенье сказано, а про то, знакомы ли они, — нет.']]},
+   {title:'Text 1 · A weekend in Kazan',tab:'форма',task:B,text:T1,items:[
+    ['1 · I <b>am coming</b> to Kazan next weekend',['расписание','уже договорились','прогноз'],1,'Мама согласилась, билет куплен — уже договорились → am / is / are + V-ing.'],
+    ['2 · My train <b>leaves</b> at 22.50',['расписание','решила сейчас','план на будущее'],0,'Поезд ходит по расписанию → простая форма: leaves.'],
+    ['3 · I <b>’ll take</b> the metro',['расписание','решает на ходу','видит: вот-вот'],1,'Решение прямо в разговоре: «не встречай, доеду сама» → will.'],
+    ['4 · I <b>am going to visit</b> the Kremlin',['решила заранее','обещание','расписание'],0,'Она уже составила список — план готов заранее → be going to.']]},
+   {title:'Text 2 · After the exams',tab:'понимание',task:A,text:plain(T2),items:[
+    ['Artyom has not decided yet where he wants to study.',TFN,1,'I decided that last year, I have already chosen the faculty.'],
+    ['Artyom’s parents studied in St Petersburg.',TFN,2,'О том, где учились родители, в тексте ничего нет.'],
+    ['If his results are not good enough, Artyom will try again a year later.',TFN,0,'I’ll work for a year and try again.'],
+    ['His grandfather is going to give him cooking lessons before he leaves.',TFN,0,'Before I leave, my grandfather is going to teach me how to cook.']]},
+   {title:'Text 2 · After the exams',tab:'форма',task:B,text:T2,items:[
+    ['1 · I <b>am going to apply</b> to a university',['решил заранее','решает на ходу','расписание'],0,'Решил ещё в прошлом году → be going to.'],
+    ['2 · My parents think I <b>will miss</b> home',['уже договорились','прогноз, мнение','расписание'],1,'Think — это мнение о будущем, а не план → will.'],
+    ['3 · I promise I <b>will call</b> them',['расписание','видит: вот-вот','обещание'],2,'I promise — обещание → will.'],
+    ['4 · If I <b>pass</b> all my exams',['после if нет will','это привычка','расписание'],0,'Речь о будущем, но после if will не ставим: If I pass…, I will study.']]},
+   {title:'Text 3 · Before the concert',tab:'понимание',task:A,text:plain(T3),items:[
+    ['The posters are getting wet in the rain at the moment.',TFN,1,'It is going to rain in a minute — дождь ещё не начался.'],
+    ['People can come into the hall thirty minutes before the concert starts.',TFN,0,'The concert starts at 6, the doors open at half past five.'],
+    ['Nika and Timur wrote the first song themselves.',TFN,2,'Сказано, что они её играют и репетируют, а кто её написал — нет.'],
+    ['Nobody has bought a ticket yet.',TFN,1,'We have sold ninety tickets already.']]},
+   {title:'Text 3 · Before the concert',tab:'форма',task:B,text:T3,items:[
+    ['1 · It <b>is going to rain</b> in a minute',['видит: вот-вот','обещание','расписание'],0,'Чёрные тучи уже видно — сейчас начнётся → be going to.'],
+    ['2 · I <b>’ll bring</b> them in',['решил заранее','решает на ходу','расписание'],1,'Решил только что, в разговоре, и предлагает помощь → will.'],
+    ['3 · The concert <b>starts</b> at 6 p.m.',['прогноз, мнение','решает на ходу','расписание'],2,'Время начала по программе → простая форма: starts.'],
+    ['4 · Mr Orlov <b>is checking</b> the microphones on Thursday',['уже договорились','прогноз, мнение','привычка'],0,'We have agreed on that — уже договорились → am / is / are + V-ing.']]}
+  ]};
+})();
+const W3_ORDER=['w3l1-revision','w3l1-meaning','w3l1-ege','w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading'];
+const W3_HOMEWORK=['w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading'];
 
 /* ---------- storage + sending ---------- */
 let w3Get=function(id){try{return JSON.parse(localStorage.getItem('arinaTask:'+id)||'{}')}catch(e){return {}}};
@@ -979,10 +1046,10 @@ const ARINA_LESSONS={
  '2-0':{intro:'Сначала повторяем Present и Past, затем учимся выбирать форму будущего по смыслу.',parts:[
   ['Повторение · Present + Past',[['task','w3l1-revision'],['rule','present','Памятка · Present','как выбрать · формулы · ошибки'],['rule','past','Памятка · Past','как выбрать · формулы · ошибки']]],
   ['Новая тема · на уроке',[['rule','future','Памятка · Future','will · be going to · Present forms'],['task','w3l1-meaning'],['task','w3l1-ege'],['task','w3l1-repair'],['task','w3l1-interview']]],
-  ['Домашняя работа',[['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
+  ['Домашняя работа',[['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['task','w3l1-reading'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
 };
 /* ---------- what is assigned: highlighted for the student, switched by the teacher ---------- */
-const ARINA_ASSIGNED_DEFAULT=['w3l1-future16','w3l1-transform','w3l1-personal'];
+const ARINA_ASSIGNED_DEFAULT=['w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading'];
 (function(){try{const p=new URLSearchParams(location.search);if(p.has('hw')){const v=p.get('hw');localStorage.setItem('arinaAssigned',JSON.stringify(!v||v==='none'?[]:v.split(',')))}}catch(e){}})();
 function arinaAssigned(){try{const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v))return v}catch(e){}return ARINA_ASSIGNED_DEFAULT}
 function arinaIsDue(id){return arinaAssigned().includes(id)&&!w3Get(id).done}
@@ -1067,10 +1134,12 @@ function w3Refresh(){
 /* ---------- player: one question on the screen, free movement back and forth, review before sending ---------- */
 let PL=null,w3Speak={i:0,timer:null,left:40};
 function w3StopSpeak(){if(typeof recStop==='function')recStop();if(w3Speak.timer){clearInterval(w3Speak.timer);w3Speak.timer=null}if('speechSynthesis' in window)speechSynthesis.cancel()}
-function plSteps(t){return t.type==='gap'?t.sets.length:t.type==='speak'?1:t.items.length}
-function plUnits(t){return t.type==='gap'?t.sets.reduce((n,s)=>n+s.lines.length,0):t.items.length}
-function plGapOffset(t,step){let k=0;for(let s=0;s<step;s++)k+=t.sets[s].lines.length;return k}
-function plStepDone(t,a,step){if(t.type==='gap'){const o=plGapOffset(t,step);return t.sets[step].lines.every((q,j)=>a[o+j]!=null&&a[o+j]!=='')}return a[step]!=null&&a[step]!==''}
+function plSets(t){return t.type==='gap'||t.type==='read'}
+function plSetLen(s){return (s.lines||s.items).length}
+function plSteps(t){return plSets(t)?t.sets.length:t.type==='speak'?1:t.items.length}
+function plUnits(t){return plSets(t)?t.sets.reduce((n,s)=>n+plSetLen(s),0):t.items.length}
+function plGapOffset(t,step){let k=0;for(let s=0;s<step;s++)k+=plSetLen(t.sets[s]);return k}
+function plStepDone(t,a,step){if(t.type==='read'){const o=plGapOffset(t,step);return t.sets[step].items.every((q,j)=>a[o+j]!=null)}if(t.type==='gap'){const o=plGapOffset(t,step);return t.sets[step].lines.every((q,j)=>a[o+j]!=null&&a[o+j]!=='')}return a[step]!=null&&a[step]!==''}
 function plAnswered(t,a){return Object.keys(a).filter(k=>a[k]!=null&&a[k]!=='').length}
 function openW3Task(id){
  const fromNav=!!document.getElementById('navRoot')&&document.getElementById('fullScreenPanel').style.display!=='none';
@@ -1086,6 +1155,7 @@ function plHead(right){const t=PL.t;return '<div class="plTop"><div><div class="
 function plRender(){
  const root=document.getElementById('plRoot');if(!root||!PL)return;
  const t=PL.t,a=PL.a,n=plSteps(t);
+ root.classList.remove('plWide');
  if(PL.mode==='result'){root.innerHTML=plResultHTML();return}
  if(PL.mode==='speak'){root.innerHTML=plHead('5 вопросов')+'<p class="plIntro">'+t.intro+'</p><div class="w3Speak"><div class="w3SpeakTop"><span id="w3SpeakNo">QUESTION 1 / '+t.items.length+'</span><b id="w3SpeakClock">00:40</b></div><div class="w3SpeakBtns"><button type="button" class="plBtn plMain" onclick="w3PlayQuestion(\''+PL.id+'\')">PLAY QUESTION</button><button type="button" class="plBtn" onclick="w3ShowQuestion(\''+PL.id+'\')">Показать текст и подсказку</button><button type="button" class="plBtn" onclick="w3NextQuestion(\''+PL.id+'\')">NEXT QUESTION</button></div><div id="w3RecBox">'+recorderHTML('w3-interview-q1','Week 3 · Interview · Future plans · Q1',t.items[0][0])+'</div><div class="w3SpeakText" id="w3SpeakText" hidden></div><p class="w3Small">Чек-лист ответа: прямой ответ · причина или пример · 2–3 полных предложения · правильная форма будущего.</p></div><div class="plNav"><span></span><button type="button" class="plBtn plMain" onclick="plSubmit()">Я ответила на все вопросы · отметить у учителя</button></div><div class="plMsg" id="plMsg"></div>';return}
  if(PL.mode==='review'){
@@ -1100,10 +1170,12 @@ function plRender(){
   card=(q[4]?'<p class="plSrc">'+q[4]+'</p>':'')+'<p class="plQ">'+q[0].replace('___','<span class="plBlank"></span>')+(q[1]?' <em class="w3Key">'+q[1]+'</em>':'')+'</p><input class="plInput" id="plField" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="'+(q[4]?'напиши пропущенные слова':'напиши исправленную форму')+'" value="'+w3Esc(a[step]||'')+'">';}
  else if(t.type==='write'){const q=t.items[step];
   card='<p class="plQ">'+q[0]+' <em class="w3Key">'+q[1]+'</em></p><textarea class="plInput" id="plField" rows="3" placeholder="Write one full sentence in English">'+w3Esc(a[step]||'')+'</textarea>';}
+ else if(t.type==='read'){const set=t.sets[step],o=plGapOffset(t,step);
+  card='<div class="rdGrid"><article class="rdText"><h3>'+set.title+'</h3>'+set.text+'</article><div class="rdQs"><p class="rdTask">'+set.task+'</p>'+set.items.map((q,j)=>'<div class="rdQ"><p>'+q[0]+'</p><div class="rdOpts">'+q[1].map((x,m)=>'<button type="button" class="'+(a[o+j]===m?'picked':'')+'" onclick="plReadPick('+(o+j)+','+m+',this)">'+x+'</button>').join('')+'</div></div>').join('')+'</div></div>';}
  else{const set=t.sets[step],o=plGapOffset(t,step),start=set.start||19;
   card='<h3 class="plSetTitle">'+set.title+'</h3><div class="plText">'+set.lines.map((q,j)=>'<p>'+q[0].replace('___','<span class="w3Gap"><small>'+(start+j)+'</small><input autocomplete="off" autocapitalize="off" spellcheck="false" data-k="'+(o+j)+'" value="'+w3Esc(a[o+j]||'')+'"><em>'+q[1]+'</em></span>')+'</p>').join('')+'</div>';}
- const what=t.type==='gap'?'Текст':t.type==='write'?'Предложение':'Вопрос';
- root.innerHTML=plHead(what+' '+(step+1)+' из '+n)+'<div class="plBar"><i style="width:'+Math.round(plAnswered(t,a)/plUnits(t)*100)+'%"></i></div>'+(n>1?'<div class="plDots">'+plDotsHTML()+'</div>':'')+(step===0?'<p class="plIntro">'+t.intro+'</p>':'')+'<div class="plCard">'+card+'</div><div class="plNav"><button type="button" class="plBtn" '+(step===0?'disabled':'')+' onclick="plGo('+(step-1)+')">← Предыдущий</button><button type="button" class="plBtn plMain" onclick="'+(last?'plReview()':'plGo('+(step+1)+')')+'">'+(last?'Проверить ответы →':'Далее →')+'</button></div>';
+ const what=t.type==='read'?'Экран':t.type==='gap'?'Текст':t.type==='write'?'Предложение':'Вопрос';
+ root.classList.toggle('plWide',t.type==='read');root.innerHTML=plHead(what+' '+(step+1)+' из '+n)+'<div class="plBar"><i style="width:'+Math.round(plAnswered(t,a)/plUnits(t)*100)+'%"></i></div>'+(n>1?'<div class="plDots">'+plDotsHTML()+'</div>':'')+(step===0&&t.type!=='read'?'<p class="plIntro">'+t.intro+'</p>':'')+'<div class="plCard">'+card+'</div><div class="plNav"><button type="button" class="plBtn" '+(step===0?'disabled':'')+' onclick="plGo('+(step-1)+')">← Предыдущий</button><button type="button" class="plBtn plMain" onclick="'+(last?'plReview()':'plGo('+(step+1)+')')+'">'+(last?'Проверить ответы →':'Далее →')+'</button></div>';
  root.querySelectorAll('.plInput,[data-k]').forEach(x=>{
   x.oninput=()=>{const k=x.dataset.k!=null?x.dataset.k:step;const v=x.value.trim();if(v)PL.a[k]=v;else delete PL.a[k];plSave();plMarks()};
   x.onkeydown=e=>{if(e.key!=='Enter'||(x.tagName==='TEXTAREA'&&e.shiftKey))return;e.preventDefault();const all=[...root.querySelectorAll('[data-k]')],ix=all.indexOf(x);if(ix>-1&&ix<all.length-1)all[ix+1].focus();else last?plReview():plGo(step+1)};
@@ -1116,6 +1188,10 @@ function plMarks(){const root=document.getElementById('plRoot');if(!root||PL.mod
 function plBackTarget(){return PL&&PL.fromNav}
 function plGo(s){if(!PL||w3Get(PL.id).done)return;PL.mode='solve';PL.pos=Math.max(0,Math.min(plSteps(PL.t)-1,s));plRender();const p=document.getElementById('fullScreenPanel');if(p)p.scrollTop=0}
 function plReview(){if(!PL)return;PL.mode='review';plRender()}
+function plReadPick(k,j,btn){
+ if(!PL||PL.mode!=='solve'||PL.t.type!=='read')return;
+ PL.a[k]=j;plSave();btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.toggle('picked',b===btn));plMarks();
+}
 function plPick(j){
  if(!PL||PL.mode!=='solve'||PL.t.type!=='mc')return;
  const step=PL.pos;PL.a[step]=j;plSave();
@@ -1134,6 +1210,7 @@ function w3Details(id,a){
  const t=taskDef(id);let details=[],why=[],score=0;
  const push=(question,chosen,correct,ok,w)=>{if(ok)score++;details.push({question,chosen,correct,is_correct:ok});why.push(w||'')};
  if(t.type==='mc')t.items.forEach((q,i)=>{const opts=t.shared||q[1],c=a[i];push(w3Plain(q[0]),c==null?'':w3Plain(opts[c]),w3Plain(opts[q[2]]),c===q[2],q[3])});
+ else if(t.type==='read'){let k=0;t.sets.forEach(set=>set.items.forEach(q=>{const c=a[k++];push(set.title+' ('+set.tab+') · '+w3Plain(q[0]),c==null?'':q[1][c],q[1][q[2]],c===q[2],q[3])}))}
  else if(t.type==='gap'){let k=0;t.sets.forEach(set=>set.lines.forEach(q=>{const v=a[k++]||'';push(q[0]+' ('+q[1]+')',v,q[2][0],w3Match(v,q[2]),q[3])}))}
  else if(t.type==='typed')t.items.forEach((q,i)=>{const v=a[i]||'';push((q[4]?q[4]+' → ':'')+w3Plain(q[0])+(q[1]?' ('+q[1]+')':''),v,q[2][0],w3Match(v,q[2]),q[3])});
  else if(t.type==='write')t.items.forEach((q,i)=>{const v=a[i]||'';push(q[0]+' ('+q[1]+')',v,'проверяет учитель',!!v,'')});
@@ -1160,7 +1237,7 @@ async function plResend(){
 }
 function plResultHTML(){
  const id=PL.id,t=PL.t,d=w3Get(id).done;if(!d)return '';
- const r=d.legacy?null:w3Details(id,d.answers),auto=t.type==='mc'||t.type==='gap'||t.type==='typed';
+ const r=d.legacy?null:w3Details(id,d.answers),auto=t.type==='mc'||t.type==='gap'||t.type==='typed'||t.type==='read';
  const pct=d.total?Math.round(d.score/d.total*100):0;
  const big=auto?'<div class="plScore"><b>'+d.score+' / '+d.total+'</b><span>'+pct+'%</span></div>':'<div class="plScore"><b>'+(t.type==='write'?'Текст отправлен':'Выполнено')+'</b></div>';
  const send=PL.sending?'<div class="plSend">Отправка учителю…</div>':d.pending?'<div class="plSend bad">Не удалось отправить учителю — проверь интернет. <button type="button" class="plBtn plMain" onclick="plResend()">Отправить ещё раз</button></div>':'<div class="plSend good">Работа у учителя'+(d.code?' · код '+d.code:'')+'. Повторная попытка закрыта.</div>';
@@ -1191,7 +1268,7 @@ function w3NextQuestion(id){
  if(no)no.textContent='QUESTION '+(w3Speak.i+1)+' / '+n;if(el){el.hidden=true;el.innerHTML=''}if(c)c.textContent='00:40';
 }
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261005q';
+const ARINA_BUILD='20261011b';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1857,7 +1934,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261011a -->
+<!-- build:20261011b -->
 
 <script id="arinaRussiaScript">
 (function(){
