@@ -1084,11 +1084,13 @@ const ARINA_LESSONS={
   ['Домашняя работа',[['task','w2l3-ege2'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори все пройденные глаголы']],'home']]},
  '2-0':{intro:'Сначала повторяем Present и Past, затем учимся выбирать форму будущего по смыслу.',parts:[
   ['Повторение · Present + Past',[['task','w3l1-revision'],['rule','present','Памятка · Present','как выбрать · формулы · ошибки'],['rule','past','Памятка · Past','как выбрать · формулы · ошибки']]],
-  ['Новая тема · на уроке',[['rule','future','Памятка · Future','will · be going to · Present forms'],['task','w3l1-meaning'],['task','w3l1-ege'],['task','w3l1-repair'],['task','w3l1-interview']]],
-  ['Домашняя работа',[['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['task','w3l1-reading-fipi'],['fn','openW3Oral()','Reading aloud · Russia · 3 текста','устное задание 1 · таймер · запись · карточки слов'],['fn',"openArinaRussiaTab('oral3')",'Interview · Russia · 3 карточки','устное задание 3 · 5 вопросов на слух · примерные ответы'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
+  ['Новая тема · на уроке',[['rule','future','Памятка · Future','will · be going to · Present forms'],['task','w3l1-meaning'],['task','w3l1-ege']]],
+  ['Домашняя работа',[['task','w3l1-repair'],['task','w3l1-interview'],['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['task','w3l1-reading-fipi'],['fn','openW3Oral()','Reading aloud · Russia · 3 текста','устное задание 1 · таймер · запись · карточки слов'],['fn',"openArinaRussiaTab('oral3')",'Interview · Russia · 3 карточки','устное задание 3 · 5 вопросов на слух · примерные ответы'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
 };
 /* ---------- what is assigned: highlighted for the student, switched by the teacher ---------- */
-const ARINA_ASSIGNED_DEFAULT=['w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi'];
+const ARINA_ASSIGNED_DEFAULT=['w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi'];
+/* 12.10: два упражнения с урока не успели — добавляем в домашку и в уже сохранённый список */
+(function(){try{if(localStorage.getItem('arinaHwAdd-20261012'))return;const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){['w3l1-repair','w3l1-interview'].forEach(id=>{if(!v.includes(id))v.unshift(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261012','1')}catch(e){}})();
 (function(){try{const p=new URLSearchParams(location.search);if(p.has('hw')){const v=p.get('hw');localStorage.setItem('arinaAssigned',JSON.stringify(!v||v==='none'?[]:v.split(',')))}}catch(e){}})();
 function arinaAssigned(){try{const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v))return v}catch(e){}return ARINA_ASSIGNED_DEFAULT}
 function arinaIsDue(id){return arinaAssigned().includes(id)&&!w3Get(id).done}
