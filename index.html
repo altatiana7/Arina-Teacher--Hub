@@ -901,8 +901,62 @@ const RD_FIPI={"r10":{"topic":"environment","n":2,"h":["Show it matters to you",
  W3_TASKS['w3l1-reading-fipi']={part:'C',title:'Reading · ЕГЭ 10–18 · Future',sub:'ФИПИ · 3 текста с формами будущего · 20 ответов',type:'read',
   intro:'Три текста из открытого банка ФИПИ в формате экзамена. Формы будущего в текстах подсвечены.',sets:sets};
 })();
-const W3_ORDER=['w3l1-revision','w3l1-meaning','w3l1-ege','w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi'];
-const W3_HOMEWORK=['w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi'];
+/* ---------- Week 3 · practice: Future + all tenses · sentences from the FIPI open bank (listening scripts and reading texts) ---------- */
+W3_TASKS['w3-future-fipi']={part:'C',title:'Future · ФИПИ · 16',sub:'16 предложений из банка ФИПИ · по 4 на экране',type:'gap',
+ intro:'Предложения из записей и текстов Открытого банка ФИПИ. Поставь глагол справа в нужную форму будущего. Сначала спроси себя: это решение, план, договорённость или после when / if?',
+ sets:[
+  {title:'Set A · will: решение сейчас, обещание, прогноз',start:1,lines:[
+   ['Drop by in the evening, and I ___ you a copy.','GIVE',['will give'],'Обещаю прямо сейчас → will.'],
+   ['Moscow looks magnificent in the evening… I think I ___ a tour right now.','ORDER',['will order'],'Решила в момент разговора → will.'],
+   ['I’m sure it ___ good on my CV.','LOOK',['will look'],'I’m sure + мнение о будущем → will.'],
+   ['Don’t worry, you ___ fine.','BE',['will be'],'Успокаиваем, предсказываем → will.']]},
+  {title:'Set B · план и договорённость',start:5,lines:[
+   ['I ___ again, and this time my destination is Russia.','TRAVEL',['am going to travel','am travelling','am traveling'],'Решено заранее, известно куда → be going to (или Present Continuous).'],
+   ['Yes, I ___ with a family with two kids.','STAY',['am going to stay','am staying'],'Всё уже устроено → be going to / Present Continuous.'],
+   ['I ___ to Moscow alone, and then my pen-friend will meet me there.','FLY',['am flying','am going to fly'],'Билет куплен, есть договорённость → Present Continuous.'],
+   ['Most of my classmates ___ somewhere, but I won’t be able to join them.','TRAVEL',['are going to travel','are travelling','are traveling'],'План, который у них уже есть → be going to.']]},
+  {title:'Set C · после when / if — не will',start:9,lines:[
+   ['I’ll let you know about my impressions when I ___ back.','GET',['get'],'В главной части уже есть I’ll. После when — Present Simple.'],
+   ['When you ___ in Moscow, you’ll check into the hotel and have some rest.','ARRIVE',['arrive'],'When + будущее → Present Simple, will только во второй части.'],
+   ['If she ___ it, it will be easier for her to control her behaviour.','FIND',['finds'],'После if — Present Simple; she → окончание -s.'],
+   ['If it’s hot — I’ll relax, and if it ___ cold — I’ll wake up.','BE',['is'],'После if — Present Simple, как в первой половине: if it’s hot.']]},
+  {title:'Set D · will be able / will have to / won’t',start:13,lines:[
+   ['When I become a doctor, I ___ to help much more.','BE ABLE',['will be able'],'Can в будущем → will be able to.'],
+   ['But that means you ___ to get up early.','HAVE',['will have'],'Must в будущем → will have to.'],
+   ['My best friend has just told me she ___ to be my travel companion this summer.','NOT BE ABLE',['will not be able'],'Не сможет летом → won’t be able to.'],
+   ['I ___ that holiday.','NOT FORGET',['will not forget'],'Уверена, что не забуду → won’t + глагол.']]}
+ ]};
+W3_TASKS['w3-mix-fipi']={part:'C',title:'All tenses · ФИПИ · 20',sub:'смесь всех времён · 20 предложений · по 4 на экране',type:'gap',
+ intro:'Предложения из записей и текстов Открытого банка ФИПИ. В каждом наборе разные времена. Ищи подсказку: usually, for, since, while, when, if, слова «сейчас» или «раньше».',
+ sets:[
+  {title:'Set A · People’s stories',start:1,lines:[
+   ['On the morning of the 25th we usually ___ a leisurely breakfast and open the presents.','HAVE',['have'],'Usually — так бывает всегда → Present Simple.'],
+   ['Other kids ___ lawns for their summer money, and my brother and I were making fishing gear.','MOW',['were mowing'],'Рядом were making — то, что шло тем летом → Past Continuous.'],
+   ['I ___ part-time for 2 years already.','WORK',['have been working','have worked'],'Начала 2 года назад и работаю до сих пор → Present Perfect Continuous.'],
+   ['— Will my mobile phone work there? — It ___ fine.','WORK',['will work'],'Ответ на вопрос о будущем с will → will.']]},
+  {title:'Set B · Holidays',start:5,lines:[
+   ['Our summer holidays ___ to an end.','COME',['are coming'],'Происходит сейчас, в эти дни → Present Continuous.'],
+   ['It ___ for ages.','RAIN',['has been raining'],'Дождь начался давно и всё идёт (for ages) → Present Perfect Continuous.'],
+   ['While I ___, I got the opportunity to be on America’s Next Top Model.','RECOVER',['was recovering'],'While + процесс в прошлом → Past Continuous.'],
+   ['This year I ___ in Brazil for New Year.','BE',['am going to be'],'План на этот Новый год → be going to.']]},
+  {title:'Set C · Learning',start:9,lines:[
+   ['In my first year, I quickly found out my English was not as good as I ___.','ASSUME',['had assumed'],'Думала так ещё раньше, до того как поняла → Past Perfect.'],
+   ['My mum ___ Russian for a while, and got interested in the Russian culture.','LEARN',['has been learning'],'Учит уже какое-то время и продолжает (for a while) → Present Perfect Continuous.'],
+   ['I ___ my summer holiday, you know.','PLAN',['am planning'],'Занята этим сейчас → Present Continuous.'],
+   ['If your mat is bad and uncomfortable, your yoga practice ___ a complete nightmare.','BE',['will be'],'If + Present, во второй части — will.']]},
+  {title:'Set D · Changes',start:13,lines:[
+   ['The amount of plastic junk in the oceans ___ at an alarming rate for the last ten years.','INCREASE',['has been increasing'],'For the last ten years — процесс до сих пор → Present Perfect Continuous.'],
+   ['Now, Mum and Dad ___ he can spend no more than two hours a day online.','DECIDE',['have decided'],'Решение уже принято, результат сейчас (now) → Present Perfect.'],
+   ['That’s when I turned from someone who had bought a book to someone who ___ a writer.','BECOME',['had become'],'Стал писателем к тому моменту в прошлом → Past Perfect (как had bought рядом).'],
+   ['I sat down with some tea, and I ___ up again until I had finished it.','NOT GET',['did not get'],'Цепочка событий в прошлом → Past Simple.']]},
+  {title:'Set E · Work and plans',start:17,lines:[
+   ['I ___ to Oslo when I was twenty-one, and I’ve been working there for quite a while now.','MOVE',['moved'],'When I was twenty-one — конкретное прошлое → Past Simple.'],
+   ['My instructor ___ that for most people, their reason for doing yoga will change over time.','SAY',['says'],'Говорит всегда, его мнение → Present Simple; he → -s.'],
+   ['When you ___ a film and texting a friend at the same time, you’re not doing any of these properly.','WATCH',['are watching'],'Рядом texting — два процесса одновременно → Present Continuous.'],
+   ['Since then, I ___ a lot about Artificial Intelligence.','THINK',['have been thinking'],'Since then — с того момента и до сих пор → Present Perfect Continuous.']]}
+ ]};
+const W3_ORDER=['w3l1-revision','w3l1-meaning','w3l1-ege','w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi','w3-future-fipi','w3-mix-fipi'];
+const W3_HOMEWORK=['w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi','w3-future-fipi','w3-mix-fipi'];
 
 /* ---------- storage + sending ---------- */
 let w3Get=function(id){try{return JSON.parse(localStorage.getItem('arinaTask:'+id)||'{}')}catch(e){return {}}};
@@ -1085,10 +1139,11 @@ const ARINA_LESSONS={
  '2-0':{intro:'Сначала повторяем Present и Past, затем учимся выбирать форму будущего по смыслу.',parts:[
   ['Повторение · Present + Past',[['task','w3l1-revision'],['rule','present','Памятка · Present','как выбрать · формулы · ошибки'],['rule','past','Памятка · Past','как выбрать · формулы · ошибки']]],
   ['Новая тема · на уроке',[['rule','future','Памятка · Future','will · be going to · Present forms'],['task','w3l1-meaning'],['task','w3l1-ege']]],
-  ['Домашняя работа',[['task','w3l1-repair'],['task','w3l1-interview'],['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['task','w3l1-reading-fipi'],['fn','openW3Oral()','Reading aloud · Russia · 3 текста','устное задание 1 · таймер · запись · карточки слов'],['fn',"openArinaRussiaTab('oral3')",'Interview · Russia · 3 карточки','устное задание 3 · 5 вопросов на слух · примерные ответы'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
+  ['Домашняя работа',[['task','w3l1-repair'],['task','w3l1-interview'],['task','w3l1-future16'],['task','w3l1-transform'],['task','w3l1-personal'],['task','w3l1-reading-fipi'],['task','w3-future-fipi'],['task','w3-mix-fipi'],['fn','openW3Oral()','Reading aloud · Russia · 3 текста','устное задание 1 · таймер · запись · карточки слов'],['fn',"openArinaRussiaTab('oral3')",'Interview · Russia · 3 карточки','устное задание 3 · 5 вопросов на слух · примерные ответы'],['fn',"renderTrainer('verbs')",'Irregular verbs · 60','повтори V2 / V3 перед следующим уроком']],'home']]}
 };
 /* ---------- what is assigned: highlighted for the student, switched by the teacher ---------- */
-const ARINA_ASSIGNED_DEFAULT=['w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi'];
+const ARINA_ASSIGNED_DEFAULT=['w3l1-repair','w3l1-interview','w3l1-future16','w3l1-transform','w3l1-personal','w3l1-reading-fipi','w3-future-fipi','w3-mix-fipi'];
+(function(){try{if(localStorage.getItem('arinaHwAdd-20261012b'))return;const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){['w3-future-fipi','w3-mix-fipi'].forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261012b','1')}catch(e){}})();
 /* 12.10: два упражнения с урока не успели — добавляем в домашку и в уже сохранённый список */
 (function(){try{if(localStorage.getItem('arinaHwAdd-20261012'))return;const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){['w3l1-repair','w3l1-interview'].forEach(id=>{if(!v.includes(id))v.unshift(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261012','1')}catch(e){}})();
 (function(){try{const p=new URLSearchParams(location.search);if(p.has('hw')){const v=p.get('hw');localStorage.setItem('arinaAssigned',JSON.stringify(!v||v==='none'?[]:v.split(',')))}}catch(e){}})();
