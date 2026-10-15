@@ -3,25 +3,28 @@
    письмо 37, эссе 38 и задание 4 (сравнение картинок) закрыты.
    Страница темы открывается панелью поверх хаба, как тема RUSSIA. */
 (function(){
-const V='1';
+const V='2';
 const TABS=[
- ['words','WORDS + SPEAKING','family/words.html'],
- ['gw','GRAMMAR + WORD FORMATION','family/tasks.html#1'],
+ ['words','WORDS · SPEAKING','family/words.html'],
+ ['gw','GRAMMAR · WORD FORM.','family/tasks.html#1'],
  ['read','READING','family/tasks.html#2'],
  ['letter','LETTER 37',null],
  ['essay','ESSAY 38',null]];
 const css=document.createElement('style');css.id='arinaFamilyStyles';
 css.textContent='#arinaFamilyPanel{position:fixed;z-index:110;inset:38px 0 0 var(--side);background:#f7f9fc;display:none;overflow:hidden}'
  +'#arinaFamilyPanel.open{display:grid;grid-template-rows:auto minmax(0,1fr);grid-template-columns:minmax(0,1fr)}'
- +'#arinaFamilyPanel .russiaTop{min-width:0}#arinaFamilyPanel .russiaTitle{flex:0 1 auto}#arinaFamilyPanel .russiaTabs{min-width:0;flex:0 1 auto}'
+ +'#arinaFamilyPanel .russiaTop{min-width:0;padding:4px 10px;gap:8px}#arinaFamilyPanel .russiaTitle{flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#arinaFamilyPanel .russiaTitle b{font-size:13px;display:inline}'
+ +'#arinaFamilyPanel .russiaBack{padding:6px 10px;white-space:nowrap}'
+ +'#arinaFamilyPanel .russiaTabs{min-width:0;flex:0 1 auto;scrollbar-width:none}#arinaFamilyPanel .russiaTabs::-webkit-scrollbar{display:none}'
+ +'#arinaFamilyPanel .russiaTabs button{padding:6px 8px}#arinaFamilyPanel .russiaTabs button:disabled{padding:6px 7px}'
  +'#arinaFamilyPanel .russiaTabs button:disabled{opacity:.4;cursor:not-allowed}'
  +'#arinaFamilyPanel iframe{width:100%;height:100%;border:0;display:block;background:#f7f9fc}'
  +'@media(max-width:800px){#arinaFamilyPanel{inset:0}}';
 document.head.appendChild(css);
 function panel(){let p=document.getElementById('arinaFamilyPanel');if(p)return p;
  p=document.createElement('section');p.id='arinaFamilyPanel';
- p.innerHTML='<div class="russiaTop"><button class="russiaBack" type="button">← ARINA HUB</button><div class="russiaTitle"><b>TOPIC 02 · FAMILY & RELATIONSHIPS</b><small>EGE topic block · student version</small></div><div class="russiaTabs">'
-  +TABS.map(t=>'<button type="button" data-fam-tab="'+t[0]+'"'+(t[2]?'':' disabled title="Locked"')+'>'+t[1]+(t[2]?'':' · LOCKED')+'</button>').join('')+'</div></div><div class="famStage"><iframe title="Family and relationships" allow="microphone; autoplay"></iframe></div>';
+ p.innerHTML='<div class="russiaTop"><button class="russiaBack" type="button">← HUB</button><div class="russiaTitle"><b>FAMILY & RELATIONSHIPS</b></div><div class="russiaTabs">'
+  +TABS.map(t=>'<button type="button" data-fam-tab="'+t[0]+'"'+(t[2]?'':' disabled title="Locked"')+'>'+t[1]+(t[2]?'':' · locked')+'</button>').join('')+'</div></div><div class="famStage"><iframe title="Family and relationships" allow="microphone; autoplay"></iframe></div>';
  document.body.appendChild(p);
  p.querySelector('.russiaBack').onclick=close;
  p.querySelectorAll('[data-fam-tab]').forEach(b=>{if(!b.disabled)b.addEventListener('click',()=>show(b.dataset.famTab));});
