@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:,">
 <title>Arina · Family and relationships</title>
-<link rel="stylesheet" href="app.css?v=1">
+<link rel="stylesheet" href="app.css?v=2">
 <style>
 .ttlb{font-weight:800;font-size:16px;color:#385079;background:#eff5ff;border:1px solid var(--line);border-radius:999px;padding:4px 12px;white-space:nowrap}
 .ws{display:grid;grid-template-columns:340px 1fr;gap:14px;align-items:start;min-height:0;width:100%;max-width:1180px;margin:0 auto}
@@ -74,6 +74,15 @@ body{padding-top:4px!important}
 /* панель темы на низком окне (около 460px по высоте) */
 @media (max-height:580px){.wpane.pr{min-height:0}.kim2{font-size:13.5px;line-height:1.32}.kim2 .task{font-size:12.5px;line-height:1.28}.kim2 .textbox{font-size:13.5px;line-height:1.33;padding:5px 10px}.kim2 p{margin:0 0 4px}
 .mt{gap:6px}.mt .col{gap:5px}.mt button{font-size:14px;padding:5px 8px;line-height:1.22}.qzcard{height:190px}.ivw .ivcard{height:175px}.ctl2 .ring{width:78px;height:78px}.ctl2 .ring b{font-size:20px}.segb{padding:5px 10px;font-size:14.5px}}
+
+/* что нужно сделать: красная рамка; сделано: зелёная */
+.todo{box-shadow:inset 0 0 0 2px #D52B1E!important}
+select.todo{border-color:#D52B1E!important;box-shadow:0 0 0 1px #D52B1E!important;background:#fff5f4!important}
+.done{box-shadow:inset 0 0 0 2px #1e8e5a!important}
+select.done{border-color:#1e8e5a!important;box-shadow:none!important;background:#effaf3!important}
+.segb .tdb{font-style:normal;display:inline-block;min-width:18px;height:18px;line-height:18px;border-radius:9px;margin-left:5px;font-size:11.5px;font-weight:900;color:#fff;background:#D52B1E;text-align:center;padding:0 4px}
+.segb.done .tdb{background:#1e8e5a}
+.segb.todo,.segb.done{box-shadow:none!important}
 </style>
 </head>
 <body>
@@ -82,8 +91,9 @@ body{padding-top:4px!important}
   <nav class="tabs" id="tabs" aria-label="Steps"></nav>
 </header>
 <main id="main"></main>
-<script src="core.js?v=1"></script>
-<script src="edit.js?v=1"></script>
-<script src="words.js?v=1"></script>
+<script src="core.js?v=2"></script>
+<script src="edit.js?v=2"></script>
+<script src="todo.js?v=2"></script>
+<script src="words.js?v=2"></script>
 </body>
 </html>

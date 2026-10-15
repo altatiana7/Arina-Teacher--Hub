@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:,">
 <title>Arina · Family and relationships</title>
-<link rel="stylesheet" href="app.css?v=1">
+<link rel="stylesheet" href="app.css?v=2">
 <style>
 .ws2{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:1240px;margin:0 auto}
 .wp{background:#fff;border:1px solid var(--line);border-top:4px solid var(--pc);border-radius:16px;box-shadow:0 6px 18px rgba(30,64,120,.06);padding:10px 12px;display:flex;flex-direction:column;gap:7px;min-width:0;height:clamp(400px,calc(100vh - 128px),760px)}
@@ -63,6 +63,15 @@ body{padding:6px 10px}
 main{padding:4px 0;justify-content:flex-start!important}
 body{padding-top:4px!important}
 .segb.lock{opacity:.45;cursor:not-allowed}
+
+/* что нужно сделать: красная рамка; сделано: зелёная */
+.todo{box-shadow:inset 0 0 0 2px #D52B1E!important}
+select.todo{border-color:#D52B1E!important;box-shadow:0 0 0 1px #D52B1E!important;background:#fff5f4!important}
+.done{box-shadow:inset 0 0 0 2px #1e8e5a!important}
+select.done{border-color:#1e8e5a!important;box-shadow:none!important;background:#effaf3!important}
+.segb .tdb{font-style:normal;display:inline-block;min-width:18px;height:18px;line-height:18px;border-radius:9px;margin-left:5px;font-size:11.5px;font-weight:900;color:#fff;background:#D52B1E;text-align:center;padding:0 4px}
+.segb.done .tdb{background:#1e8e5a}
+.segb.todo,.segb.done{box-shadow:none!important}
 </style>
 </head>
 <body>
@@ -71,9 +80,10 @@ body{padding-top:4px!important}
   <nav class="tabs" id="tabs" aria-label="Sections"></nav>
 </header>
 <main id="main"></main>
-<script src="core.js?v=1"></script>
-<script src="edit.js?v=1"></script>
-<script src="tasks-data.js?v=1"></script>
-<script src="tasks.js?v=1"></script>
+<script src="core.js?v=2"></script>
+<script src="edit.js?v=2"></script>
+<script src="todo.js?v=2"></script>
+<script src="tasks-data.js?v=2"></script>
+<script src="tasks.js?v=2"></script>
 </body>
 </html>

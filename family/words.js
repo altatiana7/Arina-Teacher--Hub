@@ -134,23 +134,27 @@ function match(box){const st=S.w;
 /* ---------- Справа: устная часть, задания 1–4 под кнопками ---------- */
 function drawRight(){if(cleanR){cleanR();cleanR=null;}stopSay();PR.innerHTML='';
   PR.append(seg([[1,'1 · Reading aloud'],[2,'2 · Questions'],[3,'3 · Interview'],[4,'4 · Photos',true]],S.right,v=>{S.right=v;drawRight();}));
+  /* что осталось сделать: красная отметка с числом, всё сделано – зелёная галочка */
+  const TK={1:['t1-1','t1-2'],2:['t2-1','t2-2'],3:['iv1','iv2']};[...PR.querySelectorAll('.seg .segb')].slice(0,3).forEach((b,i)=>{const n=TK[i+1].filter(k=>!TODO.is(k)).length;b.classList.add(n?'todo':'done');b.append(el('i','tdb',n?String(n):'✓'));});
   const body=el('div','pbody sp4');PR.append(body);[null,t1,t2,t3,t4][S.right](body);}
 /* общий блок управления: круговой таймер с фазами и запись */
-function ctl(box,phases,name,extra,onPhase){const c=el('div','ctl2'),ring=ringEl(phases[0].sec),label=el('div','phase','Press Start'),rec=el('div','rec');ring.querySelector('span').textContent='ready';
-  const run=phaseRunner({ring,label,phases,recBox:rec,recName:name,en:true,onPhase});
+function ctl(box,phases,name,extra,onPhase,onDone){const c=el('div','ctl2'),ring=ringEl(phases[0].sec),label=el('div','phase','Press Start'),rec=el('div','rec');ring.querySelector('span').textContent='ready';
+  const run=phaseRunner({ring,label,phases,recBox:rec,recName:name,en:true,onPhase,onDone});
   const st=btn('Start',()=>{run.start();st.textContent='Restart';pa.disabled=sk.disabled=false;pa.textContent='Pause';},'main wide'),pa=btn('Pause',()=>{pa.textContent=run.pause()?'Continue':'Pause';},'sm'),sk=btn('Skip',()=>run.skip(),'sm');pa.disabled=sk.disabled=true;
   const b=el('div','ctlbtns');b.append(st,pa,sk,recBtn());(extra||[]).forEach(x=>b.append(x));c.append(ring,label,b,rec);box.append(c);cleanR=()=>run.stop();}
 function t1(box){const st=S.t1,r=READS[st.v],k=el('div','kim2');
   k.innerHTML='<p class="task">Task 1. Imagine that you are preparing a project with your friend. You have found some interesting material for the presentation and you want to read this text to your friend. You have 1.5 minutes to read the text silently, then be ready to read it out aloud. You will not have more than 1.5 minutes to read it.</p><div class="textbox">'+esc(r.x)+'</div>';
-  box.append(k);ctl(box,[{label:'Preparation · read silently',kind:'prep',sec:90},{label:'Answer · read aloud',kind:'answer',sec:90}],'task1-'+(st.v+1),[btn('Tips',()=>overlayEn('Reading aloud · what to check','<p><b>Words to pronounce carefully:</b> '+esc(r.note)+'.</p><p>Pause at commas and full stops, let your voice fall at the end of a statement, read numbers in full, pronounce the endings -ed and -s.</p>'),'sm wide'),btn('Text '+(st.v+1)+' of '+Math.min(OPEN,READS.length),()=>{st.v=(st.v+1)%Math.min(OPEN,READS.length);drawRight();},'sm wide')]);}
+  box.append(k);ctl(box,[{label:'Preparation · read silently',kind:'prep',sec:90},{label:'Answer · read aloud',kind:'answer',sec:90}],'task1-'+(st.v+1),[btn('Tips',()=>overlayEn('Reading aloud · what to check','<p><b>Words to pronounce carefully:</b> '+esc(r.note)+'.</p><p>Pause at commas and full stops, let your voice fall at the end of a statement, read numbers in full, pronounce the endings -ed and -s.</p>'),'sm wide'),vbtn('Text '+(st.v+1)+' of '+Math.min(OPEN,READS.length),'t1-'+(st.v+1),()=>{st.v=(st.v+1)%Math.min(OPEN,READS.length);drawRight();})],null,()=>{TODO.mark('t1-'+(st.v+1));drawRight();});}
+/* кнопка варианта с отметкой «to do / done» */
+function vbtn(label,k,fn){const b=btn(label+TODO.tag(k),fn,'sm wide '+(TODO.is(k)?'done':'todo'));return b;}
 function t2(box){const st=S.t2,a=ADS[st.v],k=el('div','kim2');
   k.innerHTML='<p class="task">Task 2. Study the advertisement.</p><div class="adrow"><div class="ruad" style="background:'+a.c+'"><b>'+esc(a.title)+'</b><span>'+esc(a.sub)+'</span></div><div><p class="task">'+esc(a.intro)+' In 1.5 minutes you are to ask four direct questions to find out about the following:</p><ol id="pts">'+a.points.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ol><p class="task">You have 20 seconds to ask each question.</p></div></div>';
   box.append(k);
   ctl(box,[{label:'Preparation',kind:'prep',sec:90}].concat(a.points.map((p,i)=>({label:'Question '+(i+1),kind:'answer',sec:20}))),'task2-'+(st.v+1),
-    [btn('Sample questions',()=>showSample(a.title+' · sample questions','<ol class="smpl">'+a.key.map((x,i)=>'<li><i>'+esc(a.points[i])+'</i><br>'+ED.t('w1.t2.'+st.v+'.'+i,x)+'</li>').join('')+'</ol>',null,'Close'),'sm wide'),btn('Advert '+(st.v+1)+' of 2',()=>{st.v=1-st.v;drawRight();},'sm wide')],
-    i=>{[...PR.querySelectorAll('#pts li')].forEach((x,j)=>{x.className=i<1?'':(j===i-1?'now':(j<i-1?'past':''));});});}
+    [btn('Sample questions',()=>showSample(a.title+' · sample questions','<ol class="smpl">'+a.key.map((x,i)=>'<li><i>'+esc(a.points[i])+'</i><br>'+ED.t('w1.t2.'+st.v+'.'+i,x)+'</li>').join('')+'</ol>',null,'Close'),'sm wide'),vbtn('Advert '+(st.v+1)+' of 2','t2-'+(st.v+1),()=>{st.v=1-st.v;drawRight();})],
+    i=>{[...PR.querySelectorAll('#pts li')].forEach((x,j)=>{x.className=i<1?'':(j===i-1?'now':(j<i-1?'past':''));});},()=>{TODO.mark('t2-'+(st.v+1));drawRight();});}
 function t3(box){const st=S.iv,v=IV[st.v];let left=40,t=null;
-  const wrap=el('div','kim2 ivw'),top=el('div','ivtop'),sel=el('select');sel.setAttribute('aria-label','Set');IV.forEach((x,k)=>{const o=new Option('Set '+(k+1)+' · '+x.theme+(k>=OPEN?' · locked':''),k);o.disabled=k>=OPEN;sel.append(o);});sel.value=st.v;
+  const wrap=el('div','kim2 ivw'),top=el('div','ivtop'),sel=el('select');sel.setAttribute('aria-label','Set');IV.forEach((x,k)=>{const o=new Option('Set '+(k+1)+' · '+x.theme+(k>=OPEN?' · locked':TODO.tag('iv'+(k+1))),k);o.disabled=k>=OPEN;sel.append(o);});sel.value=st.v;sel.className=TODO.is('iv'+(st.v+1))?'done':'todo';
   sel.onchange=()=>{st.v=+sel.value;st.q=0;st.flip=false;st.smp=false;drawRight();};
   const qc=el('div','chips');v.q.forEach((q,k)=>{const b=el('button','chip'+(k===st.q?' on':''),String(k+1));b.type='button';b.onclick=()=>{st.q=k;st.flip=false;st.smp=false;drawRight();};qc.append(b);});
   top.append(sel,qc,btn('Intro',()=>play(true),'sm'));wrap.append(top);
@@ -161,7 +165,8 @@ function t3(box){const st=S.iv,v=IV[st.v];let left=40,t=null;
   const paint=()=>{ring.querySelector('b').textContent=left;ring.style.background='conic-gradient(var(--acc) '+(left/40*360)+'deg,#f3ddd6 0)';ring.classList.toggle('end',left===0);};
   const stopT=()=>{clearInterval(t);t=null;};
   const runT=()=>{stopT();left=40;paint();label.textContent='Answer';beep(880,200);Rec.start();const end=Date.now()+40000;t=setInterval(()=>{left=Math.max(0,Math.ceil((end-Date.now())/1000));paint();if(left===0){stopT();label.textContent='Time is up';beep(520,500);Rec.stop(rec,v.id+'-q'+(st.q+1));}},200);};
-  function play(intro){stopT();Rec.cancel();left=40;paint();label.textContent=intro?'Introduction is playing':'Question is playing';say(intro?v.intro:v.q[st.q],()=>{if(intro)label.textContent='Now press Play';else runT();},()=>{label.textContent='No English voice in this browser';});}
+  function play(intro){stopT();Rec.cancel();left=40;paint();label.textContent=intro?'Introduction is playing':'Question is playing';if(!intro){const pl=st.pl||(st.pl={}),s=pl[st.v]||(pl[st.v]={});s[st.q]=1;if(Object.keys(s).length>=v.q.length)TODO.mark('iv'+(st.v+1));}
+    say(intro?v.intro:v.q[st.q],()=>{if(intro)label.textContent='Now press Play';else runT();},()=>{label.textContent='No English voice in this browser';});}
   function face(){card.className='ivcard'+(st.flip?' back':'');card.innerHTML='';
     if(st.flip){card.append(el('div','ey','Question '+(st.q+1)+' · '+esc(v.theme)),el('div','qq',esc(v.q[st.q])));if(st.smp)card.append(el('div','smpa',ED.t('w1.iv.'+v.id+'.'+st.q,v.a[st.q])));card.append(btn(st.smp?'Hide the answer':'Sample answer',()=>{st.smp=!st.smp;face();},'sm'));}
     else{card.append(el('div','ey','Question '+(st.q+1)+' of '+v.q.length),el('div','big','Listen and answer'));const pb=el('div','navrow');pb.append(btn('Play',()=>play(false),'main'),btn('Replay',()=>play(false)),btn('Stop',()=>{stopSay();stopT();Rec.cancel();label.textContent='Stopped';}));card.append(pb);}}
