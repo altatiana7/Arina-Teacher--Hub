@@ -1394,7 +1394,7 @@ function renderW3OralCard(){
 }
 function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261015b';
+const ARINA_BUILD='20261015c';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1478,8 +1478,14 @@ const KH_DATA = [
 ];
 (function(){
  const items=KH_DATA.map(d=>[d[1]+(d[2]?' <span class="khHint">'+d[2]+'</span>':''),[d[3]].concat(d[4]),0,d[5],d[0]]);
- W3_TASKS['w3-mistakes-kahoot']={label:'Week 3 · Lesson 2',title:'Mixed test · все мои ошибки',sub:KH_DATA.length+' вопросов · Kahoot без таймера · результат уходит учителю',type:'mc',intro:'',items:items,kahoot:true};
- ARINA_LESSONS['2-0'].parts.unshift(['Разминка · все ошибки',[['task','w3-mistakes-kahoot']]]);
+ W3_TASKS['w3-mistakes-kahoot']={label:'Week 3 · Lesson 1',title:'Mixed test · все мои ошибки',sub:KH_DATA.length+' вопросов · Kahoot без таймера · результат уходит учителю',type:'mc',intro:'',items:items,kahoot:true};
+ /* 15.10 · separate homework: everything on Future not done yet + the mistakes test (tasks are moved here, not duplicated) */
+ const HW15=['w3-mistakes-kahoot','w3l1-reading-fipi','w3l1-meaning','w3l1-interview'],L=ARINA_LESSONS['2-0'];
+ L.parts.forEach(p=>{p[1]=p[1].filter(c=>!(c[0]==='task'&&HW15.includes(c[1])))});
+ L.parts.unshift(['Домашняя работа · к следующему уроку',HW15.map(id=>['task',id]).concat([['rule','future','Памятка · Future','will · be going to · Present forms']]),'home']);
+ const old=L.parts.find((p,i)=>i>0&&p[0]==='Домашняя работа');if(old)old[0]='Домашняя работа · прошлая';
+ ARINA_ASSIGNED_DEFAULT.push('w3-mistakes-kahoot','w3l1-meaning');
+ try{if(!localStorage.getItem('arinaHwAdd-20261015')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW15.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261015','1')}}catch(e){}
 })();
 const KH_SHAPES=['<svg viewBox="0 0 24 24"><path d="M12 3 22 20H2z" fill="currentColor"/></svg>','<svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12z" fill="currentColor"/></svg>','<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>','<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="currentColor"/></svg>'];
 let KH=null;
@@ -2220,7 +2226,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261015b -->
+<!-- build:20261015c -->
 
 <script id="arinaRussiaScript">
 (function(){
