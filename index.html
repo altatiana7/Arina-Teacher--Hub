@@ -1394,7 +1394,7 @@ function renderW3OralCard(){
 }
 function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261015a';
+const ARINA_BUILD='20261015b';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1425,7 +1425,6 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 </script>
 <script id="arinaKahootScript">
 /* ===== WEEK 3 · LESSON 2 · Mistakes Kahoot: every mistake Arina made in submitted work (Weeks 1–3), no timer ===== */
-const KH_R='Чтение · подбери заголовок';
 const KH_DATA = [
 ["Future · be going to","We ___ our cousins next weekend.","(VISIT) — это наш план","are going to visit",["are visit","going to visit","will visiting"],"Going to берём целиком: am / is / are + going to + глагол."],
 ["Present Perfect","I ___ him for five years.","","have known",["am knowing","know","have been knowing"],"Know не бывает с -ing. «Уже пять лет и до сих пор» → have known."],
@@ -1475,14 +1474,7 @@ const KH_DATA = [
 ["Stative verbs","Most critics ___ her the best writer of her generation.","","consider",["have considered","are considering","considers"],"Consider = считать (мнение) → Present Simple."],
 ["Stative verbs","This room ___ four metres by five.","","measures",["has measured","is measuring","measure"],"Размер комнаты — факт → measures."],
 ["Past Perfect","It was the first time most of us ___ such an ancient city.","(SEE)","had seen",["saw","have seen","had saw"],"It was the first time … → had + 3-я форма: had seen."],
-["Past Continuous","While he ___ for it, he practised for three hours a day.","(PREPARE)","was preparing",["had been preparing","prepared","is preparing"],"While — в процессе подготовки → was preparing."],
-[KH_R,"Text A · Important inventions often require years of hard work, but some discoveries are …","Изобретения","2. No effort, just luck!",["3. Have the right neighbour!","4. The unexpected side of a failure.","8. True story and myth."],"Ищи главную мысль абзаца: открытия бывают случайными."],
-[KH_R,"Text F · Harry Coover tried to create transparent plastic for gun sights, but produced a …","Изобретения","4. The unexpected side of a failure.",["2. No effort, just luck!","3. Have the right neighbour!","8. True story and myth."],"Хотел одно, не получилось — зато вышло другое полезное."],
-[KH_R,"Text G · At the 1904 World Fair an ice-cream seller ran out of paper cups. A nearby waffle …","Изобретения","3. Have the right neighbour!",["8. True story and myth.","2. No effort, just luck!","4. The unexpected side of a failure."],"Помог продавец по соседству → neighbour."],
-[KH_R,"Text B · The collection began modestly in the 1620s with a few portraits and curiosities. …","Музей","6. First famous exhibits.",["2. Presents begin to enrich the collection.","1. Reason for extension.","3. New collections for the new building."],"Начало коллекции — первые экспонаты."],
-[KH_R,"Text E · A large collection of ancient Greek and Roman statues arrived in 1755. The marbl…","Музей","1. Reason for extension.",["3. New collections for the new building.","4. New field for the old museum.","6. First famous exhibits."],"Статуй стало много — нужно больше места → extension."],
-[KH_R,"Text F · Before the new museum was completed, important drawings by Raphael and Michelangelo …","Музей","3. New collections for the new building.",["4. New field for the old museum.","1. Reason for extension.","2. Presents begin to enrich the collection."],"Новые рисунки — для нового здания."],
-[KH_R,"Text G · In the 1850s Oxford created a separate Natural History Museum. After the natural…","Музей","4. New field for the old museum.",["6. First famous exhibits.","3. New collections for the new building.","1. Reason for extension."],"Природу увезли — у старого музея новое направление."]
+["Past Continuous","While he ___ for it, he practised for three hours a day.","(PREPARE)","was preparing",["had been preparing","prepared","is preparing"],"While — в процессе подготовки → was preparing."]
 ];
 (function(){
  const items=KH_DATA.map(d=>[d[1]+(d[2]?' <span class="khHint">'+d[2]+'</span>':''),[d[3]].concat(d[4]),0,d[5],d[0]]);
@@ -2228,7 +2220,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261015a -->
+<!-- build:20261015b -->
 
 <script id="arinaRussiaScript">
 (function(){
