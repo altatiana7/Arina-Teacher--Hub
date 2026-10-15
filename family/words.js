@@ -86,7 +86,7 @@ tabs.innerHTML='';
 function overlay(title,html,rows){const ov=el('div','overlay'),t=el('div','teach');t.append(el('h4',null,title));t.insertAdjacentHTML('beforeend',html);(rows||[]).forEach(r=>t.append(r));t.append(btn('Закрыть',()=>ov.remove(),'sm'));ov.append(t);ov.onclick=e=>{if(e.target===ov)ov.remove();};document.body.append(ov);}
 function overlayEn(title,html){const ov=el('div','overlay'),t=el('div','teach');t.append(el('h4',null,title));t.insertAdjacentHTML('beforeend',html);t.append(btn('Close',()=>ov.remove(),'sm'));ov.append(t);ov.onclick=e=>{if(e.target===ov)ov.remove();};document.body.append(ov);}
 function scoreRow(label,max,get,set){const r=el('div','score');r.append(el('span',null,label));for(let n=0;n<=max;n++){const b=el('button',get()===n?'on':'',String(n));b.type='button';b.onclick=()=>{set(n);[...r.querySelectorAll('button')].forEach((x,k)=>x.classList.toggle('on',k===n));};r.append(b);}return r;}
-function seg(items,cur,onPick){const s=el('div','seg');items.forEach(([v,l,lock])=>{const b=el('button','segb'+(v===cur?' on':'')+(lock?' lock':''),l+(lock?' · locked':''));b.type='button';if(lock){b.disabled=true;b.title='Locked';}else b.onclick=()=>onPick(v);s.append(b);});return s;}
+function seg(items,cur,onPick){const s=el('div','seg');items.forEach(([v,l,lock])=>{const b=el('button','segb'+(v===cur?' on':'')+(lock?' lock':''),(lock?l.split(' · ')[0]+' · locked':l));b.type='button';if(lock){b.disabled=true;b.title='Locked';}else b.onclick=()=>onPick(v);s.append(b);});return s;}
 function recBtn(){const b=btn('',async()=>{if(!Rec.on){if(!(await Rec.enable())){b.textContent='No microphone';return;}Rec.on=true;}else Rec.on=false;paint();},'sm wide');const paint=()=>{b.textContent='Recording: '+(Rec.on?'on':'off');b.classList.toggle('main',Rec.on);};paint();return b;}
 /* ---------- Озвучка голосом браузера ---------- */
 let voice=null;
@@ -133,9 +133,9 @@ function match(box){const st=S.w;
 
 /* ---------- Справа: устная часть, задания 1–4 под кнопками ---------- */
 function drawRight(){if(cleanR){cleanR();cleanR=null;}stopSay();PR.innerHTML='';
-  PR.append(seg([[1,'1 · Reading aloud'],[2,'2 · Questions'],[3,'3 · Interview'],[4,'4 · Photos',true]],S.right,v=>{S.right=v;drawRight();}));
+  PR.append(seg([[1,'1 · Reading'],[2,'2 · Questions'],[3,'3 · Interview'],[4,'4 · Photos',true]],S.right,v=>{S.right=v;drawRight();}));
   /* что осталось сделать: красная отметка с числом, всё сделано – зелёная галочка */
-  const TK={1:['t1-1','t1-2'],2:['t2-1','t2-2'],3:['iv1','iv2']};[...PR.querySelectorAll('.seg .segb')].slice(0,3).forEach((b,i)=>{const n=TK[i+1].filter(k=>!TODO.is(k)).length;b.classList.add(n?'todo':'done');b.append(el('i','tdb',n?String(n):'✓'));});
+  const TK={1:['t1-1','t1-2'],2:['t2-1','t2-2'],3:['iv1','iv2']};[...PR.querySelectorAll('.seg .segb')].slice(0,3).forEach((b,i)=>{const n=TK[i+1].filter(k=>!TODO.is(k)).length;b.classList.add(n?'todo':'done');b.append(el('i','tdb',n?'осталось '+n:'✓'));});
   const body=el('div','pbody sp4');PR.append(body);[null,t1,t2,t3,t4][S.right](body);}
 /* общий блок управления: круговой таймер с фазами и запись */
 function ctl(box,phases,name,extra,onPhase,onDone){const c=el('div','ctl2'),ring=ringEl(phases[0].sec),label=el('div','phase','Press Start'),rec=el('div','rec');ring.querySelector('span').textContent='ready';
@@ -144,20 +144,21 @@ function ctl(box,phases,name,extra,onPhase,onDone){const c=el('div','ctl2'),ring
   const b=el('div','ctlbtns');b.append(st,pa,sk,recBtn());(extra||[]).forEach(x=>b.append(x));c.append(ring,label,b,rec);box.append(c);cleanR=()=>run.stop();}
 function t1(box){const st=S.t1,r=READS[st.v],k=el('div','kim2');
   k.innerHTML='<p class="task">Task 1. Imagine that you are preparing a project with your friend. You have found some interesting material for the presentation and you want to read this text to your friend. You have 1.5 minutes to read the text silently, then be ready to read it out aloud. You will not have more than 1.5 minutes to read it.</p><div class="textbox">'+esc(r.x)+'</div>';
-  box.append(k);ctl(box,[{label:'Preparation · read silently',kind:'prep',sec:90},{label:'Answer · read aloud',kind:'answer',sec:90}],'task1-'+(st.v+1),[btn('Tips',()=>overlayEn('Reading aloud · what to check','<p><b>Words to pronounce carefully:</b> '+esc(r.note)+'.</p><p>Pause at commas and full stops, let your voice fall at the end of a statement, read numbers in full, pronounce the endings -ed and -s.</p>'),'sm wide'),vbtn('Text '+(st.v+1)+' of '+Math.min(OPEN,READS.length),'t1-'+(st.v+1),()=>{st.v=(st.v+1)%Math.min(OPEN,READS.length);drawRight();})],null,()=>{TODO.mark('t1-'+(st.v+1));drawRight();});}
+  box.append(k);ctl(box,[{label:'Preparation · read silently',kind:'prep',sec:90},{label:'Answer · read aloud',kind:'answer',sec:90}],'task1-'+(st.v+1),[btn('Tips',()=>overlayEn('Reading aloud · what to check','<p><b>Words to pronounce carefully:</b> '+esc(r.note)+'.</p><p>Pause at commas and full stops, let your voice fall at the end of a statement, read numbers in full, pronounce the endings -ed and -s.</p>'),'sm wide'),vpick('Text','t1-',Math.min(OPEN,READS.length),st.v,k=>{st.v=k;drawRight();})],null,()=>{TODO.mark('t1-'+(st.v+1));drawRight();});}
 /* кнопка варианта с отметкой «to do / done» */
-function vbtn(label,k,fn){const b=btn(label+TODO.tag(k),fn,'sm wide '+(TODO.is(k)?'done':'todo'));return b;}
+/* варианты задания кнопками: жёлтый – сделать, зелёный – сделано */
+function vpick(name,pre,n,cur,fn){const d=el('div','vch vpk wide');for(let k=0;k<n;k++)d.append(TODO.chip(name+' '+(k+1),pre+(k+1),k===cur,()=>{if(k!==cur)fn(k);}));return d;}
 function t2(box){const st=S.t2,a=ADS[st.v],k=el('div','kim2');
   k.innerHTML='<p class="task">Task 2. Study the advertisement.</p><div class="adrow"><div class="ruad" style="background:'+a.c+'"><b>'+esc(a.title)+'</b><span>'+esc(a.sub)+'</span></div><div><p class="task">'+esc(a.intro)+' In 1.5 minutes you are to ask four direct questions to find out about the following:</p><ol id="pts">'+a.points.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ol><p class="task">You have 20 seconds to ask each question.</p></div></div>';
   box.append(k);
   ctl(box,[{label:'Preparation',kind:'prep',sec:90}].concat(a.points.map((p,i)=>({label:'Question '+(i+1),kind:'answer',sec:20}))),'task2-'+(st.v+1),
-    [btn('Sample questions',()=>showSample(a.title+' · sample questions','<ol class="smpl">'+a.key.map((x,i)=>'<li><i>'+esc(a.points[i])+'</i><br>'+ED.t('w1.t2.'+st.v+'.'+i,x)+'</li>').join('')+'</ol>',null,'Close'),'sm wide'),vbtn('Advert '+(st.v+1)+' of 2','t2-'+(st.v+1),()=>{st.v=1-st.v;drawRight();})],
+    [btn('Sample questions',()=>showSample(a.title+' · sample questions','<ol class="smpl">'+a.key.map((x,i)=>'<li><i>'+esc(a.points[i])+'</i><br>'+ED.t('w1.t2.'+st.v+'.'+i,x)+'</li>').join('')+'</ol>',null,'Close'),'sm wide'),vpick('Advert','t2-',2,st.v,k=>{st.v=k;drawRight();})],
     i=>{[...PR.querySelectorAll('#pts li')].forEach((x,j)=>{x.className=i<1?'':(j===i-1?'now':(j<i-1?'past':''));});},()=>{TODO.mark('t2-'+(st.v+1));drawRight();});}
 function t3(box){const st=S.iv,v=IV[st.v];let left=40,t=null;
-  const wrap=el('div','kim2 ivw'),top=el('div','ivtop'),sel=el('select');sel.setAttribute('aria-label','Set');IV.forEach((x,k)=>{const o=new Option('Set '+(k+1)+' · '+x.theme+(k>=OPEN?' · locked':TODO.tag('iv'+(k+1))),k);o.disabled=k>=OPEN;sel.append(o);});sel.value=st.v;sel.className=TODO.is('iv'+(st.v+1))?'done':'todo';
-  sel.onchange=()=>{st.v=+sel.value;st.q=0;st.flip=false;st.smp=false;drawRight();};
+  const wrap=el('div','kim2 ivw'),top=el('div','ivtop'),sets=el('div','vch');
+  IV.slice(0,OPEN).forEach((x,k)=>sets.append(TODO.chip('Set '+(k+1)+' · '+esc(x.theme),'iv'+(k+1),k===st.v,()=>{if(k===st.v)return;st.v=k;st.q=0;st.flip=false;st.smp=false;drawRight();})));wrap.append(sets);
   const qc=el('div','chips');v.q.forEach((q,k)=>{const b=el('button','chip'+(k===st.q?' on':''),String(k+1));b.type='button';b.onclick=()=>{st.q=k;st.flip=false;st.smp=false;drawRight();};qc.append(b);});
-  top.append(sel,qc,btn('Intro',()=>play(true),'sm'));wrap.append(top);
+  top.append(qc,btn('Intro',()=>play(true),'sm'));wrap.append(top);
   const card=el('div','ivcard');wrap.append(card);
   const nav=el('div','qznav'),bk=btn('←',()=>{st.q--;st.flip=false;st.smp=false;drawRight();},'sm'),fw=btn(st.q<v.q.length-1?'→':'Next set',()=>{if(st.q<v.q.length-1)st.q++;else{st.v=(st.v+1)%Math.min(OPEN,IV.length);st.q=0;}st.flip=false;st.smp=false;drawRight();},'sm');bk.disabled=st.q===0;
   nav.append(bk,btn('Flip the card',()=>{st.flip=!st.flip;face();},'main sm'),fw);wrap.append(nav);box.append(wrap);

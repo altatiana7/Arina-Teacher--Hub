@@ -39,11 +39,10 @@ function teachBtn(key){return el('span');}
 /* результат уходит учителю (сайт Арины: saveArinaHomework) */
 function send(id,title,score,max,details){try{const f=window.parent&&window.parent!==window&&window.parent.saveArinaHomework;if(typeof f!=='function')return;const answers={};details.forEach((d,k)=>answers[k+1]=d.chosen);f({test_id:id,test_title:title,score,max_score:max,answers,details}).catch(()=>{});}catch(e){}}
 /* шапка колонки: название + выбор текста ← список → */
-function phead(p,key,list,reset,names,extra){const h=el('div','ph');h.append(el('b','pt',PANE[key].title));
-  const sel=el('select');sel.setAttribute('aria-label',PANE[key].title+' text');(names||list.map(x=>x.t)).forEach((t,k)=>{const o=new Option((k+1)+'. '+t+(k>=OPEN?' · locked':TODO.tag(key+(k+1))),k);o.disabled=k>=OPEN;sel.append(o);});const st=S[key];sel.value=st.v;sel.className=TODO.is(key+(st.v+1))?'done':'todo';
-  const set=v=>{st.v=v;reset();repaint(key);};sel.onchange=()=>set(+sel.value);
-  const bk=btn('←',()=>set(st.v-1),'sm'),fw=btn('→',()=>set(st.v<LIM(list)-1?st.v+1:0),'sm');bk.disabled=st.v===0;bk.title='Previous text';fw.title=st.v<LIM(list)-1?'Next text':'First text';
-  h.append(bk,sel,fw);if(extra)h.append(...extra);else h.append(el('span','cnt',(st.v+1)+' / '+LIM(list)));p.append(h);}
+function phead(p,key,list,reset,names,extra){const h=el('div','ph'),st=S[key];h.append(el('b','pt',PANE[key].title));
+  const set=v=>{st.v=v;reset();repaint(key);},cs=el('div','vch');
+  (names||list.map(x=>x.t)).slice(0,LIM(list)).forEach((t,k)=>cs.append(TODO.chip((k+1)+'. '+esc(t),key+(k+1),k===st.v,()=>{if(k!==st.v)set(k);})));
+  if(extra)h.append(...extra);p.append(h,cs);}
 
 /* ---------- Грамматика и словообразование: текст с пропусками ---------- */
 function parse(x){const gaps=[];const paras=x.split('\n').map(line=>line.split(/(\[\[[^\]]+\]\])/).map(ch=>{const m=ch.match(/^\[\[([^|]+)\|([^\]]+)\]\]$/);if(!m)return ch;const g={base:m[1],acc:m[2].split('/').map(s=>s.trim()),i:gaps.length};gaps.push(g);return g;}));return {gaps,paras};}

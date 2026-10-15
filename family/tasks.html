@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:,">
 <title>Arina · Family and relationships</title>
-<link rel="stylesheet" href="app.css?v=2">
+<link rel="stylesheet" href="app.css?v=4">
 <style>
 .ws2{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:1240px;margin:0 auto}
 .wp{background:#fff;border:1px solid var(--line);border-top:4px solid var(--pc);border-radius:16px;box-shadow:0 6px 18px rgba(30,64,120,.06);padding:10px 12px;display:flex;flex-direction:column;gap:7px;min-width:0;height:clamp(400px,calc(100vh - 128px),760px)}
@@ -64,14 +64,21 @@ main{padding:4px 0;justify-content:flex-start!important}
 body{padding-top:4px!important}
 .segb.lock{opacity:.45;cursor:not-allowed}
 
-/* что нужно сделать: красная рамка; сделано: зелёная */
-.todo{box-shadow:inset 0 0 0 2px #D52B1E!important}
-select.todo{border-color:#D52B1E!important;box-shadow:0 0 0 1px #D52B1E!important;background:#fff5f4!important}
-.done{box-shadow:inset 0 0 0 2px #1e8e5a!important}
-select.done{border-color:#1e8e5a!important;box-shadow:none!important;background:#effaf3!important}
-.segb .tdb{font-style:normal;display:inline-block;min-width:18px;height:18px;line-height:18px;border-radius:9px;margin-left:5px;font-size:11.5px;font-weight:900;color:#fff;background:#D52B1E;text-align:center;padding:0 4px}
-.segb.done .tdb{background:#1e8e5a}
-.segb.todo,.segb.done{box-shadow:none!important}
+
+/* что нужно сделать: жёлтые кнопки «сделать», зелёные «✓ сделано» */
+.vch{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-width:0}
+.vc{font:inherit;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:4px 8px;cursor:pointer;font-size:14px;font-weight:700;color:#1f2a44;max-width:100%;min-width:0}
+.vc span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.vc em{font-style:normal;font-size:11.5px;font-weight:800;border-radius:20px;padding:1px 7px;white-space:nowrap}
+.vc.todo{background:#fff3c4;border:2px solid #f2c94c}.vc.todo em{color:#9a3412;background:#ffedd5}
+.vc.ok{background:#e9f7ef;border:2px solid #8fd1aa}.vc.ok em{color:#14653a;background:#d3f0de}
+.vc.cur{outline:3px solid #0039A6;outline-offset:1px}
+.vpk{grid-column:1/-1}.vpk .vc{flex:1 1 0;justify-content:center;flex-direction:column;gap:1px;padding:3px 4px;font-size:13px}
+.segb .tdb{font-style:normal;display:inline-block;margin-left:6px;font-size:11px;font-weight:800;border-radius:20px;padding:1px 7px;color:#9a3412;background:#ffedd5}
+.segb.todo{background:#fff3c4}.segb.done .tdb{color:#14653a;background:#d3f0de}
+.ph .pt{margin-right:auto}
+.wp>.vch{flex:0 0 auto}
+.segb.lock{padding:6px 8px}
 </style>
 </head>
 <body>
@@ -80,10 +87,10 @@ select.done{border-color:#1e8e5a!important;box-shadow:none!important;background:
   <nav class="tabs" id="tabs" aria-label="Sections"></nav>
 </header>
 <main id="main"></main>
-<script src="core.js?v=2"></script>
-<script src="edit.js?v=2"></script>
-<script src="todo.js?v=2"></script>
-<script src="tasks-data.js?v=2"></script>
-<script src="tasks.js?v=2"></script>
+<script src="core.js?v=4"></script>
+<script src="edit.js?v=4"></script>
+<script src="todo.js?v=4"></script>
+<script src="tasks-data.js?v=4"></script>
+<script src="tasks.js?v=4"></script>
 </body>
 </html>

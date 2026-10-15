@@ -10,5 +10,8 @@ const TODO=(function(){
   function left(tab){const o=load();return (tab?LIST[tab]:[].concat(...Object.values(LIST))).filter(k=>!o[k]).length;}
   /* подпись для варианта: «to do» или «done» */
   function tag(k){return is(k)?' · done ✓':' · to do';}
-  return {is,mark,left,tag,LIST};
+  /* кнопка-вариант: жёлтая «сделать» или зелёная «✓ сделано»; выбранная обведена синим */
+  function chip(label,k,cur,fn){const b=document.createElement('button');b.type='button';b.className='vc '+(is(k)?'ok':'todo')+(cur?' cur':'');
+    b.innerHTML='<span>'+label+'</span><em>'+(is(k)?'✓ сделано':'сделать')+'</em>';b.title=is(k)?'Сделано':'Нужно сделать';b.onclick=fn;return b;}
+  return {is,mark,left,tag,LIST,chip};
 })();
