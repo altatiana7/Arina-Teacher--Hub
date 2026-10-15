@@ -1394,7 +1394,7 @@ function renderW3OralCard(){
 }
 function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261012a';
+const ARINA_BUILD='20261015a';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1423,6 +1423,150 @@ window.addEventListener('load',()=>setTimeout(arinaSyncDone,600));
 window.addEventListener('online',arinaSyncDone);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')arinaSyncDone()});
 </script>
+<script id="arinaKahootScript">
+/* ===== WEEK 3 · LESSON 2 · Mistakes Kahoot: every mistake Arina made in submitted work (Weeks 1–3), no timer ===== */
+const KH_R='Чтение · подбери заголовок';
+const KH_DATA = [
+["Future · be going to","We ___ our cousins next weekend.","(VISIT) — это наш план","are going to visit",["are visit","going to visit","will visiting"],"Going to берём целиком: am / is / are + going to + глагол."],
+["Present Perfect","I ___ him for five years.","","have known",["am knowing","know","have been knowing"],"Know не бывает с -ing. «Уже пять лет и до сих пор» → have known."],
+["Past Continuous","Other kids ___ lawns for their summer money, and my brother and I were making fishing gear.","(MOW)","were mowing",["moved","mowed","had mowed"],"Рядом were making — значит, тоже процесс. И mow (косить) ≠ move."],
+["Present Continuous","Our summer holidays ___ to an end.","(COME)","are coming",["is coming","comes","come"],"Holidays — их много, поэтому are."],
+["Future · be going to","This year I ___ in Brazil for New Year.","(BE)","am going to be",["have been","will being","am being"],"Это план на этот Новый год → am going to be."],
+["Present Perfect Continuous","My mum ___ Russian for a while, and got interested in the Russian culture.","(LEARN)","has been learning",["was learning","learns","is learning"],"For a while — какое-то время до сих пор → has been + -ing."],
+["Present Continuous","I ___ my summer holiday, you know.","(PLAN)","am planning",["was planning","plan","have planned"],"Сейчас как раз этим занимаюсь → am planning."],
+["Present Perfect Continuous","The amount of plastic junk in the oceans ___ at an alarming rate for the last ten years.","(INCREASE)","has been increasing",["has increased","is increasing","increased"],"For the last ten years + процесс идёт до сих пор → has been + -ing."],
+["Past Simple","I ___ to Oslo when I was twenty-one, and I’ve been working there for quite a while now.","(MOVE)","moved",["have moved","had moved","was moving"],"When I was 21 — точное время в прошлом → Past Simple."],
+["Present Continuous","When you ___ a film and texting a friend at the same time, you’re not doing any of these properly.","(WATCH)","are watching",["are vatching","watch","will watch"],"Рядом texting — процесс → are watching. Пишем watch через W."],
+["Present Perfect Continuous","Since then, I ___ a lot about Artificial Intelligence.","(THINK)","have been thinking",["have thought","am thinking","thought"],"Since then — с тех пор и до сих пор думаю → have been thinking."],
+["Future · will","Drop by in the evening, and I ___ you a copy.","(GIVE)","will give",["will drop","give","am giving"],"Бери глагол из скобок! Обещание → will give."],
+["Future · be going to","Most of my classmates ___ somewhere, but I won’t be able to join them.","(TRAVEL)","are going to travel",["are going to fly","will travelling","travel"],"Глагол только из скобок: travel, а не fly."],
+["when / if + Present","I’ll let you know about my impressions when I ___ back.","(GET)","get",["will get","got","am getting"],"После when про будущее — без will: when I get back."],
+["when / if + Present","When you ___ in Moscow, you’ll check into the hotel and have some rest.","(ARRIVE)","arrive",["will arive","will arrive","arrives"],"После when — без will. И arrive пишется с двумя R."],
+["when / if + Present","If she ___ it, it will be easier for her to control her behaviour.","(FIND)","finds",["will find","find","found"],"После if — без will. She → finds (с -s)."],
+["when / if + Present","If it’s hot — I’ll relax, and if it ___ cold — I’ll wake up.","(BE)","is",["will be","be","was"],"После if — без will: if it is cold."],
+["Future · will","But that means you ___ to get up early.","(HAVE) — посмотри, что стоит после пропуска","will have",["will have to","have to","will has"],"После пропуска уже стоит to — второй раз его не пишем."],
+["Future · be going to","My intention is to learn Spanish next year. → I ___ Spanish next year.","(GOING)","am going to learn",["am going to","going to learn","will going to learn"],"Не забывай сам глагол: am going to learn."],
+["Расписание","The departure time of the bus is 8.15. → The bus ___ 8.15.","(LEAVES)","leaves at",["leaves","is leaving","will leave at"],"Расписание → Present Simple. Перед временем нужен предлог at."],
+["Future · will","I refuse to speak to him again. → I ___ to him again.","(WON’T)","won’t speak",["won'n speak","won’t to speak","don’t speak"],"Won’t = will not. После него глагол без to."],
+["will · решаю сейчас","The phone is ringing. — OK, I ___ it.","","’ll answer",["’m answering","answer","’m going to answer"],"Решила прямо сейчас → will."],
+["Договорённость","I can’t come on Saturday — I ___ my grandmother to the airport. It’s all arranged.","","’m taking",["’ll take","take","’m going take"],"Всё договорено → Present Continuous: I’m taking."],
+["Future · be going to","I’ve decided: I ___ medicine at university.","","’m going to study",["’ll study","study","’m going study"],"Уже решила заранее → going to."],
+["when / if + Present","If it ___ tomorrow, we’ll move the picnic indoors.","","rains",["will rain","rain","is raining"],"После if — без will: if it rains."],
+["Future · be going to","Be careful! You ___ that glass.","","are going to drop",["will drop","drop","are dropping"],"Видно, что сейчас случится → going to."],
+["Past Simple","Last summer my uncle ___ to fly to Sochi for a conference.","(PLAN)","planned",["had planned","plans","has planned"],"Last summer — просто факт из прошлого → planned."],
+["Past Perfect","I couldn’t pay for lunch because I ___ my wallet at home.","","had left",["left","have left","was leaving"],"Оставила раньше, чем не смогла заплатить → had left."],
+["Past Perfect Continuous","We ___ for forty minutes when the bus finally came.","","had been waiting",["were waiting","have been waiting","waited"],"Ждали 40 минут ДО того, как пришёл автобус → had been waiting."],
+["Past Perfect","When I got to the station, I realised that I ___ my ticket.","","had forgotten",["forgot","have forgotten","had forgot"],"Забыла раньше, чем поняла → had forgotten."],
+["Past Perfect Continuous","The ground was white in the morning: it ___ all night.","","had been snowing",["was snowing","has been snowing","snowed"],"Шёл всю ночь до утра → had been snowing."],
+["Past Perfect Continuous","They began to wait at noon. The doctor came at one. → They ___ for an hour when the doctor came.","(WAITING)","had been waiting",["were waiting","have been waiting","had waiting"],"For an hour + до того, как пришёл → had been waiting."],
+["Past Continuous","At that moment our neighbours ___ a snowman in the yard.","(BUILD)","were building",["are building","was building","have built"],"At that moment в прошлом → were + -ing. Neighbours — их много → were."],
+["Past Perfect · орфография","I ___ so happy for a long time.","(NOT FEEL)","had not felt",["had not feelt","did not felt","have not feeled"],"Feel — felt — felt."],
+["Past Simple","I ___ my first phone when I was ten.","","got",["had got","have got","was getting"],"When I was ten — просто факт → got."],
+["Past Continuous","At this time last Sunday we ___ in the sea.","","were swimming",["had swum","are swimming","have swum"],"At this time last Sunday — в тот момент шёл процесс → were swimming."],
+["Past Perfect Continuous","They ___ for three hours before they found the right road.","","had been driving",["had driven","were driving","have been driving"],"Три часа ДО того, как нашли → had been driving."],
+["Пассив · Present","The Palace of Westminster is the meeting place of the UK Parliament, where important laws and rules ___.","(MAKE)","are made",["made","make","are making"],"Законы не делают сами — их делают → are made."],
+["Present Perfect","Over time, it ___ into a sophisticated social and cultural activity.","(DEVELOP)","has developed",["developed","is developing","develops"],"Over time — постепенно и до сих пор → has developed."],
+["Словообразование","Accessories such as stylish hats or ___ woolen scarves can make an outfit interesting.","(COLOUR)","colourful",["colorful","colourfull","colourly"],"В тексте британское написание (colour) → colourful, одна L."],
+["Словообразование","There are other less well-known ___ of our country in the space race.","(ACHIEVE)","achievements",["achivements","acheivements","achievments"],"achieve + ment + s: ie внутри, e перед -ment."],
+["Словообразование","Russian ___ were the first to take a photo of the dark side of the Moon.","(SCIENCE)","scientists",["acientists","sciences","scientics"],"Science → scientist(s). Начинается на S."],
+["Словообразование","Russian astronauts are ___ all over the world.","(FAME)","famous",["fameous","famus","fame"],"Fame → famous: E исчезает."],
+["Present Perfect Continuous","You look hot. — Yes, I ___ tennis for two hours.","","have been playing",["have played","am playing","played"],"For two hours + видно результат сейчас → have been playing."],
+["Stative verbs","You ___ pale. Are you all right?","","look",["are looking","have looked","looks"],"Look = выглядишь — это состояние, без -ing."],
+["Stative verbs","Most critics ___ her the best writer of her generation.","","consider",["have considered","are considering","considers"],"Consider = считать (мнение) → Present Simple."],
+["Stative verbs","This room ___ four metres by five.","","measures",["has measured","is measuring","measure"],"Размер комнаты — факт → measures."],
+["Past Perfect","It was the first time most of us ___ such an ancient city.","(SEE)","had seen",["saw","have seen","had saw"],"It was the first time … → had + 3-я форма: had seen."],
+["Past Continuous","While he ___ for it, he practised for three hours a day.","(PREPARE)","was preparing",["had been preparing","prepared","is preparing"],"While — в процессе подготовки → was preparing."],
+[KH_R,"Text A · Important inventions often require years of hard work, but some discoveries are …","Изобретения","2. No effort, just luck!",["3. Have the right neighbour!","4. The unexpected side of a failure.","8. True story and myth."],"Ищи главную мысль абзаца: открытия бывают случайными."],
+[KH_R,"Text F · Harry Coover tried to create transparent plastic for gun sights, but produced a …","Изобретения","4. The unexpected side of a failure.",["2. No effort, just luck!","3. Have the right neighbour!","8. True story and myth."],"Хотел одно, не получилось — зато вышло другое полезное."],
+[KH_R,"Text G · At the 1904 World Fair an ice-cream seller ran out of paper cups. A nearby waffle …","Изобретения","3. Have the right neighbour!",["8. True story and myth.","2. No effort, just luck!","4. The unexpected side of a failure."],"Помог продавец по соседству → neighbour."],
+[KH_R,"Text B · The collection began modestly in the 1620s with a few portraits and curiosities. …","Музей","6. First famous exhibits.",["2. Presents begin to enrich the collection.","1. Reason for extension.","3. New collections for the new building."],"Начало коллекции — первые экспонаты."],
+[KH_R,"Text E · A large collection of ancient Greek and Roman statues arrived in 1755. The marbl…","Музей","1. Reason for extension.",["3. New collections for the new building.","4. New field for the old museum.","6. First famous exhibits."],"Статуй стало много — нужно больше места → extension."],
+[KH_R,"Text F · Before the new museum was completed, important drawings by Raphael and Michelangelo …","Музей","3. New collections for the new building.",["4. New field for the old museum.","1. Reason for extension.","2. Presents begin to enrich the collection."],"Новые рисунки — для нового здания."],
+[KH_R,"Text G · In the 1850s Oxford created a separate Natural History Museum. After the natural…","Музей","4. New field for the old museum.",["6. First famous exhibits.","3. New collections for the new building.","1. Reason for extension."],"Природу увезли — у старого музея новое направление."]
+];
+(function(){
+ const items=KH_DATA.map(d=>[d[1]+(d[2]?' <span class="khHint">'+d[2]+'</span>':''),[d[3]].concat(d[4]),0,d[5],d[0]]);
+ W3_TASKS['w3-mistakes-kahoot']={label:'Week 3 · Lesson 2',title:'Mixed test · все мои ошибки',sub:KH_DATA.length+' вопросов · Kahoot без таймера · результат уходит учителю',type:'mc',intro:'',items:items,kahoot:true};
+ ARINA_LESSONS['2-0'].parts.unshift(['Разминка · все ошибки',[['task','w3-mistakes-kahoot']]]);
+})();
+const KH_SHAPES=['<svg viewBox="0 0 24 24"><path d="M12 3 22 20H2z" fill="currentColor"/></svg>','<svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12z" fill="currentColor"/></svg>','<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>','<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="currentColor"/></svg>'];
+let KH=null;
+function khShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const khOpenBase=openW3Task;
+openW3Task=function(id){
+ const t=taskDef(id);
+ if(!(t&&t.kahoot)||w3Get(id).done&&!arinaTeacher()){khOpenBase(id);if(t&&t.kahoot)khAddReplay();return}
+ khStart(id,t.items.map((q,i)=>i),!w3Get(id).done);
+};
+function khAddReplay(){const r=document.getElementById('plRoot');if(!r)return;const b=document.createElement('div');b.className='khReplayBar';b.innerHTML='<button type="button" class="plBtn plMain" onclick="khPractice()">Потренироваться ещё раз · без отправки</button>';r.prepend(b)}
+function khPractice(){const id='w3-mistakes-kahoot',t=taskDef(id),d=w3Get(id).done;let idx=t.items.map((q,i)=>i);if(d&&d.answers){const w=idx.filter(i=>d.answers[i]!==0);if(w.length)idx=w}khStart(id,idx,false)}
+function khStart(id,order,real){
+ KH={id:id,t:taskDef(id),order:khShuffle(order),pos:0,score:0,a:{},wrong:[],real:real,locked:false};
+ openFullScreen('','<div class="kh" id="khRoot"></div>',khRender);
+ PL=null;
+}
+function khRender(){
+ const root=document.getElementById('khRoot');if(!root||!KH)return;
+ const k=KH.order[KH.pos],q=KH.t.items[k],n=KH.order.length;
+ const opts=khShuffle(q[1].map((o,j)=>j));KH.opts=opts;KH.locked=false;
+ root.innerHTML='<div class="khBar"><b>'+(KH.real?'Mixed test · все мои ошибки':'Тренировка · без отправки')+'</b><span>Вопрос <i>'+(KH.pos+1)+'</i> из <i>'+n+'</i></span><span>Верно: <i>'+KH.score+'</i></span></div>'+
+ '<div class="khProg"><i style="width:'+(KH.pos/n*100)+'%"></i></div>'+
+ '<div class="khCard"><div class="khTag">'+w3Esc(q[4])+'</div><p class="khQ">'+q[0].replace('___','<span class="khGap"></span>')+'</p>'+
+ '<div class="khAns">'+opts.map((j,s)=>'<button type="button" class="khBtn" data-s="'+s+'" id="khA'+s+'" onclick="khPick('+s+')">'+KH_SHAPES[s]+'<span>'+w3Esc(q[1][j])+'</span></button>').join('')+'</div>'+
+ '<div class="khFb"><div class="khMsg" id="khMsg">Не спеши — времени нет. Выбирай ответ.</div><button type="button" class="plBtn plMain" id="khNext" hidden onclick="khNext()">Дальше</button></div></div>';
+}
+function khPick(s){
+ if(!KH||KH.locked)return;KH.locked=true;
+ const k=KH.order[KH.pos],q=KH.t.items[k],j=KH.opts[s],ok=j===q[2];
+ KH.a[k]=j;if(ok)KH.score++;else KH.wrong.push(k);
+ document.querySelectorAll('.khBtn').forEach(b=>{const bj=KH.opts[+b.dataset.s];b.disabled=true;if(bj===q[2])b.classList.add('right');else if(+b.dataset.s===s)b.classList.add('wrong');else b.classList.add('dim')});
+ document.getElementById('khMsg').innerHTML=(ok?'<b class="ok">Верно! </b>':'<b class="bad">Правильно: '+w3Esc(q[1][q[2]])+'. </b>')+q[3];
+ const nb=document.getElementById('khNext');nb.hidden=false;nb.textContent=KH.pos+1<KH.order.length?'Дальше':'Результат';nb.focus();
+}
+function khNext(){if(!KH)return;KH.pos++;if(KH.pos<KH.order.length)khRender();else khFinish()}
+async function khFinish(){
+ const root=document.getElementById('khRoot');if(!root)return;const n=KH.order.length,pct=Math.round(KH.score/n*100),id=KH.id;
+ const list=KH.wrong.map(k=>{const q=KH.t.items[k];return '<div class="khRow"><span>'+w3Plain(q[0]).replace('___','…')+'</span><b>'+w3Esc(q[1][q[2]])+'</b></div>'}).join('');
+ root.innerHTML='<div class="khCard khEnd"><div class="khTag">Результат</div><p class="khBig">'+KH.score+' / '+n+'</p><p class="khNote">'+(KH.wrong.length?pct+'% правильных. Ниже — что ещё путается.':'Все ошибки исправлены!')+'</p><div class="khSend" id="khSend">'+(KH.real?'Отправка учителю…':'Тренировка — результат не отправляется.')+'</div><div class="khRowBtns">'+(KH.wrong.length?'<button type="button" class="plBtn plMain" onclick="khStart(KH.id,KH.wrong,false)">Ещё раз только ошибки</button>':'')+'<button type="button" class="plBtn" onclick="khStart(KH.id,KH.t.items.map((q,i)=>i),false)">Пройти всё заново</button><button type="button" class="plBtn" onclick="closeFullScreen()">К уроку</button></div>'+(list?'<div class="khList">'+list+'</div>':'')+'</div>';
+ if(!KH.real)return;
+ const a=KH.a,r=w3Details(id,a),st=w3Get(id);
+ st.done={answers:a,score:r.score,total:r.total,date:new Date().toLocaleString('ru-RU'),pending:true,code:''};delete st.draft;w3Set(id,st);
+ const res=await arinaSendResult(plPayload(id,a));
+ const now=w3Get(id);if(now.done){now.done.pending=!res.ok;now.done.code=res.code;w3Set(id,now)}
+ const el=document.getElementById('khSend');if(el){el.className='khSend '+(res.ok?'good':'bad');el.textContent=res.ok?'Результат у учителя'+(res.code?' · код '+res.code:'')+'.':'Не удалось отправить — проверь интернет. Результат отправится сам при следующем входе.'}
+ w3Refresh();
+}
+document.addEventListener('keydown',e=>{if(!document.getElementById('khRoot')||!KH)return;const p=document.getElementById('fullScreenPanel');if(p&&p.style.display==='none')return;
+ if(!KH.locked&&/^[1-4]$/.test(e.key)){const b=document.getElementById('khA'+(+e.key-1));if(b){e.stopImmediatePropagation();b.click()}}
+ else if(KH.locked&&e.key==='Enter'&&document.activeElement&&document.activeElement.id!=='khNext'){const nb=document.getElementById('khNext');if(nb&&!nb.hidden){e.stopImmediatePropagation();nb.click()}}
+},true);
+</script>
+<style id="arinaKahootStyles">
+.kh{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:10px;font-family:"PT Serif",Georgia,"Times New Roman",serif;color:#1e1d2b}
+.kh button{font-family:inherit}
+.khBar{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.khBar b{font-size:19px;color:#0039A6;flex:1}.khBar span{color:#5b6475;font-size:16px}.khBar i{font-style:normal;font-weight:700;color:#1e1d2b}
+.khProg{height:6px;background:#d9e1ec;border-radius:3px;overflow:hidden}.khProg i{display:block;height:100%;background:#0039A6;transition:width .3s}
+.khCard{background:#fff;border:1px solid #d9e1ec;border-radius:14px;padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.khTag{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#5b6475}
+.khQ{font-size:24px;line-height:1.45;margin:0;font-weight:700}.khHint{font-weight:400;color:#5b6475;font-size:19px}
+.khGap{display:inline-block;min-width:3em;border-bottom:2px solid #1e1d2b;margin:0 .15em}
+.khAns{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.khAns{grid-template-columns:1fr}}
+.khBtn{display:flex;align-items:center;gap:12px;border:0;border-radius:10px;padding:13px 16px;min-height:58px;color:#fff;font-size:19px;text-align:left;cursor:pointer;transition:transform .12s,box-shadow .2s}
+.khBtn:hover:not(:disabled){transform:translateY(-2px)}.khBtn:focus-visible{outline:3px solid #0039A6;outline-offset:2px}
+.khBtn svg{flex:none;width:24px;height:24px}.khBtn span{min-width:0;overflow-wrap:anywhere}
+.khBtn[data-s="0"]{background:#c2443b}.khBtn[data-s="1"]{background:#2c5fb3}.khBtn[data-s="2"]{background:#d29c1a;color:#1e1d2b}.khBtn[data-s="3"]{background:#3a8640}
+.khBtn:disabled{cursor:default}.khBtn.dim{opacity:.55}.khBtn.right{box-shadow:0 0 0 4px #1f8a3a}.khBtn.wrong{box-shadow:0 0 0 4px #b9372f}
+.khBtn.right::after{content:"✓";margin-left:auto;font-weight:700}.khBtn.wrong::after{content:"✕";margin-left:auto;font-weight:700}
+.khFb{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-height:46px}.khMsg{flex:1;min-width:0;font-size:18px;line-height:1.45}.khMsg .ok{color:#1f8a3a}.khMsg .bad{color:#b9372f}
+.khEnd{align-items:center;text-align:center}.khBig{font-size:44px;font-weight:700;margin:0;color:#0039A6}.khNote{margin:0;color:#5b6475;font-size:18px}
+.khSend{font-size:16px;color:#5b6475}.khSend.good{color:#1f8a3a}.khSend.bad{color:#b9372f}
+.khRowBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.khList{text-align:left;width:100%;max-height:34vh;overflow:auto;border-top:1px solid #d9e1ec;padding-top:6px;font-size:16px}
+.khRow{display:flex;gap:12px;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #d9e1ec}.khRow b{color:#1f8a3a;white-space:nowrap}
+.khReplayBar{display:flex;justify-content:flex-end;margin-bottom:8px}
+@media (prefers-reduced-motion:reduce){.kh *{transition:none!important}}
+</style>
+
 <script>
 
 const ARINA_DB_URL='https://lzxcmrlubhjfdhtqvqzt.supabase.co';
@@ -2084,7 +2228,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261012a -->
+<!-- build:20261015a -->
 
 <script id="arinaRussiaScript">
 (function(){
