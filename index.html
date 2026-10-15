@@ -2405,4 +2405,5 @@ window.nextInterview=function(k){const s=interviewState[k];if(s.timer){clearInte
 window.speakUK=function(text,rate){if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=rate||.82;const vs=window.speechSynthesis.getVoices();const v=vs.find(x=>/^en-GB/i.test(x.lang))||vs.find(x=>/^en/i.test(x.lang));if(v)u.voice=v;window.speechSynthesis.speak(u)}
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('arinaRussiaPanel')?.classList.contains('open'))closeArinaRussia()});
 })();
-</script></body></html>
+</script>
+<script src="family/panel.js?v=1"></script></body></html>
