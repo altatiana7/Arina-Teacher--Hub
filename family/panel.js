@@ -3,7 +3,7 @@
    письмо 37, эссе 38 и задание 4 (сравнение картинок) закрыты.
    Страница темы открывается панелью поверх хаба, как тема RUSSIA. */
 (function(){
-const V='9';
+const V='10';
 /* что нужно сделать по вкладкам (как в family/todo.js) */
 const TODO_LIST={words:['t1-1','t1-2','t2-1','t2-2','iv1','iv2'],gw:['g1','g2','g3','g4','g5','g6','g7','g8','g9','g10','g11','g12','w1','w2','w3','w4','w5','w6','w7','w8'],read:['r1','r2','r3']};
 const doneMap=()=>{try{return JSON.parse(localStorage.getItem('arinaFamily:done')||'{}')||{};}catch(e){return {};}};
@@ -15,7 +15,7 @@ const TABS=[
  ['letter','LETTER 37',null],
  ['essay','ESSAY 38',null]];
 const css=document.createElement('style');css.id='arinaFamilyStyles';
-css.textContent='#arinaFamilyPanel{position:fixed;z-index:110;inset:38px 0 0 0;background:#f7f9fc;display:none;overflow:hidden}'
+css.textContent='#arinaFamilyPanel{position:fixed;z-index:110;inset:0;background:#f7f9fc;display:none;overflow:hidden}'
  +'#arinaFamilyPanel.open{display:grid;grid-template-rows:auto minmax(0,1fr);grid-template-columns:minmax(0,1fr)}'
  +'#arinaFamilyPanel .russiaTop{min-width:0;padding:4px 10px;gap:8px}#arinaFamilyPanel .russiaTitle{flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#arinaFamilyPanel .russiaTitle b{font-size:13px;display:inline}'
  +'#arinaFamilyPanel .russiaBack{padding:6px 10px;white-space:nowrap}'
@@ -45,8 +45,8 @@ function refresh(){const p=document.getElementById('arinaFamilyPanel');
  if(p)p.querySelectorAll('[data-fam-tab]').forEach(b=>{const t=b.dataset.famTab;if(!TODO_LIST[t])return;const n=leftOf(t);let i=b.querySelector('i');if(!i){i=document.createElement('i');b.append(i);}i.textContent=n?'осталось '+n:'✓ сделано';b.classList.toggle('ftodo',n>0);b.classList.toggle('fdone',n===0);b.title=n?'To do: '+n:'Done';});
  const fb=document.querySelector('.famTopic small');if(fb){const n=leftOf('words')+leftOf('gw')+leftOf('read');fb.innerHTML=n?'homework · <b>осталось '+n+'</b>':'homework · всё сделано ✓';}}
 window.famTodoRefresh=function(){refresh();const dp=document.getElementById('duePanel');if(dp&&typeof window.duePanelHTML==='function')dp.outerHTML=window.duePanelHTML();};
-function close(){const p=document.getElementById('arinaFamilyPanel');if(!p)return;p.classList.remove('open');p.querySelector('iframe').src='about:blank';document.body.style.overflow='';}
-window.openArinaFamily=function(tab){if(typeof closeArinaRussia==='function')closeArinaRussia();panel().classList.add('open');show(TABS.some(t=>t[0]===tab&&t[2])?tab:'words');document.body.style.overflow='hidden';};
+function close(){const p=document.getElementById('arinaFamilyPanel');if(!p)return;try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}p.classList.remove('open');p.querySelector('iframe').src='about:blank';document.body.style.overflow='';}
+window.openArinaFamily=function(tab){if(typeof closeArinaRussia==='function')closeArinaRussia();try{const d=document.documentElement;if(!document.fullscreenElement&&d.requestFullscreen)d.requestFullscreen().catch(()=>{});}catch(e){}panel().classList.add('open');show(TABS.some(t=>t[0]===tab&&t[2])?tab:'words');document.body.style.overflow='hidden';};
 /* 17.10 · домашняя работа: все задания ОГЭ темы Family – в блоке «Задано сейчас» (по строке на вид задания) */
 const FAM_HW=[['gw','g','Family · Grammar 19–24 · тренировка',12],['gw','w','Family · Word formation 25–29 · тренировка',8],['read','r','Family · Reading · тренировка',3]];
 function famRows(){const o=doneMap();return FAM_HW.map(h=>{let n=0;for(let i=1;i<=h[3];i++)if(!o[h[1]+i])n++;return [h,n];}).filter(x=>x[1]>0)
