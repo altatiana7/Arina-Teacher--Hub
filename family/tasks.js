@@ -11,8 +11,8 @@ const NOTE={
  w:'<p><b>Словообразование, формат заданий 25–29.</b> 8 текстов по 6 пропусков из подборки «Family, friends» (тексты ОГЭ из открытого банка ФИПИ). Основное: -ful, -ive, -ing, -tion, -ness, -ship, -er/-or, отрицательные приставки un-, im-, dis-.</p><p>Попросите ученицу перед вводом сказать часть речи для каждого пропуска: так ловятся ошибки вида creative / creativity.</p>',
  r:'<p><b>Чтение: True / False / Not stated.</b> Три рассказа по 500 слов (ОГЭ, задания 13–19). В ЕГЭ такой формат – в аудировании (задание 2), поэтому тексты хороши для тренировки различия False и Not stated.</p><p>После проверки попросите ученицу для каждого ответа показать строку в тексте. Для Not stated – объяснить, почему в тексте нет ни «да», ни «нет».</p><p>Время: 10–12 минут на текст.</p>',
  l:'<p><b>Письмо 37.</b> Четыре письма из подборки (там они в формате ОГЭ: ответить на 3 вопроса, 100–120 слов). Для ЕГЭ добавлены последняя строка письма и требование задать 3 вопроса, объём 100–140 слов. Эта часть и примерные письма составлены для сайта; их можно исправить через «Правка ответов».</p><p>Время: 20 минут. Пишется дома; на уроке – разбор по критериям К1–К3.</p>'};
-/* Arina: open only the first OPEN texts of each task; letter 37 is not opened */
-const OPEN=2,LIM=list=>Math.min(OPEN,list.length);
+/* Arina, 17.10: все задания ОГЭ из подборки открыты как домашняя работа – грамматика 12, словообразование 8, чтение 3; письмо 37 пока закрыто */
+const OPEN=99,LIM=list=>Math.min(OPEN,list.length);
 const SCREENS=[
  {label:'Grammar + Word formation',color:'#b0683a',panes:['g','w']},
  {label:'Reading',color:'#66549a',panes:['r']}];
@@ -41,7 +41,7 @@ function send(id,title,score,max,details){try{const f=window.parent&&window.pare
 /* шапка колонки: название + выбор текста ← список → */
 function phead(p,key,list,reset,names,extra){const h=el('div','ph'),st=S[key];h.append(el('b','pt',PANE[key].title));
   const set=v=>{st.v=v;reset();repaint(key);},cs=el('div','vch');
-  (names||list.map(x=>x.t)).slice(0,LIM(list)).forEach((t,k)=>cs.append(TODO.chip((k+1)+'. '+esc(t),key+(k+1),k===st.v,()=>{if(k!==st.v)set(k);})));
+  const many=LIM(list)>4;(names||list.map(x=>x.t)).slice(0,LIM(list)).forEach((t,k)=>{const c=TODO.chip(many?String(k+1):(k+1)+'. '+esc(t),key+(k+1),k===st.v,()=>{if(k!==st.v)set(k);});if(many){c.classList.add('n');c.title=(k+1)+'. '+t+' · '+(TODO.is(key+(k+1))?'сделано':'сделать');}cs.append(c);});
   if(extra)h.append(...extra);p.append(h,cs);}
 
 /* ---------- Грамматика и словообразование: текст с пропусками ---------- */
