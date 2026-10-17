@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Arina · Past Continuous</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0039A6;--red:#D52B1E;--txt:#1d2433;--mut:#64748b;--line:#d9e1ec;--soft:#edf3ff;--ok:#1e8e5a;--okbg:#e3f4ea;--bad:#c62f2f;--badbg:#fbe6e3;--yel:#fff3c4;--yelb:#f2c94c}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#f7f9fc;color:var(--txt);font-family:"Segoe UI",system-ui,Roboto,Arial,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+.top{display:flex;align-items:center;gap:8px;padding:6px 12px;background:#fff;border-bottom:1px solid var(--line);flex:0 0 auto;flex-wrap:wrap}
+.top h1{margin:0 8px 0 0;font-size:16px;color:var(--ink);white-space:nowrap}
+.rt{display:flex;gap:6px}
+.rt button{font:inherit;font-size:14px;font-weight:700;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:4px 12px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.rt button i{font-style:normal;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px}
+.rt button.on{border-color:var(--ink);background:var(--soft)}
+.rt button.done{border-color:#8fd1aa;background:#e9f7ef}.rt button.done i{background:var(--ok)}
+.stars{margin-left:auto;font-size:14px;font-weight:800;color:var(--mut);white-space:nowrap}
+.stars b{color:#b7791f}
+main{flex:1 1 0;min-height:0;display:flex;flex-direction:column;padding:8px 12px;gap:6px}
+.task{font-size:15px;color:var(--txt);margin:0}
+.task b{color:var(--red)}
+.grid{flex:1 1 0;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 12px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow:auto;border-left:5px solid var(--ink)}
+.card.ok{border-left-color:var(--ok);background:#f6fcf8}.card.bad{border-left-color:var(--bad);background:#fffafa}
+.num{font-size:12px;font-weight:800;color:var(--ink);letter-spacing:.4px}
+.sent{font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.45;margin:0}
+.w{cursor:pointer;border-radius:5px;padding:0 2px;margin:0 -1px}
+.w:hover{background:var(--soft)}
+.w.sel{background:var(--yel);box-shadow:inset 0 -2px 0 var(--yelb)}
+.w.hit{background:var(--okbg);box-shadow:inset 0 -2px 0 var(--ok)}
+.w.miss{background:var(--badbg);text-decoration:line-through}
+.w.lost{box-shadow:inset 0 -3px 0 var(--ok)}
+.done .w{cursor:default}
+.gap{display:inline-block;min-width:90px;border-bottom:2px solid var(--ink);color:var(--ink);font-weight:700;text-align:center;padding:0 4px}
+.key{font-family:"Segoe UI",Arial,sans-serif;font-size:13px;font-weight:800;background:var(--yel);border:1px solid var(--yelb);border-radius:6px;padding:1px 6px;margin-left:4px;color:#3d3000}
+.opts{display:flex;gap:8px;margin-top:auto}
+.opts button{flex:1;font:inherit;font-family:"PT Serif",Georgia,serif;font-size:18px;border:2px solid var(--line);background:#fff;border-radius:10px;padding:6px 8px;cursor:pointer;color:var(--txt)}
+.opts button:hover{border-color:var(--ink)}
+.opts button.pick{border-color:var(--ink);background:var(--soft);font-weight:700}
+.opts button.right{border-color:var(--ok);background:var(--okbg);font-weight:700}
+.opts button.wrong{border-color:var(--bad);background:var(--badbg);text-decoration:line-through}
+.opts button:disabled{cursor:default}
+.inp{margin-top:auto;font-family:"PT Serif",Georgia,serif;font-size:19px;border:2px solid #9eb4d1;border-radius:10px;padding:6px 10px;width:100%;color:#111}
+.inp.ok{border-color:var(--ok);background:var(--okbg)}.inp.bad{border-color:var(--bad);background:var(--badbg)}
+.fix{font-size:14px;font-weight:700;color:var(--ok)}
+.foot{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.btn{font:inherit;font-size:15px;font-weight:800;border:0;border-radius:10px;padding:8px 18px;cursor:pointer;background:var(--ink);color:#fff}
+.btn.sec{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.res{font-size:16px;font-weight:800}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:10px;height:10px;border-radius:50%;background:#d6deea}.dots i.on{background:var(--ink)}.dots i.ok{background:var(--ok)}
+.end{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center}
+.end h2{margin:0;color:var(--ink);font-size:24px}.end p{margin:0;font-size:17px}
+.pop{position:fixed;left:50%;top:44%;transform:translate(-50%,-50%) scale(.6);background:#fff;border:3px solid var(--ok);color:var(--ok);font-weight:900;font-size:28px;border-radius:18px;padding:14px 26px;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 18px 50px rgba(0,57,166,.18)}
+.pop.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@media (max-width:760px){.grid{grid-template-columns:1fr;grid-auto-rows:auto}body{overflow:auto}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Past Continuous</h1>
+  <nav class="rt" id="rt"></nav>
+  <span class="stars" id="stars"></span>
+</header>
+<main id="main"></main>
+<div class="pop" id="pop"></div>
+<script src="data.js?v=1"></script>
+<script src="pc.js?v=2"></script>
+</body>
+</html>
