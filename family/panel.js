@@ -3,9 +3,9 @@
    письмо 37, эссе 38 и задание 4 (сравнение картинок) закрыты.
    Страница темы открывается панелью поверх хаба, как тема RUSSIA. */
 (function(){
-const V='10';
+const V='11';
 /* что нужно сделать по вкладкам (как в family/todo.js) */
-const TODO_LIST={words:['t1-1','t1-2','t2-1','t2-2','iv1','iv2'],gw:['g1','g2','g3','g4','g5','g6','g7','g8','g9','g10','g11','g12','w1','w2','w3','w4','w5','w6','w7','w8'],read:['r1','r2','r3']};
+const TODO_LIST={words:['t1-1','t1-2','t2-1','t2-2','iv1','iv2'],gw:['g1','g2','g3','g4','w1','w2','w3','w4'],read:['r1','r2','r3']};
 const doneMap=()=>{try{return JSON.parse(localStorage.getItem('arinaFamily:done')||'{}')||{};}catch(e){return {};}};
 const leftOf=t=>{const o=doneMap();return (TODO_LIST[t]||[]).filter(k=>!o[k]).length;};
 const TABS=[
@@ -48,7 +48,7 @@ window.famTodoRefresh=function(){refresh();const dp=document.getElementById('due
 function close(){const p=document.getElementById('arinaFamilyPanel');if(!p)return;try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}p.classList.remove('open');p.querySelector('iframe').src='about:blank';document.body.style.overflow='';}
 window.openArinaFamily=function(tab){if(typeof closeArinaRussia==='function')closeArinaRussia();try{const d=document.documentElement;if(!document.fullscreenElement&&d.requestFullscreen)d.requestFullscreen().catch(()=>{});}catch(e){}panel().classList.add('open');show(TABS.some(t=>t[0]===tab&&t[2])?tab:'words');document.body.style.overflow='hidden';};
 /* 17.10 · домашняя работа: все задания ОГЭ темы Family – в блоке «Задано сейчас» (по строке на вид задания) */
-const FAM_HW=[['gw','g','Family · Grammar 19–24 · тренировка',12],['gw','w','Family · Word formation 25–29 · тренировка',8],['read','r','Family · Reading · тренировка',3]];
+const FAM_HW=[['gw','g','Family · Grammar 19–24 · тренировка',4],['gw','w','Family · Word formation 25–29 · тренировка',4],['read','r','Family · Reading · тренировка',3]];
 function famRows(){const o=doneMap();return FAM_HW.map(h=>{let n=0;for(let i=1;i<=h[3];i++)if(!o[h[1]+i])n++;return [h,n];}).filter(x=>x[1]>0)
  .map(([h,n])=>'<button type="button" class="dueRow" onclick="openArinaFamily(\''+h[0]+'\')"><span class="w3Tag">задано</span><span class="dueText"><b>'+h[2]+'</b><small>Тема Family · осталось '+n+' из '+h[3]+'</small></span><em>'+(n<h[3]?'Продолжить':'Начать')+' →</em></button>');}
 if(typeof window.duePanelHTML==='function'){const base=window.duePanelHTML;window.duePanelHTML=function(){const html=base.apply(this,arguments),rows=famRows();if(!rows.length)return html;
