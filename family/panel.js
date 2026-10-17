@@ -3,7 +3,7 @@
    письмо 37, эссе 38 и задание 4 (сравнение картинок) закрыты.
    Страница темы открывается панелью поверх хаба, как тема RUSSIA. */
 (function(){
-const V='8';
+const V='9';
 /* что нужно сделать по вкладкам (как в family/todo.js) */
 const TODO_LIST={words:['t1-1','t1-2','t2-1','t2-2','iv1','iv2'],gw:['g1','g2','g3','g4','g5','g6','g7','g8','g9','g10','g11','g12','w1','w2','w3','w4','w5','w6','w7','w8'],read:['r1','r2','r3']};
 const doneMap=()=>{try{return JSON.parse(localStorage.getItem('arinaFamily:done')||'{}')||{};}catch(e){return {};}};
@@ -15,7 +15,7 @@ const TABS=[
  ['letter','LETTER 37',null],
  ['essay','ESSAY 38',null]];
 const css=document.createElement('style');css.id='arinaFamilyStyles';
-css.textContent='#arinaFamilyPanel{position:fixed;z-index:110;inset:38px 0 0 var(--side);background:#f7f9fc;display:none;overflow:hidden}'
+css.textContent='#arinaFamilyPanel{position:fixed;z-index:110;inset:38px 0 0 0;background:#f7f9fc;display:none;overflow:hidden}'
  +'#arinaFamilyPanel.open{display:grid;grid-template-rows:auto minmax(0,1fr);grid-template-columns:minmax(0,1fr)}'
  +'#arinaFamilyPanel .russiaTop{min-width:0;padding:4px 10px;gap:8px}#arinaFamilyPanel .russiaTitle{flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#arinaFamilyPanel .russiaTitle b{font-size:13px;display:inline}'
  +'#arinaFamilyPanel .russiaBack{padding:6px 10px;white-space:nowrap}'

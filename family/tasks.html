@@ -90,6 +90,13 @@ body{padding-top:4px!important}
 .sts .sti>span{font-size:16px!important;line-height:1.35!important}
 .sts .sti{padding:6px 10px!important}
 @media (max-width:800px){.rbody{grid-template-columns:1fr!important}}
+
+/* 17.10 · чтение во весь экран: текст на всю ширину и высоту */
+.ws2.n1:has(.wp[data-k=r]),body:has(.wp[data-k=r])>main{max-width:none!important}
+.txt.rd1{column-count:auto!important;column-width:auto!important;columns:auto!important}
+.wp[data-k=r]{height:calc(100vh - 14px)!important;max-height:none!important}
+.wp[data-k=r] .rbody{grid-template-columns:minmax(0,1fr) 400px!important}
+.txt.rd1{font-size:19px!important;line-height:1.65;padding:14px 28px}
 </style>
 </head>
 <body>
