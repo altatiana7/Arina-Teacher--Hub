@@ -80,6 +80,16 @@ body{padding-top:4px!important}
 .ph .pt{margin-right:auto}
 .wp>.vch{flex:0 0 auto}
 .segb.lock{padding:6px 8px}
+
+/* 17.10 · чтение для Арины: текст одной колонкой с прокруткой, утверждения сверху рядом с текстом */
+.txt.rd1{column-count:1!important;overflow-y:auto;font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:18px!important;line-height:1.6;padding:12px 20px;background:#fff}
+.txt.rd1 h3{font-size:20px;margin:0 0 8px}
+.txt.rd1 p{margin:0 0 10px;text-indent:1.2em}
+.rbody{grid-template-columns:1.35fr 1fr!important}
+.sts{justify-content:flex-start!important}
+.sts .sti>span{font-size:16px!important;line-height:1.35!important}
+.sts .sti{padding:6px 10px!important}
+@media (max-width:800px){.rbody{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -92,6 +102,6 @@ body{padding-top:4px!important}
 <script src="edit.js?v=4"></script>
 <script src="todo.js?v=5"></script>
 <script src="tasks-data.js?v=4"></script>
-<script src="tasks.js?v=5"></script>
+<script src="tasks.js?v=6"></script>
 </body>
 </html>
