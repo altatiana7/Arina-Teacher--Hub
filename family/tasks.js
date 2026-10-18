@@ -5,6 +5,12 @@
    Всё для учениц – на английском; заметки для учителя – по-русски под кнопкой «Учителю».
    Ничего не сохраняется: страница каждый раз открывается с первого текста. */
 const main=$('#main'),tabs=$('#tabs'),B=window.B1;
+/* 18.10: убраны тексты, которые Арина уже выполнила (грамматика 1–2, словообразование 1–2, отправлены 15.10),
+   и повтор «Mark» (почти тот же текст, что «My friend Mark»). У каждого текста свой постоянный номер id (по подборке),
+   поэтому отметки «сделано» и результаты у учителя не путаются. */
+const FAM_SKIP={grammar:[0,1],wf:[0,1,5]};
+['grammar','wf'].forEach(k=>{const pre=k==='grammar'?'g':'w';B[k]=B[k].map((x,i)=>Object.assign({id:pre+(i+1)},x)).filter((x,i)=>FAM_SKIP[k].indexOf(i)<0);});
+const tid=(list,k,key)=>(list[k]&&list[k].id)||key+(k+1);
 const S={g:{v:0,val:{},done:false},w:{v:0,val:{},done:false},r:{v:0,val:{},done:false},l:{v:0,txt:{}}};
 const NOTE={
  g:'<p><b>Грамматика, формат заданий 19–24.</b> 12 текстов по 9 пропусков из подборки «Family, friends» (тексты ОГЭ из открытого банка ФИПИ). Темы: времена, пассив, условные предложения и I wish, степени сравнения, местоимения, числительные, множественное число.</p><p>На уроке: один текст на время (7–8 минут), затем разбор только неверных пропусков. Дома: два текста подряд, отчёт – скриншот результата.</p><p>Проверка принимает полные и краткие формы (could not = couldn’t), регистр не важен – как в бланке ЕГЭ.</p>',
@@ -41,7 +47,7 @@ function send(id,title,score,max,details){try{const f=window.parent&&window.pare
 /* шапка колонки: название + выбор текста ← список → */
 function phead(p,key,list,reset,names,extra){const h=el('div','ph'),st=S[key];h.append(el('b','pt',PANE[key].title));
   const set=v=>{st.v=v;reset();repaint(key);},cs=el('div','vch');
-  const many=LIM(list)>4;(names||list.map(x=>x.t)).slice(0,LIM(list)).forEach((t,k)=>{const c=TODO.chip(many?String(k+1):(k+1)+'. '+esc(t),key+(k+1),k===st.v,()=>{if(k!==st.v)set(k);});if(many){c.classList.add('n');c.title=(k+1)+'. '+t+' · '+(TODO.is(key+(k+1))?'сделано':'сделать');}cs.append(c);});
+  const many=LIM(list)>4;(names||list.map(x=>x.t)).slice(0,LIM(list)).forEach((t,k)=>{const c=TODO.chip(many?String(k+1):(k+1)+'. '+esc(t),tid(list,k,key),k===st.v,()=>{if(k!==st.v)set(k);});if(many){c.classList.add('n');c.title=(k+1)+'. '+t+' · '+(TODO.is(tid(list,k,key))?'сделано':'сделать');}cs.append(c);});
   if(extra)h.append(...extra);p.append(h,cs);}
 
 /* ---------- Грамматика и словообразование: текст с пропусками ---------- */
@@ -50,7 +56,7 @@ const okAns=(g,v)=>g.acc.some(a=>norm(a)===norm(v||''));
 function gaps(p,key,list,task){const st=S[key],d=list[st.v],P=parse(d.x),reset=()=>{st.val={};st.done=false;};
   const P2=P;let ctl;
   if(st.done){const n=P2.gaps.filter(g=>okAns(g,st.val[g.i])).length;ctl=[el('b','sc',n+'/'+P2.gaps.length),btn('Again',()=>{reset();repaint(key);},'sm')];}
-  else ctl=[btn('Check',()=>{st.done=true;TODO.mark(key+(st.v+1));const det=P2.gaps.map(g=>({question:'Gap '+(g.i+1)+' · '+g.base,chosen:st.val[g.i]||'',correct:g.acc[0],is_correct:okAns(g,st.val[g.i])}));send('fam-'+key+(st.v+1),'Family · '+PANE[key].title+' · '+d.t,det.filter(x=>x.is_correct).length,det.length,det);repaint(key);},'main sm')];
+  else ctl=[btn('Check',()=>{st.done=true;TODO.mark(tid(list,st.v,key));const det=P2.gaps.map(g=>({question:'Gap '+(g.i+1)+' · '+g.base,chosen:st.val[g.i]||'',correct:g.acc[0],is_correct:okAns(g,st.val[g.i])}));send('fam-'+tid(list,st.v,key),'Family · '+PANE[key].title+' · '+d.t,det.filter(x=>x.is_correct).length,det.length,det);repaint(key);},'main sm')];
   ctl.push(teachBtn(key));
   phead(p,key,list,reset,null,ctl);p.append(el('div','ptask',task));
   const box=el('div','gtext scr');box.dataset.max=17;box.dataset.min=13;

@@ -2,7 +2,7 @@
    Отметки хранятся в браузере Арины (как и остальные её задания на сайте), ответы не хранятся. */
 const TODO=(function(){
   const KEY='arinaFamily:done';
-  const LIST={words:['t1-1','t1-2','t2-1','t2-2','iv1','iv2'],gw:['g1','g2','g3','g4','w1','w2','w3','w4'],read:['r1','r2','r3']};
+  const LIST={words:['t1-1','t1-2','t2-1','t2-2','iv1','iv2'],gw:['g3','g4','g5','g6','w3','w4','w5','w7'],read:['r1','r2','r3']};
   const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){return {};}};
   function is(k){return !!load()[k];}
   /* устная часть: учителю уходит отметка «сделано» с датой (письменные задания отправляются со своими ответами в tasks.js) */
