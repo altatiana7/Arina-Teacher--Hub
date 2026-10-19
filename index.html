@@ -525,9 +525,6 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 .rightBig{display:inline-block;width:calc(50% - 4px);padding:8px 6px;margin-top:8px;font-size:13px;font-weight:700;border-radius:9px}
 .rightBig.fipi{margin-left:4px}
 @media(max-width:900px){.week1Layout{grid-template-columns:1fr}.week1Right{order:-1}}
-.w3TagDebt{background:#c2410c}
-.w3Due .w3TagDebt,.w3Card:not(.w3Debt) .w3TagDebt{display:none}
-.w3Debt .w3TagDebt{display:inline-block;margin:0 7px 0 0;vertical-align:2px}
 .w3Card.w3Debt{border:2px solid #fb923c;background:#fff7ed}
 .lessonChip.debt{background:#ffedd5;color:#9a3412;border:1px solid #fb923c}
 .wbtn{position:relative}
@@ -1306,7 +1303,7 @@ function debtPanelHTML(){
 }
 function navRowHTML(id){
  const t=taskDef(id),st=w3Get(id),d=st.done,due=arinaIsDue(id),debt=arinaIsDebt(id),started=!d&&st.draft&&Object.keys(st.draft).length;
- const cls=d?'done':due?'due':debt?'debt':'',mark=d?(t.type==='write'||t.type==='speak'?'сдано':d.score+' / '+d.total):due?'задано':started?'начато':debt?'сделать':'по желанию';
+ const cls=d?'done':due?'due':debt?'debt':'',mark=d?(t.type==='write'||t.type==='speak'?'сдано':d.score+' / '+d.total):due?'задано':started?'начато':'';
  return '<button type="button" class="navRow '+cls+'" onclick="openW3Task(\''+id+'\')"><span>'+t.title+'</span><i>'+mark+'</i></button>';
 }
 function openNavigator(){
@@ -1333,7 +1330,7 @@ function w3StatusText(id){
  return d.pending?[res+' · ждёт отправки','wait']:[res+' · у учителя','done'];
 }
 function w3Card(c,n){
- if(c[0]==='task'){const t=taskDef(c[1]),s=w3StatusText(c[1]);const card='<button class="w3Card'+(arinaIsDue(c[1])?' w3Due':'')+(arinaIsDebt(c[1])?' w3Debt':'')+'" type="button" data-w3card="'+c[1]+'" onclick="openW3Task(\''+c[1]+'\')"><i class="w3Num">'+n+'</i><span class="w3CardText"><span class="w3Tag">задано</span><span class="w3Tag w3TagDebt">сделать</span><b>'+t.title+'</b><small>'+t.sub+'</small></span><span class="w3State '+s[1]+'">'+s[0]+'</span></button>';
+ if(c[0]==='task'){const t=taskDef(c[1]),s=w3StatusText(c[1]);const card='<button class="w3Card'+(arinaIsDue(c[1])?' w3Due':'')+(arinaIsDebt(c[1])?' w3Debt':'')+'" type="button" data-w3card="'+c[1]+'" onclick="openW3Task(\''+c[1]+'\')"><i class="w3Num">'+n+'</i><span class="w3CardText"><span class="w3Tag">задано</span><b>'+t.title+'</b><small>'+t.sub+'</small></span><span class="w3State '+s[1]+'">'+s[0]+'</span></button>';
   if(!arinaTeacher())return card;const on=arinaAssigned().includes(c[1]);return '<div class="w3Row">'+card+'<button type="button" class="w3Assign'+(on?' on':'')+'" onclick="arinaToggleAssign(\''+c[1]+'\')">'+(on?'снять':'задать')+'</button></div>'}
  const click=c[0]==='rule'?"openW3Rule('"+c[1]+"')":c[1];
  return '<button class="w3Card w3Ref" type="button" onclick="'+click+'"><i class="w3Num">'+n+'</i><span class="w3CardText"><b>'+c[2]+'</b><small>'+c[3]+'</small></span><span class="w3State">открыть</span></button>';
