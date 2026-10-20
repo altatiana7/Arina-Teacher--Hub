@@ -558,6 +558,7 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 .navRow.due{background:#fff8e1;border-color:#f59e0b}
 .navRow.debt{background:#fff7ed;border-color:#fb923c}
 .navRow.done{background:#f6fef9;color:#475569}
+.navCol.navCur{border:2px solid #D52B1E;box-shadow:0 2px 10px #d52b1e22}.navCol.navCur .navWeek b{color:#D52B1E}
 @media(max-width:800px){.navCols{grid-template-columns:1fr}.navTop{flex-direction:column;align-items:flex-start}}
 .pl.plWide{max-width:none;padding-bottom:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:14px;align-items:center}
 .fullScreenPanel:has(.plWide){padding:8px 14px}
@@ -1311,7 +1312,7 @@ function openNavigator(){
  for(let w=0;w<=ACTIVE_WEEK;w++){
   let body='';const left=arinaWeekLeft(w);
   for(let i=0;i<3;i++){if(w===ACTIVE_WEEK&&!ARINA_OPEN_LESSONS.includes(i))continue;const ids=lessonTaskIds(w,i);if(!ids.length)continue;body+='<div class="navLesson">Урок '+(i+1)+' · '+weeks[w].l[i][0]+'</div>'+ids.map(navRowHTML).join('')}
-  cols+='<div class="navCol"><div class="navWeek"><b>Неделя '+(w+1)+'</b><span>'+(left?'осталось '+left:'всё сдано')+'</span></div>'+body+'</div>';
+  cols=('<div class="navCol'+(w===ACTIVE_WEEK?' navCur':'')+'"><div class="navWeek"><b>Неделя '+(w+1)+(w===ACTIVE_WEEK?' · текущая':'')+'</b><span>'+(left?'осталось '+left:'всё сдано')+'</span></div>'+body+'</div>')+cols;
  }
  openFullScreen('','<div class="nav" id="navRoot"><div class="navTop"><h1>Навигатор заданий</h1><div class="navLegend"><i class="due">задано</i><i class="debt">сделать · прошлые недели</i><i class="done">сдано</i></div></div><div class="navCols">'+cols+'</div></div>');
  PL=null;
