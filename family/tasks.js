@@ -56,7 +56,7 @@ const okAns=(g,v)=>g.acc.some(a=>norm(a)===norm(v||''));
 function gaps(p,key,list,task){const st=S[key],d=list[st.v],P=parse(d.x),reset=()=>{st.val={};st.done=false;};
   const P2=P;let ctl;
   if(st.done){const n=P2.gaps.filter(g=>okAns(g,st.val[g.i])).length;ctl=[el('b','sc',n+'/'+P2.gaps.length),btn('Again',()=>{reset();repaint(key);},'sm')];}
-  else ctl=[btn('Check',()=>{st.done=true;TODO.mark(tid(list,st.v,key));const det=P2.gaps.map(g=>({question:'Gap '+(g.i+1)+' · '+g.base,chosen:st.val[g.i]||'',correct:g.acc[0],is_correct:okAns(g,st.val[g.i])}));send('fam-'+tid(list,st.v,key),'Family · '+PANE[key].title+' · '+d.t,det.filter(x=>x.is_correct).length,det.length,det);repaint(key);},'main sm')];
+  else ctl=[btn('Check',()=>{const empty=P2.gaps.filter(g=>!String(st.val[g.i]||'').trim()).length;if(empty){overlay('Fill in all the gaps','<p>'+empty+' gap'+(empty>1?'s are':' is')+' still empty. Fill in every gap, then press Check.</p>');return;}st.done=true;TODO.mark(tid(list,st.v,key));const det=P2.gaps.map(g=>({question:'Gap '+(g.i+1)+' · '+g.base,chosen:st.val[g.i]||'',correct:g.acc[0],is_correct:okAns(g,st.val[g.i])}));send('fam-'+tid(list,st.v,key),'Family · '+PANE[key].title+' · '+d.t,det.filter(x=>x.is_correct).length,det.length,det);repaint(key);},'main sm')];
   ctl.push(teachBtn(key));
   phead(p,key,list,reset,null,ctl);p.append(el('div','ptask',task));
   const box=el('div','gtext scr');box.dataset.max=17;box.dataset.min=13;
@@ -80,7 +80,7 @@ function reading(p){const st=S.r,d=B.reading[st.v],reset=()=>{st.val={};st.done=
   const rb=el('div','rbody');rb.append(txt,sts);p.append(rb);
   const f=el('div','pf');
   if(st.done){const n=d.key.filter((a,k)=>st.val[k]===a).length;f.append(el('b','sc',n+' / 7'),btn('Try again',()=>{reset();repaint('r');},'sm'),btn(st.v<LIM(B.reading)-1?'Next text →':'First text',()=>{st.v=st.v<LIM(B.reading)-1?st.v+1:0;reset();repaint('r');},'main sm'));}
-  else f.append(btn('Check',()=>{st.done=true;TODO.mark('r'+(st.v+1));const L=['','T','F','NS'],det=d.st.map((q,k)=>({question:q,chosen:L[st.val[k]||0]||'',correct:L[d.key[k]],is_correct:st.val[k]===d.key[k]}));send('fam-r'+(st.v+1),'Family · Reading · '+d.t,det.filter(x=>x.is_correct).length,det.length,det);repaint('r');},'main sm'),el('span','note',Object.keys(st.val).length+' / 7'));
+  else f.append(btn('Check',()=>{const left=d.st.length-Object.keys(st.val).length;if(left>0){overlay('Answer all the statements','<p>'+left+' statement'+(left>1?'s are':' is')+' still without an answer. Choose T, F or NS for each one, then press Check.</p>');return;}st.done=true;TODO.mark('r'+(st.v+1));const L=['','T','F','NS'],det=d.st.map((q,k)=>({question:q,chosen:L[st.val[k]||0]||'',correct:L[d.key[k]],is_correct:st.val[k]===d.key[k]}));send('fam-r'+(st.v+1),'Family · Reading · '+d.t,det.filter(x=>x.is_correct).length,det.length,det);repaint('r');},'main sm'),el('span','note',Object.keys(st.val).length+' / 7'));
   f.append(teachBtn('r'));p.append(f);
 }
 

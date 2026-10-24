@@ -1,3 +1,5 @@
+/* 24.10: сдано по отчёту (грамматика 3–6, словообразование 3–5); Phobias (w7) сдано пустым — снова «сделать» */
+(function(){try{const F='arinaFamily:fix-20261024';if(localStorage.getItem(F))return;const o=JSON.parse(localStorage.getItem('arinaFamily:done')||'{}')||{};['g3','g4','g5','g6','w3','w4','w5'].forEach(k=>{if(!o[k])o[k]=Date.parse('2026-10-24T09:00:00Z');});delete o.w7;localStorage.setItem('arinaFamily:done',JSON.stringify(o));localStorage.setItem(F,'1');}catch(e){}})();
 /* Что Арине нужно сделать в теме Family: список заданий и отметки «сделано».
    Отметки хранятся в браузере Арины (как и остальные её задания на сайте), ответы не хранятся. */
 const TODO=(function(){
