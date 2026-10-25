@@ -172,6 +172,15 @@
 .w2ReadTabs button.active{background:#0039A6;color:#fff;border-color:#0039A6}
 .w2ReadTabs button span{display:block;font-size:9px;font-weight:700;opacity:.8;margin-top:2px}
 @media(max-width:700px){.w2ReadTabs{grid-template-columns:1fr 1fr}}
+.trTabBtn{background:#0039A6!important;color:#fff!important;border-color:#0039A6!important;font-weight:700;letter-spacing:.3px}.trTabBtn small{display:block;font-size:11px;font-weight:400;opacity:.9;letter-spacing:0;margin-top:2px}
+.trHub{max-width:1100px;margin:0 auto}.trHub h1{margin:0 0 10px;font-size:20px;color:#0039A6;font-weight:700}
+.trGrid{display:grid;align-items:start;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.trTile{border:1px solid #cbd9ea;background:#fff;border-radius:12px;padding:14px 14px 12px;text-align:left;color:#0039A6;cursor:pointer;font:inherit}
+.trTile:hover{border-color:#0039A6;box-shadow:0 2px 10px #0039a61a}
+.trTile b{display:block;font-size:17px;margin-bottom:4px}.trTile small{display:block;font-size:13px;color:#64748b;line-height:1.35}
+.trTile.trBig{border:2px solid #0039A6;background:#f5f8ff}
+.fullScreenPanel:has(.trFrame){padding:6px 10px}.fullScreenPanel:has(.trFrame) .fullScreenBack{position:static;margin:0 0 6px;padding:5px 12px}
+.trFrame{display:block;width:100%;height:calc(100vh - 60px);border:0;border-radius:8px;background:#6b4a2e}
 </style><meta name="theme-color" content="#ffffff">
 
 <style id="arinaRussiaStyles">
@@ -671,7 +680,7 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 </style>
 </head><body>
 <header class="top"><div class="brand">ARINA · <b>EGE 2027</b></div><div class="topnote">3 занятия × 60 минут · план → задания → домашняя работа</div><button class="mobile" id="mobileBtn">План</button></header>
-<aside class="side" id="side"><button class="trainerBtn navSide navTopBtn" type="button" onclick="openNavigator()">НАВИГАТОР ЗАДАНИЙ<small style="display:block;font-size:11px;font-weight:700;opacity:.9">что задано · что осталось</small></button><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Памятки</div><button class="trainerBtn" type="button" onclick="openTenseLogicTrainer()">Времена · шаг за шагом<small style="display:block;font-weight:400">Когда? → Какая картинка? → Форма</small></button><button class="trainerBtn" onclick="openMemo('present')">Памятки · времена и маркеры</button><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn" onclick="renderTrainer('verbs')">Неправильные глаголы · 60</button><button class="trainerBtn" onclick="openPresentPanel('markertrain','side')">Marker → Tense · Training</button><button class="trainerBtn" onclick="renderTrainer('difficult')">Difficult Words · карточки + чтение</button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
+<aside class="side" id="side"><button class="trainerBtn navSide navTopBtn" type="button" onclick="openNavigator()">НАВИГАТОР ЗАДАНИЙ<small style="display:block;font-size:11px;font-weight:700;opacity:.9">что задано · что осталось</small></button><div class="sidehead">План по неделям</div><div class="weekBtns" id="weekBtns"></div><div class="sidehead arinaTopicsHead">TOPICS</div><div class="arinaTopicButtons"><button class="arinaTopicBtn active" type="button" onclick="openArinaRussia()">RUSSIA<small>active topic</small></button><button class="arinaTopicBtn locked" type="button" disabled>TRAVELLING<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>EDUCATION<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>ENVIRONMENT<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>SCIENCE<small>locked</small></button><button class="arinaTopicBtn locked" type="button" disabled>HEALTH<small>locked</small></button></div><div class="sidehead" style="margin-top:14px">Памятки</div><button class="trainerBtn" type="button" onclick="openTenseLogicTrainer()">Времена · шаг за шагом<small style="display:block;font-weight:400">Когда? → Какая картинка? → Форма</small></button><button class="trainerBtn" onclick="openMemo('present')">Памятки · времена и маркеры</button><div class="sidehead" style="margin-top:14px">Тренажёры</div><button class="trainerBtn trTabBtn" type="button" onclick="openTrainersTab()">ТРЕНАЖЁРЫ<small>памятки ЕГЭ · глаголы · времена · слова</small></button><div class="sidehead" style="margin-top:10px">ЕГЭ · ГРАММАТИКА И ЛЕКСИКА</div><button class="ebtn egeCore" style="width:100%" onclick="renderExam('grammar1924')"><b>GRAMMAR · 19–24</b><small>грамматические формы</small></button><button class="ebtn egeCore" style="width:100%;margin-top:4px" onclick="renderExam('wordformation')"><b>WORD FORMATION · 25–29</b><small>словообразование</small></button><button class="ebtn" style="width:100%;margin-top:4px" onclick="renderExam('vocabulary3036')">VOCABULARY · 30–36<small>лексико-грамматический выбор</small></button></aside>
 <main class="main"><section id="weekView" class="content on"></section><section id="examView" class="content"></section><section id="trainerView" class="content"></section></main>
 <script id="arinaWeek3Script">
 /* ===== ARINA · WEEK 3 · LESSON 1 · Future forms + revision of Present / Past ===== */
@@ -2846,5 +2855,21 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
  HW.forEach(id=>{if(!ARINA_ASSIGNED_DEFAULT.includes(id))ARINA_ASSIGNED_DEFAULT.push(id)});
  try{if(!localStorage.getItem('arinaHwAdd-20261025b')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261025b','1')}}catch(e){}
 })();
+</script>
+<script id="arinaTrainersTab">
+/* Вкладка «Тренажёры»: все тренажёры в одном месте */
+const PAMYATKI_URL='https://altatiana7.github.io/Tatyana-English-Hub/ege-teachers-hub/pamyatki.html?student=1&v=3';
+function openTrainersTab(){
+ openFullScreen('','<div class="trHub"><h1>Тренажёры</h1><div class="trGrid">'
+  +'<button type="button" class="trTile trBig" onclick="openPamyatki()"><b>Памятки ЕГЭ</b><small>артикли, времена, лексика 30–36, фразовые глаголы, словообразование, письмо и устная часть — карточки и игры</small></button>'
+  +'<button type="button" class="trTile" onclick="closeFullScreen();renderTrainer(\'verbs\')"><b>Неправильные глаголы</b><small>60 глаголов</small></button>'
+  +'<button type="button" class="trTile" onclick="closeFullScreen();openPresentPanel(\'markertrain\',\'side\')"><b>Marker → Tense</b><small>маркеры времени и выбор времени</small></button>'
+  +'<button type="button" class="trTile" onclick="closeFullScreen();renderTrainer(\'difficult\')"><b>Difficult Words</b><small>карточки + чтение</small></button>'
+  +'</div></div>');
+}
+function openPamyatki(){
+ openFullScreen('','<iframe class="trFrame" src="'+PAMYATKI_URL+'" title="Памятки ЕГЭ" allow="autoplay"></iframe>');
+ const b=document.querySelector('#fullScreenPanel .fullScreenBack');if(b){b.textContent='← Тренажёры';b.onclick=openTrainersTab}
+}
 </script>
 </body></html>
