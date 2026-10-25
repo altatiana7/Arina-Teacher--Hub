@@ -569,6 +569,10 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 .plWide .plBar{display:none}.plWide .plDots{padding:0;grid-column:2;grid-row:1}
 .plWide .plNav{grid-column:3;grid-row:1;margin:0}.plWide .plNav .plBtn{padding:8px 16px;min-height:42px}
 .plWide .plCard{grid-column:1/-1;grid-row:2;padding:10px 14px;margin-top:8px}
+.rdDense .rdQ{padding:5px 10px!important;margin:0 0 5px!important}.rdDense .rdQ p{margin:0 0 4px!important;font-size:16px}.rdDense .rdOpts button{min-height:30px!important;padding:3px 6px!important;font-size:15px}
+.plWide .plIntro{grid-column:1/-1;grid-row:2;margin:6px 0 0;font-size:14px}.plWide .plIntro+.plCard{grid-row:3}
+.plWide .plCard:has(.plText){width:100%;max-width:1240px;justify-self:center}.plWide .plSetTitle{margin:0 0 4px}
+#plRoot.plWide .plText p{padding-top:5px!important;padding-bottom:5px!important;line-height:1.6!important}#plRoot.plWide .plText .w3Gap small,#plRoot.plWide .plText .w3Gap em{top:7px}
 .fullScreenPanel:has(.ro){padding:8px 14px}
 .fullScreenPanel:has(.ro) .fullScreenBack{position:static;float:left;margin:0 12px 0 0}
 .roTabs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:42px}
@@ -1126,7 +1130,7 @@ function taskDef(id){
    'w2-fipi':{label:'Week 2 · Lesson 1',title:'ФИПИ · 4 блока',sub:'Grammar 19–24 + Word Formation 25–29',type:'gap',intro:'Материалы ФИПИ 2026. В блоках 19–24 меняем грамматическую форму, в блоках 25–29 образуем новое слово.',sets:[gapSet(exam26Grammar[0],19,'Grammar 19–24'),gapSet(exam26Grammar[1],19,'Grammar 19–24'),gapSet(exam26WF[0],25,'Word Formation 25–29'),gapSet(exam26WF[1],25,'Word Formation 25–29')]}
   });
  }
- return W3_TASKS[id];
+ return plMerge(W3_TASKS[id]);
 }
 const w3GetRaw=w3Get;
 w3Get=function(id){
@@ -1244,6 +1248,34 @@ let plClock=null;
 function plTimerHTML(){if(!PL||!PL.t.timer||PL.mode!=='solve')return '';const l=Math.max(0,Math.round((PL.deadline-Date.now())/1000));return ' <b class="plTimer'+(l<=0?' end':'')+'" id="plTimer">'+(l<=0?'время вышло':String(Math.floor(l/60)).padStart(2,'0')+':'+String(l%60).padStart(2,'0'))+'</b>'}
 function plTimerStart(min){clearInterval(plClock);PL.deadline=Date.now()+min*60000;plClock=setInterval(()=>{const el=document.getElementById('plTimer');if(!el||!PL||PL.mode!=='solve'){clearInterval(plClock);return}el.outerHTML=plTimerHTML()},1000)}
 /* ---------- reading builders (FIPI open bank) ---------- */
+/* one task = one screen: parts of the same text (19–21 + 22–24, 25–27 + 28–29, reading 10 / 11 / True-False) are joined back.
+   Order of items is kept, so saved answers and the teacher's site stay in place. */
+function plMerge(t){
+ if(!t||t._merged||!Array.isArray(t.sets))return t;t._merged=true;
+ const rng=/\s*·\s*(?:пропуски\s+)?[A-Z0-9]+\s*[–-]\s*[A-Z0-9]+\s*$/;
+ const base=s=>(s.title||'').replace(rng,'');
+ const out=[];
+ t.sets.forEach(s=>{
+  const p=out[out.length-1];
+  if(t.type==='gap'){
+   if(p&&rng.test(s.title||'')&&base(p)===base(s)&&s.start===p.start+p.lines.length){
+    p.lines=p.lines.concat(s.lines);p.title=base(p)+' · '+p.start+'–'+(p.start+p.lines.length-1);return}
+  }else if(t.type==='read'&&p&&p.tab===s.tab&&s.tab!=='12–18'){
+   const sameText=p.tid===s.tid,sameTask=(p.tid||'').replace(/-\d+$/,'')===(s.tid||'').replace(/-\d+$/,'');
+   if(sameText||(s.tab==='10'&&sameTask)){
+    if(!sameText)p.text+=s.text;
+    p.items=p.items.concat(s.items);p.title=base(p);
+    if(s.tab==='10')p.title='Задание 10 · тексты A–'+'ABCDEFG'[p.items.length-1];
+    if(s.tab==='11')p.task='Заполните пропуски A–'+'ABCDEF'[p.items.length-1]+' частями 1–7. Одна часть лишняя.';
+    if(s.tab==='True / False'){p.task='Утверждения 1–'+p.items.length+'. Выбери True, False или Not stated.';p.col=false;p.dense=true}
+    return}
+  }
+  out.push(Object.assign({},s));
+ });
+ t.sets=out;
+ if(t.sub)t.sub=t.sub.replace(/\s*·\s*по \d+(?: и \d+)? на экране/,'');
+ return t;
+}
 function rdBuild10(R,tid){
  const L='ABCDEFG',nums=n=>Array.from({length:n},(_,i)=>String(i+1)),list=a=>'<ol class="rdList">'+a.map(x=>'<li>'+x+'</li>').join('')+'</ol>',heads=R.h.map((h,i)=>(i+1)+'. '+h);
  return [[0,4],[4,7]].map(r=>({title:'Задание 10 · тексты '+L[r[0]]+'–'+L[r[1]-1],tab:'10',tid:tid+'-'+r[0],row:true,task:'Подберите заголовки 1–8 к текстам A–G. Один заголовок лишний.',note:list(R.h),
@@ -1423,11 +1455,11 @@ function plRender(){
  else if(t.type==='write'){const q=t.items[step];
   card='<p class="plQ">'+q[0]+' <em class="w3Key">'+q[1]+'</em></p><textarea class="plInput" id="plField" rows="'+(q[3]||3)+'" placeholder="'+(q[2]||'Write one full sentence in English')+'">'+w3Esc(a[step]||'')+'</textarea>';}
  else if(t.type==='read'){const set=t.sets[step],o=plGapOffset(t,step);
-  card='<div class="rdGrid"><article class="rdText" data-tid="'+set.tid+'"><h3>'+set.title+'</h3>'+set.text+'</article><div class="rdQs"><p class="rdTask">'+set.task+'</p>'+(set.note||'')+set.items.map((q,j)=>'<div class="rdQ'+(set.row?' rdRow':'')+(set.col?' rdCol':'')+'"><p>'+q[0]+'</p><div class="rdOpts" style="grid-template-columns:repeat('+(set.col?1:q[1].length)+',1fr)">'+q[1].map((x,m)=>'<button type="button" class="'+(a[o+j]===m?'picked':'')+'" onclick="plReadPick('+(o+j)+','+m+',this)">'+x+'</button>').join('')+'</div></div>').join('')+'</div></div>';}
+  card='<div class="rdGrid'+(set.dense?' rdDense':'')+'"><article class="rdText" data-tid="'+set.tid+'"><h3>'+set.title+'</h3>'+set.text+'</article><div class="rdQs"><p class="rdTask">'+set.task+'</p>'+(set.note||'')+set.items.map((q,j)=>'<div class="rdQ'+(set.row?' rdRow':'')+(set.col?' rdCol':'')+'"><p>'+q[0]+'</p><div class="rdOpts" style="grid-template-columns:repeat('+(set.col?1:q[1].length)+',1fr)">'+q[1].map((x,m)=>'<button type="button" class="'+(a[o+j]===m?'picked':'')+'" onclick="plReadPick('+(o+j)+','+m+',this)">'+x+'</button>').join('')+'</div></div>').join('')+'</div></div>';}
  else{const set=t.sets[step],o=plGapOffset(t,step),start=set.start||19;
   card='<h3 class="plSetTitle">'+set.title+'</h3><div class="plText">'+set.lines.map((q,j)=>'<p>'+q[0].replace('___','<span class="w3Gap"><small>'+(start+j)+'</small><input autocomplete="off" autocapitalize="off" spellcheck="false" data-k="'+(o+j)+'" value="'+w3Esc(a[o+j]||'')+'"><em>'+q[1]+'</em></span>')+'</p>').join('')+'</div>';}
  const what=t.type==='read'?'Экран':t.type==='gap'?'Текст':t.type==='write'?'Предложение':'Вопрос';
- root.classList.toggle('plWide',t.type==='read');root.classList.toggle('plTight',!!t.tight);root.innerHTML=plHead(what+' '+(step+1)+' из '+n)+'<div class="plBar"><i style="width:'+Math.round(plAnswered(t,a)/plUnits(t)*100)+'%"></i></div>'+(n>1?'<div class="plDots">'+plDotsHTML()+'</div>':'')+(step===0&&t.type!=='read'?'<p class="plIntro">'+t.intro+'</p>':'')+'<div class="plCard">'+card+'</div><div class="plNav"><button type="button" class="plBtn" '+(step===0?'disabled':'')+' onclick="plGo('+(step-1)+')">← Предыдущий</button><button type="button" class="plBtn plMain" onclick="'+(last?'plReview()':'plGo('+(step+1)+')')+'">'+(last?'Проверить ответы →':'Далее →')+'</button></div>';
+ root.classList.toggle('plWide',t.type==='read'||t.type==='gap');root.classList.toggle('plTight',!!t.tight);root.innerHTML=plHead(what+' '+(step+1)+' из '+n)+'<div class="plBar"><i style="width:'+Math.round(plAnswered(t,a)/plUnits(t)*100)+'%"></i></div>'+(n>1?'<div class="plDots">'+plDotsHTML()+'</div>':'')+(step===0&&t.type!=='read'?'<p class="plIntro">'+t.intro+'</p>':'')+'<div class="plCard">'+card+'</div><div class="plNav"><button type="button" class="plBtn" '+(step===0?'disabled':'')+' onclick="plGo('+(step-1)+')">← Предыдущий</button><button type="button" class="plBtn plMain" onclick="'+(last?'plReview()':'plGo('+(step+1)+')')+'">'+(last?'Проверить ответы →':'Далее →')+'</button></div>';
  root.querySelectorAll('.plInput,[data-k]').forEach(x=>{
   x.oninput=()=>{const k=x.dataset.k!=null?x.dataset.k:step;const v=x.value.trim();if(v)PL.a[k]=v;else delete PL.a[k];plSave();plMarks()};
   x.onkeydown=e=>{if(e.key!=='Enter'||(x.tagName==='TEXTAREA'&&e.shiftKey))return;e.preventDefault();const all=[...root.querySelectorAll('[data-k]')],ix=all.indexOf(x);if(ix>-1&&ix<all.length-1)all[ix+1].focus();else last?plReview():plGo(step+1)};
