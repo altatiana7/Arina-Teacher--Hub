@@ -645,14 +645,17 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 </style><script defer src="tense/tense-logic.js?v=20261011"></script><style id="kahootSkin">/* 25.10.2026: задания с выбором ответа — цветные кнопки в два столбика, как Kahoot */
 #plRoot .plQ{font-family:"PT Serif",Georgia,"Times New Roman",serif!important;font-size:28px!important;line-height:1.35;text-align:center;margin:6px 0 18px}
 #plRoot .plOpts,#plRoot .plOpts.plOne{grid-template-columns:1fr 1fr!important;gap:14px!important}
-#plRoot .plOpts button{position:relative;justify-content:center;min-height:92px;border:0!important;color:#fff!important;font-family:"PT Serif",Georgia,serif!important;font-size:24px!important;font-weight:700!important;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.18);transition:transform .12s,filter .2s,opacity .2s;padding:14px 18px 14px 58px!important}
-#plRoot .plOpts button i{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:32px!important;height:32px!important;min-width:32px;display:flex!important;align-items:center;justify-content:center;border-radius:8px;font:900 17px/1 "Segoe UI",Arial,sans-serif!important;background:rgba(255,255,255,.22)!important;color:#fff!important;font-style:normal}
-#plRoot .plOpts button:nth-child(4n+1){background:#e2324a!important}#plRoot .plOpts button:nth-child(4n+2){background:#1f7fd8!important}
-#plRoot .plOpts button:nth-child(4n+3){background:#e88a00!important}#plRoot .plOpts button:nth-child(4n+4){background:#2e9e3e!important}
-#plRoot .plOpts button:nth-child(5){background:#7c3aed!important}#plRoot .plOpts button:nth-child(6){background:#0f9a9a!important}
+#plRoot .plOpts button{position:relative;justify-content:center;min-height:88px;border:2px solid!important;color:#142337!important;font-family:"PT Serif",Georgia,serif!important;font-size:24px!important;font-weight:600!important;text-align:center;transition:transform .12s,opacity .2s;padding:14px 18px 14px 58px!important}
+#plRoot .plOpts button i{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:32px!important;height:32px!important;min-width:32px;display:flex!important;align-items:center;justify-content:center;border-radius:8px;font:800 17px/1 "Segoe UI",Arial,sans-serif!important;color:#fff!important;font-style:normal}
+#plRoot .plOpts button:nth-child(6n+1){background:#fbeeee!important;border-color:#e6b9bd!important}#plRoot .plOpts button:nth-child(6n+1) i{background:#b8636c!important}
+#plRoot .plOpts button:nth-child(6n+2){background:#edf3fb!important;border-color:#b5cbe8!important}#plRoot .plOpts button:nth-child(6n+2) i{background:#4f79ad!important}
+#plRoot .plOpts button:nth-child(6n+3){background:#fbf4e6!important;border-color:#e6cf9f!important}#plRoot .plOpts button:nth-child(6n+3) i{background:#b08a3e!important}
+#plRoot .plOpts button:nth-child(6n+4){background:#edf6ef!important;border-color:#b6d8bd!important}#plRoot .plOpts button:nth-child(6n+4) i{background:#5b8f65!important}
+#plRoot .plOpts button:nth-child(6n+5){background:#f3effa!important;border-color:#cdc0e6!important}#plRoot .plOpts button:nth-child(6n+5) i{background:#7a68a8!important}
+#plRoot .plOpts button:nth-child(6n+6){background:#eaf5f5!important;border-color:#acd3d3!important}#plRoot .plOpts button:nth-child(6n+6) i{background:#4e8f8f!important}
 #plRoot .plOpts button:hover{transform:translateY(-2px);filter:brightness(1.06)}
 #plRoot .plOpts:has(button.picked) button:not(.picked){opacity:.4}
-#plRoot .plOpts button.picked{outline:5px solid #142337;outline-offset:3px;opacity:1}
+#plRoot .plOpts button.picked{outline:3px solid #0039A6;outline-offset:2px;opacity:1}
 @media(max-width:800px){#plRoot .plOpts,#plRoot .plOpts.plOne{grid-template-columns:1fr!important}#plRoot .plQ{font-size:22px!important}#plRoot .plOpts button{font-size:19px!important;min-height:64px}}
 /* задания 19–24 / 25–29 в домашке — как на сайте ФИПИ: номер слева, сплошной текст, слово справа на полях */
 #plRoot .plText{font-family:"PT Serif",Georgia,"Times New Roman",serif}
