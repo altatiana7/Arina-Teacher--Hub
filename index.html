@@ -2832,4 +2832,19 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
  try{if(!localStorage.getItem('arinaHwAdd-20261025')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261025','1')}}catch(e){}
 })();
 </script>
+<script id="arinaHw20261025b">
+/* 25.10 · Неделя 4 · урок 2: не успели №1, 8 и задание 11 (№9) — уходят в домашку; остальное сделано на уроке. Урок 2 открыт для Арины. */
+(function(){
+ const HW=['w4l2-warmup','w4l2-wf','w4l2-r11'],L=ARINA_LESSONS['3-1'];
+ if(L){
+  L.parts.forEach(p=>{if(!p[2])p[1]=p[1].filter(c=>!(c[0]==='task'&&HW.includes(c[1])))});
+  L.parts=L.parts.filter(p=>p[2]||p[1].length);
+  L.parts.push(['Домашняя работа · не успели на уроке',HW.map(id=>['task',id]),'home']);
+ }
+ if(!ARINA_OPEN_LESSONS.includes(1))ARINA_OPEN_LESSONS.push(1);
+ ['w4l2-warmup-iv','w4l2-mistakes','w4l2-voice','w4l2-future','w4l2-iv-schools'].forEach(id=>{ARINA_DONE_IN_CLASS[id]='24.10'});
+ HW.forEach(id=>{if(!ARINA_ASSIGNED_DEFAULT.includes(id))ARINA_ASSIGNED_DEFAULT.push(id)});
+ try{if(!localStorage.getItem('arinaHwAdd-20261025b')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261025b','1')}}catch(e){}
+})();
+</script>
 </body></html>
