@@ -1260,9 +1260,10 @@ function plMerge(t){
   if(t.type==='gap'){
    if(p&&rng.test(s.title||'')&&base(p)===base(s)&&s.start===p.start+p.lines.length){
     p.lines=p.lines.concat(s.lines);p.title=base(p)+' · '+p.start+'–'+(p.start+p.lines.length-1);return}
-  }else if(t.type==='read'&&p&&p.tab===s.tab&&s.tab!=='12–18'){
+  }else if(t.type==='read'&&p&&p.tab===s.tab){
    const sameText=p.tid===s.tid,sameTask=(p.tid||'').replace(/-\d+$/,'')===(s.tid||'').replace(/-\d+$/,'');
    if(sameText||(s.tab==='10'&&sameTask)){
+    if(s.tab==='12–18'){p.items=p.items.concat(s.items);p.task='Задания 12–'+(11+p.items.length)+'. Выберите один вариант ответа.';p.cols=2;p.dense=true;return}
     if(!sameText)p.text+=s.text;
     p.items=p.items.concat(s.items);p.title=base(p);
     if(s.tab==='10')p.title='Задание 10 · тексты A–'+'ABCDEFG'[p.items.length-1];
@@ -1455,7 +1456,7 @@ function plRender(){
  else if(t.type==='write'){const q=t.items[step];
   card='<p class="plQ">'+q[0]+' <em class="w3Key">'+q[1]+'</em></p><textarea class="plInput" id="plField" rows="'+(q[3]||3)+'" placeholder="'+(q[2]||'Write one full sentence in English')+'">'+w3Esc(a[step]||'')+'</textarea>';}
  else if(t.type==='read'){const set=t.sets[step],o=plGapOffset(t,step);
-  card='<div class="rdGrid'+(set.dense?' rdDense':'')+'"><article class="rdText" data-tid="'+set.tid+'"><h3>'+set.title+'</h3>'+set.text+'</article><div class="rdQs"><p class="rdTask">'+set.task+'</p>'+(set.note||'')+set.items.map((q,j)=>'<div class="rdQ'+(set.row?' rdRow':'')+(set.col?' rdCol':'')+'"><p>'+q[0]+'</p><div class="rdOpts" style="grid-template-columns:repeat('+(set.col?1:q[1].length)+',1fr)">'+q[1].map((x,m)=>'<button type="button" class="'+(a[o+j]===m?'picked':'')+'" onclick="plReadPick('+(o+j)+','+m+',this)">'+x+'</button>').join('')+'</div></div>').join('')+'</div></div>';}
+  card='<div class="rdGrid'+(set.dense?' rdDense':'')+'"><article class="rdText" data-tid="'+set.tid+'"><h3>'+set.title+'</h3>'+set.text+'</article><div class="rdQs"><p class="rdTask">'+set.task+'</p>'+(set.note||'')+set.items.map((q,j)=>'<div class="rdQ'+(set.row?' rdRow':'')+(set.col?' rdCol':'')+'"><p>'+q[0]+'</p><div class="rdOpts" style="grid-template-columns:repeat('+(set.cols||(set.col?1:q[1].length))+',minmax(0,1fr))">'+q[1].map((x,m)=>'<button type="button" class="'+(a[o+j]===m?'picked':'')+'" onclick="plReadPick('+(o+j)+','+m+',this)">'+x+'</button>').join('')+'</div></div>').join('')+'</div></div>';}
  else{const set=t.sets[step],o=plGapOffset(t,step),start=set.start||19;
   card='<h3 class="plSetTitle">'+set.title+'</h3><div class="plText">'+set.lines.map((q,j)=>'<p>'+q[0].replace('___','<span class="w3Gap"><small>'+(start+j)+'</small><input autocomplete="off" autocapitalize="off" spellcheck="false" data-k="'+(o+j)+'" value="'+w3Esc(a[o+j]||'')+'"><em>'+q[1]+'</em></span>')+'</p>').join('')+'</div>';}
  const what=t.type==='read'?'Экран':t.type==='gap'?'Текст':t.type==='write'?'Предложение':'Вопрос';
@@ -1946,6 +1947,24 @@ lessonProgress=(function(base){return function(w,i){const ids=lessonTaskIds(w,i)
 .khRow{display:flex;gap:12px;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #d9e1ec}.khRow b{color:#1f8a3a;white-space:nowrap}
 .khReplayBar{display:flex;justify-content:flex-end;margin-bottom:8px}
 @media (prefers-reduced-motion:reduce){.kh *{transition:none!important}}
+
+/* compact, not huge: smaller type in tasks, a small gap at the bottom of the screen */
+.fullScreenPanel:has(.plWide){padding:6px 14px 12px}
+.plWide .plTop h1{font-size:18px}.fullScreenPanel:has(.plWide) .fullScreenBack{padding:6px 12px;font-size:14px;margin-top:2px}
+.plWide .plNav .plBtn{padding:6px 14px;min-height:36px;font-size:14px}
+.rdText{font-size:16px!important;line-height:1.5!important;max-height:calc(100vh - 150px)!important}.rdQs{max-height:calc(100vh - 150px)!important}
+.rdText h3{font-size:16px}.rdTask{font-size:14px}.rdList{font-size:15px}
+.rdOpts button{font-size:15px;padding:4px}
+#plRoot .plText p{font-size:17px!important}
+#plRoot .plText .w3Gap small{font-size:15px!important}
+#plRoot .plText .w3Gap em{font-size:14px!important}
+#plRoot .plText .w3Gap input{height:30px;font-size:16px!important;width:150px!important}
+.plSetTitle{font-size:16px}
+.rdDense.rdGrid .rdCol .rdOpts button{padding:2px 8px;font-size:14px;min-height:0!important;line-height:1.35}
+.rdDense .rdQ.rdCol{padding:4px 9px!important;margin:0 0 4px!important}.rdDense .rdQ.rdCol p{font-size:15px!important;margin:0 0 3px!important}
+.rdDense.rdGrid{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:12px}.rdDense .rdText{font-size:15px!important}.rdDense.rdGrid .rdCol .rdOpts button{font-size:14px}.rdDense .rdQ.rdCol p{font-size:14.5px!important}.rdDense .rdCol .rdOpts{gap:2px 4px}.rdDense.rdGrid .rdCol .rdOpts button{padding:1px 8px;line-height:1.3;border-width:1px}.rdDense .rdQ.rdCol{padding:3px 8px!important;margin:0 0 3px!important}.rdDense .rdQ.rdCol p{margin:0 0 2px!important;line-height:1.3}
+.rdDense .rdTask{margin:0 0 3px!important;font-size:13px}.rdDense.rdGrid .rdCol .rdOpts button{padding:0 7px!important;line-height:1.25!important}.rdDense .rdQ.rdCol{padding:2px 8px!important;margin:0 0 3px!important}.rdDense .rdQ.rdCol p{line-height:1.25!important}
+.rdText p,.rdText .rdL,.rdText .rdGapL{font-size:16px}.rdDense .rdText p,.rdDense .rdText .rdL{font-size:15.5px}
 </style>
 
 <script>
