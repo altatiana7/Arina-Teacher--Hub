@@ -1606,7 +1606,7 @@ function renderW3OralCard(){
 }
 function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261107a';
+const ARINA_BUILD='20261107b';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -1621,6 +1621,19 @@ async function arinaFetchDone(){
 async function arinaSyncDone(){
  const rows=await arinaFetchDone();if(!rows)return;
  let changed=false;
+ /* устные задания: записи голоса лежат в базе как rec-<задание>-q<вопрос>-<время>; все вопросы записаны → задание выполнено */
+ const recQ={};
+ rows.forEach(r=>{const m=String(r.test_id||'').match(/^rec-(.+)-q(\d+)-[0-9a-z]+$/);if(!m)return;const tid=m[1]==='w3-interview'?'w3l1-interview':m[1];const o=recQ[tid]||(recQ[tid]={q:{},t:0});o.q[m[2]]=1;o.t=Math.max(o.t,new Date(r.created_at).getTime()||0)});
+ Object.keys(recQ).forEach(tid=>{
+  let t=null;try{t=taskDef(tid)}catch(e){}
+  if(!t||t.type!=='speak'||!t.items)return;
+  if(Object.keys(recQ[tid].q).length<t.items.length)return;
+  const st=w3Get(tid);if(st.done)return;
+  let reset=0;try{reset=+localStorage.getItem('arinaReset:'+tid)||0}catch(e){}
+  if(reset&&recQ[tid].t<reset)return;
+  st.done={answers:{},score:0,total:0,date:recQ[tid].t?new Date(recQ[tid].t).toLocaleDateString('ru-RU'):'',pending:false,code:'',legacy:true,server:true,rec:true};
+  delete st.draft;w3Set(tid,st);changed=true;
+ });
  rows.forEach(r=>{
   const id=r.test_id;if(!id||!W3_TASKS[id]&&!(()=>{try{return taskDef(id)}catch(e){return null}})())return;
   const st=w3Get(id);if(st.done)return;
@@ -2651,7 +2664,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261107a -->
+<!-- build:20261107b -->
 
 <script id="arinaRussiaScript">
 (function(){
