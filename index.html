@@ -3004,13 +3004,13 @@ body{background:var(--ev-bg)!important;color:var(--ev-text)}
 .evHome{display:none}
 body.evHomeOn .main>.content{display:none!important}
 body.evHomeOn .evHome{display:block}
-.evHero{background:#fff;border:1px solid var(--ev-line);border-radius:16px;display:grid;grid-template-columns:minmax(0,1fr) 320px;align-items:stretch;overflow:hidden;min-height:170px;margin-bottom:22px}
+.evHero{background:#fff;border:1px solid var(--ev-line);border-radius:16px;display:grid;grid-template-columns:minmax(0,1fr) 48%;align-items:stretch;overflow:hidden;min-height:170px;margin-bottom:22px}
 .evHeroTxt{padding:26px 30px}
 .evHero h1{margin:0 0 8px;font-size:40px;font-weight:600;color:#6e7385;letter-spacing:-.3px}
 .evHero p{margin:0 0 4px;font-size:15px;color:#555b70}
 .evHero .evBtn{margin-top:16px}
 .evHeroPic{position:relative;background:radial-gradient(circle at 60% 55%,#e4e5fb 0 38%,transparent 39%)}
-.evHeroPic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.evHeroPic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:78% 28%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%);mask-image:linear-gradient(90deg,transparent 0,#000 18%)}
 .evBtn{border:0;border-radius:9px;background:var(--ev-ind);color:#fff;font-weight:600;font-size:14px;padding:10px 22px}
 .evBtn:hover{background:var(--ev-ind2)}
 .evSecHead{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px}
@@ -3054,13 +3054,14 @@ body.evHomeOn .evHome{display:block}
 .hwRow em,.dueRow em{background:var(--ev-ind)!important;border-radius:8px!important}
 .dueBar i{background:var(--ev-ind)!important}
 .evTabs{display:none}
+@media(max-height:720px){.evPlan{display:none}}
 @media(max-width:1100px){.evStats{grid-template-columns:repeat(2,minmax(0,1fr))}.evHero{grid-template-columns:1fr 220px}}
 @media(max-width:800px){
  .top{left:0!important;height:56px!important;padding:0 14px!important}.top .mobile{display:grid!important;order:-1}.top .brand{font-size:16px!important}.evTopR .evSearch{display:none}
  .side{top:0!important;z-index:130!important;width:min(84vw,280px)!important}.evPlan,.evUser{display:none}
  .main{margin:0!important;padding:64px 12px 84px!important}
  .lessonPage,.fullScreenPanel{inset:0!important}#arinaRussiaPanel,.taskModal,.tx{left:0!important}
- .evHero{grid-template-columns:1fr 130px;min-height:0}.evHeroTxt{padding:16px}.evHero h1{font-size:28px}
+ .evHero{grid-template-columns:1fr;min-height:0}.evHeroPic{height:150px;order:-1}.evHeroTxt{padding:16px}.evHero h1{font-size:28px}
  .evTwo{grid-template-columns:1fr}.evStats{gap:10px}.evStat{padding:12px}
  .evTabs{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--ev-line);padding:7px 4px 10px}
  .evTabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--ev-mut)}
@@ -3124,7 +3125,7 @@ body.evHomeOn .evHome{display:block}
   const cw=W[ACTIVE_WEEK],cp=cw[1]?Math.round(cw[0]*100/cw[1]):0,w=weeks[ACTIVE_WEEK];
   const stat=(c,i,t,val,sp,foot,fn)=>'<div class="evStat" style="--c:'+c+'" onclick="'+fn+'"><h4>'+ic(i)+t+'</h4><div class="evVal">'+val+'</div>'+spark(sp,c)+'<div class="evFoot"><i></i>'+foot+'</div></div>';
   const first=open[0]||debt[0];
-  let html='<div class="evHero"><div class="evHeroTxt"><h1>'+hello()+', Arina</h1><p>Неделя '+(ACTIVE_WEEK+1)+' · '+w.d+'</p><p>'+(open.length?'Осталось сдать: <b>'+open.length+'</b>':'Вся домашка сдана')+(debt.length?' · прошлые недели: <b>'+debt.length+'</b>':'')+'</p>'+(first?'<button class="evBtn" onclick="openW3Task(\''+first+'\')">Продолжить домашку</button>':'<button class="evBtn" onclick="evGo(\'lessons\')">Мои уроки</button>')+'</div><div class="evHeroPic"><img src="img/hero.jpg" alt="" onerror="this.remove()"></div></div>';
+  let html='<div class="evHero"><div class="evHeroTxt"><h1>'+hello()+', Arina</h1><p>Неделя '+(ACTIVE_WEEK+1)+' · '+w.d+'</p><p>'+(open.length?'Осталось сдать: <b>'+open.length+'</b>':'Вся домашка сдана')+(debt.length?' · прошлые недели: <b>'+debt.length+'</b>':'')+'</p>'+(first?'<button class="evBtn" onclick="openW3Task(\''+first+'\')">Продолжить домашку</button>':'<button class="evBtn" onclick="evGo(\'lessons\')">Мои уроки</button>')+'</div><div class="evHeroPic"><img src="img/hero.png" alt="" onerror="this.remove()"></div></div>';
   html+='<div class="evSecHead"><h2>Learning Overview</h2><button onclick="openNavigator()">View all</button></div><div class="evStats">'+
    stat('var(--ev-blue)','book','Lessons this week',(ARINA_OPEN_LESSONS.length)+' <small>из 3 открыто</small>',doneS,'сделано за неделю: '+cw[0],"evGo('lessons')")+
    stat('var(--ev-red)','task','Homework Due',open.length+' <small>осталось</small>',leftS,'прошлые недели: '+debt.length,"evGo('hw')")+
