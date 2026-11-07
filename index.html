@@ -1486,7 +1486,7 @@ function plRender(){
  root.classList.toggle('plWide',t.type==='read'||t.type==='gap');root.classList.toggle('plTight',!!t.tight);root.innerHTML=plHead(what+' '+(step+1)+' из '+n)+'<div class="plBar"><i style="width:'+Math.round(plAnswered(t,a)/plUnits(t)*100)+'%"></i></div>'+(n>1?'<div class="plDots">'+plDotsHTML()+'</div>':'')+(step===0&&t.type!=='read'?'<p class="plIntro">'+t.intro+'</p>':'')+'<div class="plCard">'+card+'</div><div class="plNav"><button type="button" class="plBtn" '+(step===0?'disabled':'')+' onclick="plGo('+(step-1)+')">← Предыдущий</button><button type="button" class="plBtn plMain" onclick="'+(last?'plReview()':'plGo('+(step+1)+')')+'">'+(last?'Проверить ответы →':'Далее →')+'</button></div>';
  root.querySelectorAll('.plInput,[data-k]').forEach(x=>{
   x.oninput=()=>{const k=x.dataset.k!=null?x.dataset.k:step;const v=x.value.trim();if(v)PL.a[k]=v;else delete PL.a[k];plSave();plMarks()};
-  x.onkeydown=e=>{if(e.key!=='Enter'||(x.tagName==='TEXTAREA'&&e.shiftKey))return;e.preventDefault();const all=[...root.querySelectorAll('[data-k]')],ix=all.indexOf(x);if(ix>-1&&ix<all.length-1)all[ix+1].focus();else last?plReview():plGo(step+1)};
+  x.onkeydown=e=>{if(e.key!=='Enter'||(x.tagName==='TEXTAREA'&&(e.shiftKey||PL.t.letter)))return;e.preventDefault();const all=[...root.querySelectorAll('[data-k]')],ix=all.indexOf(x);if(ix>-1&&ix<all.length-1)all[ix+1].focus();else last?plReview():plGo(step+1)};
  });
  const f=document.getElementById('plField');if(f&&innerWidth>800)f.focus();
  const rt=root.querySelector('.rdText');if(rt){PL.rdS=PL.rdS||{};rt.scrollTop=PL.rdS[rt.dataset.tid]||0;rt.onscroll=()=>{PL.rdS[rt.dataset.tid]=rt.scrollTop}}
@@ -2883,6 +2883,7 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
  try{if(!localStorage.getItem('arinaHwAdd-20261025b')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261025b','1')}}catch(e){}
 })();
 </script>
+<script src="hw-20261108.js?v=20261108a"></script>
 <script id="arinaTrainersTab">
 /* Вкладка «Тренажёры»: все тренажёры в одном месте */
 const PAMYATKI_URL='https://altatiana7.github.io/Tatyana-English-Hub/ege-teachers-hub/pamyatki.html?student=1&only=lexis&v=4';
