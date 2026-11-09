@@ -114,5 +114,6 @@ plRender=function(){
 /* назначить домашку (как в прошлых неделях: и по умолчанию, и в уже сохранённом списке) */
 const HW=['w5l1-hw-read','w5l1-hw-letter','w5l1-hw-passive','w5l1-hw-future'];
 HW.forEach(id=>{if(!ARINA_ASSIGNED_DEFAULT.includes(id))ARINA_ASSIGNED_DEFAULT.push(id)});
+(window.ARINA_HW_BATCHES=window.ARINA_HW_BATCHES||[]).push(HW); /* новое — сверху */
 try{if(!localStorage.getItem('arinaHwAdd-20261108')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261108','1')}}catch(e){}
 })();

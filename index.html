@@ -1343,6 +1343,12 @@ ARINA_ASSIGNED_DEFAULT.push('w4l1-hw-g19','w4l1-hw-wf','w4l1-hw-r12','w4l1-iv-fr
 function arinaAssigned(){try{const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v))return v}catch(e){}return ARINA_ASSIGNED_DEFAULT}
 function arinaIsDue(id){return arinaAssigned().includes(id)&&!w3Get(id).done}
 function arinaDue(){return arinaAssigned().filter(id=>taskDef(id)&&!w3Get(id).done)}
+/* 09.11.2026: то, что задано последним, всегда сверху. Каждый файл hw-*.js кладёт свой список в ARINA_HW_BATCHES (более поздний файл = более новая домашка); остальное — в обратном порядке назначения */
+window.ARINA_HW_BATCHES=window.ARINA_HW_BATCHES||[];
+function arinaNewestFirst(ids){const rank=new Map();let r=0;
+ ARINA_HW_BATCHES.slice().reverse().forEach(b=>b.forEach(id=>{if(!rank.has(id))rank.set(id,r++)}));
+ const all=arinaAssigned();for(let k=all.length-1;k>=0;k--)if(!rank.has(all[k]))rank.set(all[k],r++);
+ return ids.slice().sort((a,b)=>(rank.has(a)?rank.get(a):1e6)-(rank.has(b)?rank.get(b):1e6))}
 function arinaTeacher(){try{return sessionStorage.getItem('arinaTeacher')==='1'}catch(e){return false}}
 let arinaCurLesson=null;
 function arinaTeacherMode(on){
@@ -1388,7 +1394,7 @@ function openNavigator(){
 function navShowWeek(w){document.querySelectorAll('#navRoot .navTab,#navRoot .navPane').forEach(x=>x.classList.toggle('on',+x.dataset.w===w))}
 function duePanelHTML(){
  const ru=t=>(t.label||'').replace('Week','Неделя').replace('Lesson','Урок');
- const ids=arinaAssigned().filter(id=>taskDef(id));
+ const ids=arinaNewestFirst(arinaAssigned().filter(id=>taskDef(id)));
  const open=ids.filter(id=>!w3Get(id).done),done=ids.filter(id=>w3Get(id).done);
  if(!ids.length)return '<div class="duePanel dueEmpty" id="duePanel"><b>Домашка</b><span>Сейчас ничего не задано.</span></div>';
  const pct=Math.round(done.length*100/ids.length);
@@ -2883,7 +2889,7 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
  try{if(!localStorage.getItem('arinaHwAdd-20261025b')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261025b','1')}}catch(e){}
 })();
 </script>
-<script src="hw-20261108.js?v=20261108a"></script><script src="hw-20261109.js?v=20261109a"></script>
+<script src="hw-20261108.js?v=20261109b"></script><script src="hw-20261109.js?v=20261109b"></script>
 <script id="arinaTrainersTab">
 /* Вкладка «Тренажёры»: все тренажёры в одном месте */
 const PAMYATKI_URL='https://altatiana7.github.io/Tatyana-English-Hub/ege-teachers-hub/pamyatki.html?student=1&only=lexis&v=4';
@@ -3118,7 +3124,7 @@ body.evHomeOn .evHome{display:block}
   return '<svg class="spark" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.2"/></svg>'}
  function hello(){const h=new Date().getHours();return h<12?'Good morning':h<18?'Good afternoon':'Good evening'}
  function homeHTML(){
-  const ids=arinaAssigned().filter(id=>taskDef(id)),open=ids.filter(id=>!w3Get(id).done),done=ids.length-open.length;
+  const ids=arinaNewestFirst(arinaAssigned().filter(id=>taskDef(id))),open=ids.filter(id=>!w3Get(id).done),done=ids.length-open.length;
   let debt=[];for(let w=0;w<ACTIVE_WEEK;w++)for(let i=0;i<3;i++)debt=debt.concat(lessonTaskIds(w,i).filter(arinaIsDebt));
   const W=[];for(let w=0;w<=ACTIVE_WEEK;w++)W.push(wk(w));
   const pctS=W.map(x=>x[1]?Math.round(x[0]*100/x[1]):0),doneS=W.map(x=>x[0]),leftS=W.map((x,w)=>arinaWeekLeft(w));
@@ -3157,5 +3163,5 @@ body.evHomeOn .evHome{display:block}
 .evHero h1{color:#2f2c55!important}.evHero p{color:#3f3c63!important}
 @media(max-width:800px){.evHeroTxt{max-width:none;padding-bottom:150px}.evHeroPic{top:auto;width:100%;height:150px!important}}
 </style>
-<style id="compactScale">/* весь сайт компактнее: всё помещается на экран без прокрутки */:root{--sz:.8}html{zoom:var(--sz)}</style>
+<style id="compactScale">/* весь сайт компактнее: всё помещается на экран без прокрутки; 09.11.2026 — шрифт чуть крупнее (было .8): Арина носит очки */:root{--sz:.9}html{zoom:var(--sz)}</style>
 </body></html>

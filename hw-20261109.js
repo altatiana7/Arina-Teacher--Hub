@@ -139,6 +139,7 @@ plSubmit=function(){const id=PL&&PL.id;stop();const r=baseSubmit.apply(this,argu
 /* назначить домашку (и по умолчанию, и в уже сохранённом списке) */
 const HW=['w4l5-hw-fam-t2','w4l5-hw-fam-iv1','w4l5-hw-fam-iv2','w4l5-hw-science','w4l5-hw-wf','w4l5-hw-r11','w4l5-hw-voc'];
 HW.forEach(id=>{if(!ARINA_ASSIGNED_DEFAULT.includes(id))ARINA_ASSIGNED_DEFAULT.push(id)});
+(window.ARINA_HW_BATCHES=window.ARINA_HW_BATCHES||[]).push(HW); /* новое — сверху */
 /* урок 9 ноября в «Моих уроках» (неделя 4 · урок 3 на сайте Арины) — там же видна эта домашка */
 try{if(weeks[3]&&weeks[3].l[2])weeks[3].l[2][0]='Passive + Word formation · Review';}catch(e){}
 ARINA_LESSONS['3-2']={intro:'Урок 9 ноября: пассив и словообразование. Домашка: устная часть Family (задания 2 и 3), 19–24, 25–29, чтение 11 и лексика 30–36.',parts:[
