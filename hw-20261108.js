@@ -82,12 +82,13 @@ function readHTML(done){stop();cur=0;ph=0;left=90;
 
 /* ---- чек-лист и счётчик слов под письмом ---- */
 const CK='arinaCheck-20261108';
-const ckGet=()=>{try{return JSON.parse(localStorage.getItem(CK)||'[]')}catch(e){return []}};
+const cl=()=>(PL&&PL.t&&PL.t.check)||CHECK, ckKey=()=>(PL&&PL.t&&PL.t.check)?CK+':'+PL.id:CK; /* у каждого письма свой чек-лист */
+const ckGet=()=>{try{return JSON.parse(localStorage.getItem(ckKey())||'[]')}catch(e){return []}};
 function checkHTML(){const on=ckGet();
- return '<div class="c5"><h3>Чек-лист перед отправкой</h3><div class="c5List">'+CHECK.map((c,k)=>'<button type="button" data-c5="'+k+'" class="'+(c[1]?'key':'')+(on[k]?' on':'')+'"><i></i><span>'+c[0]+'</span></button>').join('')+'</div><div class="c5Res"></div></div>'}
-function checkRes(){const w=document.querySelector('.c5');if(!w)return;const C=ckGet(),on=CHECK.map((_,k)=>!!C[k]),key=on.slice(0,4).every(Boolean),all=on.every(Boolean);
+ return '<div class="c5"><h3>Чек-лист перед отправкой</h3><div class="c5List">'+cl().map((c,k)=>'<button type="button" data-c5="'+k+'" class="'+(c[1]?'key':'')+(on[k]?' on':'')+'"><i></i><span>'+c[0]+'</span></button>').join('')+'</div><div class="c5Res"></div></div>'}
+function checkRes(){const w=document.querySelector('.c5');if(!w)return;const C=ckGet(),on=cl().map((_,k)=>!!C[k]),key=on.slice(0,4).every(Boolean),all=on.every(Boolean);
  const r=w.querySelector('.c5Res');r.className='c5Res'+(all?' ok':key?'':' bad');
- r.textContent=all?'Все 10 пунктов отмечены — можно отправлять.':key?'Обязательные пункты есть. Осталось: '+on.filter(x=>!x).length+'.':'Жёлтые пункты обязательны: без них письмо переписывается.'}
+ r.textContent=all?'Все '+on.length+' пунктов отмечены — можно отправлять.':key?'Обязательные пункты есть. Осталось: '+on.filter(x=>!x).length+'.':'Жёлтые пункты обязательны: без них письмо переписывается.'}
 function words(v){return (String(v).trim().match(/\b[\w]+(?:['’\-][\w]+)*\b/g)||[]).length}
 function countDraw(){const f=document.getElementById('plField'),c=document.querySelector('.c5Count');if(!f||!c)return;const n=words(f.value);c.textContent=n+' words · норма 100–140';c.classList.toggle('warn',n<100||n>140)}
 
@@ -97,7 +98,7 @@ document.addEventListener('click',e=>{
   if(k==='start'){go(0);a.textContent='Заново'}else if(k==='skip'){go(1)}else if(k==='stop'){stop()}
   else if(k==='marks'){box().querySelector('.r5Text').classList.toggle('clean')}
   else if(k==='read'){const n=readsGet()[cur]||0;readsSet(cur,n>=3?0:n+1);draw()}return}
- const c=e.target.closest('.c5 [data-c5]');if(c){const on=ckGet();on[+c.dataset.c5]=!on[+c.dataset.c5];try{localStorage.setItem(CK,JSON.stringify(on))}catch(x){}c.classList.toggle('on');checkRes()}
+ const c=e.target.closest('.c5 [data-c5]');if(c){const on=ckGet();on[+c.dataset.c5]=!on[+c.dataset.c5];try{localStorage.setItem(ckKey(),JSON.stringify(on))}catch(x){}c.classList.toggle('on');checkRes()}
 });
 document.addEventListener('input',e=>{if(e.target&&e.target.id==='plField'&&PL&&PL.t&&PL.t.letter)countDraw()});
 
