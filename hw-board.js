@@ -34,7 +34,7 @@ window.openHwBoard=function(){
   panes+='<div class="navCol navPane'+(on?' on':'')+'" data-w="'+k+'"><div class="navLesson">Задано на уроке '+C.ruShort(b.lesson)+' → '+(isOver(b)?'срок был '+C.ru(b.due):'сдать '+dueWord(b))+' · сдано '+b.doneN+' из '+b.must.length+'</div>'+order.map((t,i)=>rowHTML(t,i+1)).join('')+'</div>';
  });
  tabs+='<button type="button" class="navTab'+(old.length?' left':'')+'" onclick="openHwOlder()"><b>Раньше · октябрь</b><small>'+(old.length?'не сдано '+old.length:'всё сдано')+'</small></button>';
- openFullScreen('','<div class="nav navTight hwb" id="navRoot"><div class="navTop"><h1>Домашка</h1><div class="hwbNow">'+todayLine()+'</div></div><div class="navTabs">'+tabs+'</div>'+panes+'</div>');
+ openFullScreen('','<div class="nav navTight hwb" id="navRoot"><div class="navTop"><h1>Homework</h1><div class="hwbNow">'+todayLine()+'</div></div><div class="navTabs">'+tabs+'</div>'+panes+'</div>');
  try{PL=null}catch(e){}
 };
 window.openHwOlder=function(){if(oldNavigator)oldNavigator()};
@@ -45,7 +45,7 @@ try{openNavigator=window.openHwBoard}catch(e){}
 window.hwbHero=function(){
  const B=batches(),cur=current(B);let late=0;B.forEach(b=>{if(b!==cur)late+=b.left.length});
  let p2='Сейчас ничего не задано';
- if(cur)p2=cur.left.length?(isOver(cur)?'Не сдана домашка ':'Домашка ')+dueWord(cur)+': осталось <b>'+cur.left.length+'</b> из '+cur.must.length:'Домашка '+dueWord(cur)+' сдана';
+ if(cur)p2=cur.left.length?(isOver(cur)?'Не сдан Homework ':'Homework ')+dueWord(cur)+': осталось <b>'+cur.left.length+'</b> из '+cur.must.length:'Homework '+dueWord(cur)+' сдан';
  return '<p>'+todayLine()+'</p><p>'+p2+'</p>'+(late?'<p>Не сдано с прошлых уроков: <b>'+late+'</b></p>':'');
 };
 window.hwbFirst=function(){const B=batches();for(const b of B)if(b.left.length)return b.left[0].id;return ''};

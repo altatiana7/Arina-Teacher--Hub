@@ -655,7 +655,7 @@ body,button,input,textarea,select{font-family:"Segoe UI",system-ui,-apple-system
 .rdOpts button:hover{border-color:#0039A6;background:#f4f8ff}
 .rdOpts button.picked,.rdCol .rdOpts button.picked{background:#0039A6;border-color:#0039A6;color:#fff}
 @media(max-width:800px){.pl.plWide{display:block}.plWide .plNav{margin-top:10px}.rdGrid{grid-template-columns:1fr}.rdText{max-height:45vh;border-right:0;padding-right:0}.rdQs{max-height:none}}
-</style><script defer src="tense/tense-logic.js?v=20261011"></script><style id="kahootSkin">/* 25.10.2026: задания с выбором ответа — цветные кнопки в два столбика, как Kahoot */
+</style><script defer src="tense/tense-logic.js?v=20261114"></script><style id="kahootSkin">/* 25.10.2026: задания с выбором ответа — цветные кнопки в два столбика, как Kahoot */
 #plRoot .plQ{font-family:"PT Serif",Georgia,"Times New Roman",serif!important;font-size:28px!important;line-height:1.35;text-align:center;margin:6px 0 18px}
 #plRoot .plOpts,#plRoot .plOpts.plOne{grid-template-columns:1fr 1fr!important;gap:14px!important}
 #plRoot .plOpts button{position:relative;justify-content:center;min-height:88px;border:2px solid!important;color:#142337!important;font-family:"PT Serif",Georgia,serif!important;font-size:24px!important;font-weight:600!important;text-align:center;transition:transform .12s,opacity .2s;padding:14px 18px 14px 58px!important}
@@ -1335,7 +1335,7 @@ function atrRender(){
 }
 ARINA_LESSONS['3-0']={intro:'Пассив и ловушки ЕГЭ: 19–24, 25–29, чтение 10 на время и интервью.',parts:[
   ['На уроке',[['fn','openArinaTraps()','Ловушки и стратегии','алгоритм глагола · часть речи · заголовки'],['task','w4l1-voice'],['task','w4l1-tea'],['task','w4l1-wf'],['task','w4l1-r10'],['task','w4l1-iv-family'],['task','w4l1-iv-transport']]],
-  ['Домашняя работа',[['task','w4l1-hw-g19'],['task','w4l1-hw-wf'],['task','w4l1-hw-r12'],['task','w4l1-iv-friends'],['fn','openArinaTraps()','Ловушки и стратегии','повтори перед домашкой']],'home']]};
+  ['Домашняя работа',[['task','w4l1-hw-g19'],['task','w4l1-hw-wf'],['task','w4l1-hw-r12'],['task','w4l1-iv-friends'],['fn','openArinaTraps()','Ловушки и стратегии','повтори перед Homework']],'home']]};
 ARINA_ASSIGNED_DEFAULT.push('w4l1-hw-g19','w4l1-hw-wf','w4l1-hw-r12','w4l1-iv-friends');
 (function(){try{if(localStorage.getItem('arinaHwAdd-20261019c'))return;const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){['w4l1-hw-g19','w4l1-hw-wf','w4l1-hw-r12','w4l1-iv-friends'].forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261019c','1')}catch(e){}})();
 
@@ -1399,19 +1399,19 @@ function duePanelHTML(){
  const ru=t=>(t.label||'').replace('Week','Неделя').replace('Lesson','Урок');
  const ids=arinaNewestFirst(arinaAssigned().filter(id=>taskDef(id)));
  const open=ids.filter(id=>!w3Get(id).done),done=ids.filter(id=>w3Get(id).done);
- if(!ids.length)return '<div class="duePanel dueEmpty" id="duePanel"><b>Домашка</b><span>Сейчас ничего не задано.</span></div>';
+ if(!ids.length)return '<div class="duePanel dueEmpty" id="duePanel"><b>Homework</b><span>Сейчас ничего не задано.</span></div>';
  const pct=Math.round(done.length*100/ids.length);
  const row=id=>{const t=taskDef(id),st=w3Get(id),started=!st.done&&st.draft&&Object.keys(st.draft).length;
   return '<button type="button" class="dueRow" onclick="openW3Task(\''+id+'\')"><span class="dueText"><b>'+t.title+'</b><small>'+ru(t)+'</small></span><em>'+(started?'Продолжить':'Начать')+'</em></button>'};
  const doneRow=id=>{const t=taskDef(id),st=w3Get(id).done,kind=t.type==='write'?'текст отправлен':t.type==='speak'?'выполнено':(st.score+' / '+st.total);
   const open=t.type==='speak';
   return '<'+(open?'button type="button" onclick="openW3Task(\''+id+'\')"':'div')+' class="dueRow doneRow"><span class="dueText"><b>'+t.title+'</b><small>'+ru(t)+'</small></span><span class="doneMark">✓ Сдано · '+kind+'</span></'+(open?'button':'div')+'>'};
- return '<div class="duePanel" id="duePanel"><div class="dueHead"><b>Домашка</b><span class="dueCount">сдано '+done.length+' из '+ids.length+'</span></div><div class="dueBar"><i style="width:'+pct+'%"></i></div>'+
+ return '<div class="duePanel" id="duePanel"><div class="dueHead"><b>Homework</b><span class="dueCount">сдано '+done.length+' из '+ids.length+'</span></div><div class="dueBar"><i style="width:'+pct+'%"></i></div>'+
   (open.length?'<div class="dueSub">Осталось · '+open.length+'</div><div class="dueList">'+open.map(row).join('')+'</div>':'<div class="dueAll">Всё сдано</div>')+
   (done.length?'<details class="dueDone"><summary>Сдано · '+done.length+'</summary><div class="dueList">'+done.map(doneRow).join('')+'</div></details>':'')+'</div>';
 }
 function hwLinksHTML(){
- const L=[['./homework-2026-11-02/','Слова к текстам · памятка эссе','к домашке от 2 ноября · сами задания — в разделе Homework'],['./ege37-homework-2026-10-31/','Домашняя работа · 31 октября','3 письма ЕГЭ 37 · написать и отправить'],['./ege37-pamyatka/','Памятка · письмо ЕГЭ 37','Правила, образец, чек-лист']];
+ const L=[['./homework-2026-11-02/','Слова к текстам · памятка эссе','к Homework от 2 ноября · сами задания — в разделе Homework'],['./ege37-homework-2026-10-31/','Домашняя работа · 31 октября','3 письма ЕГЭ 37 · написать и отправить'],['./ege37-pamyatka/','Памятка · письмо ЕГЭ 37','Правила, образец, чек-лист']];
  return '<div class="hwLinks"><div class="hwHead">Домашние работы</div>'+L.map(x=>'<a class="hwRow" href="'+x[0]+'"><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span><em>Открыть</em></a>').join('')+'</div>';
 }
 function lessonTaskIds(w,i){const L=ARINA_LESSONS[w+'-'+i];return L?L.parts.flatMap(p=>p[1].filter(c=>c[0]==='task').map(c=>c[1])):[]}
@@ -1901,7 +1901,7 @@ khTask('w4l2-voice','Active или Passive? · ФИПИ · 18','18 предло�
  ['Thousands of tourists ___ this exciting route so far.','TRY','have tried',['have been tried','were tried','tried'],'Туристы пробуют сами → актив; so far → have tried.','The Flam railway'],
  ['Now they ___ significant recognition in this craft.','ACHIEVE','have achieved',['have been achieved','are achieved','achieved'],'Мастера сами добились признания → актив; now — результат к этому моменту → have achieved.','Gzhel artists']
 ]);
-khTask('w4l2-future','Future · ФИПИ · 16','16 предложений · снято с домашки 19.10 · Kahoot',[
+khTask('w4l2-future','Future · ФИПИ · 16','16 предложений · снято с Homework 19.10 · Kahoot',[
  ['Drop by in the evening, and I ___ you a copy.','GIVE','will give',['give','am giving','would give'],'Обещаю прямо сейчас → will.','Future · will'],
  ['Moscow looks magnificent in the evening… I think I ___ a tour right now.','ORDER','will order',['am ordering','order','ordered'],'Решила в момент разговора → will.','Future · will'],
  ['I’m sure it ___ good on my CV.','LOOK','will look',['will looks','is look','looking'],'I’m sure + мнение о будущем → will.','Future · will'],
@@ -1949,7 +1949,7 @@ W3_TASKS['w4l2-r11']={label:W4L2,part:'B',title:'Чтение · задание 
 W3_TASKS['w4l2-iv-schools']={label:W4L2,part:'B',title:'Interview · Schools of the future',sub:'Открытый банк ФИПИ · 5 вопросов на слух · 40 секунд',type:'speak',card:true,
  intro:'Как на экзамене: вопрос только звучит. Ответ — 2–3 полных предложения.',
  items:[["What do you think schools will look like in some twenty years?","","audio/fipi-iv02-q1.mp3"],["What kind of teachers will work at these schools?","","audio/fipi-iv02-q2.mp3"],["What subjects will be taught at these schools?","","audio/fipi-iv02-q3.mp3"],["How different will these schools be from today's school?","","audio/fipi-iv02-q4.mp3"],["Will it be boring or fun to study at the school of the future? Why?","","audio/fipi-iv02-q5.mp3"]]};
-ARINA_LESSONS['3-1']={intro:'Сначала твои ошибки за неделю, потом актив или пассив, будущее (то, что сняли с домашки), словообразование, задание 11 и интервью про школы будущего.',parts:[
+ARINA_LESSONS['3-1']={intro:'Сначала твои ошибки за неделю, потом актив или пассив, будущее (то, что сняли с Homework), словообразование, задание 11 и интервью про школы будущего.',parts:[
   ['Начало · мои ошибки 20–24 октября',[['task','w4l2-mistakes']]],
   ['Пассив · кто делает действие?',[['rule','passive','Памятка · Passive','be + V3 · время показывает be'],['task','w4l2-voice']]],
   ['Future · на уроке + интервью',[['task','w4l2-future'],['task','w4l2-iv-schools']]],
@@ -2051,7 +2051,7 @@ const weeks=[
 ['EGE 19–24: Present forms','2 мини-сета по 6 пропусков; определить грамматический сигнал; объяснить каждое изменение исходного слова; заполнить error log.','Сет 19–24 №1 и №2; исправить все ошибки по схеме answer → rule → new example; cumulative test 20 irregular verbs.']]},
 {d:'28 Sep–4 Oct',g:'Закрепить четыре Present tenses со stative verbs и уверенно использовать Past Simple / Continuous / Perfect / Perfect Continuous.',r:'Не менее 80% в mixed Present + stative test и в mixed Past set; правильная последовательность событий.',l:[['Present Tenses + Stative Verbs · Consolidation','Повторить Present Simple / Continuous / Perfect / Perfect Continuous; stative vs dynamic verbs; mixed contexts; работа с ошибками.','Повторить 4 Present tenses и stative verbs; выполнить cumulative Present practice; разобрать ошибки перед переходом к Past.'],['Past Perfect + Past Perfect Continuous','Earlier past; result vs duration; 12 contrast items; narrative sequencing.','15 mixed Past items; 6 sentence transformations; 10 новых irregular verbs.'],['EGE 19–24: Past forms','2 экзаменационных мини-сета; анализ distractors; error log.','12 заданий 19–24 на Past forms; cumulative irregular verbs 40; исправить ошибки.']]},
 {d:'5–11 Oct',g:'Различать способы выражения будущего и смешивать Present/Past/Future без опоры на маркеры.',r:'80%+ в mixed tenses checkpoint.',l:[['Future: will / be going to / Present forms','Predictions, plans, arrangements, timetables; 16 contexts.','16 future-form choices; 8 personal examples; 10 transformations.'],['Future Continuous + Future Perfect','Process at a future point; completed by a deadline; timeline practice.','12 items; 6 transformations; short plan “By 2030…” with 6 target forms.'],['Mixed tenses checkpoint','24 mixed tense items; explain 8 choices; error categories.','18 EGE-style grammar gaps; revise error log; irregular verbs cumulative 50.']]},
-{d:'12–18 Oct',g:'Строить Passive Voice в основных временах и узнавать его в заданиях 19–24.',r:'90% формообразования Passive; 80% exam set.',l:[['Passive: core tenses','Active → Passive in Present/Past/Future; 15 transformations.','12 transformations; 8 gap-fill items; learn V3 forms from error list.'],['Active / Passive + Future · ФИПИ','Мои ошибки 20–24 окт.; актив или пассив (18); Future, снятое с домашки (16); словообразование; задание 11; интервью Schools.','10 modal-passive items; 6 two-object transformations; 6 error corrections.'],['EGE Passive practice','2 sets 19–24 with passive forms; tense + voice decision.','12 exam gaps; write rule for each mistake; mixed tense/passive test.']]},
+{d:'12–18 Oct',g:'Строить Passive Voice в основных временах и узнавать его в заданиях 19–24.',r:'90% формообразования Passive; 80% exam set.',l:[['Passive: core tenses','Active → Passive in Present/Past/Future; 15 transformations.','12 transformations; 8 gap-fill items; learn V3 forms from error list.'],['Active / Passive + Future · ФИПИ','Мои ошибки 20–24 окт.; актив или пассив (18); Future, снятое с Homework (16); словообразование; задание 11; интервью Schools.','10 modal-passive items; 6 two-object transformations; 6 error corrections.'],['EGE Passive practice','2 sets 19–24 with passive forms; tense + voice decision.','12 exam gaps; write rule for each mistake; mixed tense/passive test.']]},
 {d:'19–25 Oct',g:'Различать значения modal verbs и их эквивалентов.',r:'80%+ в modal meaning test; корректные past modals.',l:[['can/could/may/might','Ability, permission, possibility; degrees of certainty; 16 contexts.','15 choices; 8 paraphrases; 6 personal examples.'],['must/have to/should/need','Obligation, necessity, advice, absence of necessity; contrasts.','16 mixed modal items; 8 transformations; error correction.'],['Past modals','must have / might have / could have / should have; inference about past.','12 past-modal sentences; 6 paraphrases; mini EGE set.']]},
 {d:'26 Oct–1 Nov',g:'Закрыть базовые ошибки с articles, quantifiers и pronouns.',r:'85%+ в mixed determiners test.',l:[['Articles a/an/the/zero','First/second mention; unique objects; institutions; geography.','20 article gaps; explain 8 choices; make personal examples.'],['Quantifiers','some/any/no; much/many; few/little; a few/a little.','18 quantifier choices; 8 transformations; 6 error corrections.'],['Pronouns + determiners','another/other/the other; each/every; both/either/neither.','18 mixed items; 6 EGE-style gaps; error log.']]},
 {d:'2–8 Nov',g:'Контролировать adjective/adverb forms и comparison structures.',r:'80%+ word-form/grammar mixed set.',l:[['Adjective vs adverb','Position and function; -ly exceptions; 16 word-form items.','15 adjective/adverb gaps; 8 corrections.'],['Degrees of comparison','Comparative/superlative; irregular forms; modifiers.','16 comparison items; 8 transformations.'],['so/such; too/enough','Patterns and meaning; exam transformations.','18 mixed items; 6 EGE gaps; short review test.']]},
@@ -2892,7 +2892,7 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
  try{if(!localStorage.getItem('arinaHwAdd-20261025b')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261025b','1')}}catch(e){}
 })();
 </script>
-<script src="hw-20261102.js?v=20261114b"></script><script src="hw-20261108.js?v=20261114b"></script><script src="hw-20261109.js?v=20261109b"></script><script src="hw-20261112.js?v=20261112a"></script><script src="hw-list.js?v=20261114b"></script><script src="hw-board.js?v=20261114b"></script>
+<script src="hw-20261102.js?v=20261114b"></script><script src="hw-20261108.js?v=20261114b"></script><script src="hw-20261109.js?v=20261114c"></script><script src="hw-20261112.js?v=20261112a"></script><script src="hw-list.js?v=20261114b"></script><script src="hw-board.js?v=20261114c"></script>
 <script id="arinaTrainersTab">
 /* Вкладка «Тренажёры»: все тренажёры в одном месте */
 const PAMYATKI_URL='https://altatiana7.github.io/Tatyana-English-Hub/ege-teachers-hub/pamyatki.html?student=1&only=lexis&v=4';
@@ -3093,7 +3093,7 @@ body.evHomeOn .evHome{display:block}
  brand.innerHTML='<span>Arina EGE-Homework</span><span class="topTag">Homework</span>';
  const oldTag=top.querySelector(':scope>.topTag');if(oldTag)oldTag.remove();
  const mob=document.getElementById('mobileBtn');if(mob){mob.innerHTML=ic('menu');top.insertBefore(mob,top.firstChild)}
- top.insertAdjacentHTML('beforeend','<div class="evTopR"><button class="evSearch" title="Все задания" onclick="openNavigator()">'+ic('search')+'</button><button class="evBell" id="evBell" title="Домашка" onclick="evGo(\'hw\')">'+ic('bell')+'<i></i></button><span class="evAva">A</span></div>');
+ top.insertAdjacentHTML('beforeend','<div class="evTopR"><button class="evSearch" title="Все задания" onclick="openNavigator()">'+ic('search')+'</button><button class="evBell" id="evBell" title="Homework" onclick="evGo(\'hw\')">'+ic('bell')+'<i></i></button><span class="evAva">A</span></div>');
  /* меню */
  const side=document.getElementById('side');
  const item=(k,i,t)=>'<button type="button" class="evItem evKeep" data-k="'+k+'" onclick="evGo(\''+k+'\')">'+ic(i)+t+(k==='hw'?'<em id="evLeft" style="display:none"></em>':'')+'</button>'+(['lessons','topics','trainers'].includes(k)?'<div class="evGroup evKeep" id="evG-'+k+'"></div>':'');
@@ -3135,7 +3135,7 @@ body.evHomeOn .evHome{display:block}
   const cw=W[ACTIVE_WEEK],cp=cw[1]?Math.round(cw[0]*100/cw[1]):0,w=weeks[ACTIVE_WEEK];
   const stat=(c,i,t,val,sp,foot,fn)=>'<div class="evStat" style="--c:'+c+'" onclick="'+fn+'"><h4>'+ic(i)+t+'</h4><div class="evVal">'+val+'</div>'+spark(sp,c)+'<div class="evFoot"><i></i>'+foot+'</div></div>';
   const first=(window.hwbFirst&&hwbFirst())||open[0]||debt[0];const HC=window.hwbCount?hwbCount():{left:open.length,all:ids.length,done:done,older:debt.length};
-  let html='<div class="evHero"><div class="evHeroTxt"><h1>'+hello()+', Arina</h1>'+(window.hwbHero?hwbHero():'<p>'+(open.length?'Осталось сдать: <b>'+open.length+'</b>':'Вся домашка сдана')+'</p>')+(first?'<button class="evBtn" onclick="openW3Task(\''+first+'\')">Продолжить домашку</button>':'<button class="evBtn" onclick="evGo(\'lessons\')">Мои уроки</button>')+'</div><div class="evHeroPic"><img src="img/hero-desk.jpg" alt="" onerror="this.remove()"></div></div>';
+  let html='<div class="evHero"><div class="evHeroTxt"><h1>'+hello()+', Arina</h1>'+(window.hwbHero?hwbHero():'<p>'+(open.length?'Осталось сдать: <b>'+open.length+'</b>':'Весь Homework сдан')+'</p>')+(first?'<button class="evBtn" onclick="openW3Task(\''+first+'\')">Продолжить Homework</button>':'<button class="evBtn" onclick="evGo(\'lessons\')">Мои уроки</button>')+'</div><div class="evHeroPic"><img src="img/hero-desk.jpg" alt="" onerror="this.remove()"></div></div>';
   html+='<div class="evSecHead"><h2>Learning Overview</h2><button onclick="openNavigator()">View all</button></div><div class="evStats">'+
    stat('var(--ev-blue)','book','Lessons this week',(ARINA_OPEN_LESSONS.length)+' <small>из 3 открыто</small>',doneS,'сделано за неделю: '+cw[0],"evGo('lessons')")+
    stat('var(--ev-red)','task','Homework Due',HC.left+' <small>осталось</small>',leftS,'раньше (октябрь): '+HC.older,"evGo('hw')")+
