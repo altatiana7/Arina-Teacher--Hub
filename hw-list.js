@@ -26,6 +26,10 @@ function ruShort(x){return ru(x,{day:'numeric',month:'long'})+' · '+ru(x,{weekd
 window.ArinaCal={DAYS:DAYS,d0:d0,iso:iso,isLesson:isLesson,lessonOnOrBefore:lessonOnOrBefore,nextLessonAfter:nextLessonAfter,currentLesson:currentLesson,ru:ru,ruDay:ruDay,ruShort:ruShort};
 
 window.ARINA_HW_LIST=[
+ {given:'2026-11-14',tasks:[
+  ['hw1114-essay','Эссе 38 · Environment · диаграмма','write'],
+  ['hw1114-passive','Passive · мои ошибки · 19','auto'],
+  ['hw1114-past','Past · мои ошибки · 20','auto']]},
  {given:'2026-11-12',tasks:[
   ['hw1112-letter-sammy','Письмо 37 · Sammy','write'],
   ['hw1112-letter-dan','Письмо 37 · Dan','write'],
