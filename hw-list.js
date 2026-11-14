@@ -44,7 +44,13 @@ window.ARINA_HW_LIST=[
   ['w5l1-hw-letter','Письмо 37 · чек-лист · Ann','write'],
   ['w5l1-hw-passive','Passive · 20','auto'],
   ['w5l1-hw-future','Future · 20','auto'],
-  ['w5l1-hw-read','Чтение вслух · 10 текстов','open']]}
+  ['w5l1-hw-read','Чтение вслух · 10 текстов','open']]},
+ {given:'2026-11-02',tasks:[
+  ['hw1102-read','Чтение вслух · 5 текстов','speak'],
+  ['hw1102-iv1','Interview 1 · Everyday reading','speak'],
+  ['hw1102-iv2','Interview 2 · School and learning','speak'],
+  ['hw1102-iv3','Interview 3 · Technology and free time','speak'],
+  ['hw1102-grammar','Грамматика · 30 · Present / Past','auto']]}
 ];
 
 /* готовый расчёт: каждая домашка с датой урока и сроком, новые сверху */

@@ -1250,7 +1250,8 @@ function spkStop(){if(w3Speak.audio){w3Speak.audio.onended=null;w3Speak.audio.pa
 function spkPlay(id){
  const q=taskDef(id).items[w3Speak.i];spkStop();w3Speak.left=40;spkTick();
  const go=()=>{w3Speak.timer=setInterval(()=>{w3Speak.left=Math.max(0,w3Speak.left-1);spkTick();if(w3Speak.left<=0){clearInterval(w3Speak.timer);w3Speak.timer=null}},1000)};
- if(q[2]){w3Speak.audio=new Audio(q[2]);w3Speak.audio.onended=go;w3Speak.audio.play().catch(go)}else go();
+ if(q[2]){w3Speak.audio=new Audio(q[2]);w3Speak.audio.onended=go;w3Speak.audio.play().catch(go)}
+ else if('speechSynthesis' in window){/* нет записанного аудио — вопрос читает голос браузера, таймер стартует после вопроса */const u=new SpeechSynthesisUtterance(q[0]);u.lang='en-GB';u.rate=.85;const vs=speechSynthesis.getVoices();u.voice=vs.find(v=>/^en-GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;let started=false;const once=()=>{if(!started){started=true;go()}};u.onend=once;u.onerror=once;speechSynthesis.speak(u)}else go();
 }
 function spkGo(id,k){spkStop();if(typeof recStop==='function')recStop();w3Speak.i=Math.max(0,Math.min(taskDef(id).items.length-1,k));w3Speak.left=40;w3Speak.flip=false;spkRender(id)}
 function spkFlip(id){spkStop();w3Speak.left=40;w3Speak.flip=!w3Speak.flip;spkRender(id)}
@@ -1410,7 +1411,7 @@ function duePanelHTML(){
   (done.length?'<details class="dueDone"><summary>Сдано · '+done.length+'</summary><div class="dueList">'+done.map(doneRow).join('')+'</div></details>':'')+'</div>';
 }
 function hwLinksHTML(){
- const L=[['./homework-2026-11-02/','Домашняя работа · 2 ноября','5 чтений · 3 интервью · 30 грамматика · эссе'],['./ege37-homework-2026-10-31/','Домашняя работа · 31 октября','3 письма ЕГЭ 37 · написать и отправить'],['./ege37-pamyatka/','Памятка · письмо ЕГЭ 37','Правила, образец, чек-лист']];
+ const L=[['./homework-2026-11-02/','Слова к текстам · памятка эссе','к домашке от 2 ноября · сами задания — в разделе Homework'],['./ege37-homework-2026-10-31/','Домашняя работа · 31 октября','3 письма ЕГЭ 37 · написать и отправить'],['./ege37-pamyatka/','Памятка · письмо ЕГЭ 37','Правила, образец, чек-лист']];
  return '<div class="hwLinks"><div class="hwHead">Домашние работы</div>'+L.map(x=>'<a class="hwRow" href="'+x[0]+'"><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span><em>Открыть</em></a>').join('')+'</div>';
 }
 function lessonTaskIds(w,i){const L=ARINA_LESSONS[w+'-'+i];return L?L.parts.flatMap(p=>p[1].filter(c=>c[0]==='task').map(c=>c[1])):[]}
@@ -1614,7 +1615,7 @@ function renderW3OralCard(){
 }
 function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261114a';
+const ARINA_BUILD='20261114b';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -2672,7 +2673,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261114a -->
+<!-- build:20261114b -->
 
 <script id="arinaRussiaScript">
 (function(){
@@ -2891,7 +2892,7 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
  try{if(!localStorage.getItem('arinaHwAdd-20261025b')){const v=JSON.parse(localStorage.getItem('arinaAssigned')||'null');if(Array.isArray(v)){HW.forEach(id=>{if(!v.includes(id))v.push(id)});localStorage.setItem('arinaAssigned',JSON.stringify(v))}localStorage.setItem('arinaHwAdd-20261025b','1')}}catch(e){}
 })();
 </script>
-<script src="hw-20261108.js?v=20261112a"></script><script src="hw-20261109.js?v=20261109b"></script><script src="hw-20261112.js?v=20261112a"></script><script src="hw-list.js?v=20261114a"></script><script src="hw-board.js?v=20261114a"></script>
+<script src="hw-20261102.js?v=20261114b"></script><script src="hw-20261108.js?v=20261114b"></script><script src="hw-20261109.js?v=20261109b"></script><script src="hw-20261112.js?v=20261112a"></script><script src="hw-list.js?v=20261114b"></script><script src="hw-board.js?v=20261114b"></script>
 <script id="arinaTrainersTab">
 /* Вкладка «Тренажёры»: все тренажёры в одном месте */
 const PAMYATKI_URL='https://altatiana7.github.io/Tatyana-English-Hub/ege-teachers-hub/pamyatki.html?student=1&only=lexis&v=4';
@@ -3103,7 +3104,7 @@ body.evHomeOn .evHome{display:block}
  const old=[...side.children];nodes.forEach(n=>side.appendChild(n));
  function sweep(){[...side.children].forEach(el=>{if(el.classList.contains('evKeep'))return;const g=classify(el);if(g==='skip'||g==='drop'){el.style.display='none';el.classList.add('evKeep');return}const b=document.getElementById('evG-'+g);if(b)b.appendChild(el)})}
  sweep();
- document.body.insertAdjacentHTML('beforeend','<div class="evPlan"><b>'+ic('crown')+'Homework</b><a href="./homework-2026-11-02/">Домашняя работа · 2 ноября</a><a href="./ege37-homework-2026-10-31/">Домашняя работа · 31 октября</a><a href="./ege37-pamyatka/">Памятка · письмо ЕГЭ 37</a></div><div class="evUser"><span class="evAva">A</span><span><b>Arina</b><small>EGE 2027 · Homework</small></span></div>'+
+ document.body.insertAdjacentHTML('beforeend','<div class="evPlan"><b>'+ic('crown')+'Homework</b><a href="./homework-2026-11-02/">Слова к текстам · памятка эссе</a><a href="./ege37-homework-2026-10-31/">Домашняя работа · 31 октября</a><a href="./ege37-pamyatka/">Памятка · письмо ЕГЭ 37</a></div><div class="evUser"><span class="evAva">A</span><span><b>Arina</b><small>EGE 2027 · Homework</small></span></div>'+
   '<nav class="evTabs" id="evTabs"><button data-k="home" onclick="evGo(\'home\')">'+ic('home')+'Home</button><button data-k="lessons" onclick="evGo(\'lessons\')">'+ic('book')+'Lessons</button><button data-k="hw" onclick="evGo(\'hw\')">'+ic('task')+'Homework</button><button data-k="trainers" onclick="evGo(\'trainers\')">'+ic('train')+'Trainers</button></nav>');
  window.addEventListener('load',sweep);setTimeout(sweep,1500);
 

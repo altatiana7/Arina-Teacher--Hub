@@ -56,24 +56,25 @@ document.head.appendChild(st);
 const mark=x=>x.replace(/\s*\/\/\s*/g,' \u0002 ').replace(/\s*\/\s*/g,' \u0001 ').replace(/\u0002/g,'<span class="p2">||</span>').replace(/\u0001/g,'<span class="p1">|</span>');
 const PH=[['Подготовка · про себя',90],['Чтение вслух',90]];
 let ph=0,left=90,tm=null,cur=0;
-const RK='arinaRA-20261108';
-const readsGet=()=>{try{return JSON.parse(localStorage.getItem(RK)||'{}')}catch(e){return {}}};
-const readsSet=(i,n)=>{const r=readsGet();r[i]=n;try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}};
+const RK0='arinaRA-20261108';let TX=TEXTS; /* тексты того задания, которое сейчас открыто */
+const rk=()=>(PL&&PL.t&&PL.t.texts)?RK0+':'+PL.id:RK0; /* у каждого задания на чтение свой счётчик прочтений */
+const readsGet=()=>{try{return JSON.parse(localStorage.getItem(rk())||'{}')}catch(e){return {}}};
+const readsSet=(i,n)=>{const r=readsGet();r[i]=n;try{localStorage.setItem(rk(),JSON.stringify(r))}catch(e){}};
 const box=()=>document.querySelector('.r5Wrap');
 function draw(){const b=box();if(!b)return;const r=b.querySelector('.r5Ring'),p=PH[Math.min(ph,1)],R=readsGet(),n=R[cur]||0;
  r.style.setProperty('--p',Math.max(0,left)/p[1]*100);r.classList.toggle('end',ph>=PH.length);
  r.querySelector('b').textContent=Math.floor(Math.max(0,left)/60)+':'+String(Math.max(0,left)%60).padStart(2,'0');
  b.querySelector('.r5Ph').textContent=ph>=PH.length?'Время вышло':p[0];
  b.querySelectorAll('.r5Reads span').forEach((s,k)=>s.classList.toggle('on',k<n));
- b.querySelectorAll('.r5Pick button').forEach((x,k)=>{x.classList.toggle('on',k===cur);x.textContent=(k+1)+' · '+TEXTS[k][0]+((R[k]||0)>=3?' ✓':'')})}
+ b.querySelectorAll('.r5Pick button').forEach((x,k)=>{x.classList.toggle('on',k===cur);x.textContent=(k+1)+' · '+TX[k][0]+((R[k]||0)>=3?' ✓':'')})}
 function stop(){if(tm){clearInterval(tm);tm=null}}
 function go(p){stop();ph=p;left=PH[p][1];draw();tm=setInterval(()=>{if(!box()){stop();return}left--;
  if(left<=0){if(ph===1)readsSet(cur,Math.min(3,(readsGet()[cur]||0)+1));ph++;if(ph<PH.length)left=PH[ph][1];else stop()}draw()},1000)}
 function show(i){stop();cur=i;ph=0;left=90;const b=box();if(!b)return;
- b.querySelector('.r5Text').innerHTML='<b>'+TEXTS[i][0]+'.</b> '+mark(TEXTS[i][1]);b.querySelector('[data-r5="start"]').textContent='Старт';draw()}
+ b.querySelector('.r5Text').innerHTML='<b>'+TX[i][0]+'.</b> '+mark(TX[i][1]);b.querySelector('[data-r5="start"]').textContent='Старт';draw()}
 function readHTML(done){stop();cur=0;ph=0;left=90;
- return '<div class="r5Wrap"><div><div class="r5Pick">'+TEXTS.map((t,k)=>'<button type="button" data-r5t="'+k+'">'+(k+1)+' · '+t[0]+'</button>').join('')+'</div>'+
- '<p class="r5Text"><b>'+TEXTS[0][0]+'.</b> '+mark(TEXTS[0][1])+'</p></div>'+
+ return '<div class="r5Wrap"><div><div class="r5Pick">'+TX.map((t,k)=>'<button type="button" data-r5t="'+k+'">'+(k+1)+' · '+t[0]+'</button>').join('')+'</div>'+
+ '<p class="r5Text"><b>'+TX[0][0]+'.</b> '+mark(TX[0][1])+'</p></div>'+
  '<div class="r5Side"><div class="r5Ring" style="--p:100"><div><b>1:30</b></div></div><div class="r5Ph">'+PH[0][0]+'</div>'+
  '<div class="r5Btns"><button type="button" class="prim" data-r5="start">Старт</button><button type="button" data-r5="skip">Читать</button><button type="button" data-r5="stop">Стоп</button></div>'+
  '<div class="r5Reads"><span>1</span><span>2</span><span>3</span></div>'+
@@ -106,7 +107,8 @@ const baseRender=plRender;
 plRender=function(){
  const root=document.getElementById('plRoot');
  if(root&&PL&&PL.t&&PL.t.ra){const d=w3Get(PL.id).done;root.classList.remove('plWide');
-  root.innerHTML='<div class="r5Page">'+plHead('10 текстов')+'<p class="plIntro">'+PL.t.intro+'</p>'+readHTML(d?d.date:'')+'</div>';draw();return}
+  TX=PL.t.texts||TEXTS;
+  root.innerHTML='<div class="r5Page">'+plHead(TX.length+' текстов')+'<p class="plIntro">'+PL.t.intro+'</p>'+readHTML(d?d.date:'')+'</div>';draw();return}
  baseRender();
  if(root&&PL&&PL.t&&PL.t.letter&&PL.mode==='solve'&&root.querySelector('#plField')){
   root.querySelector('#plField').insertAdjacentHTML('afterend','<div class="c5Count"></div>'+checkHTML());countDraw();checkRes()}
