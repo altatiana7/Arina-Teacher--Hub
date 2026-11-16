@@ -31,7 +31,11 @@ window.ARINA_HW_LIST=[
   ['hw1116-r10','Reading · задание 10 · Great apes','auto'],
   ['hw1116-spell','Spelling cards · 25–29','open'],
   ['hw1116-future','Mistakes · Future · 14','auto'],
-  ['hw1116-cards','Cards · Future & Passive','open']]},
+  ['hw1116-cards','Cards · Future & Passive','open'],
+  ['hw1116b-eh','Error Hunter · found / founded · its / it’s · 14','auto'],
+  ['hw1116b-wfq','Word formation · Who or what? · 14','auto'],
+  ['hw1116b-g19','ЕГЭ 19–24 · ФИПИ · 2 текста','auto'],
+  ['hw1116b-w25','ЕГЭ 25–29 · ФИПИ · 2 текста','auto']]},
  {given:'2026-11-14',tasks:[
   ['hw1114-essay','Эссе 38 · Environment · диаграмма','write'],
   ['hw1114-passive','Passive · мои ошибки · 19','auto'],
