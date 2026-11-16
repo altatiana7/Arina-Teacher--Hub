@@ -26,6 +26,12 @@ function ruShort(x){return ru(x,{day:'numeric',month:'long'})+' · '+ru(x,{weekd
 window.ArinaCal={DAYS:DAYS,d0:d0,iso:iso,isLesson:isLesson,lessonOnOrBefore:lessonOnOrBefore,nextLessonAfter:nextLessonAfter,currentLesson:currentLesson,ru:ru,ruDay:ruDay,ruShort:ruShort};
 
 window.ARINA_HW_LIST=[
+ {given:'2026-11-16',tasks:[
+  ['hw1116-wf','Word families · кто? что? какой? как?','auto'],
+  ['hw1116-r10','Reading · задание 10 · Great apes','auto'],
+  ['hw1116-spell','Spelling cards · 25–29','open'],
+  ['hw1116-future','Mistakes · Future · 14','auto'],
+  ['hw1116-cards','Cards · Future & Passive','open']]},
  {given:'2026-11-14',tasks:[
   ['hw1114-essay','Эссе 38 · Environment · диаграмма','write'],
   ['hw1114-passive','Passive · мои ошибки · 19','auto'],
