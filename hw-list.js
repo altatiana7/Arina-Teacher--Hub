@@ -31,7 +31,8 @@ window.ARINA_HW_LIST=[
   ['hw1118-pp','Past Perfect · Past Perfect Continuous · 14','auto'],
   ['hw1118-mist','Mistakes · 16 Nov · 12','auto'],
   ['hw1118-g19','ЕГЭ 19–24 · прошедшие времена · 2 текста','auto'],
-  ['hw1118-w25','ЕГЭ 25–29 · словообразование · 2 текста','auto']]},
+  ['hw1118-w25','ЕГЭ 25–29 · словообразование · 2 текста','auto'],
+  ['hw1118-voc','Vocabulary 30–36 · Penny · Thanksgiving','auto']]},
  {given:'2026-11-16',tasks:[
   ['hw1116-wf','Word families · кто? что? какой? как?','auto'],
   ['hw1116-r10','Reading · задание 10 · Great apes','auto'],
