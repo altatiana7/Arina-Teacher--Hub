@@ -26,6 +26,12 @@ function ruShort(x){return ru(x,{day:'numeric',month:'long'})+' · '+ru(x,{weekd
 window.ArinaCal={DAYS:DAYS,d0:d0,iso:iso,isLesson:isLesson,lessonOnOrBefore:lessonOnOrBefore,nextLessonAfter:nextLessonAfter,currentLesson:currentLesson,ru:ru,ruDay:ruDay,ruShort:ruShort};
 
 window.ARINA_HW_LIST=[
+ {given:'2026-11-18',tasks:[
+  ['hw1118-pc','Past Simple или Past Continuous? · 14','auto'],
+  ['hw1118-pp','Past Perfect · Past Perfect Continuous · 14','auto'],
+  ['hw1118-mist','Mistakes · 16 Nov · 12','auto'],
+  ['hw1118-g19','ЕГЭ 19–24 · прошедшие времена · 2 текста','auto'],
+  ['hw1118-w25','ЕГЭ 25–29 · словообразование · 2 текста','auto']]},
  {given:'2026-11-16',tasks:[
   ['hw1116-wf','Word families · кто? что? какой? как?','auto'],
   ['hw1116-r10','Reading · задание 10 · Great apes','auto'],
