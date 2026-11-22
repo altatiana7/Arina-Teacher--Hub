@@ -26,6 +26,7 @@ function ruShort(x){return ru(x,{day:'numeric',month:'long'})+' · '+ru(x,{weekd
 window.ArinaCal={DAYS:DAYS,d0:d0,iso:iso,isLesson:isLesson,lessonOnOrBefore:lessonOnOrBefore,nextLessonAfter:nextLessonAfter,currentLesson:currentLesson,ru:ru,ruDay:ruDay,ruShort:ruShort};
 
 window.ARINA_HW_LIST=[
+ {given:'2026-11-22',tasks:[['hw1122-error-check','Error Check · 12 вопросов · 15 минут','auto']]},
  {given:'2026-11-18',tasks:[
   ['hw1118-pc','Past Simple или Past Continuous? · 14','auto'],
   ['hw1118-pp','Past Perfect · Past Perfect Continuous · 14','auto'],
