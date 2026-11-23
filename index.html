@@ -1411,7 +1411,7 @@ function duePanelHTML(){
   (done.length?'<details class="dueDone"><summary>Сдано · '+done.length+'</summary><div class="dueList">'+done.map(doneRow).join('')+'</div></details>':'')+'</div>';
 }
 function hwLinksHTML(){
- const L=[['./homework-2026-11-02/','Слова к текстам · памятка эссе','к Homework от 2 ноября · сами задания — в разделе Homework'],['./ege37-homework-2026-10-31/','Домашняя работа · 31 октября','3 письма ЕГЭ 37 · написать и отправить'],['./ege37-pamyatka/','Памятка · письмо ЕГЭ 37','Правила, образец, чек-лист']];
+ const L=[['./reading-12-18-2026-11-23/','НОВОЕ · Reading 12–18 · 23 ноября','Задано: завершить диагностику · 7 вопросов · 14 минут'],['./homework-2026-11-02/','Слова к текстам · памятка эссе','к Homework от 2 ноября · сами задания — в разделе Homework'],['./ege37-homework-2026-10-31/','Домашняя работа · 31 октября','3 письма ЕГЭ 37 · написать и отправить'],['./ege37-pamyatka/','Памятка · письмо ЕГЭ 37','Правила, образец, чек-лист']];
  return '<div class="hwLinks"><div class="hwHead">Домашние работы</div>'+L.map(x=>'<a class="hwRow" href="'+x[0]+'"><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span><em>Открыть</em></a>').join('')+'</div>';
 }
 function lessonTaskIds(w,i){const L=ARINA_LESSONS[w+'-'+i];return L?L.parts.flatMap(p=>p[1].filter(c=>c[0]==='task').map(c=>c[1])):[]}
