@@ -3192,9 +3192,20 @@ body.evHomeOn .evHome{display:block}
 </style>
 <style id="compactScale">/* весь сайт компактнее: всё помещается на экран без прокрутки; 09.11.2026 — шрифт чуть крупнее (было .8): Арина носит очки */:root{--sz:1}html{zoom:var(--sz)}</style>
 <style id="homeworkTextLayout">
-#fullScreenPanel:has(.rdGrid, .plText, .plWriting, .roText){inset:0!important}
-#fullScreenPanel:has(.rdGrid, .plText, .plWriting, .roText) .content{max-width:1380px}
-#plRoot .rdGrid{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:clamp(18px,3vw,40px)}
+body:has(#fullScreenPanel[style*="display: block"] :is(.rdGrid,.plText,.plWriting,.roText)){--side:148px}
+#fullScreenPanel:has(.rdGrid,.plText,.plWriting,.roText){padding:4px 8px 6px}
+#fullScreenPanel:has(.rdGrid,.plText,.plWriting,.roText) .content{max-width:1440px;position:relative}
+#fullScreenPanel:has(.rdGrid,.plText,.plWriting,.roText) .fullScreenBack{float:none;margin:0 0 4px}
+#plRoot.plWide .plCard{margin-top:4px;padding:8px 10px}
+@media(min-width:1050px){
+  #fullScreenPanel:has(.plWide) .fullScreenBack{position:absolute;top:0;left:0;margin:0;z-index:2}
+  #plRoot.plWide .plTop{padding-left:125px;min-height:34px}
+}
+@media(min-width:801px){
+  body:has(#fullScreenPanel[style*="display: block"] :is(.rdGrid,.plText,.plWriting,.roText)) .side{padding-inline:8px!important}
+  body:has(#fullScreenPanel[style*="display: block"] :is(.rdGrid,.plText,.plWriting,.roText)) .evUser{left:8px;width:calc(var(--side) - 16px);padding:6px;gap:6px}
+}
+#plRoot .rdGrid{grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);gap:clamp(14px,2vw,28px)}
 #plRoot .rdText,#plRoot .rdQs,.roText,.roSide{
   max-height:none!important;min-height:0;overflow:visible;min-width:0;
 }
@@ -3203,9 +3214,9 @@ body.evHomeOn .evHome{display:block}
 #plRoot .rdText p{margin:0 0 .85em}
 #plRoot .rdText h3,.roText h3{font-size:1.13em;margin:0 0 .4em}
 #plRoot .rdTask,#plRoot .rdList,#plRoot .rdList p{font-size:17px!important;line-height:1.5!important}
-#plRoot .rdQ{padding:8px 10px!important;margin-bottom:8px!important}
+#plRoot .rdQ{padding:4px 7px!important;margin-bottom:4px!important}
 #plRoot .rdQ p{font-size:17px!important;line-height:1.45!important}
-#plRoot .rdOpts button{font-size:16px!important;line-height:1.4!important;min-height:38px!important;padding:5px 7px!important}
+#plRoot .rdOpts button{font-size:16px!important;line-height:1.4!important;min-height:34px!important;padding:3px 5px!important}
 #plRoot .plText p{font-size:clamp(19px,1.55vw,22px)!important;line-height:1.75!important}
 #plRoot .plSetTitle{font-size:22px}
 .roText,.roText p{font-size:clamp(20px,1.6vw,23px);line-height:1.65}
@@ -3224,7 +3235,7 @@ body.evHomeOn .evHome{display:block}
 .plWritingCount{display:block;margin-top:8px;font-size:16px}
 .plWritingCount.ok{color:#177044}
 #plRoot .plAns{white-space:pre-wrap;overflow-wrap:anywhere}
-@media(max-width:940px){
+@media(max-width:1000px){
   #plRoot .rdGrid,.plWriting{grid-template-columns:minmax(0,1fr)}
   #plRoot .rdQs{border-top:1px solid #d9e1ec;padding-top:10px}
 }
