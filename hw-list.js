@@ -26,7 +26,7 @@ function ruShort(x){return ru(x,{day:'numeric',month:'long'})+' · '+ru(x,{weekd
 window.ArinaCal={DAYS:DAYS,d0:d0,iso:iso,isLesson:isLesson,lessonOnOrBefore:lessonOnOrBefore,nextLessonAfter:nextLessonAfter,currentLesson:currentLesson,ru:ru,ruDay:ruDay,ruShort:ruShort};
 
 window.ARINA_HW_LIST=[
- {given:'2026-11-25',tasks:[['hw1125-essay','Эссе 38.1 · Volunteering','write']]},
+ {given:'2026-11-25',tasks:[['hw1125-essay','Эссе 38.1 · Volunteering','write'],['hw1126-errors-reading','Тест по ошибкам · лексика и чтение','auto']]},
  {given:'2026-11-23',tasks:[
   ['hw1123-reading11','Чтение 11 · 2 текста из сборника','auto'],
   ['hw1123-reading12','Чтение 12–18 · завершение диагностики','auto']]},
