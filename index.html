@@ -1519,7 +1519,7 @@ function plRender(){
  updateCount();
  root.querySelectorAll('.plInput,[data-k]').forEach(x=>{
   x.oninput=()=>{const k=x.dataset.k!=null?x.dataset.k:step;const v=x.value.trim();if(v)PL.a[k]=v;else delete PL.a[k];plSave();plMarks();updateCount()};
-  x.onkeydown=e=>{if(e.key!=='Enter'||(x.tagName==='TEXTAREA'&&(e.shiftKey||PL.t.letter)))return;e.preventDefault();const all=[...root.querySelectorAll('[data-k]')],ix=all.indexOf(x);if(ix>-1&&ix<all.length-1)all[ix+1].focus();else last?plReview():plGo(step+1)};
+  x.onkeydown=e=>{if(e.key!=='Enter'||(x.tagName==='TEXTAREA'&&(e.shiftKey||PL.t.letter||PL.t.prompt)))return;e.preventDefault();const all=[...root.querySelectorAll('[data-k]')],ix=all.indexOf(x);if(ix>-1&&ix<all.length-1)all[ix+1].focus();else last?plReview():plGo(step+1)};
  });
  const f=document.getElementById('plField');if(f&&innerWidth>800&&!t.prompt)f.focus({preventScroll:true});
  const rt=root.querySelector('.rdText');if(rt){PL.rdS=PL.rdS||{};rt.scrollTop=PL.rdS[rt.dataset.tid]||0;rt.onscroll=()=>{PL.rdS[rt.dataset.tid]=rt.scrollTop}}
@@ -1639,7 +1639,7 @@ function renderW3OralCard(){
 }
 function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261126a';
+const ARINA_BUILD='20261126b';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -2697,7 +2697,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261126a -->
+<!-- build:20261126b -->
 
 <script id="arinaRussiaScript">
 (function(){
@@ -2917,7 +2917,7 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
 })();
 </script>
 <script src="hw-20261102.js?v=20261114b"></script><script src="hw-20261108.js?v=20261114b"></script><script src="hw-20261109.js?v=20261114c"></script><script src="hw-20261112.js?v=20261112a"></script><script src="hw-20261114.js?v=20261114a"></script><script src="hw-20261116.js?v=20261116a"></script><script src="hw-20261116b.js?v=20261116a"></script><script src="hw-20261118.js?v=20261118a"></script><script src="hw-20261118b.js?v=20261118a"></script><script src="hw-20261122.js?v=20261122"></script><script src="hw-20261123-readings.js?v=20261124a"></script>
-<script src="hw-20261125-essay.js?v=20261126a"></script><script src="hw-list.js?v=20261126a"></script><script src="hw-board.js?v=20261114c"></script>
+<script src="hw-20261125-essay.js?v=20261126b"></script><script src="hw-list.js?v=20261126a"></script><script src="hw-board.js?v=20261114c"></script>
 <script id="arinaTrainersTab">
 /* Вкладка «Тренажёры»: все тренажёры в одном месте */
 const PAMYATKI_URL='https://altatiana7.github.io/Tatyana-English-Hub/ege-teachers-hub/pamyatki.html?student=1&only=lexis&v=4';
