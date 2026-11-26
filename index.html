@@ -1499,18 +1499,29 @@ function plRender(){
  else if(t.type==='typed'){const q=t.items[step];
   card=(q[4]?'<p class="plSrc">'+q[4]+'</p>':'')+'<p class="plQ">'+q[0].replace('___','<span class="plBlank"></span>')+(q[1]?' <em class="w3Key">'+q[1]+'</em>':'')+'</p><input class="plInput" id="plField" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="'+(q[4]?'напиши пропущенные слова':'напиши исправленную форму')+'" value="'+w3Esc(a[step]||'')+'">';}
  else if(t.type==='write'){const q=t.items[step];
-  card='<p class="plQ">'+q[0]+' <em class="w3Key">'+q[1]+'</em></p><textarea class="plInput" id="plField" rows="'+(q[3]||3)+'" placeholder="'+(q[2]||'Write one full sentence in English')+'">'+w3Esc(a[step]||'')+'</textarea>';}
+  if(t.prompt){
+   card='<div class="plWriting"><section class="plWritingPrompt">'+t.prompt+'</section><section><label class="plWritingLabel" for="plField">Твоё эссе</label><textarea class="plInput" id="plField" rows="'+q[3]+'" placeholder="'+q[2]+'" aria-describedby="plWritingCount" spellcheck="false">'+w3Esc(a[step]||'')+'</textarea><output class="plWritingCount" id="plWritingCount" for="plField"></output></section></div>';
+  }else card='<p class="plQ">'+q[0]+' <em class="w3Key">'+q[1]+'</em></p><textarea class="plInput" id="plField" rows="'+(q[3]||3)+'" placeholder="'+(q[2]||'Write one full sentence in English')+'">'+w3Esc(a[step]||'')+'</textarea>';}
  else if(t.type==='read'){const set=t.sets[step],o=plGapOffset(t,step);
   card='<div class="rdGrid'+(set.dense?' rdDense':'')+'"><article class="rdText" data-tid="'+set.tid+'"><h3>'+set.title+'</h3>'+set.text+'</article><div class="rdQs"><p class="rdTask">'+set.task+'</p>'+(set.note||'')+set.items.map((q,j)=>'<div class="rdQ'+(set.row?' rdRow':'')+(set.col?' rdCol':'')+'"><p>'+q[0]+'</p><div class="rdOpts" style="grid-template-columns:repeat('+(set.cols||(set.col?1:q[1].length))+',minmax(0,1fr))">'+q[1].map((x,m)=>'<button type="button" class="'+(a[o+j]===m?'picked':'')+'" onclick="plReadPick('+(o+j)+','+m+',this)">'+x+'</button>').join('')+'</div></div>').join('')+'</div></div>';}
  else{const set=t.sets[step],o=plGapOffset(t,step),start=set.start||19;
   card='<h3 class="plSetTitle">'+set.title+'</h3><div class="plText">'+set.lines.map((q,j)=>'<p>'+q[0].replace('___','<span class="w3Gap"><small>'+(start+j)+'</small><input autocomplete="off" autocapitalize="off" spellcheck="false" data-k="'+(o+j)+'" value="'+w3Esc(a[o+j]||'')+'"><em>'+q[1]+'</em></span>')+'</p>').join('')+'</div>';}
- const what=t.type==='read'?'Экран':t.type==='gap'?'Текст':t.type==='write'?'Предложение':'Вопрос';
+ const what=t.type==='read'?'Экран':t.type==='gap'?'Текст':t.prompt?'Задание':t.type==='write'?'Предложение':'Вопрос';
  root.classList.toggle('plWide',t.type==='read'||t.type==='gap');root.classList.toggle('plTight',!!t.tight);root.innerHTML=plHead(what+' '+(step+1)+' из '+n)+'<div class="plBar"><i style="width:'+Math.round(plAnswered(t,a)/plUnits(t)*100)+'%"></i></div>'+(n>1?'<div class="plDots">'+plDotsHTML()+'</div>':'')+(step===0&&t.type!=='read'?'<p class="plIntro">'+t.intro+'</p>':'')+'<div class="plCard">'+card+'</div><div class="plNav"><button type="button" class="plBtn" '+(step===0?'disabled':'')+' onclick="plGo('+(step-1)+')">← Предыдущий</button><button type="button" class="plBtn plMain" onclick="'+(last?'plReview()':'plGo('+(step+1)+')')+'">'+(last?'Проверить ответы →':'Далее →')+'</button></div>';
+ const count=root.querySelector('#plWritingCount');
+ const updateCount=()=>{
+  if(!count)return;
+  const [min,max]=t.wordRange;
+  const words=(root.querySelector('#plField').value.match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu)||[]).length;
+  count.textContent='Слов: '+words+' · нужно '+min+'–'+max;
+  count.classList.toggle('ok',words>=min&&words<=max);
+ };
+ updateCount();
  root.querySelectorAll('.plInput,[data-k]').forEach(x=>{
-  x.oninput=()=>{const k=x.dataset.k!=null?x.dataset.k:step;const v=x.value.trim();if(v)PL.a[k]=v;else delete PL.a[k];plSave();plMarks()};
+  x.oninput=()=>{const k=x.dataset.k!=null?x.dataset.k:step;const v=x.value.trim();if(v)PL.a[k]=v;else delete PL.a[k];plSave();plMarks();updateCount()};
   x.onkeydown=e=>{if(e.key!=='Enter'||(x.tagName==='TEXTAREA'&&(e.shiftKey||PL.t.letter)))return;e.preventDefault();const all=[...root.querySelectorAll('[data-k]')],ix=all.indexOf(x);if(ix>-1&&ix<all.length-1)all[ix+1].focus();else last?plReview():plGo(step+1)};
  });
- const f=document.getElementById('plField');if(f&&innerWidth>800)f.focus();
+ const f=document.getElementById('plField');if(f&&innerWidth>800&&!t.prompt)f.focus({preventScroll:true});
  const rt=root.querySelector('.rdText');if(rt){PL.rdS=PL.rdS||{};rt.scrollTop=PL.rdS[rt.dataset.tid]||0;rt.onscroll=()=>{PL.rdS[rt.dataset.tid]=rt.scrollTop}}
  const cur=root.querySelector('.plDots .cur');if(cur&&cur.scrollIntoView)cur.scrollIntoView({block:'nearest',inline:'center'});
 }
@@ -1628,7 +1639,7 @@ function renderW3OralCard(){
 }
 function w3OralWord(d){const n=W3_ORAL[w3Oral.i].words.length;w3Oral.w=(w3Oral.w+d+n)%n;renderW3OralCard()}
 /* always show the newest published version: compare the build mark with the server copy and reload once */
-const ARINA_BUILD='20261114b';
+const ARINA_BUILD='20261126a';
 window.addEventListener('load',()=>{if(!/^https?:/.test(location.protocol))return;fetch(location.pathname+'?fresh='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/<!-- build:(\w+) -->/);if(m&&m[1]!==ARINA_BUILD&&sessionStorage.getItem('arinaReloaded')!==m[1]){sessionStorage.setItem('arinaReloaded',m[1]);location.replace(location.pathname+'?v='+m[1])}}).catch(()=>{})});
 window.addEventListener('online',arinaFlushPending);
 window.addEventListener('load',()=>setTimeout(arinaFlushPending,1500));
@@ -2686,7 +2697,7 @@ const EX={grammar1924:['19–24 · Грамматика','<div class="examCard">
 function renderExam(id){closeLesson();closeFullScreen();if(id==='grammar1924'||id==='wordformation'){exam26Mode=id==='grammar1924'?'grammar':'wf';exam26Index=0;renderExam26View();return}['weekView','examView','trainerView'].forEach(x=>document.getElementById(x).style.display='');document.body.classList.remove('fullWeek');document.getElementById('weekView').classList.remove('on');document.getElementById('trainerView').classList.remove('on');document.getElementById('examView').classList.add('on');document.querySelectorAll('.wbtn').forEach(b=>b.classList.remove('active'));const e=EX[id];document.getElementById('examView').innerHTML='<div class="hero"><div class="eyebrow">Структура ЕГЭ · английский язык</div><h1>'+e[0]+'</h1><p>Баллы, время и критерии собраны в одном компактном блоке.</p></div><div class="examCard">'+e[1]+'<a class="official" href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">Официальные проекты ФИПИ 2027 ↗</a></div>';if(innerWidth<801)document.getElementById('side').classList.remove('open');scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('mobileBtn').onclick=()=>document.getElementById('side').classList.toggle('open');renderButtons();renderWeek(ACTIVE_WEEK);
 </script>
-<!-- build:20261114b -->
+<!-- build:20261126a -->
 
 <script id="arinaRussiaScript">
 (function(){
@@ -2906,7 +2917,7 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementBy
 })();
 </script>
 <script src="hw-20261102.js?v=20261114b"></script><script src="hw-20261108.js?v=20261114b"></script><script src="hw-20261109.js?v=20261114c"></script><script src="hw-20261112.js?v=20261112a"></script><script src="hw-20261114.js?v=20261114a"></script><script src="hw-20261116.js?v=20261116a"></script><script src="hw-20261116b.js?v=20261116a"></script><script src="hw-20261118.js?v=20261118a"></script><script src="hw-20261118b.js?v=20261118a"></script><script src="hw-20261122.js?v=20261122"></script><script src="hw-20261123-readings.js?v=20261124a"></script>
-<script src="hw-list.js?v=20261122"></script><script src="hw-board.js?v=20261114c"></script>
+<script src="hw-20261125-essay.js?v=20261126a"></script><script src="hw-list.js?v=20261126a"></script><script src="hw-board.js?v=20261114c"></script>
 <script id="arinaTrainersTab">
 /* Вкладка «Тренажёры»: все тренажёры в одном месте */
 const PAMYATKI_URL='https://altatiana7.github.io/Tatyana-English-Hub/ege-teachers-hub/pamyatki.html?student=1&only=lexis&v=4';
@@ -3180,4 +3191,47 @@ body.evHomeOn .evHome{display:block}
 @media(max-width:800px){.evHeroTxt{max-width:none;padding-bottom:150px}.evHeroPic{top:auto;width:100%;height:150px!important}}
 </style>
 <style id="compactScale">/* весь сайт компактнее: всё помещается на экран без прокрутки; 09.11.2026 — шрифт чуть крупнее (было .8): Арина носит очки */:root{--sz:1}html{zoom:var(--sz)}</style>
+<style id="homeworkTextLayout">
+#fullScreenPanel:has(.rdGrid, .plText, .plWriting, .roText){inset:0!important}
+#fullScreenPanel:has(.rdGrid, .plText, .plWriting, .roText) .content{max-width:1380px}
+#plRoot .rdGrid{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:clamp(18px,3vw,40px)}
+#plRoot .rdText,#plRoot .rdQs,.roText,.roSide{
+  max-height:none!important;min-height:0;overflow:visible;min-width:0;
+}
+#plRoot .rdText{font-size:clamp(20px,1.65vw,23px)!important;line-height:1.65!important;border-right:0;padding:0}
+#plRoot .rdText :is(p,.rdL,.rdGapL){font-size:inherit;line-height:inherit}
+#plRoot .rdText p{margin:0 0 .85em}
+#plRoot .rdText h3,.roText h3{font-size:1.13em;margin:0 0 .4em}
+#plRoot .rdTask,#plRoot .rdList,#plRoot .rdList p{font-size:17px!important;line-height:1.5!important}
+#plRoot .rdQ{padding:8px 10px!important;margin-bottom:8px!important}
+#plRoot .rdQ p{font-size:17px!important;line-height:1.45!important}
+#plRoot .rdOpts button{font-size:16px!important;line-height:1.4!important;min-height:38px!important;padding:5px 7px!important}
+#plRoot .plText p{font-size:clamp(19px,1.55vw,22px)!important;line-height:1.75!important}
+#plRoot .plSetTitle{font-size:22px}
+.roText,.roText p{font-size:clamp(20px,1.6vw,23px);line-height:1.65}
+#plRoot:has(.plWriting){max-width:1180px}
+.plWriting{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px}
+.plWritingPrompt{font-size:19px;line-height:1.55;min-width:0;color:#142337}
+.plWritingPrompt>p:first-child{margin-top:0}
+.plWritingPrompt li{margin:.35em 0}
+.plWritingPrompt ul{padding-left:1.35em}
+.essaySurvey{width:100%;border-collapse:collapse}
+.essaySurvey :is(td,th){border:1px solid #cbd7ea;padding:7px;text-align:left}
+.essaySurvey th{background:#edf3ff}
+.essaySurvey td:last-child{text-align:center}
+.plWritingLabel{display:block;font-size:18px;font-weight:700;margin:0 0 6px}
+#plRoot .plWriting textarea{display:block;width:100%;min-height:22rem;resize:vertical;font-size:19px;line-height:1.6;padding:12px}
+.plWritingCount{display:block;margin-top:8px;font-size:16px}
+.plWritingCount.ok{color:#177044}
+#plRoot .plAns{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:940px){
+  #plRoot .rdGrid,.plWriting{grid-template-columns:minmax(0,1fr)}
+  #plRoot .rdQs{border-top:1px solid #d9e1ec;padding-top:10px}
+}
+@media(max-width:450px){
+  #plRoot .rdQ.rdRow{display:block}
+  #plRoot .rdRow .rdOpts{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  #plRoot .plText p{padding-right:8px!important}
+}
+</style>
 </body></html>
