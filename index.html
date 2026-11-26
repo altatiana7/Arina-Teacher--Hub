@@ -3240,6 +3240,9 @@ body:has(#fullScreenPanel[style*="display: block"] :is(.rdGrid,.plText,.plWritin
   #plRoot .rdQs{border-top:1px solid #d9e1ec;padding-top:10px}
 }
 @media(max-width:450px){
+  #fullScreenPanel:has(.rdGrid,.plText,.plWriting,.roText){padding-inline:4px}
+  #fullScreenPanel:has(.rdGrid,.plText,.plWriting,.roText) .content{width:100%;padding-inline:0!important}
+  #plRoot.plWide .plCard{padding-inline:7px}
   #plRoot .rdQ.rdRow{display:block}
   #plRoot .rdRow .rdOpts{grid-template-columns:repeat(4,minmax(0,1fr))!important}
   #plRoot .plText p{padding-right:8px!important}
